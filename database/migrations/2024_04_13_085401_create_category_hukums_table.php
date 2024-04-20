@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('category_hukums', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->nullable(false);
-            $table->string("short_title")->nullable(false);
+            $table->string("title")->nullable(false)->unique();
+            $table->string("short_title")->nullable(false)->unique();
             $table->string("slug")->nullable(false);
             $table->timestamps();
         });

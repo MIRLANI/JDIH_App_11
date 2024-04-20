@@ -5,23 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\ProductHukum;
 use App\Http\Requests\StoreProductHukumRequest;
 use App\Http\Requests\UpdateProductHukumRequest;
+use App\Models\CategoryHukum;
+use Illuminate\Http\Response;
 
 class ProductHukumController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $productHukum = ProductHukum::query()->get();
+        return response()->view("pages.admin.product_hukum.produk_hukum", [
+            "productHukums" => $productHukum
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+         return response()->view("pages.admin.product_hukum.tambah_product_hukum");
     }
 
     /**
@@ -29,15 +34,19 @@ class ProductHukumController extends Controller
      */
     public function store(StoreProductHukumRequest $request)
     {
-        //
+         $productHukum = CategoryHukum::query()->create($request->all());
+         $productHukum->save();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProductHukum $productHukum)
+    public function show(string $slug, ProductHukum $productHukum)
     {
-        //
+        $productHukums = $productHukum->query()->where("slug", $slug)->first();
+        return response()->view("pages.admin.product_hukum.detail_product_hukum", [
+            "produkHukum" => $productHukums
+        ]);
     }
 
     /**

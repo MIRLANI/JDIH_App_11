@@ -13,10 +13,10 @@ class Category{
 class ProductHukum{
     id int(11) <<PK>>
     category_hukum_id(11) <<FK>>
+    produk_hukum_id (11) <<FK>>
     --
     nama_peraturan varchar (255)
     deskripsi varchar (255)
-    materi_pokok text()
     judul varchar (255)
     tipe_document varchar(255)
     tahun varchar(255)
@@ -31,39 +31,39 @@ class ProductHukum{
     lokasi varchar (255)
     file varchar(255)
     bidang varchar (255)
-    abstract text(255)
+    mengubah varchar(255)
+    diubah varchar(255)
+    mencabut varchar(255)
+    dicabut varchar(255)
     slug varchar(255)
 }
 
 
 class SubjekProdukHukum{
     id int(11) <<PR>>
-     subjek_id int(11) <<FK>>
-     produk_id int(11) <<FK>>
+    subjek_id int(11) <<FK>>
+    produk_id int(11) <<FK>>
 }
 
-class SubjekHukum{
-    id int(11) <<PR>>
-    --
-    judul varchar (255)
-}
 
-class StatusHukum{
+
+class AbstrakHukum{
     id int(11) <<PK>>
     produk_hukum_id <<FK>>
     --
-    mengubah varchar(255) 
-    diubah varchar(255) 
-    mencabut varchar(255)
-    dicabut varchar(255)
+    title varchar(255)
+    materi_pokok text()
+    abstract text()
+    catatan text()
+    slug varchar(255)
 }
 
 
-
-ProductHukum }|--{Category
+ProductHukum}|--{Category
 ProductHukum }|--{SubjekProdukHukum
 SubjekHukum }|--{SubjekProdukHukum
-ProductHukum }|--{StatusHukum
+ProductHukum }|--|{AbstrakHukum
+
 
 
 
