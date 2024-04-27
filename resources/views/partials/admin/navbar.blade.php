@@ -42,7 +42,7 @@
 
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-title"><b>Menu</b></li>
 
                 <li class="sidebar-item active ">
                     <a href="/dashboard" class='sidebar-link'>
@@ -51,24 +51,24 @@
                     </a>
                 </li>
                 <hr>
-                {{-- <li class="sidebar-title">Category Hukum &amp; Produk Hukum  </li> --}}
+                <li class="sidebar-title"><b>Produk Hukum</b>  </li>
 
                 <li class="sidebar-item  ">
                     <a href="/category-hukum" class='sidebar-link'>
-                        {{-- <i class="bi bi-grid-fill"></i> --}}
-                        <span>Kategori Hukum</span>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Kategori</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/category-hukum" class='sidebar-link'>
-                        {{-- <i class="bi bi-grid-fill"></i> --}}
-                        <span>Subjek Hukum</span>
+                    <a href="/subjek-hukum" class='sidebar-link'>
+                        <i class="bi bi-blockquote-right"></i>
+                        <span>Subjek</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
+                <li class="sidebar-item  has-sub active">
+                    <a href="#" class='sidebar-link '>
+                        <i class="bi bi-bank2"></i>
                         <span>Hukum</span>
                     </a>
                     <ul class="submenu ">
@@ -76,9 +76,17 @@
                             <a href="/product-hukum">Hukum</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="form-element-input-group.html">Abstrak</a>
+                            <a href="/abstract-hukum">Abstrak</a>
                         </li>                     
                     </ul>
+                </li>
+                <hr>
+                <li class="sidebar-item mt-3">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-arrow-bar-right"></i>
+                        <span>Logout</span>
+                    </a>
+                    
                 </li>
                
               

@@ -32,7 +32,8 @@
                         </div> --}}
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" data-parsley-validate>
+                                <form class="form" data-parsley-validate action="/product-hukum-add" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Hukum</b></h4>

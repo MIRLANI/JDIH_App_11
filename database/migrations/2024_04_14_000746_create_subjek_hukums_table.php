@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('subjek_hukums', function (Blueprint $table) {
             $table->id();
             $table->string("judul")->nullable(false);
+            $table->string("slug")->nullable(false);
             $table->timestamps();
         });
     }

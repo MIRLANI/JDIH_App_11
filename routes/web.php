@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\AbstrakHukumController;
 use App\Http\Controllers\CategoryHukumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductHukumController;
+use App\Http\Controllers\SubjekHukumController;
 use Illuminate\Support\Facades\Route;
 
+Route::get("/home", [HomeController::class, "index"]);
 Route::get("/dashboard", [DashboardController::class, "index"]);
 
 
@@ -24,5 +28,14 @@ Route::controller(ProductHukumController::class)->group(function(){
     Route::get("/product-hukum", "index")->name("index.product_hukum");
     Route::get("/product-hukum-detail/{slug}", "show")->name("detail.product_hukum");
     Route::get("/product-hukum-add", "create")->name("detail.product_hukum");
-    Route::post("/product-hukum-add", "create")->name("detail.product_hukum");
+    Route::post("/product-hukum-add", "store")->name("detail.product_hukum");
+});
+
+Route::controller(AbstrakHukumController::class)->group(function(){
+    Route::get("/abstract-hukum", "index")->name("index.abstrack_hukum");
+    Route::get("/abstract-hukum-add", "create")->name("create.abstrack_hukum");
+});
+
+Route::controller(SubjekHukumController::class)->group(function(){
+     Route::get("/subjek-hukum", "index")->name("index.subjek_hukum");
 });

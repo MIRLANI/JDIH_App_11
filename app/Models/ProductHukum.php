@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ProductHukum extends Model
 {
@@ -29,5 +30,10 @@ class ProductHukum extends Model
     public function categoryHukum(): BelongsTo
     {
         return $this->belongsTo(CategoryHukum::class,  "category_hukum_id", "id");
+    }
+
+    public function abstractHukum(): HasOne
+    {
+        return $this->hasOne(AbstrakHukum::class, "produk_hukum_id", "id");
     }
 }

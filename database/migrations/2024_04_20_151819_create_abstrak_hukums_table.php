@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("produk_hukum_id")->nullable(false);
             $table->string("title")->nullable();
-            $table->text("mater_pokok")->nullable();
-            $table->text("abstrack")->nullable();
+            $table->text("materi_pokok")->nullable();
+            $table->text("abstrak")->nullable();
             $table->text("catatan")->nullable();
             $table->string("slug")->nullable();
             $table->timestamps();

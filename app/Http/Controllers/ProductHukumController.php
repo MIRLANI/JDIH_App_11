@@ -34,6 +34,7 @@ class ProductHukumController extends Controller
      */
     public function store(StoreProductHukumRequest $request)
     {
+        dd($request);
          $productHukum = CategoryHukum::query()->create($request->all());
          $productHukum->save();
     }
