@@ -11,12 +11,6 @@ use Illuminate\Http\Response;
 
 class CategoryHukumController extends Controller
 {
-    private CategoryHukumService $categoryHukumService;
-
-    public function __construct(CategoryHukumService $categoryHukumService)
-    {
-        $this->categoryHukumService = $categoryHukumService;
-    }
     /**
      * Display a listing of the resource.
      */
@@ -43,7 +37,6 @@ class CategoryHukumController extends Controller
     {
         $title = $request->input("title");
         $short_title = $request->input("short_title");
-        $slug = $request->input("slug");
         $request->validate([
             $title, $short_title
         ]);
@@ -98,6 +91,23 @@ class CategoryHukumController extends Controller
     {
         $data = $categoryHukum::query()->where("slug", $slug)->first();
         $data->delete();
-        return redirect()->route("index.category_hukum")->with("message", "Catagori Hukum Destroy Successfull");
+        return redirect()->route("index.category_hukum")->with("message", "Catagori Hukum Delete Successfull");
     }
+
+    public function viewDelete()
+    {
+         $categoryHukum = CategoryHukum::onlyTrashed()->get();
+        return response()->view("pages.admin.category_hukum.view_delete_category_hukum", [
+            "category_hukum" =>  $categoryHukum
+        ]);
+    }
+
+    public function restore(string $slug): RedirectResponse
+    {
+        $categoryHukum = CategoryHukum::withTrashed()->where("slug", $slug)->first();
+        $categoryHukum->restore();
+        return response()->redirectToRoute("index.category_hukum")->with("message", "Restore Category Hukum Successfully");  
+    }
+
+
 }

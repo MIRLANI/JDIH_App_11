@@ -65,6 +65,12 @@
                         <span>Subjek</span>
                     </a>
                 </li>
+                <li class="sidebar-item  ">
+                    <a href="/tipe-ducument" class='sidebar-link'>
+                        <i class="bi bi-blockquote-right"></i>
+                        <span>Tipe Dokument</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item  has-sub active">
                     <a href="#" class='sidebar-link '>
@@ -88,8 +94,6 @@
                     </a>
                     
                 </li>
-               
-              
             </ul>
         </div>
     </div>

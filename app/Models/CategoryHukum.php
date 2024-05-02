@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryHukum extends Model 
 {
-    use Sluggable;
+    use Sluggable, SoftDeletes;
     protected $table = 'category_hukums';
     protected $primaryKey = 'id';
     protected $keyType = 'int';

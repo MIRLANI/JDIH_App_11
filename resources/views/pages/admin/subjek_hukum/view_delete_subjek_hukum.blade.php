@@ -1,44 +1,37 @@
 @extends('layouts.admin')
 
-@section('title', 'categori hukum')
+@section('title', 'subjek subjek')
 
 @section('content')
+
+
 
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Subjek Hukum</h3>
-                    <p class="text-subtitle text-muted">________________________</p>
+                    <h3>View Delete Subjek Hukum</h3>
+                    <p class="text-subtitle text-muted">____________________________________________</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Subjek Hukum</li>
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">View Detele Subjek Hukum</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-        @if (session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/subjek-hukum-add" class="btn  btn-primary mx-2" title="Delete">
-                        <i class="bi bi-file-earmark-plus"></i>
-                        Tambah
-                    </a>
-
-                    <a href="/subjek-hukum-view-delete" class="btn  btn-secondary">
-                        <i class="bi bi-eye"></i>
-                        View Delete Data
+                    <a href="/subjek-hukum" class="btn  btn-primary mx-2" title="Delete">
+                        <i class="bi bi-arrow-left"></i>
+                        Back
                     </a>
 
                 </div>
-
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
                         <thead>
@@ -57,15 +50,14 @@
                                     <td>
 
                                         <div class="d-flex buttons">
-                                            <a href="/subjek-hukum-delete/{{ $subjek->slug }}" class="btn icon btn-danger"
-                                                title="Delete">
-                                                <i class="bi bi-trash "></i>
+                                            <a href="/subjek-hukum-restore/{{ $subjek->slug }}"
+                                                class="btn icon btn-warning" title="return">
+                                                <i class="bi bi-arrow-repeat"></i>
                                             </a>
-                                            <a href="/subjek-hukum-update/{{ $subjek->slug }}" class="btn icon btn-primary"
-                                                title="Update">
-                                                <i class="bi bi-pencil "></i>
+                                            <a href="/subjek-hukum-detail/{{ $subjek->slug }}"
+                                                class="btn icon btn-info" title="Detail">
+                                                <i class="bi bi-info-circle "></i>
                                             </a>
-
                                         </div>
 
                                     </td>
@@ -81,6 +73,9 @@
 
         </section>
     </div>
+
+
+
 
 
 @endsection

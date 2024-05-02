@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text("abstrak")->nullable();
             $table->text("catatan")->nullable();
             $table->string("slug")->nullable();
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("produk_hukum_id")->on("product_hukums")->references("id");
         });

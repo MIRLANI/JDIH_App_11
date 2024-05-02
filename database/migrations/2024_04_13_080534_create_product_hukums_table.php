@@ -14,23 +14,24 @@ return new class extends Migration
         Schema::create('product_hukums', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("category_hukum_id")->nullable();
-            // $table->unsignedBigInteger("product_hukum_id")->nullable();
+            $table->unsignedBigInteger("product_hukum_id")->nullable();
             $table->string("nama")->nullable();
             $table->string("deskripsi")->nullable();
-            $table->string("tipe_dokument")->nullable();
+            $table->string("tipe_dokumen")->nullable();
             $table->string("judul")->nullable();
             $table->string("tahun")->nullable();
             $table->string("tempat_penetapan")->nullable();
             $table->string("tanggal_penetapan")->nullable();
             $table->string("tanggal_pengundangan")->nullable();
             $table->string("tanggal_berlaku")->nullable();
-            $table->string("bentuk_peraturan")->nullable();
-            $table->string("subjek")->nullable();
+            // $table->string("bentuk_peraturan")->nullable();
+            // $table->string("subjek")->nullable();
             $table->string("sumber")->nullable();
             $table->enum("status", ["berlaku", "tidak berlaku"])->nullable();
             $table->string("bahasa")->nullable();
             $table->string("lokasi")->nullable();
             $table->string("teu")->nullable();
+            $table->string("nomor")->nullable();
             $table->string("bidang")->nullable();
             $table->string("mengubah")->nullable();
             $table->string("diubah")->nullable();
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->string("dicabut")->nullable();
             $table->string("file")->nullable();
             $table->string("slug")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

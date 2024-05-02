@@ -5,10 +5,11 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubjekHukum extends Model
 {
-    use Sluggable;
+    use Sluggable, SoftDeletes;
     protected $table = 'subjek_hukums';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
@@ -20,8 +21,12 @@ class SubjekHukum extends Model
     {
         return [
             'slug' => [
-                'source' => 'judul'
+                'source' => 'nama'
             ]
         ];
     }
+
+    
+
+
 }

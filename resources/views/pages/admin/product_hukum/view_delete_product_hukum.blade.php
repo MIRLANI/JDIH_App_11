@@ -10,33 +10,25 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Produ Hukum</h3>
-                    <p class="text-subtitle text-muted">______________________</p>
+                    <h3>View Delete Produk Hukum</h3>
+                    <p class="text-subtitle text-muted">____________________________________________</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Produk Hukum</li>
+                            <li class="breadcrumb-item active" aria-current="page">View Detele Produk Hukum</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-        @if (session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/product-hukum-add" class="btn  btn-primary mx-2" title="Delete">
-                        <i class="bi bi-file-earmark-plus"></i>
-                        Tambah
-                    </a>
-
-                    <a href="/product-hukum-view-delete" class="btn  btn-secondary">
-                        <i class="bi bi-eye"></i>
-                        View Delete Data
+                    <a href="/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                        <i class="bi bi-arrow-left"></i>
+                        Back
                     </a>
 
                 </div>
@@ -48,8 +40,8 @@
                                 <th>Product Hukum</th>
                                 {{-- <th>Deskripsi</th> --}}
                                 <th>Judul</th>
-                                <th>Category Hukum</th>
-                                <th>Subjek</th>
+                                {{-- <th>Category Hukum</th> --}}
+                                {{-- <th>Subjek</th> --}}
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -57,16 +49,13 @@
                         <tbody>
 
                             @foreach ($productHukums as $productHukum)
-                              
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $productHukum->nama }}</td>
                                     {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
                                     <td>{{ $productHukum->judul }}</td>
-                                    <td>{{ $productHukum->categoryHukum->short_title }} </td>
-                                    <td>
-                                        {{ implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) }}
-                                    </td>
+                                    {{-- <td>{{ $productHukum->categoryHukum->short_title }} </td> --}}
+                                    {{-- <td>{{ $productHukum->subjek }}</td> --}}
                                     <td>
                                         <span @class([
                                             'badge bg-danger' => $productHukum->status == 'tidak berlaku',
@@ -76,13 +65,10 @@
                                     </td>
                                     <td>
                                         <div class="d-flex buttons">
-                                            <a href="/product-hukum-delete/{{ $productHukum->slug }}"
-                                                class="btn icon btn-danger" title="Delete">
-                                                <i class="bi bi-trash "></i>
-                                            </a>
-                                            <a href="/product-hukum-update/{{ $productHukum->slug }}"
-                                                class="btn icon btn-primary" title="Update">
-                                                <i class="bi bi-pencil "></i>
+                                            
+                                            <a href="/product-hukum-restore/{{ $productHukum->slug }}"
+                                                class="btn icon btn-warning" title="return">
+                                                <i class="bi bi-arrow-repeat"></i>
                                             </a>
                                             <a href="/product-hukum-detail/{{ $productHukum->slug }}"
                                                 class="btn icon btn-info" title="Detail">

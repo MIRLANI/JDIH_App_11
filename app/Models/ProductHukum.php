@@ -6,12 +6,14 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductHukum extends Model
 {
     
-    use Sluggable;
+    use Sluggable, SoftDeletes;
     protected $table = 'product_hukums';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
@@ -35,5 +37,10 @@ class ProductHukum extends Model
     public function abstractHukum(): HasOne
     {
         return $this->hasOne(AbstrakHukum::class, "produk_hukum_id", "id");
+    }
+
+    public function subjekHukums(): BelongsToMany
+    {
+        return $this->belongsToMany(SubjekHukum::class, "subjek_product_hukums",  "product_hukum_id", "subjek_hukum_id");
     }
 }

@@ -6,6 +6,8 @@ use App\Models\ProductHukum;
 use App\Http\Requests\StoreProductHukumRequest;
 use App\Http\Requests\UpdateProductHukumRequest;
 use App\Models\CategoryHukum;
+use App\Models\SubjekHukum;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class ProductHukumController extends Controller
@@ -26,7 +28,14 @@ class ProductHukumController extends Controller
      */
     public function create(): Response
     {
-         return response()->view("pages.admin.product_hukum.tambah_product_hukum");
+         $productHukums = ProductHukum::query()->get();
+         $categoryHukums = CategoryHukum::query()->get();
+         $subjekHukums = SubjekHukum::query()->get();
+         return response()->view("pages.admin.product_hukum.tambah_product_hukum",[
+            "produk_hukums" => $productHukums,
+            "category_hukums" => $categoryHukums,
+            "subjek_hukums" => $subjekHukums
+         ]);
     }
 
     /**
@@ -34,9 +43,25 @@ class ProductHukumController extends Controller
      */
     public function store(StoreProductHukumRequest $request)
     {
-        dd($request);
-         $productHukum = CategoryHukum::query()->create($request->all());
+        // dd($request);
+        // $request->validate($request->all());
+        if ($request->file("file")) {     
+            $extension = $request->file("file")->getClientOriginalExtension();
+            // $file = uniqid() . "." . $extension;
+            // bisa juga seperti ini 
+
+            $file = $request->input("nama") . "-" . now()->timestamp . "." . $extension;
+            // memasukan datanya kedalam direkotri public
+            $request->file("file")->storeAs("public", $file);
+        }
+        // kemudian kita masukan ke dalam database menggunakan merge
+        $request->merge(["file" => $file]);
+
+         $productHukum = ProductHukum::query()->create($request->all());
+         $productHukum->subjekHukums()->sync($request->input("subjek"));
+
          $productHukum->save();
+         return redirect("/product-hukum")->with("message", "Add Product Hukum Successfully");
     }
 
     /**
@@ -69,8 +94,26 @@ class ProductHukumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductHukum $productHukum)
+    public function destroy(string $slug)
     {
-        //
+         $productHukum = ProductHukum::query()->where("slug", $slug)->first();
+        $productHukum->delete();
+        $productHukum->save();
+        return response()->redirectToRoute("index.product_hukum")->with("message", "Destroy Product Hukum Successfully");
+    }
+
+    public function viewDelete()
+    {
+        $productHukums = ProductHukum::onlyTrashed()->get();
+        return response()->view("pages.admin.product_hukum.view_delete_product_hukum", [
+            "productHukums" => $productHukums
+        ]);
+    }
+
+    public function restore(string $slug): RedirectResponse
+    {
+        $productHukum = ProductHukum::withTrashed()->where("slug", $slug)->first();
+        $productHukum->restore();
+        return response()->redirectToRoute("index.product_hukum")->with("message", "Restore Product Hukum Successfully");  
     }
 }

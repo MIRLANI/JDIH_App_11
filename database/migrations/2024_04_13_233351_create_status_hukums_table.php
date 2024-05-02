@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("diubah")->nullable(false);
             $table->string("mencabut")->nullable(false);
             $table->string("dicabut")->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

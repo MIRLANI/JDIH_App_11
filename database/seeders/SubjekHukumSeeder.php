@@ -14,10 +14,10 @@ class SubjekHukumSeeder extends Seeder
     public function run(): void
     {
          SubjekHukum::query()->create([
-            "judul" => "KEPEGAWAIAN"
+            "nama" => "KEPEGAWAIAN"
          ]);
          SubjekHukum::query()->create([
-            "judul" => "APARATUR NEGARA - KODE ETIK"
+            "nama" => "APARATUR NEGARA - KODE ETIK"
          ]);
     }
 }
