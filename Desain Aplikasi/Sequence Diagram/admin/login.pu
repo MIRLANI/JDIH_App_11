@@ -1,0 +1,35 @@
+@startuml
+
+actor Administrator as admin
+boundary "Login" as login
+control "UserController" as controller
+entity "User" as model
+database "Database" as db
+
+admin -> login : Memasukkan username dan password
+
+login -> controller: username, password method POST
+
+activate controller
+controller -> controller: Validasi kredensial
+
+alt Kredensial Valid
+    controller -> model: Mendapatkan data admin
+    activate model
+    model -> db: Memeriksa kredensial di database
+    activate db
+    db --> model: Data ditemukan
+    deactivate db
+    model --> controller: Data admin ditemukan
+    deactivate model
+    controller --> login: Response berhasil
+    deactivate controller
+    login --> admin: Redirect ke dashboard
+    
+else Kredensial Tidak Valid
+    controller --> login: Response gagal
+    deactivate controller
+    login --> admin: Username atau password salah
+end
+
+@enduml

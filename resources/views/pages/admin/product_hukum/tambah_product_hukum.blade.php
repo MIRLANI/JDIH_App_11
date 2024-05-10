@@ -403,7 +403,7 @@
                                                 <div class="form-group">
                                                     <select class="choices form-select" name="mengubah">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($produk_hukums as $produk)
+                                                        @foreach ($product_hukums as $produk)
                                                             <option value="{{ $produk->id }}">{{ $produk->nama }}
                                                             </option>
                                                         @endforeach
@@ -417,7 +417,7 @@
                                                 <div class="form-group">
                                                     <select class="choices form-select" name="diubah">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($produk_hukums as $produk)
+                                                        @foreach ($product_hukums as $produk)
                                                             <option value="{{ $produk->id }}">{{ $produk->nama }}
                                                             </option>
                                                         @endforeach
@@ -431,7 +431,7 @@
                                                 <div class="form-group">
                                                     <select class="choices form-select" name="mencabut">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($produk_hukums as $produk)
+                                                        @foreach ($product_hukums as $produk)
                                                             <option value="{{ $produk->id }}">{{ $produk->nama }}
                                                             </option>
                                                         @endforeach
@@ -445,7 +445,7 @@
                                                 <div class="form-group">
                                                     <select class="choices form-select" name="dicabut">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($produk_hukums as $produk)
+                                                        @foreach ($product_hukums as $produk)
                                                             <option value="{{ $produk->id }}">{{ $produk->nama }}
                                                             </option>
                                                         @endforeach

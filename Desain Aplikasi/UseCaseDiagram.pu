@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+
+actor "Administrator" as A
+actor User as U
+
+package "System JDHI" {
+
+    usecase "Download dokument" as Dokument
+    usecase "Produk Hukum FMIPA" as ProdukHukum
+    usecase "Mencari Produk Hukum" as SearchProduk
+    usecase "CRUD Produk Hukum" as CrudProduk
+    usecase "Login" as Login
+
+
+
+    A --> CrudProduk
+    A --> Login
+    A --> ProdukHukum
+    A --> SearchProduk
+    A --> Dokument
+
+    U --> ProdukHukum
+    U --> Dokument
+    U --> SearchProduk
+
+
+}
+
+@enduml

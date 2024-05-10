@@ -34,6 +34,8 @@ Route::controller(ProductHukumController::class)->group(function () {
     Route::get("/product-hukum-delete/{slug}", "destroy")->name("destroy.product_hukum");
     Route::get("/product-hukum-view-delete", "viewDelete")->name("viewDelete.product_hukum");
     Route::get("/product-hukum-restore/{slug}", "restore")->name("restore.product_hukum");
+    Route::get("/product-hukum-update/{slug}", "edit")->name("edit.product_hukum");
+    Route::post("/product-hukum-update/{slug}", "update")->name("update.product_hukum");
 });
 
 Route::controller(AbstrakHukumController::class)->group(function () {
