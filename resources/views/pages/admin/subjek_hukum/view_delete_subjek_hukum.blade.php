@@ -26,7 +26,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/subjek-hukum" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="/admin/subjek-hukum" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
@@ -50,11 +50,11 @@
                                     <td>
 
                                         <div class="d-flex buttons">
-                                            <a href="/subjek-hukum-restore/{{ $subjek->slug }}"
+                                            <a href="/admin/subjek-hukum-restore/{{ $subjek->slug }}"
                                                 class="btn icon btn-warning" title="return">
                                                 <i class="bi bi-arrow-repeat"></i>
                                             </a>
-                                            <a href="/subjek-hukum-detail/{{ $subjek->slug }}"
+                                            <a href="/admin/subjek-hukum-detail/{{ $subjek->slug }}"
                                                 class="btn icon btn-info" title="Detail">
                                                 <i class="bi bi-info-circle "></i>
                                             </a>

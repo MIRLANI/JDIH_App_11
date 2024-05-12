@@ -26,14 +26,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header my-2">
-                            <a href="/category-hukum" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="/admin/category-hukum" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
                         </div>
                         <div class="card-content mx-2">
                             <div class="card-body">
-                                <form class="form" action="/category-hukum-add" method="POST">
+                                <form class="form" action="/admin/category-hukum-add" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6 col-12">

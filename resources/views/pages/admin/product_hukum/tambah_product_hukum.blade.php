@@ -4,7 +4,7 @@
 
 @section('content')
 
-                                        
+
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -29,7 +29,7 @@
                 <div class="col-12 mt-3">
                     <div class="card ">
                         <div class="card-header">
-                            <a href="/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="/admin/product-hukum" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
@@ -37,7 +37,7 @@
                         <div class="card-content">
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
-                                <form class="form" action="/product-hukum-add" method="POST"
+                                <form class="form" action="/admin/product-hukum-add" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -139,7 +139,8 @@
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label " for="tempat_penetapan">Tempat Penetapan </label>
+                                                <label class="form-label " for="tempat_penetapan">Tempat Penetapan
+                                                </label>
                                                 <input class="form-control @error('tempat_penetapan') is-invalid @enderror"
                                                     type="text" placeholder="Tempat Penetapan..."
                                                     data-parsley-required="true" name="tempat_penetapan"
@@ -212,20 +213,20 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Bentuk Peraturan</label>
-                                                    <a href="/category-hukum-add" class="icon btn-primary mb-2"
+                                                    <a href="/admin/category-hukum-add" class="icon btn-primary mb-2"
                                                         title="Tambah Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                     <select
                                                         class="choices form-select @error('category_hukum_id') is-invalid @enderror"
-                                                        name="category_hukum_id"   data-parsley-required="true">
+                                                        name="category_hukum_id" data-parsley-required="true">
                                                         <option value="">Pilih Peraturan</option>
 
                                                         @foreach ($category_hukums as $category)
@@ -250,7 +251,7 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Subjek </label>
-                                                    <a href="/subjek-hukum-add" class="icon btn-primary mb-2"
+                                                    <a href="/admin/subjek-hukum-add" class="icon btn-primary mb-2"
                                                         title="Tambah Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -266,7 +267,7 @@
                                                             @endforeach
                                                         </optgroup>
                                                     </select>
-                                                
+
                                                     @error('subjek')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
@@ -455,8 +456,9 @@
                                         </div>
                                         <div class=" col-12 mt-3 mt-4">
                                             <div class="form-group ">
-                                                <input type="file" image-crop-aspect-ratio="1:1" name="file"
+                                                <input type="file" class="form-control form-control-sm" image-crop-aspect-ratio="1:1" name="file"
                                                     class="@error('file') is-invalid @enderror">
+
                                                 @error('file')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>

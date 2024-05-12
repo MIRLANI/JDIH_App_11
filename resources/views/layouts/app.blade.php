@@ -11,7 +11,7 @@
     @include('partials.users.assetcss')
 </head>
 
-<body>
+<body class="small">
     @include('partials.users.navbar')
 
              @yield('content')

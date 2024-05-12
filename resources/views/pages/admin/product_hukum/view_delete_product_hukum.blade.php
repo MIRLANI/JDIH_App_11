@@ -26,7 +26,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="/admin/product-hukum" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
@@ -66,11 +66,11 @@
                                     <td>
                                         <div class="d-flex buttons">
                                             
-                                            <a href="/product-hukum-restore/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-restore/{{ $productHukum->slug }}"
                                                 class="btn icon btn-warning" title="return">
                                                 <i class="bi bi-arrow-repeat"></i>
                                             </a>
-                                            <a href="/product-hukum-detail/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug }}"
                                                 class="btn icon btn-info" title="Detail">
                                                 <i class="bi bi-info-circle "></i>
                                             </a>

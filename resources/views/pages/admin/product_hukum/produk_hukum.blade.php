@@ -29,12 +29,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/product-hukum-add" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="/admin/product-hukum-add" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
                     </a>
 
-                    <a href="/product-hukum-view-delete" class="btn  btn-secondary">
+                    <a href="/admin/product-hukum-view-delete" class="btn  btn-secondary">
                         <i class="bi bi-eye"></i>
                         View Delete Data
                     </a>
@@ -76,15 +76,15 @@
                                     </td>
                                     <td>
                                         <div class="d-flex buttons">
-                                            <a href="/product-hukum-delete/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-delete/{{ $productHukum->slug }}"
                                                 class="btn icon btn-danger" title="Delete">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="/product-hukum-update/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-update/{{ $productHukum->slug }}"
                                                 class="btn icon btn-primary" title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
-                                            <a href="/product-hukum-detail/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug }}"
                                                 class="btn icon btn-info" title="Detail">
                                                 <i class="bi bi-info-circle "></i>
                                             </a>

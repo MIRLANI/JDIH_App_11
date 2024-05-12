@@ -29,7 +29,7 @@
                 <div class="col-12 mt-3">
                     <div class="card ">
                         <div class="card-header">
-                            <a href="/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="/admin/product-hukum" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
@@ -37,7 +37,7 @@
                         <div class="card-content">
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
-                                <form class="form" action="/product-hukum-add" method="POST"
+                                <form class="form" action="/admin/product-hukum-add" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -220,7 +220,7 @@
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Bentuk Peraturan</label>
-                                                    <a href="/category-hukum-add" class="icon btn-primary mb-2"
+                                                    <a href="/admin/category-hukum-add" class="icon btn-primary mb-2"
                                                         title="Update Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -257,7 +257,7 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Subjek </label>
-                                                    <a href="/subjek-hukum-add" class="icon btn-primary mb-2"
+                                                    <a href="/admin/subjek-hukum-add" class="icon btn-primary mb-2"
                                                         title="Update Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -496,56 +496,57 @@
                                             </div>
                                         </div>
 
-                                        {{ asset('storage/' . $product_hukum->file) }}
 
-                                        <div class="col-md-6 col-12 mt-3">
+                                        <div class="col-md-12 col-12 mt-3">
                                             <div class="form-group ">
-                                                <label class="form-label" for="sumber">Mencabut </label>
+                                                <label class="form-label" for="sumber">File Old </label>
                                                 <div class="form-group">
 
                                                     @if ($product_hukum->file != '')
-                                                        <fieldset src="{{ asset('storage/' . $product_hukum->file) }}"
-                                                            alt="" width="300px">
+                                                    <a href="{{ asset('storage/' . $product_hukum->file) }}">lihat produk hukum</a>
+                                                        
                                                         @else
                                                             <img src="" alt="Image Not Found">
                                                     @endif
-                                                  
-                                                </div>
-                                            </div>
 
-                                            <div class=" col-12 mt-3 mt-4">
-                                                <div class="form-group ">
-                                                    <input type="file" image-crop-aspect-ratio="1:1" name="file"
-                                                        class="@error('file') is-invalid @enderror">
-                                                    @error('file')
-                                                        <div class="invalid-feedback">
-                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                        </div>
-                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-12 mt-3">
-                                                <div class='form-group'>
-                                                    <div class="form-check mandatory">
-                                                        <input type="checkbox" id="checkbox5" name="persetujuan"
-                                                            class='form-check-input' checked data-parsley-required="true"
-                                                            data-parsley-error-message="You have to accept our terms and conditions to proceed.">
-                                                        <label for="checkbox5" class="form-check-label form-label">I
-                                                            accept these terms and conditions.
+                                        </div>
+
+                                        <div class=" col-12 mt-3 mt-4">
+                                            <div class="form-group ">
+                                                <input type="file" class="form-control form-control-sm"
+                                                    image-crop-aspect-ratio="1:1" name="file"
+                                                    class="@error('file') is-invalid @enderror">
+                                                @error('file')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <div class='form-group'>
+                                                <div class="form-check mandatory">
+                                                    <input type="checkbox" id="checkbox5" name="persetujuan"
+                                                        class='form-check-input' checked data-parsley-required="true"
+                                                        data-parsley-error-message="You have to accept our terms and conditions to proceed.">
+                                                    <label for="checkbox5" class="form-check-label form-label">I
+                                                        accept these terms and conditions.
                                                 </div>
                                             </div>
-
-
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-12 mt-3 d-flex  justify-content-end">
-                                                <button class="btn btn-primary me-3 mb-1">Submit</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                            </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 mt-3 d-flex  justify-content-end">
+                                            <button class="btn btn-primary me-3 mb-1">Submit</button>
+                                            <button type="reset"
+                                                class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

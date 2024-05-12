@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <b><a href="/dashboard">JDIH FMIPA</a></b>
+                    <b><a href="/admin/dashboard">JDIH FMIPA</a></b>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -45,7 +45,7 @@
                 <li class="sidebar-title"><b>Menu</b></li>
 
                 <li class="sidebar-item active ">
-                    <a href="/dashboard" class='sidebar-link'>
+                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -54,13 +54,13 @@
                 <li class="sidebar-title"><b>Produk Hukum</b>  </li>
 
                 <li class="sidebar-item  ">
-                    <a href="/category-hukum" class='sidebar-link'>
+                    <a href="/admin/category-hukum" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Kategori</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/subjek-hukum" class='sidebar-link'>
+                    <a href="/admin/subjek-hukum" class='sidebar-link'>
                         <i class="bi bi-blockquote-right"></i>
                         <span>Subjek</span>
                     </a>
@@ -79,10 +79,10 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="/product-hukum">Hukum</a>
+                            <a href="/admin/product-hukum">Hukum</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="/abstract-hukum">Abstrak</a>
+                            <a href="/admin/abstract-hukum">Abstrak</a>
                         </li>                     
                     </ul>
                 </li>

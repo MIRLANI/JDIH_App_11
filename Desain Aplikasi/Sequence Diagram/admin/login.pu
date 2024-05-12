@@ -2,8 +2,8 @@
 
 actor Administrator as admin
 boundary "Login" as login
-control "UserController" as controller
-entity "User" as model
+control "Controller" as controller
+entity "Model" as model
 database "Database" as db
 
 admin -> login : Memasukkan username dan password

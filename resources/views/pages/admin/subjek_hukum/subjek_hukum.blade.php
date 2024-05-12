@@ -27,12 +27,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/subjek-hukum-add" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="/admin/subjek-hukum-add" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
                     </a>
 
-                    <a href="/subjek-hukum-view-delete" class="btn  btn-secondary">
+                    <a href="/admin/subjek-hukum-view-delete" class="btn  btn-secondary">
                         <i class="bi bi-eye"></i>
                         View Delete Data
                     </a>
@@ -57,11 +57,11 @@
                                     <td>
 
                                         <div class="d-flex buttons">
-                                            <a href="/subjek-hukum-delete/{{ $subjek->slug }}" class="btn icon btn-danger"
+                                            <a href="/admin/subjek-hukum-delete/{{ $subjek->slug }}" class="btn icon btn-danger"
                                                 title="Delete">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="/subjek-hukum-update/{{ $subjek->slug }}" class="btn icon btn-primary"
+                                            <a href="/admin/subjek-hukum-update/{{ $subjek->slug }}" class="btn icon btn-primary"
                                                 title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>

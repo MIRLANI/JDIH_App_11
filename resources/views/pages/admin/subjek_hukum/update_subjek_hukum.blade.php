@@ -26,14 +26,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header my-2">
-                            <a href="/subjek-hukum" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="/admin/subjek-hukum" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" action="/subjek-hukum-update/{{ $subjekHukum->slug }}" method="POST">
+                                <form class="form" action="/admin/subjek-hukum-update/{{ $subjekHukum->slug }}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6 col-12">

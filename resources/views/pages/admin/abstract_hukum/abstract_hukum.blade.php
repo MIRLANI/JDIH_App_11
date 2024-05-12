@@ -30,7 +30,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <a href="/abstract-hukum-add">Tambah</a>
+                    <a href="/admin/abstract-hukum-add">Tambah</a>
                 </div>
 
                 <div class="card-body">
@@ -60,15 +60,15 @@
                                     <td>
 
                                         <div class="d-flex buttons">
-                                            <a href="/abstract-hukum-delete/{{ $abstrak->slug }}" class="btn icon btn-danger"
+                                            <a href="/admin/abstract-hukum-delete/{{ $abstrak->slug }}" class="btn icon btn-danger"
                                                 title="Delete">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="/abstract-hukum-update/{{ $abstrak->slug }}" class="btn icon btn-primary"
+                                            <a href="/admin/abstract-hukum-update/{{ $abstrak->slug }}" class="btn icon btn-primary"
                                                 title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
-                                            <a href="/abstract-hukum-detail/{{ $abstrak->slug }}" class="btn icon btn-info"
+                                            <a href="/admin/abstract-hukum-detail/{{ $abstrak->slug }}" class="btn icon btn-info"
                                                 title="Detail">
                                                 <i class="bi bi-info-circle "></i>
                                             </a>

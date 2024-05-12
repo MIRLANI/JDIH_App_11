@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header my-2">
-                        <a href="/category-hukum" class="btn btn-primary mx-2" title="Delete">
+                        <a href="/admin/category-hukum" class="btn btn-primary mx-2" title="Delete">
                             <i class="bi bi-arrow-left"></i>
                             Back
                         </a>

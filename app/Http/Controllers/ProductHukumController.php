@@ -17,9 +17,10 @@ class ProductHukumController extends Controller
      */
     public function index(): Response
     {
-        $productHukum = ProductHukum::query()->get();
+        $productHukums = ProductHukum::orderBy('created_at', 'desc')->get();
+
         return response()->view("pages.admin.product_hukum.produk_hukum", [
-            "productHukums" => $productHukum
+            "productHukums" => $productHukums
         ]);
     }
 
