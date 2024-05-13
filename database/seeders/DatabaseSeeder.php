@@ -22,14 +22,12 @@ class DatabaseSeeder extends Seeder
         DB::delete("delete from subjek_hukums");
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'mirlani',
-            'email' => 'lani@gmail.com',
-        ]);
+        
 
         $this->call(CategoryHukumSeeder::class);
         $this->call(ProductHukumSeeder::class);
         $this->call(AbstrakHukumSeeder::class);
         $this->call(SubjekHukumSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

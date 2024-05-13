@@ -33,6 +33,10 @@
     </div>
 
     @include('partials.admin.assetjs')
+    @include('sweetalert::alert')
+
+
+
 
 </body>
 

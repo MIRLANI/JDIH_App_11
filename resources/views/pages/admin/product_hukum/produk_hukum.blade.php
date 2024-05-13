@@ -77,7 +77,7 @@
                                     <td>
                                         <div class="d-flex buttons">
                                             <a href="/admin/product-hukum-delete/{{ $productHukum->slug }}"
-                                                class="btn icon btn-danger" title="Delete">
+                                                class="btn icon btn-danger" title="Delete" id="warning">
                                                 <i class="bi bi-trash "></i>
                                             </a>
                                             <a href="/admin/product-hukum-update/{{ $productHukum->slug }}"

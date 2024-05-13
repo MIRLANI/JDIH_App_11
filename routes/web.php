@@ -10,6 +10,9 @@ use App\Http\Controllers\SubjekHukumController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+
+
+
 Route::get("/", [HomeController::class, "index"])->name("home");
 Route::get("/login", [UserController::class, "getLogin"])->name("getLogin");
 Route::post("/login", [UserController::class, "postLogin"])->name("postLogin");

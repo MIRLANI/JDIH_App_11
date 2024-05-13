@@ -11,12 +11,12 @@ admin -> login : Memasukkan username dan password
 login -> controller: username, password method POST
 
 activate controller
-controller -> controller: Validasi Data
+controller -> controller: Validasi kredensial
 
-alt Data Valid 
+alt Kredensial Valid
     controller -> model: Mendapatkan data admin
     activate model
-    model -> db: Memeriksa Data di database
+    model -> db: Memeriksa kredensial di database
     activate db
     db --> model: Data ditemukan
     deactivate db
@@ -26,10 +26,28 @@ alt Data Valid
     deactivate controller
     login --> admin: Redirect ke dashboard
     
-else Data Tidak Valid
+else Kredensial Tidak Valid
     controller --> login: Response gagal
     deactivate controller
     login --> admin: Username atau password salah
 end
+
+admin -> login : Klik tombol logout
+
+login -> controller: method POST untuk logout
+
+activate controller
+controller -> controller: Melakukan proses logout
+
+controller -> model: Menghapus data login session
+
+activate model
+model -> db: Menghapus session dari database
+deactivate model
+
+controller --> login: Response berhasil logout
+deactivate controller
+
+login --> admin: Redirect ke halaman login
 
 @enduml

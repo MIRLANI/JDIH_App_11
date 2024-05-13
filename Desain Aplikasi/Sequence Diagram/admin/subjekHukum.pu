@@ -1,0 +1,106 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Subjek Hukum Page" as subjek
+boundary "Middleware" as middleware
+control "Controller" as controller
+entity "Model" as model
+' database "Database" as db
+
+loop View Subjek Hukum
+    admin -[#Blue]> subjek : Request method GET
+    ' note left: admin mengases subjek hukum
+    subjek -[#Blue]> middleware: Menampilkan Subjek Hukum
+    activate middleware
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> subjek : Admin belum login
+            subjek --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+                controller -[#Blue]> model : Get data subjek hukum
+                    activate model
+                    model --[#Green]> controller : Response  sukses
+                    deactivate model
+                    controller --[#Green]> subjek : Response  sukses
+            deactivate controller
+                subjek --[#Green]> admin : Menampilkan Data Subjek Hukum
+
+
+        ' DELETE
+        group Delete Subjek
+            admin -[#Blue]> subjek : Request method GET
+            ' note left: admin mengases subjek hukum
+
+            subjek -[#Blue]> middleware: Delete Subjek Hukum by id
+
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> subjek : Admin belum login
+            subjek --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+            controller -[#Blue]> model : Delete data subjek hukum
+            activate model
+            model --[#Green]> controller : Response  sukses
+            deactivate model
+            controller --[#Green]> subjek : Response  sukses
+            deactivate controller
+            subjek --[#Green]> admin : Subjek Hukum delete succesfull
+        end
+
+
+        ' UPDATE
+        group Update Subjek
+            admin -[#Blue]> subjek : Request method GET
+            ' note left: admin mengases subjek hukum
+
+            subjek -[#Blue]> middleware: Get Subjek Hukum by ID
+
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> subjek : Admin belum login
+            subjek --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+            controller -[#Blue]> model : Get data subjek hukum
+            activate model
+            model --[#Green]> controller : Response  sukses
+            deactivate model
+            controller --[#Green]> subjek : Response  sukses
+            deactivate controller
+                subjek --[#Green]> admin : Menampilkan Data Subjek Hukum
+            
+            activate admin
+             admin -[#Blue]> subjek : Update subjek hukum by ID
+            deactivate admin
+             subjek -[#Blue]> middleware : Request method POST
+             middleware -[#Red]> middleware : authentication
+            middleware --[#Red]> subjek : Admin belum login
+            subjek --[#Red]> admin : redirect to login method GET
+
+            middleware -[#Blue]> controller : Request diteruskan
+            activate controller
+            controller -[#Red]> controller : Validasi
+            controller --[#Red]> subjek : Response  failed
+            subjek --[#Red]> admin : Response  failed
+            controller -[#Blue]> model : Update subjek hukum
+            activate model 
+            model --[#Green]> controller : Response  sukses
+            deactivate model
+            controller --[#Green]> subjek : Response sukses
+            subjek --[#Green]> admin : Subjek hukum update succesfull
+            deactivate controller
+
+        deactivate middleware
+            
+
+            
+        end
+
+
+end
+
+
+@enduml

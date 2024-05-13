@@ -13,6 +13,8 @@
 
 <link rel="stylesheet" href="{{ asset("assets/css/shared/iconly.css") }}">
 
+<link rel="stylesheet" href="{{ asset("assets/extensions/sweetalert2/sweetalert2.min.css") }}">
+
 
 {{-- lagin --}}
 <link rel="stylesheet" href="{{ asset("assets/css/pages/auth.css") }}">
@@ -22,10 +24,3 @@
 <link rel="shortcut icon" href="{{ asset("assets/images/logo/favicon.svg") }}" type="image/x-icon">
 <link rel="shortcut icon" href="{{ asset("assets/images/logo/favicon.png") }}" type="image/png">
 
-{{-- <link rel="stylesheet" href="{{ asset("assets/css/pages/summernote.css") }}">
-<link rel="stylesheet" href="{{ asset("assets/extensions/summernote/summernote-lite.css") }}"> --}}
-
-
-
-{{-- <link rel="stylesheet" href="assets/extensions/quill/quill.snow.css">
-<link rel="stylesheet" href="assets/extensions/quill/quill.bubble.css"> --}}

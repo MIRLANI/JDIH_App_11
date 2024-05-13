@@ -11,6 +11,7 @@
         body {
             height: 100%;
         }
+
         body {
             background: url('{{ asset('images/fmipa_uho.jpg') }}');
             background-size: cover;
@@ -27,34 +28,49 @@
     <div class="container mt-5 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
-               
+
+                <div class="mb-3">
+
+                    @if (session('message'))
+                        <div class="alert alert-danger">{{ session('message') }}</div>
+                    @endif
+                </div>
+
+
+             
+
                 <div class="card">
                     <div class="card-body p-5">
                         <form method="POST" action="{{ route('postLogin') }}">
                             @csrf
+                            
                             <div class="form-group position-relative has-icon-left mb-4">
                                 <input type="text" name="username"
                                     class="form-control form-control-xl @error('username') is-invalid @enderror"
-                                    placeholder="Username" value="{{ old('username') }}">
+                                    placeholder="Username" value="{{ old('username') ?: session('username') }}">
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
+                                @error('username')
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group position-relative has-icon-left mb-4">
                                 <input type="password" name="password"
                                     class="form-control form-control-xl  @error('password') is-invalid @enderror"
-                                    placeholder="Password" value="{{ old('password') }}">
+                                    placeholder="Password" value="{{ old('password') ?: session('password') }}">
                                 <div class="form-control-icon">
                                     <i class="bi bi-shield-lock"></i>
                                 </div>
+                                @error('password')
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                    </div>
+                                @enderror
                             </div>
-                            <div class="form-check form-check-lg d-flex align-items-end">
-                                <input class="form-check-input me-2" type="checkbox" value=""
-                                    id="flexCheckDefault">
-                                <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                                    Keep me logged in
-                                </label>
-                            </div>
+                          
                             <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                         </form>
                     </div>
@@ -62,8 +78,9 @@
             </div>
         </div>
     </div>
+    @include('partials.admin.assetjs')
+   
 </body>
 
-@include('partials.admin.assetjs')
 
 </html>
