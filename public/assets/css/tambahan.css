@@ -1,0 +1,92 @@
+.main-navbar {
+    position: fixed;
+    width: 100%;
+    /* Menyesuaikan lebar dengan layar */
+    background-color: #ffffff;
+    /* Ganti dengan warna latar belakang yang diinginkan */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Menambahkan shadow jika diinginkan */
+    z-index: 1000;
+    /* Menentukan urutan tampilan di atas elemen lain */
+  }
+
+  .carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Ubah nilai alpha untuk ketebalan gelap */
+    z-index: 1;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .carousel-caption h5,
+  .carousel-caption p {
+    margin: 0;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    z-index: 3;
+    /* Mengatur z-index agar tetap terlihat di atas lapisan hitam */
+  }
+
+
+
+  .carousel-control-prev-icon:after,
+  .carousel-control-next-icon:after {
+    color: white;
+    /* Warna ikon navigasi */
+    font-size: 2rem;
+    /* Ukuran ikon navigasi */
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+    /* Lebar tombol navigasi */
+    opacity: 1;
+    /* Menetapkan opasitas agar tombol tetap terlihat */
+  }
+
+  .main-navbar {
+    background-color: maroon;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .logo img {
+    max-width: 100%;
+  }
+
+  .menu-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  .menu-item a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .login-button {
+    margin-left: auto;
+  }
+
+
+  
+  

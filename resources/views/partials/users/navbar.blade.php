@@ -1,37 +1,60 @@
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="index.html"><b>JDIH</b></a></h1>
+<nav class="main-navbar p-2" style="background-color: maroon">
+    <div class="container ">
+        <ul class="nav ">
+            <li class="menu-item nav-item">
+                <div class="logo">
+                    <a class="nav-link" href="index.html"><img src="{{ asset("images/logo-mipa.png") }}" alt="Logo" width="220px"></a>
+                </div>
+            </li>
 
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
-                <li><a class="nav-link scrollto" href="#about">Subjek</a></li>
-                <li><a class="nav-link scrollto" href="#services">Jenis</a></li>
-                <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                    class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+
+            <div class="mr-5"></div>
+            <li class="menu-item nav-item">
+                <a class="nav-link" href="index.html" class='menu-link'>
+                    <span style="color: white;">Beranda</span>
+                </a>
+            </li>
+
+            <li class="menu-item nav-item">
+                <a class="nav-link" href="index.html" class='menu-link'>
+                    <span style="color: white;">Subjek</span>
+                </a>
+            </li>
+
+            <li class="menu-item nav-item">
+                <a class="nav-link" href="index.html" class='menu-link'>
+                    <span style="color: white;">Jenis</span>
+                </a>
+            </li>
+            <li class="menu-item nav-item">
+                <a class="nav-link" href="index.html" class='menu-link'>
+                    <span style="color: white;">Tahun</span>
+                </a>
+            </li>
+            <li class="menu-item nav-item">
+                <a class="nav-link" href="index.html" class='menu-link'>
+                    <span style="color: white;">Login</span>
+                </a>
+            </li>
+
+            
+
+            
+
+        </ul>
     </div>
-</header>
+
+   
+</nav>
+
+<div class="header-top ">
+    <div class="container lani">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify"></i>
+        </a>
+    </div>
+</div>
+
+
+
+

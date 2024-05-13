@@ -21,5 +21,4 @@
 <script src="{{ asset("assets/extensions/toastify-js/src/toastify.js") }}"></script>
 <script src="{{ asset("assets/js/pages/filepond.js") }}"></script>
 
-<script src="{{ asset("assets/extensions/summernote/summernote-lite.min.js") }}"></script>
-<script src="{{ asset("assets/js/pages/summernote.js") }}"></script>
+<script src="{{ asset('assets/js/pages/horizontal-layout.js') }}"></script>

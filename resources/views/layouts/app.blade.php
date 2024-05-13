@@ -8,17 +8,31 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    @include('partials.users.assetcss')
+    @include('partials.admin.assetcss')
+
 </head>
 
-<body class="small">
-    @include('partials.users.navbar')
+<body>
 
-             @yield('content')
+    <div id="app">
+        <div id="main " class="layout-horizontal">
+            <header class="mb-5">
+                {{-- navbar --}}
+                @include('partials.users.navbar')
+            </header>
+            
+            <div class="content-wrapper container">
+                <div class="page-content">
+                    @yield('content')
+                </div>
+            </div>
 
-    @include('partials.users.footer')
-
-    @include('partials.users.assetjs')
+            {{-- footer --}}
+            @include('partials.users.footer')
+        </div>
+    </div>
+    @include('partials.admin.assetjs')
 </body>
+
 
 </html>
