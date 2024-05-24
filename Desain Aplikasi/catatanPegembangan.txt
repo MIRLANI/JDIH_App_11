@@ -1,0 +1,53 @@
+
+
+
+ATURAN ABSTRAK HUKUM
+1. dalam menambahkan abstrak hukum harus produk hukum yang ditampilkan hanya 
+produk hukum yang belum ada abstraknya
+2. update abstrack hukum hanya model abstract yang di gunakan
+
+
+
+
+actor  "Administrator" as admin
+boundary "Abstrak Hukum Page" as abstract
+boundary "AuthMiddleware" as middleware
+control "AbstractController" as controller
+entity "Abstract Model" as model
+
+admin -[#Blue]> abstract : Akses abstract hukum
+abstract -[#Blue]> middleware :  Request method GET
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> abstract : Admin belum login
+abstract --[#Red]> admin : Redirect to login method GET
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller
+controller -> model : Get abstract hukum
+activate model 
+model --> controller : Response success
+deactivate model
+controller --> abstract : Response success
+deactivate controller
+abstract --> admin : Menampilkan abstract hukum
+
+group Hapus Abstract Hukum
+
+admin -> abstract : Delete abstract hukum by id
+abstract -> middleware : Request method GET
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> abstract : Admin belum login
+abstract --[#Red]> admin : Redirect to login method GET
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller 
+controller -> model : Delete absract hukum by 
+
+
+
+end
+

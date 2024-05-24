@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" action="/subjek-hukum-add" method="POST">
+                                <form class="form" action="{{ route('store.subjek_hukum') }}" method="POST">
                                     @csrf
                                     <div class="row mx-2">
                                         <div class="col-md-6 col-12 ">

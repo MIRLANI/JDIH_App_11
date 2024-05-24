@@ -1,0 +1,44 @@
+@startuml
+
+
+
+actor User as user
+boundary "SISTEM JDIH"  as sistem
+control  "Controller" as subjekController
+entity "Model Produk Hukum" as modelproduk
+
+
+user -[#Blue]> sistem : User mengases menu tahun
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> subjekController : Menampilkan halaman tahun
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+
+group Fitur Halaman Subjek
+user -[#Blue]> sistem : Searach tahun
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> subjekController : Menampilkan hasil pencarian
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+
+
+user -[#Blue]> sistem : Mengases produk hukum berdasarkan tahun
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> modelproduk : Get produk hukum berdasarkan tahun
+activate modelproduk 
+modelproduk --[#Green]> subjekController : Mendapatkan data produk hukum
+deactivate modelproduk
+subjekController -[#Blue]> subjekController : Menampilkan data produk hukum berdasarkan tahun
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+end
+@enduml

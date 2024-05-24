@@ -2,34 +2,41 @@
 
 actor Administrator as admin
 boundary "Login" as login
-control "Controller" as controller
-entity "Model" as model
-database "Database" as db
+control "UserController" as controller
+entity "Model User" as model
 
-admin -> login : Memasukkan username dan password
+admin -[#Blue]> login : Admin Login
 
-login -> controller: username, password method POST
+login -[#Blue]> controller: Request method GET
+
+activate controller 
+controller --[#Green]> login : Response success
+deactivate controller
+login --[#Green]> admin : Response success
+
+admin -[#Blue]> login : Masukan username dan password
+login -[#Blue]> controller : Request method POST
+
 
 activate controller
-controller -> controller: Validasi Data
+controller -[#Red]> controller: Validasi Data
+controller --[#Red]> login : Response failed
+login --[#Red]> admin : Response failed
 
 alt Data Valid 
-    controller -> model: Mendapatkan data admin
+    controller -[#Blue]> model: Get data user
     activate model
-    model -> db: Memeriksa Data di database
-    activate db
-    db --> model: Data ditemukan
-    deactivate db
-    model --> controller: Data admin ditemukan
+    model --[#Green]> controller: Response success
     deactivate model
-    controller --> login: Response berhasil
-    deactivate controller
-    login --> admin: Redirect ke dashboard
+    controller -[#Green]> controller : Mendapatkan data user membuat sessions
+    controller --[#Green]> login: Response success
+    login --[#Green]> admin: Redirect ke dashboard method GET
     
 else Data Tidak Valid
-    controller --> login: Response gagal
+    controller --[#Red]> login: Response gagal
     deactivate controller
-    login --> admin: Username atau password salah
+    login --[#Red]> admin: Username atau password salah
+    deactivate controller
 end
 
 @enduml

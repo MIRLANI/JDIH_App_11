@@ -32,4 +32,6 @@ class CategoryHukum extends Model
     {
         return $this->hasMany(ProductHukum::class,  "category_hukum_id", "id");
     }
+
+  
 }

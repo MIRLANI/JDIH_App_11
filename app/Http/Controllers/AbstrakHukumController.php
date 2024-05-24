@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AbstrakHukum;
 use App\Http\Requests\StoreAbstrakHukumRequest;
 use App\Http\Requests\UpdateAbstrakHukumRequest;
+use App\Models\ProductHukum;
 use Illuminate\Http\Response;
 
 class AbstrakHukumController extends Controller
@@ -25,7 +26,10 @@ class AbstrakHukumController extends Controller
      */
     public function create(): Response
     {
-        return response()->view("pages.admin.abstract_hukum.tambah_abstract_hukum");
+        $produkHukum = ProductHukum::doesntHave('abstrakHukum')->get();
+        return response()->view("pages.admin.abstract_hukum.tambah_abstract_hukum", [
+            "produkHukum" => $produkHukum
+        ]);
     }
 
     /**
@@ -33,7 +37,9 @@ class AbstrakHukumController extends Controller
      */
     public function store(StoreAbstrakHukumRequest $request)
     {
-        //
+        $abstrakHukum = AbstrakHukum::create($request->validated());
+        dd($abstrakHukum);
+        return redirect()->route("admin.abstract_hukum.index");
     }
 
     /**

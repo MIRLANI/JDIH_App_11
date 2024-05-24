@@ -1,0 +1,38 @@
+@startuml
+
+|Admistrator|
+start
+:mengakses halaman 
+abstrak produk hukum;
+|Sistem|
+:menampilkan halaman 
+abstrak produk hukum;
+|Admistrator|
+repeat:halaman abstrak produk hukum;
+:mengelolah abstrak
+ produk hukum FMIPA;
+fork
+    :menambah abstrak
+     produk hukum;
+fork again
+    :menghapus abstrak 
+    produk hukum;
+fork again
+    :update abstrak 
+    produk hukum;
+fork again
+    :melihat detail 
+    abstrak produk hukum;
+    |Sistem|
+end fork
+:validasi data abstrak produk;
+ backward :mengirimkan pesan error
+  ke halaman abstrak produk hukum;
+repeat  while (valid?) is (no) not (yes)
+:menyimpan data 
+abstrak produk hukum;
+:memperbaharui data
+ abstrak produk hukum;
+stop
+@enduml
+

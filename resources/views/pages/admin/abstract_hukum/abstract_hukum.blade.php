@@ -30,7 +30,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <a href="/admin/abstract-hukum-add">Tambah</a>
+                    <a href="{{ route('create.abstrack_hukum') }}">Tambah</a>
                 </div>
 
                 <div class="card-body">
@@ -52,7 +52,7 @@
                             @foreach ($AbstractHukums as $abstrak)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $abstrak->productHukum->nama }}</td>
+                                    <td>{{ optional($abstrak->productHukum)->nama }}</td>
                                     <td> {{ $abstrak->title }}</td>
                                     {{-- <td>{{ $abstrak->materi_pokok }}</td>
                                     <td>{{ $abstrak->abstrak }}</td>

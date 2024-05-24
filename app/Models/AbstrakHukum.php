@@ -30,7 +30,7 @@ class AbstrakHukum extends Model
 
     public function productHukum(): BelongsTo
     {
-        return $this->belongsTo(ProductHukum::class, "produk_hukum_id", "id");
+        return $this->belongsTo(ProductHukum::class,  "produk_hukum_id",  "id" );
     }
 
 }

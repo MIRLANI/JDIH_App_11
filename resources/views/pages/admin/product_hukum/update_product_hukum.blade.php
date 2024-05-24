@@ -37,8 +37,9 @@
                         <div class="card-content">
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
-                                <form class="form" action="/admin/product-hukum-add" method="POST"
-                                    enctype="multipart/form-data">
+                                <form class="form"
+                                    action="{{ route('update.product_hukum', ['id' => $product_hukum->id, 'slug' => $product_hukum->slug]) }}"
+                                    method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="mt-2">
@@ -123,10 +124,15 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun </label>
-                                                <input class="form-control  @error('tahun') is-invalid @enderror"
-                                                    type="number" placeholder="Tahun" data-parsley-required="true"
-                                                    name="tahun" id="tahun"
-                                                    value="{{ old('tahun') ?: $product_hukum->tahun }}">
+                                                <select id="tahun"
+                                                    class="form-control @error('tahun') is-invalid @enderror"
+                                                    name="tahun">
+                                                    <option value="">Pilih Tahun</option>
+                                                    @for ($year = date('Y'); $year >= 1900; $year--)
+                                                        <option value="{{ $year }}">{{ $year }}</option>
+                                                    @endfor
+                                                </select>
+
                                                 @error('tahun')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
@@ -220,8 +226,8 @@
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Bentuk Peraturan</label>
-                                                    <a href="/admin/category-hukum-add" class="icon btn-primary mb-2"
-                                                        title="Update Bentuk Peraturan">
+                                                    <a href="{{ route('create.category_hukum') }}"
+                                                        class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                     <select
@@ -420,6 +426,11 @@
                                         </div>
 
                                         {{-- status Hukum --}}
+                                        @php
+                                        $statusHukum = json_decode($product_hukum->status_hukum, true);
+                                        $statusKeys = ['mengubah', 'diubah', 'mencabut', 'dicabut'];
+                                    @endphp
+
                                         <div class="mt-5"></div>
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Status Hukum</b></h4>
@@ -428,10 +439,18 @@
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Mengubah </label>
                                                 <div class="form-group">
-                                                    <select class="choices form-select" name="mengubah">
+                                                    <select
+                                                        class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[mengubah][]">
                                                         <option value="">Pilih Hukum</option>
                                                         @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
+                                                            <option value="{{ $produk->id }}"
+                                                                @if (old('status_hukum.mengubah') && is_array(old('status_hukum.mengubah')) && in_array($produk->id, old('status_hukum.mengubah')))
+                                                                    @selected(true)
+                                                                @elseif (isset($statusHukum['mengubah']) && is_array($statusHukum['mengubah']) && in_array($produk->id, $statusHukum['mengubah']))
+                                                                    @selected(true)
+                                                                @endif>
+                                                                {{ $produk->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -441,11 +460,19 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Diubah </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="diubah">
+                                                <div class="form-group mandatory">
+                                                    <select
+                                                        class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[diubah][]">
                                                         <option value="">Pilih Hukum</option>
                                                         @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
+                                                            <option value="{{ $produk->id }}"
+                                                                @if (old('status_hukum.diubah') && is_array(old('status_hukum.diubah')) && in_array($produk->id, old('status_hukum.diubah')))
+                                                                    @selected(true)
+                                                                @elseif (isset($statusHukum['diubah']) && is_array($statusHukum['diubah']) && in_array($produk->id, $statusHukum['diubah']))
+                                                                    @selected(true)
+                                                                @endif>
+                                                                {{ $produk->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -455,40 +482,42 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Mencabut </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="mencabut">
+                                                <div class="form-group mandatory">
+                                                    <select
+                                                        class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[mencabut][]">
                                                         <option value="">Pilih Hukum</option>
                                                         @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
+                                                            <option value="{{ $produk->id }}"
+                                                                @if (old('status_hukum.mencabut') && is_array(old('status_hukum.mencabut')) && in_array($produk->id, old('status_hukum.mencabut')))
+                                                                    @selected(true)
+                                                                @elseif (isset($statusHukum['mencabut']) && is_array($statusHukum['mencabut']) && in_array($produk->id, $statusHukum['mencabut']))
+                                                                    @selected(true)
+                                                                @endif>
+                                                                {{ $produk->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                       
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Dicabut </label>
                                                 <div class="form-group">
-                                                    <select class="choices form-select" name="dicabut">
+                                                    <select
+                                                        class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[dicabut][]">
                                                         <option value="">Pilih Hukum</option>
                                                         @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="sumber">Mencabut </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="mencabut">
-                                                        <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
+                                                            <option value="{{ $produk->id }}"
+                                                                @if (old('status_hukum.dicabut') && is_array(old('status_hukum.dicabut')) && in_array($produk->id, old('status_hukum.dicabut')))
+                                                                    @selected(true)
+                                                                @elseif (isset($statusHukum['dicabut']) && is_array($statusHukum['dicabut']) && in_array($produk->id, $statusHukum['dicabut']))
+                                                                    @selected(true)
+                                                                @endif>
+                                                                {{ $produk->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -503,10 +532,10 @@
                                                 <div class="form-group">
 
                                                     @if ($product_hukum->file != '')
-                                                    <a href="{{ asset('storage/' . $product_hukum->file) }}">lihat produk hukum</a>
-                                                        
-                                                        @else
-                                                            <img src="" alt="Image Not Found">
+                                                        <a href="{{ asset('storage/' . $product_hukum->file) }}">lihat
+                                                            produk hukum</a>
+                                                    @else
+                                                        <img src="" alt="Image Not Found">
                                                     @endif
 
                                                 </div>

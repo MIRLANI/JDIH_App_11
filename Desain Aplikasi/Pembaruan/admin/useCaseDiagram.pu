@@ -1,0 +1,58 @@
+@startuml
+
+
+
+:Administrator: as  admin
+:User : as user
+
+
+
+
+usecase "Login" as login
+usecase "Logout" as logout
+usecase "Mengelolah Peraturan" as inputPeraturan
+usecase "Subjek" as subjekPeraturan
+usecase "Tipe " as tipePeraturan
+usecase "Katagori " as katagoriPeraturan
+usecase "Abstrak " as abstrakPeraturan
+
+usecase "Download Dokumen" as downloadDokumen
+usecase "Melihat Dokumen" as melihatDokumen
+usecase "Produk Hukum" as produkHukum
+usecase "Peraturan FMIPA" as peraturanFmipa
+usecase "Mencari Peraturan" as mencariPeraturan
+
+
+admin --> login
+admin --> logout
+admin --> inputPeraturan
+
+inputPeraturan .. subjekPeraturan : <<include>>
+inputPeraturan .. tipePeraturan : <<include>>
+inputPeraturan .. katagoriPeraturan : <<include>>
+inputPeraturan .. produkHukum : <<include>>
+inputPeraturan .. abstrakPeraturan : <<include>>
+
+
+user -> downloadDokumen
+user --> melihatDokumen
+user -> produkHukum
+user -> mencariPeraturan
+produkHukum .. mencariPeraturan : <<include>>
+produkHukum .. downloadDokumen : <<include>>
+produkHukum .. melihatDokumen : <<include>>
+produkHukum . peraturanFmipa : <<include>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml

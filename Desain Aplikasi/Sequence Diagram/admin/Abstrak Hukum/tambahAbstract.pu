@@ -1,0 +1,56 @@
+@startuml
+
+actor "Administrator" as admin
+boundary "Abstrak Hukum Page" as abstract
+boundary "AuthMiddleware" as middleware
+control "AbastractController" as controller
+entity "Model Abastract" as modelAbstract
+entity "Model Product" as modelProduct
+
+
+
+admin -[#Blue]> abstract : Tambah abstract hukum
+abstract -[#Blue]> middleware :  Request method GET
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> abstract : Admin belum login
+abstract --[#Red]> admin : Redirect to login method GET
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller
+controller -[#Blue]> modelProduct : Get produk hukum
+activate modelProduct
+modelProduct --[#Green]> controller : Response success
+deactivate modelProduct
+controller --[#Green]> abstract : Response success
+deactivate controller
+abstract --[#Green]> admin : Response success
+
+admin --[#Blue]> abstract : Tambah abstract hukum
+activate abstract
+abstract --[#Blue]> middleware : Request method POST
+deactivate abstract
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> abstract : Admin belum login
+abstract --[#Red]> admin : Redirect to login method GET
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller
+controller -[#Red]> controller : Validate
+controller --[#Red]> abstract : Response failed
+abstract ---[#Red]> admin  : Response failed
+controller -[#Blue]> modelAbstract : Tambah produk hukum
+activate modelAbstract
+modelAbstract --[#Green]> controller : Response success
+deactivate modelAbstract
+controller --[#Green]> abstract : Response success
+abstract --[#Green]> admin : Tambah abstract hukum successful
+deactivate controller
+
+
+
+
+@enduml

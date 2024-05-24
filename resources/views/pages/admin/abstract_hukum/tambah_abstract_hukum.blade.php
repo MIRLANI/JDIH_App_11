@@ -30,7 +30,8 @@
 
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" data-parsley-validate action="" method="GET">
+                                <form class="form" data-parsley-validate action="" method="POST" action="{{ route('store.abstrack_hukum') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Abstrak</b></h4>
@@ -40,10 +41,11 @@
                                                 <label class="form-label" for="sumber">Hukum </label>
                                                 <div class="form-group">
                                                     <select class="choices form-select">
-                                                        <option value=""> </option>
-                                                        <option value="square">Peraturan BPK Nomor 1 Tahun 2013 </option>
-                                                        <option value="rectangle">Peraturan Menteri Dalam Negeri
-                                                            (Permendagri) Nomor 37 Tahun 2014</option>
+                                                        @foreach ($produkHukum as $huku)
+                                                        <option value="{{ $huku->id }}"> {{ $huku->nama }} </option>
+                                                            
+                                                        @endforeach
+                                
                                                     </select>
                                                 </div>
                                             </div>
@@ -65,16 +67,19 @@
                                         <div class="col-md-12 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="abstrak" class="form-label">Abstrak: </label>
-                                                <textarea class="form-control" id="abstrak" rows="6" name="abstrak"></textarea>
+                                                <textarea class="form-control" id="abstrak" rows="6" name="abstrak" placeholder="Masukkan abstrak, pisahkan poin dengan enter. Maksimal 3 poin." style="resize: vertical; min-height: 100px; max-height: 300px;"></textarea>
                                             </div>
+                                            <ul id="abstrakList" class="mt-2"></ul>
                                         </div>
+                                        
                                         <div class="col-md-12 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="catatan" class="form-label">Catatan: </label>
-                                                <textarea class="form-control" id="catatan" rows="6" name="abstrak"></textarea>
+                                                <textarea class="form-control" id="catatan" rows="6" name="catatan" placeholder="Masukkan catatan, pisahkan poin dengan enter. Maksimal 3 poin." style="resize: vertical; min-height: 100px; max-height: 300px;"></textarea>
                                             </div>
+                                            <ul id="catatanList" class="mt-2"></ul>
                                         </div>
-
+                                      
                                         <div class="col-12 mt-3 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

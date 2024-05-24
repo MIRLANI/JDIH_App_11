@@ -24,8 +24,57 @@
 <script src="{{ asset('assets/js/pages/horizontal-layout.js') }}"></script>
 
 
-<script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>>
-<script src="{{ asset('assets/js/pages/sweetalert2.js') }}"></script>>
+<script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/sweetalert2.js') }}"></script>
 
+<script>
+    let isZoomed = false;
+    function toggleZoomBackground() {
+        const section = document.getElementById('multiple-column-form');
+        section.style.transition = 'background-size 0.6s ease-in-out'; // Improved smooth transition for zoom effect
+        if (!isZoomed) {
+            section.style.backgroundSize = '120%'; // Zoom in the background
+            isZoomed = true;
+        } else {
+            section.style.backgroundSize = '100%'; // Reset to original size
+            isZoomed = false;
+        }
+    }
+</script>
+
+
+<script>
+    document.getElementById('abstrak').addEventListener('input', function() {
+        var text = this.value;
+        var points = text.split('\n');
+        if (points.length > 3) {
+            alert('Hanya boleh memasukkan maksimal 3 poin.');
+            this.value = points.slice(0, 3).join('\n');
+            return;
+        }
+        var html = points.map(function(point) {
+            return point.trim() !== '' ? '<li>' + point.trim() + '</li>' : '';
+        }).join('');
+        document.getElementById('abstrakList').innerHTML = html; // Display as list inside the ul element
+    });
+</script>
+
+
+
+<script>
+    document.getElementById('catatan').addEventListener('input', function() {
+        var text = this.value;
+        var points = text.split('\n');
+        if (points.length > 3) {
+            alert('Hanya boleh memasukkan maksimal 3 poin.');
+            this.value = points.slice(0, 3).join('\n');
+            return;
+        }
+        var html = points.map(function(point) {
+            return point.trim() !== '' ? '<li>' + point.trim() + '</li>' : '';
+        }).join('');
+        document.getElementById('catatanList').innerHTML = html; // Display as list inside the ul element
+    });
+</script>
 
 

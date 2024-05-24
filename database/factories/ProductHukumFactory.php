@@ -17,7 +17,23 @@ class ProductHukumFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // 'category_hukum_id' => $this->faker->numberBetween(1, 10),
+            // 'nama' => $this->faker->sentence,
+            // 'deskripsi' => $this->faker->paragraph,
+            // 'tipe_dokumen' => $this->faker->randomElement(['Peraturan Perundang-undangan', 'Peraturan Pemerintah', 'Keputusan Presiden']),
+            // 'judul' => $this->faker->sentence,
+            // 'tahun' => $this->faker->year,
+            // 'tempat_penetapan' => $this->faker->city,
+            // 'tanggal_penetapan' => $this->faker->date,
+            // 'tanggal_pengundangan' => $this->faker->date,
+            // 'tanggal_berlaku' => $this->faker->date,
+            // 'sumber' => $this->faker->sentence,
+            // 'status' => $this->faker->randomElement(['Berlaku', 'Tidak Berlaku']),
+            // 'bahasa' => $this->faker->randomElement(['Bahasa Indonesia', 'English']),
+            // 'lokasi' => $this->faker->city,
+            // 'file' => $this->faker->fileExtension,
+            // 'mencabut' => $this->faker->numberBetween(0, 1),
+            // 'teu' => $this->faker->randomElement(['TEU 1', 'TEU 2', 'TEU 3']),
         ];
     }
 }

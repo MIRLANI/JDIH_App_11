@@ -1,0 +1,11 @@
+@startuml
+
+|Administrator|
+start
+:admin logout;
+|Sistem|
+:menghapus session;
+:Redirect ke halaman login;
+stop
+@enduml
+

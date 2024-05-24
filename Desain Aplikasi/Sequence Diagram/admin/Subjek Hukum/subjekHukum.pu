@@ -3,49 +3,49 @@
 
 actor "Administrator" as admin
 boundary "Subjek Hukum Page" as subjek
-boundary "Middleware" as middleware
-control "Controller" as controller
-entity "Model" as model
+boundary "AuthMiddleware" as middleware
+control "SubjectController" as controller
+entity "Model Subject" as model
 ' database "Database" as db
 
 loop View Subjek Hukum
-    admin -[#Blue]> subjek : Request method GET
+    admin -[#Blue]> subjek : Menampilkan Subjek Hukum 
     ' note left: admin mengases subjek hukum
-    subjek -[#Blue]> middleware: Menampilkan Subjek Hukum
+    subjek -[#Blue]> middleware: Request method GET
     activate middleware
             middleware -[#Red]> middleware: authentication
             middleware --[#Red]> subjek : Admin belum login
             subjek --[#Red]> admin : redirect to login method GET
             middleware -[#Blue]> controller : Request diteruskan
-
+    deactivate middleware
             activate controller
                 controller -[#Blue]> model : Get data subjek hukum
                     activate model
-                    model --[#Green]> controller : Response  sukses
+                    model --[#Green]> controller : Response  success
                     deactivate model
-                    controller --[#Green]> subjek : Response  sukses
+                    controller --[#Green]> subjek : Response  success
             deactivate controller
                 subjek --[#Green]> admin : Menampilkan Data Subjek Hukum
 
 
         ' DELETE
         group Delete Subjek
-            admin -[#Blue]> subjek : Request method GET
+            admin -[#Blue]> subjek : Delete Subjek Hukum by id
             ' note left: admin mengases subjek hukum
 
-            subjek -[#Blue]> middleware: Delete Subjek Hukum by id
-
+            subjek -[#Blue]> middleware:  Request method GET
+        activate middleware
             middleware -[#Red]> middleware: authentication
             middleware --[#Red]> subjek : Admin belum login
             subjek --[#Red]> admin : redirect to login method GET
             middleware -[#Blue]> controller : Request diteruskan
-
+        deactivate middleware
             activate controller
             controller -[#Blue]> model : Delete data subjek hukum
             activate model
-            model --[#Green]> controller : Response  sukses
+            model --[#Green]> controller : Response  success
             deactivate model
-            controller --[#Green]> subjek : Response  sukses
+            controller --[#Green]> subjek : Response  success
             deactivate controller
             subjek --[#Green]> admin : Subjek Hukum delete succesfull
         end
@@ -53,43 +53,46 @@ loop View Subjek Hukum
 
         ' UPDATE
         group Update Subjek
-            admin -[#Blue]> subjek : Request method GET
+            admin -[#Blue]> subjek : Get Subjek Hukum by id
             ' note left: admin mengases subjek hukum
 
-            subjek -[#Blue]> middleware: Get Subjek Hukum by ID
-
+            subjek -[#Blue]> middleware: Request method GET
+        activate middleware
             middleware -[#Red]> middleware: authentication
             middleware --[#Red]> subjek : Admin belum login
             subjek --[#Red]> admin : redirect to login method GET
             middleware -[#Blue]> controller : Request diteruskan
-
+        deactivate middleware
             activate controller
             controller -[#Blue]> model : Get data subjek hukum
             activate model
-            model --[#Green]> controller : Response  sukses
+            model --[#Green]> controller : Response  success
             deactivate model
-            controller --[#Green]> subjek : Response  sukses
+            controller --[#Green]> subjek : Response  success
             deactivate controller
                 subjek --[#Green]> admin : Menampilkan Data Subjek Hukum
             
-            activate admin
              admin -[#Blue]> subjek : Update subjek hukum by ID
-            deactivate admin
+            activate subjek
              subjek -[#Blue]> middleware : Request method POST
+            deactivate subjek
+            
+            activate middleware
              middleware -[#Red]> middleware : authentication
             middleware --[#Red]> subjek : Admin belum login
             subjek --[#Red]> admin : redirect to login method GET
 
             middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
             activate controller
             controller -[#Red]> controller : Validasi
             controller --[#Red]> subjek : Response  failed
             subjek --[#Red]> admin : Response  failed
             controller -[#Blue]> model : Update subjek hukum
             activate model 
-            model --[#Green]> controller : Response  sukses
+            model --[#Green]> controller : Response  success
             deactivate model
-            controller --[#Green]> subjek : Response sukses
+            controller --[#Green]> subjek : Response success
             subjek --[#Green]> admin : Subjek hukum update succesfull
             deactivate controller
 

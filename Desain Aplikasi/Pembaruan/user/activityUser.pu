@@ -1,0 +1,31 @@
+@startuml
+
+|User|
+start
+:Mengases Halaman
+JDIH FMIPA;
+|Sistem|
+:menampilkan halaman
+JDIH FMIPA;
+|User|
+:melihat halaman
+JDIH FMIPA;
+
+repeat :Mencari produk hukum;
+
+:Memasukan kata kunci;
+|User|
+|Sistem|
+
+:Mencari Produk hukum
+berdasarkan kata kunci;
+repeat  while () is (no) not (yes)
+:Menampilkan hasil pencarian;
+|User|
+:Melihat produk hukum;
+
+:Mendownload dokumen;
+
+stop
+@enduml
+

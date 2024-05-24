@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbstrakHukumController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryHukumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HelloController;
@@ -12,17 +13,25 @@ use Illuminate\Support\Facades\Route;
 
 
 
+// Route untuk autLogin
+Route::get("/login", [AuthController::class, "getLogin"])->name("getLogin");
+Route::post("/login", [AuthController::class, "postLogin"])->name("postLogin");
 
-Route::get("/", [HomeController::class, "index"])->name("home");
-Route::get("/login", [UserController::class, "getLogin"])->name("getLogin");
-Route::post("/login", [UserController::class, "postLogin"])->name("postLogin");
+// Route untuk user
+Route::controller(UserController::class)->group(function () {
+    Route::get("/",  "index")->name("home");
+    Route::get("/subjek",  "subjek")->name("subjek");
+    Route::get("/jenis",  "jenis")->name("jenis");
+    Route::get("/tahun",  "tahun")->name("tahun");
+    Route::get("/detail/{id}/{slug}",  "detail")->name("detail");
+    Route::get("/search",  "search")->name("search");
+});
 
 
+// Route untuk admin
 Route::prefix("/admin")->group(function () {
-    
+
     Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
-
-
     Route::controller(CategoryHukumController::class)->group(function () {
         Route::get("/category-hukum",  "index")->name("index.category_hukum");
         Route::get("/category-hukum-add",  "create")->name("create.category_hukum");
@@ -43,13 +52,14 @@ Route::prefix("/admin")->group(function () {
         Route::get("/product-hukum-delete/{slug}", "destroy")->name("destroy.product_hukum");
         Route::get("/product-hukum-view-delete", "viewDelete")->name("viewDelete.product_hukum");
         Route::get("/product-hukum-restore/{slug}", "restore")->name("restore.product_hukum");
-        Route::get("/product-hukum-update/{slug}", "edit")->name("edit.product_hukum");
-        Route::post("/product-hukum-update/{slug}", "update")->name("update.product_hukum");
+        Route::get("/product-hukum-update/{id}/{slug}", "edit")->name("edit.product_hukum");
+        Route::post("/product-hukum-update/{id}/{slug}", "update")->name("update.product_hukum");
     });
 
     Route::controller(AbstrakHukumController::class)->group(function () {
         Route::get("/abstract-hukum", "index")->name("index.abstrack_hukum");
         Route::get("/abstract-hukum-add", "create")->name("create.abstrack_hukum");
+        Route::post("/abstract-hukum-add", "store")->name("store.abstrack_hukum");
     });
 
     Route::controller(SubjekHukumController::class)->group(function () {

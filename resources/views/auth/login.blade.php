@@ -15,6 +15,8 @@
         body {
             background: url('{{ asset('images/fmipa_uho.jpg') }}');
             background-size: cover;
+            background-color: rgba(0,0,0,0.5); /* Black color overlay */
+            background-blend-mode: darken; /* Blend mode to overlay the color */
             height: 100vh;
             margin: 0;
             display: flex;
@@ -35,10 +37,6 @@
                         <div class="alert alert-danger">{{ session('message') }}</div>
                     @endif
                 </div>
-
-
-             
-
                 <div class="card">
                     <div class="card-body p-5">
                         <form method="POST" action="{{ route('postLogin') }}">

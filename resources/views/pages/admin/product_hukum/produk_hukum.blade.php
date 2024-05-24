@@ -80,7 +80,7 @@
                                                 class="btn icon btn-danger" title="Delete" id="warning">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="/admin/product-hukum-update/{{ $productHukum->slug }}"
+                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
                                                 class="btn icon btn-primary" title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
@@ -94,7 +94,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div>4
             </div>
 
         </section>

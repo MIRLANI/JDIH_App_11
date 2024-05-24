@@ -2,30 +2,82 @@
 
 left to right direction
 
-actor "Administrator" as A
-actor User as U
+actor "Administrator" as admin
+actor "User" as user
 
-package "System JDHI" {
 
-    usecase "Download dokument" as Dokument
-    usecase "Produk Hukum FMIPA" as ProdukHukum
+
+    usecase "Download Dokument" as Dokument
     usecase "Mencari Produk Hukum" as SearchProduk
-    usecase "CRUD Produk Hukum" as CrudProduk
-    usecase "Login" as Login
 
 
 
-    A --> CrudProduk
-    A --> Login
-    A --> ProdukHukum
-    A --> SearchProduk
-    A --> Dokument
+    usecase "Login" as login
+    usecase "Dashboard" as dashboard
 
-    U --> ProdukHukum
-    U --> Dokument
-    U --> SearchProduk
+    usecase "Katagori Hukum" as Katagori
+    usecase "Tambah Katagori Hukum" as tambahKatagori
+    usecase "delete Katagori Hukum" as deleteKatagori
+
+    usecase "Subjek Hukum" as Subjek
+    usecase "Tambah Subjek Hukum" as tambahSubjek
+    usecase "Delete Subjek Hukum" as deleteSubjek
+
+    usecase "Tipe Dokumen" as Tipe
+    usecase "Update Tipe Dokumen" as deleteTipe
+    usecase "Delete Tipe Dokumen" as updateTipe
+
+    usecase "Produk Hukum" as Produk
+    usecase "Tambah Produk Hukum" as tambahProduk
+    usecase "Delete Produk Hukum" as deleteProduk
+    usecase "Update Produk Hukum" as updateProduk
+    usecase "Detail Produk Hukum" as detailProduk
+
+    usecase "Abstrak Hukum" as Abstrak
+    usecase "Delete Abstrak Hukum" as deleteAbstrak
+    usecase "Update Abstrak Hukum" as updateAbstrak
 
 
-}
+
+admin ---> login
+admin ---> dashboard
+admin ---> Katagori
+Katagori ..> tambahKatagori : include
+Katagori ..> deleteKatagori : include
+
+admin ---> Subjek
+Subjek ..> tambahSubjek : include
+Subjek ..> deleteSubjek : include
+
+admin ---> Tipe
+Tipe ..> deleteTipe : include
+Tipe ..> updateTipe : include
+
+
+admin ---> Abstrak
+Abstrak ..> updateAbstrak : include
+Abstrak ..> deleteAbstrak : include
+
+
+admin ---> Produk
+admin ---> Dokument
+admin ---> SearchProduk
+admin ---> updateProduk
+admin ---> deleteProduk
+admin ---> tambahProduk
+user --> Dokument
+
+Produk ...> tambahProduk : include
+Produk ...> deleteProduk : include
+Produk ...> updateProduk : include
+Produk ...> SearchProduk : include
+Produk ...> detailProduk : include
+Produk ..> Dokument : include 
+
+
+
+user ---> Produk
+user ---> SearchProduk
+
 
 @enduml

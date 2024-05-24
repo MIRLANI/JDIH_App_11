@@ -1,0 +1,30 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Subjek Hukum Page" as subjek
+boundary "AuthMiddleware" as middleware
+control "SubjectController" as controller
+entity "Model Subject" as model
+
+admin -[#Blue]> subjek : Request method GET
+subjek -[#Blue]> middleware : Tambah subjek method POST
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> subjek : Admin belum login
+subjek --[#Red]> admin : Redirect to login
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller
+controller -[#Red]> controller : Validasi
+controller --[#Red]> subjek : Response failed
+subjek --[#Red]> admin : Response failed
+controller -[#Blue]> model : Create subjek hukum
+activate model
+model --[#Green]> controller : Response success
+deactivate model
+controller --[#Green]> subjek : Response success
+deactivate controller
+subjek --[#Green]> admin : Tambah subjek hukum successfull
+@enduml

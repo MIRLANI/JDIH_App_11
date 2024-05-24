@@ -45,8 +45,11 @@ class ProductHukumController extends Controller
     public function store(StoreProductHukumRequest $request)
     {
         if ($request->hasFile("file")) {
-            $file = $request->file("file")->getClientOriginalName(); // Mengambil nama file asli
-            $request->file("file")->storeAs("public", $file); // Menyimpan file dengan nama asli
+            $originalName = $request->file("file")->getClientOriginalName(); // Mengambil nama file asli
+            $extension = $request->file("file")->getClientOriginalExtension(); // Mengambil ekstensi file
+            $productName = $request->input('nama'); // Mengambil nama produk hukum dari input form
+            $file = $productName . '.' . $extension; // Membuat nama file baru berdasarkan nama produk hukum
+            $request->file("file")->storeAs("public", $file); // Menyimpan file dengan nama baru
         }
     
         $productHukumData = $request->all();
@@ -54,8 +57,7 @@ class ProductHukumController extends Controller
     
         $productHukum = ProductHukum::create($productHukumData);
         $productHukum->subjekHukums()->sync($request->input("subjek"));
-    
-        return redirect("/product-hukum")->with("message", "Add Product Hukum Successfully");
+        return redirect()->route("index.product_hukum")->with("message", "Add Product Hukum Successfully");
     }
     
 
@@ -73,7 +75,7 @@ class ProductHukumController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug, ProductHukum $productHukum)
+    public function edit(string $id, string $slug, ProductHukum $productHukum)
     {
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
@@ -90,8 +92,9 @@ class ProductHukumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $slug, UpdateProductHukumRequest $request)
+    public function update(string $id, string $slug, UpdateProductHukumRequest $request)
     {
+        // dd($request);
        
         if ($request->file("file")) {
             $extension = $request->file("file")->getClientOriginalExtension();
@@ -105,14 +108,14 @@ class ProductHukumController extends Controller
             $request->merge(["file" => $file]);
         }
 
-        $productHukum = ProductHukum::query()->where("slug", $slug)->first();
+        $productHukum = ProductHukum::query()->where("id", $id)->where("slug", $slug)->first();
         $productHukum->update($request->all());
 
         if ($request->input("subjek")) {
             
-            $productHukum->catagories()->sync($request->input("subjek"));
+            $productHukum->subjekHukums()->sync($request->input("subjek"));
         }
-        return redirect("/product-hukum")->with("message", "Update Product Successfully");
+        return redirect()->route("index.product_hukum")->with("message", "Update Product Successfully");
 
     }
 

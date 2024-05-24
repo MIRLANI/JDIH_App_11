@@ -1,0 +1,53 @@
+@startuml
+
+
+
+actor User as user
+boundary "SISTEM JDIH"  as sistem
+control  "Controller" as subjekController
+entity "Model Subjek" as modelsubjek
+entity "Model Produk Hukum" as modelproduk
+
+
+user -[#Blue]> sistem : User mengases menu subjek
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> modelsubjek : Get data subjek
+activate modelsubjek
+modelsubjek --[#Green]> subjekController : Mendapatkan data subjek
+deactivate modelsubjek 
+subjekController -[#Blue]> subjekController : Menampilkan halaman subjek
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+
+group Fitur Halaman Subjek
+user -[#Blue]> sistem : Searach subjek
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> modelsubjek: Search subjek berdasarkan inputan 
+activate modelsubjek
+modelsubjek --[#Green]> subjekController : data hasil pencarian
+deactivate modelsubjek
+subjekController -[#Blue]> subjekController : Menampilkan hasil pencarian
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+
+
+user -[#Blue]> sistem : Mengases produk hukum berdasarkan subjek
+sistem -[#Blue]> subjekController : Request method GET
+activate subjekController
+subjekController -[#Blue]> modelproduk : Get produk hukum berdasarkan subjek
+activate modelproduk 
+modelproduk --[#Green]> subjekController : Mendapatkan data produk hukum
+deactivate modelproduk
+subjekController -[#Blue]> subjekController : Menampilkan data produk hukum berdasarkan subjek
+subjekController --[#Green]> sistem : Response success
+deactivate subjekController
+sistem --[#Green]> user : Response success
+
+end
+@enduml

@@ -1,0 +1,109 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Katagori Hukum Page" as Katagori
+boundary "AuthMiddleware" as middleware
+control "CategoryController" as controller
+entity "Model Category" as model
+' database "Database" as db
+
+loop View Katagori Hukum
+    admin -[#Blue]> Katagori : Mengases Katagori Hukum
+    ' note left: admin mengases Katagori hukum
+    Katagori -[#Blue]> middleware: Request method GET 
+    activate middleware
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Katagori : Admin belum login
+            Katagori --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+    deactivate middleware
+            activate controller
+                controller -[#Blue]> model : Get data Katagori hukum
+                    activate model
+                    model --[#Green]> controller : Response  success
+                    deactivate model
+                    controller --[#Green]> Katagori : Response  success
+            deactivate controller
+                Katagori --[#Green]> admin : Menampilkan Data Katagori Hukum
+
+
+        ' DELETE
+        group Delete Katagori
+            admin -[#Blue]> Katagori :  Delete Katagori Hukum by id
+            ' note left: admin mengases Katagori hukum
+
+            Katagori -[#Blue]> middleware: Request method GET
+            activate middleware
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Katagori : Admin belum login
+            Katagori --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+
+            activate controller
+            controller -[#Blue]> model : Delete data Katagori hukum
+            activate model
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Katagori : Response  success
+            deactivate controller
+            Katagori --[#Green]> admin : Katagori Hukum delete succesfull
+        end
+
+
+        ' UPDATE
+        group Update Katagori
+            admin -[#Blue]> Katagori : Update Katagori Hukum by id
+            ' note left: admin mengases Katagori hukum
+
+            Katagori -[#Blue]> middleware:  Request method GET
+
+            activate middleware
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Katagori : Admin belum login
+            Katagori --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+            activate controller
+            controller -[#Blue]> model : Get data Katagori hukum
+            activate model
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Katagori : Response  success
+            deactivate controller
+                Katagori --[#Green]> admin : Menampilkan Data Katagori Hukum
+            
+             admin -[#Blue]> Katagori : Update Katagori hukum by id
+            activate Katagori
+             Katagori -[#Blue]> middleware : Request method POST
+             deactivate Katagori
+             activate middleware
+             middleware -[#Red]> middleware : authentication
+            middleware --[#Red]> Katagori : Admin belum login
+            Katagori --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+            activate controller
+            controller -[#Red]> controller : Validasi
+            controller --[#Red]> Katagori : Response  failed
+            Katagori --[#Red]> admin : Response  failed
+            controller -[#Blue]> model : Update Katagori hukum
+            activate model 
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Katagori : Response success
+            Katagori --[#Green]> admin : Katagori hukum update succesfull
+            deactivate controller
+
+        
+            
+
+            
+        end
+
+
+end
+
+
+@enduml

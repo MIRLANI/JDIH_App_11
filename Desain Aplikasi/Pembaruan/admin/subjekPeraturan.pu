@@ -1,0 +1,35 @@
+@startuml
+
+|Admistrator|
+start
+:mengakses halaman 
+subjek peraturan;
+|Sistem|
+:menampilkan halaman
+ subjek peraturan;
+|Admistrator|
+repeat:halaman subjek peraturan;
+:mengelolah 
+subjek peraturan ;
+fork
+    :menambah 
+    subjek peraturan;
+fork again
+    :menghapus 
+    subjek peraturan;
+fork again
+    :update 
+    subjek peraturan;
+    |Sistem|
+end fork
+:validasi data produk;
+ backward :mengirimkan pesan error
+  ke halaman subjek peraturan;
+repeat  while (valid?) is (no) not (yes)
+:menyimpan data 
+subjek peraturan;
+:memperbaharui data
+ subjek peraturan;
+stop
+@enduml
+

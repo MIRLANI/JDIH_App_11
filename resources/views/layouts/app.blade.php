@@ -12,16 +12,16 @@
 
 </head>
 
-<body>
+<body class="small">
 
     <div id="app">
-        <div id="main " class="layout-horizontal">
-            <header class="mb-5">
+        <div id="main " class="layout-horizontal ">
+            <header >
                 {{-- navbar --}}
                 @include('partials.users.navbar')
             </header>
             
-            <div class="content-wrapper container">
+            <div class="content-wrapper  ">
                 <div class="page-content">
                     @yield('content')
                 </div>

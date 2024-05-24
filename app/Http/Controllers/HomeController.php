@@ -7,8 +7,5 @@ use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
-    public function index(): Response
-    {
-        return response()->view("pages.users.home");
-    }
+   
 }

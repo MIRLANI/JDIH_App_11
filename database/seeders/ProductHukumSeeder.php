@@ -21,20 +21,21 @@ class ProductHukumSeeder extends Seeder
             "tipe_dokumen" => "Peraturan Perundang-undangan",
             "tahun" => "2013",
             "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "29 November 2013",
-            "tanggal_pengundangan" => "29 November 2013",
-            "tanggal_berlaku" => "29 November 2013",
-            "sumber" => "LN 2013 (189) : 3 hlm.",
-            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
+            "tanggal_penetapan" => "2013-11-29",
+            "tanggal_pengundangan" => "2013-11-29",
+            "tanggal_berlaku" => "2013-11-29",
+            "sumber" => "LN 2013 No. 189 : 3 hlm.",
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
             "file" => "contoh-document.pdf",
-            "mencabut" => 1
-
+            "status_hukum" => json_encode([
+                "dicabut" => "dicabut oleh peraturan contoh",
+                "mengubah" => "diubah oleh peraturan contoh"
+            ]),
         ];
-        $productHukums = ProductHukum::query()->create($data);
-        $productHukums->save();
+        $productHukum = ProductHukum::create($data);
+        $productHukum->save();
 
         $data2 = [
             
@@ -54,10 +55,97 @@ class ProductHukumSeeder extends Seeder
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
             "file" => "contoh-document.pdf",
-            "dicabut" => 1
+            "status_hukum" => json_encode([
+                "dicabut" => "dicabut oleh peraturan contoh",
+                "mengubah" => "diubah oleh peraturan contoh"
+            ]),
         ];
 
         $productHukums = ProductHukum::query()->create($data2);
+        $productHukums->save();
+        
+        $data3 = [
+            
+            "category_hukum_id" => 1,
+            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
+            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "tipe_dokumen" => "Peraturan Perundang-undangan",
+            "tahun" => "2011",
+            "tempat_penetapan" => "Jakarta",
+            "tanggal_penetapan" => "07 Oktober 2011",
+            "tanggal_pengundangan" => "07 Oktober 2011",
+            "tanggal_berlaku" => "07 Oktober 2011",
+            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
+            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
+            "status" => "Tidak Berlaku",
+            "bahasa" => "Bahasa Indonesia",
+            "lokasi" => "BPK RI",
+            "file" => "contoh-document.pdf",
+            "status_hukum" => json_encode([
+                "dicabut" => "dicabut oleh peraturan contoh",
+                "mengubah" => "diubah oleh peraturan contoh"
+            ]),
+        ];
+        
+        $productHukums = ProductHukum::query()->create($data3);
+        $productHukums->save();
+
+
+        $data4 = [
+            
+            "category_hukum_id" => 1,
+            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
+            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "tipe_dokumen" => "Peraturan Perundang-undangan",
+            "tahun" => "2011",
+            "tempat_penetapan" => "Jakarta",
+            "tanggal_penetapan" => "07 Oktober 2011",
+            "tanggal_pengundangan" => "07 Oktober 2011",
+            "tanggal_berlaku" => "07 Oktober 2011",
+            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
+            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
+            "status" => "Tidak Berlaku",
+            "bahasa" => "Bahasa Indonesia",
+            "lokasi" => "BPK RI",
+            "file" => "contoh-document.pdf",
+            "status_hukum" => json_encode([
+                "dicabut" => "dicabut oleh peraturan contoh",
+                "mengubah" => "diubah oleh peraturan contoh"
+            ]),
+        ];
+
+        $productHukums = ProductHukum::query()->create($data4);
+        $productHukums->save();
+
+
+       
+        $data4 = [
+            
+            "category_hukum_id" => 1,
+            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
+            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
+            "tipe_dokumen" => "Peraturan Perundang-undangan",
+            "tahun" => "2011",
+            "tempat_penetapan" => "Jakarta",
+            "tanggal_penetapan" => "07 Oktober 2011",
+            "tanggal_pengundangan" => "07 Oktober 2011",
+            "tanggal_berlaku" => "07 Oktober 2011",
+            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
+            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
+            "status" => "Tidak Berlaku",
+            "bahasa" => "Bahasa Indonesia",
+            "lokasi" => "BPK RI",
+            "file" => "contoh-document.pdf",
+            "status_hukum" => json_encode([
+                "dicabut" => "dicabut oleh peraturan contoh",
+                "mengubah" => "diubah oleh peraturan contoh"
+            ]),
+        ];
+
+        $productHukums = ProductHukum::query()->create($data4);
         $productHukums->save();
 
 

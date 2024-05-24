@@ -1,0 +1,106 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Abstract Hukum Page" as Abstract
+boundary "AuthMiddleware" as middleware
+control "AbstractController" as controller
+entity "Model Abstract" as model
+' database "Database" as db
+
+loop View Abstract Hukum
+    admin -[#Blue]> Abstract : Mengases Abstract Hukum
+    ' note left: admin mengases Abstract hukum
+    Abstract -[#Blue]> middleware: Request method GET 
+    activate middleware
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Abstract : Admin belum login
+            Abstract --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+                controller -[#Blue]> model : Get data Abstract hukum
+                    activate model
+                    model --[#Green]> controller : Response  success
+                    deactivate model
+                    controller --[#Green]> Abstract : Response  success
+            deactivate controller
+                Abstract --[#Green]> admin : Menampilkan Data Abstract Hukum
+
+
+        ' DELETE
+        group Delete Abstract
+            admin -[#Blue]> Abstract :  Delete Abstract Hukum by id
+            ' note left: admin mengases Abstract hukum
+
+            Abstract -[#Blue]> middleware: Request method GET
+
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Abstract : Admin belum login
+            Abstract --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+            controller -[#Blue]> model : Delete data Abstract hukum
+            activate model
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Abstract : Response  success
+            deactivate controller
+            Abstract --[#Green]> admin : Abstract Hukum delete succesfull
+        end
+
+
+        ' UPDATE
+        group Update Abstract
+            admin -[#Blue]> Abstract : Update Abstract Hukum by id
+            ' note left: admin mengases Abstract hukum
+
+            Abstract -[#Blue]> middleware:  Request method GET
+
+            middleware -[#Red]> middleware: authentication
+            middleware --[#Red]> Abstract : Admin belum login
+            Abstract --[#Red]> admin : redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+
+            activate controller
+            controller -[#Blue]> model : Get data Abstract hukum
+            activate model
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Abstract : Response  success
+            deactivate controller
+                Abstract --[#Green]> admin : Menampilkan Data Abstract Hukum
+            
+            activate admin
+             admin -[#Blue]> Abstract : Update Abstract hukum by id
+            deactivate admin
+             Abstract -[#Blue]> middleware : Request method POST
+             middleware -[#Red]> middleware : authentication
+            middleware --[#Red]> Abstract : Admin belum login
+            Abstract --[#Red]> admin : redirect to login method GET
+
+            middleware -[#Blue]> controller : Request diteruskan
+            activate controller
+            controller -[#Red]> controller : Validasi
+            controller --[#Red]> Abstract : Response  failed
+            Abstract --[#Red]> admin : Response  failed
+            controller -[#Blue]> model : Update Abstract hukum
+            activate model 
+            model --[#Green]> controller : Response  success
+            deactivate model
+            controller --[#Green]> Abstract : Response success
+            Abstract --[#Green]> admin : Abstract hukum update succesfull
+            deactivate controller
+
+        deactivate middleware
+            
+
+            
+        end
+
+
+end
+
+
+@enduml

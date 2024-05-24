@@ -1,0 +1,149 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Produk Hukum Page" as produk
+boundary "AuthMiddleware" as middleware
+control "ProductHukumController" as controller
+entity "Product Model" as modelProduct
+entity "Category Model" as modelCategory
+entity "Subject Model" as modelSubject
+entity "TipeDocument Model" as ModelTipe
+
+
+loop View Produk Hukum
+
+    admin -[#Blue]> produk : Menampilan produk hukum
+    produk -[#Blue]> middleware : Request method GET
+
+    activate middleware
+    middleware -[#Red]> middleware : Authencation
+    middleware -[#Red]-> produk : Response failed
+    produk -[#Red]-> admin : Redirect to login method GET
+    middleware -[#Blue]> controller : Request diteruskan
+    deactivate middleware
+
+    activate controller
+        controller -[#Blue]> modelProduct : Get produk hukum
+        activate modelProduct 
+        modelProduct --[#Green]> controller : Request success
+        deactivate modelProduct
+        controller --[#Green]> produk : Request success
+        produk --[#Green]> admin : Menampilkan produk hukum
+    deactivate controller
+
+    group Delete Produk Hukum
+        admin -[#Blue]> produk : Hapus produk hukum by id
+        produk -[#Blue]> middleware : Request method GET
+        activate middleware
+            middleware -[#Red]> middleware : Authencation
+            middleware -[#Red]-> produk : Response failed
+            produk -[#Red]-> admin : Redirect to login method GET
+            middleware -[#Blue]> controller: Request diteruskan
+        deactivate middleware
+        
+        activate controller
+        controller -[#Blue]> modelProduct : Delete produk hukum
+        activate modelProduct
+        modelProduct --[#Green]> controller : Response success
+        deactivate modelProduct
+        controller --[#Green]> produk : Response success
+        deactivate controller
+        produk --[#Green]> admin : Produk hukum delete successful
+
+    end
+
+    group Update Produk Hukum
+            admin -[#Blue]> produk : Update produk hukum by id
+            produk -[#Blue]> middleware : Request method GET
+
+            activate middleware
+            middleware -[#Red]> middleware : Authencation
+            middleware -[#Red]-> produk : Response failed
+            produk -[#Red]-> admin : Redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+            
+            activate controller
+            controller -[#Blue]> modelProduct : Get product hukum by id
+            activate modelProduct 
+            modelProduct --[#Green]> controller : Response success
+            controller -[#Blue]> modelProduct : Get product hukum
+            modelProduct --[#Green]> controller : Response success
+            deactivate modelProduct
+
+            controller -[#Blue]> modelCategory : Get category hukum
+            activate modelCategory 
+            modelCategory --[#Green]> controller : Response success
+            deactivate modelCategory
+
+            controller -[#Blue]> modelSubject : Get subject hukum
+             activate modelSubject 
+            modelSubject --[#Green]> controller : Response success
+            deactivate modelSubject
+
+            controller -[#Blue]> ModelTipe : Get tipe document 
+             activate ModelTipe 
+            ModelTipe --[#Green]> controller : Response success
+            deactivate ModelTipe
+
+            controller --[#Green]> produk : Response success
+            produk --[#Green]> admin : Menampilkan data     
+            deactivate controller
+            
+            admin -[#Blue]> produk : Update Input data produk hukum
+            activate produk
+            produk -[#Blue]> middleware : Request method POST
+            deactivate produk
+
+            
+            activate middleware
+            middleware -[#Red]> middleware : Authencation
+            middleware -[#Red]-> produk : Response failed
+            produk -[#Red]-> admin : Redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+
+            activate controller
+            controller -[#Red]> controller : Validate
+            controller --[#Red]> produk : Response failed
+            produk --[#Red]> admin : Response failed
+            controller -[#Blue]> modelProduct : Update produk hukum by id
+            activate modelProduct
+            modelProduct --[#Green]> controller : Response success
+            deactivate modelProduct
+            controller --[#Green]> produk : Response success
+            produk --[#Green]> admin : Update produk hukum successful
+            deactivate controller
+
+    end
+
+    group Detail Produk Hukum
+            admin -[#Blue]> produk : Detail produk hukum by id
+            produk -[#Blue]> middleware : Request method GET
+
+            activate middleware
+            middleware -[#Red]> middleware : Authencation
+            middleware -[#Red]-> produk : Response failed
+            produk -[#Red]-> admin : Redirect to login method GET
+            middleware -[#Blue]> controller : Request diteruskan
+            deactivate middleware
+
+            activate controller
+            controller -[#Blue]> modelProduct : Get produk hukum by id
+            activate modelProduct 
+            modelProduct --[#Green]> controller : Request success
+            deactivate modelProduct
+            controller --[#Green]> produk : Request success
+            produk --[#Green]> admin : Menampilkan detail produk hukum
+            deactivate controller
+            
+        
+
+    end
+
+
+end
+
+
+@enduml

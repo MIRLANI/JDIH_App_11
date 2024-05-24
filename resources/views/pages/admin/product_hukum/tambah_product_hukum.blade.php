@@ -37,7 +37,7 @@
                         <div class="card-content">
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
-                                <form class="form" action="/admin/product-hukum-add" method="POST"
+                                <form class="form"  action="{{ route('store.product_hukum') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -123,10 +123,13 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun </label>
-                                                <input class="form-control  @error('tahun') is-invalid @enderror"
-                                                    type="number" placeholder="Tahun" data-parsley-required="true"
-                                                    name="tahun" id="tahun"
-                                                    value="{{ old('tahun') ?: session('tahun') }}">
+                                                <select id="tahun" class="form-control @error('tahun') is-invalid @enderror" name="tahun">
+                                                    <option value="">Pilih Tahun</option>
+                                                    @for ($year = date('Y'); $year >= 1900; $year--)
+                                                        <option value="{{ $year }}">{{ $year }}</option>
+                                                    @endfor
+                                                </select>
+                                                
                                                 @error('tahun')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
@@ -266,6 +269,7 @@
                                                                     {{ $subjek->nama }}</option>
                                                             @endforeach
                                                         </optgroup>
+                                                       
                                                     </select>
 
                                                     @error('subjek')
@@ -398,62 +402,66 @@
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Status Hukum</b></h4>
                                         </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="sumber">Mengubah </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="mengubah">
-                                                        <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                        @php
+                                            $status = [
+                                                'mengubah' => [
+                                                    'label' => 'Mengubah',
+                                                    'options' => $product_hukums->map(function ($produk) {
+                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
+                                                    })->toArray()
+                                                ],
+                                                'diubah' => [
+                                                    'label' => 'Diubah',
+                                                    'options' => $product_hukums->map(function ($produk) {
+                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
+                                                    })->toArray()
+                                                ],
+                                                'mencabut' => [
+                                                    'label' => 'Mencabut',
+                                                    'options' => $product_hukums->map(function ($produk) {
+                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
+                                                    })->toArray()
+                                                ],
+                                                'dicabut' => [
+                                                    'label' => 'Dicabut',
+                                                    'options' => $product_hukums->map(function ($produk) {
+                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
+                                                    })->toArray()
+                                                ]
+                                            ];
+                                        @endphp
+
+                                        <input type="hidden" name="status_hukum" id="status_hukum" value="">
+                                        <script>
+                                            function updateStatusHukum() {
+                                                var statusHukum = [];
+                                                @foreach ($status as $key => $data)
+                                                    var selected = document.querySelector('select[name="{{ $key }}"]').value;
+                                                    if (selected) {
+                                                        statusHukum.push({ key: "{{ $key }}", id: selected });
+                                                    }
+                                                @endforeach
+                                                                                               document.getElementById('status_hukum').value = JSON.stringify(statusHukum);
+                                            }
+                                        </script>
+
+                                        @foreach ($status as $key => $data)
+                                            <div class="col-md-6 col-12 mt-3">
+                                                <div class="form-group ">
+                                                    <label class="form-label" for="sumber">{{ $data['label'] }}</label>
+                                                    <div class="form-group">
+                                                        <select class="choices form-select" name="{{ $key }}" onchange="updateStatusHukum()">
+                                                            <option value="">Pilih Hukum</option>
+                                                            @foreach ($data['options'] as $option)
+                                                                <option value="{{ $option['id'] }}">{{ $option['nama'] }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="sumber">Diubah </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="diubah">
-                                                        <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="sumber">Mencabut </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="mencabut">
-                                                        <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="sumber">Dicabut </label>
-                                                <div class="form-group">
-                                                    <select class="choices form-select" name="dicabut">
-                                                        <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
-                                                            <option value="{{ $produk->id }}">{{ $produk->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
+
+                                        
                                         <div class=" col-12 mt-3 mt-4">
                                             <div class="form-group ">
                                                 <input type="file" class="form-control form-control-sm" image-crop-aspect-ratio="1:1" name="file"

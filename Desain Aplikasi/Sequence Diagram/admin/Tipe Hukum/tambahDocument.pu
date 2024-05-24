@@ -1,0 +1,30 @@
+@startuml
+
+
+actor "Administrator" as admin
+boundary "Tipe Dokument Page" as Tipe
+boundary "AuthMiddleware" as middleware
+control "TipeDocumentController" as controller
+entity "TipeDocument Model" as model
+
+admin -[#Blue]> Tipe : Request method GET
+Tipe -[#Blue]> middleware : Tambah Tipe dokumen method POST
+activate middleware
+middleware -[#Red]> middleware : Autentication
+middleware --[#Red]> Tipe : Admin belum login
+Tipe --[#Red]> admin : Redirect to login method GET
+middleware -[#Blue]> controller : Request diteruskan
+deactivate middleware
+
+activate controller
+controller -[#Red]> controller : Validasi
+controller --[#Red]> Tipe : Response failed
+Tipe --[#Red]> admin : Response failed
+controller -[#Blue]> model : Create Tipe dokument
+activate model
+model --[#Green]> controller : Response success
+deactivate model
+controller --[#Green]> Tipe : Response success
+deactivate controller
+Tipe --[#Green]> admin : Tambah Tipe dokument successfull
+@enduml
