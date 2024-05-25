@@ -28,7 +28,6 @@ class ProductHukumSeeder extends Seeder
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
-            "file" => "contoh-document.pdf",
             "status_hukum" => json_encode([
                 "dicabut" => "dicabut oleh peraturan contoh",
                 "mengubah" => "diubah oleh peraturan contoh"
@@ -54,7 +53,6 @@ class ProductHukumSeeder extends Seeder
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
-            "file" => "contoh-document.pdf",
             "status_hukum" => json_encode([
                 "dicabut" => "dicabut oleh peraturan contoh",
                 "mengubah" => "diubah oleh peraturan contoh"
@@ -81,7 +79,6 @@ class ProductHukumSeeder extends Seeder
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
-            "file" => "contoh-document.pdf",
             "status_hukum" => json_encode([
                 "dicabut" => "dicabut oleh peraturan contoh",
                 "mengubah" => "diubah oleh peraturan contoh"
@@ -109,7 +106,6 @@ class ProductHukumSeeder extends Seeder
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
-            "file" => "contoh-document.pdf",
             "status_hukum" => json_encode([
                 "dicabut" => "dicabut oleh peraturan contoh",
                 "mengubah" => "diubah oleh peraturan contoh"
@@ -138,7 +134,6 @@ class ProductHukumSeeder extends Seeder
             "status" => "Tidak Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "BPK RI",
-            "file" => "contoh-document.pdf",
             "status_hukum" => json_encode([
                 "dicabut" => "dicabut oleh peraturan contoh",
                 "mengubah" => "diubah oleh peraturan contoh"

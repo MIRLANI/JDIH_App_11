@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductHukum;
 use App\Http\Requests\StoreProductHukumRequest;
 use App\Http\Requests\UpdateProductHukumRequest;
+use App\Models\Akses;
 use App\Models\CategoryHukum;
 use App\Models\SubjekHukum;
 use Illuminate\Http\RedirectResponse;
@@ -80,7 +81,7 @@ class ProductHukumController extends Controller
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $productHukums = ProductHukum::query()->get();
-        $product = $productHukum->query()->where("slug", $slug)->first();
+        $product = $productHukum->where("id", $id)->where("slug", $slug)->first();
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
             "product_hukums" => $productHukums,
             "subjek_hukums" => $subjekHukums,
@@ -96,27 +97,39 @@ class ProductHukumController extends Controller
     {
         // dd($request);
        
+        $akses = Akses::query()->where("product_hukum_id", $id)->first();
+        
         if ($request->file("file")) {
             $extension = $request->file("file")->getClientOriginalExtension();
-            // $name = uniqid() . "." . $extension;
-            // bisa juga seperti ini 
-
-            $file = $request->input("nama") . "-" . now()->timestamp . "." . $extension;
-            // memasukan datanya kedalam direkotri public
-            $request->file("file")->storeAs("public", $file);
-            // kemudian kita masukan ke dalam database menggunakan merge
-            $request->merge(["file" => $file]);
+            if ($extension !== 'pdf') {
+                return back()->withErrors(['file' => 'Only PDF files are allowed.']);
+            }
+            $randomString = \Illuminate\Support\Str::random(10);
+            $newSlug = $request->input('slug');
+            $file = $newSlug  . $slug . "-" . now()->timestamp . "-" . $randomString . "." . $extension;
+            // memasukan datanya kedalam direktori tanpa prefix public
+            $path = $request->file("file")->storeAs("document", $file);
+            // Ensure Akses record exists or create a new one
+            if (!$akses) {
+                $akses = Akses::create([
+                    'product_hukum_id' => $id,
+                    'file' => $file  // Store only the file name without the 'public/' prefix
+                ]);
+            } else {
+                $akses->update(['file' => $file]);  // Update with the file name only
+            }
         }
 
         $productHukum = ProductHukum::query()->where("id", $id)->where("slug", $slug)->first();
-        $productHukum->update($request->all());
+        if (!$productHukum) {
+            return back()->withErrors(['error' => 'Product Hukum not found.']);
+        }
+        $productHukum->update($request->except(['slug', 'file']) + ['slug' => $newSlug ?? $slug]);
 
         if ($request->input("subjek")) {
-            
             $productHukum->subjekHukums()->sync($request->input("subjek"));
         }
         return redirect()->route("index.product_hukum")->with("message", "Update Product Successfully");
-
     }
 
     /**

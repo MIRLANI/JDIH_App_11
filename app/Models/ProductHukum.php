@@ -41,23 +41,27 @@ class ProductHukum extends Model
         return $this->belongsToMany(SubjekHukum::class, "subjek_product_hukums",  "product_hukum_id", "subjek_hukum_id");
     }
 
-    public function jumlahAkses(): HasMany
-    {
-        return $this->hasMany(JumlahAkses::class, "produk_hukum_id", "id");
-    }
+
 
     public function abstrakHukum(): HasOne
     {
         return $this->hasOne(AbstrakHukum::class, "produk_hukum_id", "id");
     }
 
-    public function subProducts()
+
+    public function akses(): HasOne
     {
-        return $this->hasMany(ProductHukum::class, 'product_hukum_id', "id");
+        return $this->hasOne(Akses::class, "product_hukum_id", "id");
     }
 
-    public function parentId()
+    public static function mostPopularProducts()
     {
-        return $this->belongsTo(ProductHukum::class, 'product_hukum_id', "id");
+        return self::whereHas('akses', function ($query) {
+            $query->where('review', '>', 0)->orWhere('download', '>', 0);
+        })->with(['akses' => function ($query) {
+            $query->orderByRaw('download DESC, review DESC');
+        }])->get()->sortByDesc(function ($product) {
+            return $product->akses->where('product_hukum_id', $product->id)->sum('download') + $product->akses->where('product_hukum_id', $product->id)->sum('review');
+        });
     }
 }

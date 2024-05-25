@@ -8,7 +8,8 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductHukumController;
 use App\Http\Controllers\SubjekHukumController;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,13 +19,16 @@ Route::get("/login", [AuthController::class, "getLogin"])->name("getLogin");
 Route::post("/login", [AuthController::class, "postLogin"])->name("postLogin");
 
 // Route untuk user
-Route::controller(UserController::class)->group(function () {
+Route::controller(HomeController::class)->group(function () {
     Route::get("/",  "index")->name("home");
     Route::get("/subjek",  "subjek")->name("subjek");
     Route::get("/jenis",  "jenis")->name("jenis");
     Route::get("/tahun",  "tahun")->name("tahun");
     Route::get("/detail/{id}/{slug}",  "detail")->name("detail");
     Route::get("/search",  "search")->name("search");
+    Route::get("/download_file/{id}/{file}",  "download")->name("download");
+    Route::get("/review_file/{id}/{file}",  "review")->name("review");
+    
 });
 
 
