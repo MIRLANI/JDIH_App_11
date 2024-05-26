@@ -8,7 +8,7 @@
     <hr class="mt-0 mx-auto" style="width: 90%;">
     <div class="card-body mx-2">
         @php
-            $statusHukum = json_decode($detailHukum->status_hukum, true);
+            $statusHukum = json_decode($produkHukum->status_hukum, true);
             $statusKeys = ['mengubah', 'diubah', 'mencabut', 'dicabut'];
         @endphp
         @foreach ($statusKeys as $statusKey)

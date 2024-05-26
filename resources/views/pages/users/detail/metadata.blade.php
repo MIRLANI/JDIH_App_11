@@ -13,80 +13,80 @@
             <tbody>
                 <tr>
                     <th scope="row">Tipe Dokumen</th>
-                    <td>{{ $detailHukum->tipe_dokumen ? $detailHukum->tipe_dokumen : '' }}</td>
+                    <td>{{ $produkHukum->tipe_dokumen ? $produkHukum->tipe_dokumen : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Judul</th>
-                    <td>{{ $detailHukum->judul ? $detailHukum->judul : '' }}</td>
+                    <td>{{ $produkHukum->judul ? $produkHukum->judul : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">T.E.U.</th>
-                    <td>{{ $detailHukum->teu ? $detailHukum->teu : '' }}</td>
+                    <td>{{ $produkHukum->teu ? $produkHukum->teu : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Nomor</th>
-                    <td>{{ $detailHukum->nomor ? $detailHukum->nomor : '' }}</td>
+                    <td>{{ $produkHukum->nomor ? $produkHukum->nomor : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Bentuk</th>
-                    <td>{{ optional($detailHukum->categoryHukum)->title ?? '' }}</td>
+                    <td>{{ optional($produkHukum->categoryHukum)->title ?? '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Bentuk Singkat</th>
-                    <td>{{ $detailHukum->categoryHukum->short_title ? $detailHukum->categoryHukum->short_title : '' }}
+                    <td>{{ $produkHukum->categoryHukum->short_title ? $produkHukum->categoryHukum->short_title : '' }}
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">Tahun</th>
-                    <td>{{ $detailHukum->tahun ? $detailHukum->tahun : '' }}</td>
+                    <td>{{ $produkHukum->tahun ? $produkHukum->tahun : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tempat Penetapan</th>
-                    <td>{{ $detailHukum->lokasi }}</td>
+                    <td>{{ $produkHukum->lokasi }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Penetapan</th>
-                    <td>{{ $detailHukum->tempat_penetapan ? $detailHukum->tempat_penetapan : '' }}</td>
+                    <td>{{ $produkHukum->tempat_penetapan ? $produkHukum->tempat_penetapan : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Pengundangan</th>
-                    <td>{{ $detailHukum->tanggal_pengundangan ? $detailHukum->tanggal_pengundangan : '' }}
+                    <td>{{ $produkHukum->tanggal_pengundangan ? $produkHukum->tanggal_pengundangan : '' }}
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Berlaku</th>
-                    <td>{{ $detailHukum->tanggal_berlaku ? $detailHukum->tanggal_berlaku : '' }}</td>
+                    <td>{{ $produkHukum->tanggal_berlaku ? $produkHukum->tanggal_berlaku : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Sumber</th>
-                    <td>{{ $detailHukum->sumber ? $detailHukum->sumber : '' }}</td>
+                    <td>{{ $produkHukum->sumber ? $produkHukum->sumber : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Subjek</th>
-                    <td>{{ $detailHukum->subjekHukums->pluck('nama')->isNotEmpty() ? implode(', ', $detailHukum->subjekHukums->pluck('nama')->toArray()) : '' }}
+                    <td>{{ $produkHukum->subjekHukums->pluck('nama')->isNotEmpty() ? implode(', ', $produkHukum->subjekHukums->pluck('nama')->toArray()) : '' }}
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">Status</th>
                     <td>
                         <span
-                            style="padding: 1px 10px; color: white; background-color: {{ $detailHukum->status == 'berlaku' ? '#008000' : '#800000' }}; border-radius: 5px;">
+                            style="padding: 1px 10px; color: white; background-color: {{ $produkHukum->status == 'berlaku' ? '#008000' : '#800000' }}; border-radius: 5px;">
                             <b>
-                                {{ $detailHukum->status ? $detailHukum->status : 'Tidak Diketahui' }}</b>
+                                {{ $produkHukum->status ? $produkHukum->status : 'Tidak Diketahui' }}</b>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">Bahasa</th>
-                    <td>{{ $detailHukum->bahasa ? $detailHukum->bahasa : '' }}</td>
+                    <td>{{ $produkHukum->bahasa ? $produkHukum->bahasa : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Lokasi</th>
-                    <td>{{ $detailHukum->lokasi ? $detailHukum->lokasi : '' }}</td>
+                    <td>{{ $produkHukum->lokasi ? $produkHukum->lokasi : '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Bidang</th>
-                    <td>{{ $detailHukum->bidang ? $detailHukum->bidang : '' }}</td>
+                    <td>{{ $produkHukum->bidang ? $produkHukum->bidang : '' }}</td>
                 </tr>
             </tbody>
         </table>

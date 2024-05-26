@@ -26,36 +26,36 @@ class HomeController extends Controller
 
     public function jenis(): Response
     {
-        return response()->view("pages.users.jenis");
+        return response()->view("pages.users.jenis.index");
     }
 
     public function subjek(): Response
     {
-        return response()->view("pages.users.subjek");
+        return response()->view("pages.users.subjek.index");
     }
     public function tahun(): Response
     {
-        return response()->view("pages.users.tahun");
+        return response()->view("pages.users.tahun.index");
     }
 
     public function detail(string $id, string $slug): Response
     {
-        $detailHukum = ProductHukum::query()->where('id', $id)->orWhere('slug', $slug)->first();
-        return response()->view("pages.users.detail", [
-            "detailHukum" => $detailHukum
+        $produkHukum = ProductHukum::query()->where('id', $id)->orWhere('slug', $slug)->first();
+        return response()->view("pages.users.detail.index", [
+            "produkHukum" => $produkHukum
         ]);
     }
 
 
     public function search(): Response
     {
-        $detailHukum = ProductHukum::query()->where('id', 2)->orWhere('slug', "djfd-fdfd")->first();
+        $produkHukum = ProductHukum::query()->where('id', 2)->orWhere('slug', "djfd-fdfd")->first();
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
             "subjekHukums" => $subjekHukums,
-            "detailHukum" => $detailHukum
+            "produkHukum" => $produkHukum
         ]);
        
     }

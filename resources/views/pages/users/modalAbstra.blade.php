@@ -12,19 +12,19 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <p>{{ optional($detailHukum->abstrakHukum)->title ?? '' }}</p>
-                    <p>{{ $detailHukum->tahun ?? '' }}</p>
-                    <p>{{ strtoupper(optional($detailHukum->categoryHukum)->title ?? '' . ' NO ' . $detailHukum->nomor ?? '' . optional($detailHukum)->sumber ?? '') }}
+                    <p>{{ optional($produkHukum->abstrakHukum)->title ?? '' }}</p>
+                    <p>{{ $produkHukum->tahun ?? '' }}</p>
+                    <p>{{ strtoupper(optional($produkHukum->categoryHukum)->title ?? '' . ' NO ' . $produkHukum->nomor ?? '' . optional($produkHukum)->sumber ?? '') }}
                     </p>
                     <p>
-                        {{ strtoupper(optional($detailHukum)->deskripsi ?? '') }}
+                        {{ strtoupper(optional($produkHukum)->deskripsi ?? '') }}
                     </p>
                     <div>
                         <h5>ABSTRAK:</h5>
                         <div>
                             <ul>
-                                @if($detailHukum->abstrakHukum)
-                                    @foreach (explode("\n", $detailHukum->abstrakHukum->abstrak ?? '') as $point)
+                                @if($produkHukum->abstrakHukum)
+                                    @foreach (explode("\n", $produkHukum->abstrakHukum->abstrak ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -34,8 +34,8 @@
                             <h5>CATATAN:</h5>
                             <p>
                             <ul>
-                                @if($detailHukum->abstrakHukum)
-                                    @foreach (explode("\n", $detailHukum->abstrakHukum->catatam ?? '') as $point)
+                                @if($produkHukum->abstrakHukum)
+                                    @foreach (explode("\n", $produkHukum->abstrakHukum->catatam ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif

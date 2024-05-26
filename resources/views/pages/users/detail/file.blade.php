@@ -10,12 +10,12 @@
         <div class="d-flex justify-content-evenly">
             <div class="card " style="background-color: #e3f2fd; width: 48%; margin-right: 1%;">
                 <div class="card-body" style="color: #343a40;">
-                    <span style="font-size: 15px;"><strong>Views: </strong>{{ optional($detailHukum->akses)->review ?? '0' }}</span>
+                    <span style="font-size: 15px;"><strong>Views: </strong>{{ optional($produkHukum->akses)->review ?? '0' }}</span>
                 </div>
             </div>
             <div class="card" style="background-color: #fce4ec; width: 48%; margin-left: 1%;">
                 <div class="card-body" style="color: #343a40;">
-                    <span style="font-size: 15px;"><strong>Downloads: </strong> {{ optional($detailHukum->akses)->download ?? '0' }}</span>
+                    <span style="font-size: 15px;"><strong>Downloads: </strong> {{ optional($produkHukum->akses)->download ?? '0' }}</span>
                 </div>
             </div>
         </div>
@@ -23,11 +23,11 @@
        
 
         <div class="d-flex justify-content-center  gap-5">
-            @if($detailHukum->akses && $detailHukum->akses->product_hukum_id)
-                <a href="{{ route("review", ['id' => $detailHukum->akses->product_hukum_id, 'file' => $detailHukum->akses->file]) }}" target="_blank" class="btn btn-primary px-4">
+            @if($produkHukum->akses && $produkHukum->akses->product_hukum_id)
+                <a href="{{ route("review", ['id' => $produkHukum->akses->product_hukum_id, 'file' => $produkHukum->akses->file]) }}" target="_blank" class="btn btn-primary px-4">
                     <i class="bi bi-eye-fill me-2"></i>Preview
                 </a>
-                <a href="{{ route('download', ['id' => $detailHukum->akses->product_hukum_id, 'file' => $detailHukum->akses->file]) }}" class="btn btn-primary px-4">
+                <a href="{{ route('download', ['id' => $produkHukum->akses->product_hukum_id, 'file' => $produkHukum->akses->file]) }}" class="btn btn-primary px-4">
                     <i class="bi bi-download me-2"></i>Download
                 </a>
             @else
