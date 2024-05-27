@@ -17,67 +17,127 @@
 </section>
 
 
-@include('pages.users.modalAbstra')
+
+
+
 
 
 <div class="col-11 my-5">
     <h4 class="fw-bold text-center">PENCARIAN PERATURAN</h4>
-    <p class="mb-0 text-center">Kriteria: Tentang: <strong>keuangan</strong></p>
+    <p class="mb-0 text-center">Kriteria: Tentang: <strong>{{ request()->get('keyword') }}</strong></p>
 </div>
-<div class="card w-75 mx-auto my-5"> <!-- Changed width from w-100 to w-75 -->
-    <div class="card-body">
-        <div class="row align-item mx-1s-center">
-            <div class="col-5 col-md-auto">
-                <i class="bi bi-file-earmark-text-fill mb-3 me-3" style="font-size:100px;"></i>
-            </div>
-            <div class="col-12 col-md">
-                <h6 class="mb-4">Peraturan Gubernur (PERGUB) Provinsi Nanggroe Aceh Darussalam No. 20 Tahun 2017
-                </h6>
-                <a href="" style="font-size: 25px;">Penetapan dan Penyaluran Belanja Bantuan Keuangan kepada
-                    Kabupaten Aceh Timur
-                    Tahun Anggaran 2017</a>
 
-                <span class="d-block mt-2" style="color: gray;">Bantuan, Sumbangan, Bencana/Kebencanaan, dan
-                    Penanggulangan
-                    Bencana</span>
-            </div>
-
-            <hr class="m-2">
-            <h6 class="mb-2">Status Peraturan:</h6>
-            <div class="mb-3">
-                <strong class="">Dicabut dengan:</strong>
-                <ul>
-                    <li><a href=""><span style="color: red">Peraturan BPK Nomor Tiga Tahun 2016</span></a>
-                        tentang Kode Etik Badan Pemeriksa Pemeriksa</li>
-                    <li><a href=""><span style="color: red">Peraturan BPK Nomor Tiga Tahun 2016</span></a>
-                        tentang Kode Etik Badan Pemeriksa Pemeriksa</li>
-                </ul>
-                <strong>Mencabut:</strong>
-                <ul>
-                    <li><span style="color: red">Peraturan BPK No. 2 Tahun 2007</span> tentang Kode Etik Badan
-                        Pemeriksa Keuangan Republik Indonesia</li>
-                </ul>
+@if ($produkHukum->isNotEmpty())
+    @foreach ($produkHukum as $hukum)
+        @include('pages.users.modalSearch')
+        <div class="card w-75 mx-auto my-5 shadow">
+            <div class="card-body">
+                <div class="row align-items-center mx-1">
+                    <div class="col-5 col-md-auto">
+                        <i class="bi bi-file-earmark-text-fill mb-3 me-3" style="font-size:100px;"></i>
+                    </div>
+                    <div class="col-12 col-md mt-3">
+                        <h6 class="mb-4">{{ $hukum->nama }}</h6>
+                        <a href="{{ route('detail', ['id' => $hukum->id, 'slug' => $hukum->slug]) }}"
+                            style="font-size: 25px; color: black;" onmouseover="this.style.color='#4A90E2'"
+                            onmouseout="this.style.color='#333'">{{ Str::limit($hukum->deskripsi, 100) }}</a>
+                        <span class="d-block mt-2"
+                            style="color: gray;">{{ $hukum->subjekHukums->isNotEmpty() ? implode(', ', $hukum->subjekHukums->pluck('nama')->toArray()) : '' }}</span>
+                    </div>
+                </div>
+                <hr class="my-2">
+                <h6 class="mb-2">Status Peraturan:</h6>
+                @php
+                    $hukum_status = json_decode($hukum->status_hukum, true);
+                    $statusKeys = ['mengubah', 'diubah', 'mencabut', 'dicabut'];
+                @endphp
+                @foreach ($statusKeys as $statusKey)
+                    @if (isset($hukum_status[$statusKey]) && !empty($hukum_status[$statusKey]) && is_array($hukum_status[$statusKey]))
+                        <p style="background-color: #f0f8ff; padding: 0.1em; display: inline-block;">
+                            {{ ucfirst($statusKey) }}</p>
+                        <ol style="list-style-type: lower-alpha;">
+                            @foreach ($hukum_status[$statusKey] as $statusId)
+                                @php
+                                    $produkStatus = \App\Models\ProductHukum::query()->find($statusId);
+                                @endphp
+                                @if ($produkStatus)
+                                    <li>
+                                        <a
+                                            href="{{ route('detail', ['id' => $produkStatus->id, 'slug' => $produkStatus->slug]) }}">
+                                            <span style="color: red;">{{ $produkStatus->nama }}</span>
+                                        </a>
+                                        {{ $produkStatus->deskripsi }}
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ol>
+                    @endif
+                @endforeach
+                <hr class="my-2">
+                <div class="d-flex justify-content-between align-items-center mx-1">
+                    <div class="d-flex align-items-center">
+                        @if ($hukum->file)
+                            <a class="btn btn-light-secondary px-2 mx-1"
+                                href="{{ route('download', ['id' => $hukum->id, 'file' => $hukum->file]) }}"
+                                title="Download">Download
+                                <i class="bi bi-download"></i>
+                            </a>
+                            <a class="btn btn-light-secondary px-2 mx-1"
+                                href="{{ route('review', ['id' => $hukum->id, 'file' => $hukum->file]) }}"
+                                target="_blank">Review
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        @else
+                            <button class="btn btn-light-secondary px-2 mx-1 disabled" title="Download"
+                                disabled>Download
+                                <i class="bi bi-download"></i>
+                            </button>
+                            <button class="btn btn-light-secondary px-2 mx-1 disabled" disabled>Review
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        @endif
+                    </div>
+                    <button type="button" class="btn btn-light-secondary px-4" data-bs-toggle="modal"
+                    data-bs-target="#modal-{{ $hukum->id }}">Abstrak</button>
+                </div>
             </div>
         </div>
-        <hr>
-
-        <div class="d-flex justify-content-between align-item mx-1s-center">
-            <p>Download: <a class="bi bi-file-earmark-pdf" href="#"><span class="mx-1">file-hello.pdf</span></a>
-            </p>
-            <button type="button" class="btn btn-light-secondary px-4" data-bs-toggle="modal"
-                data-bs-target="#large">Abstrak</button>
-        </div>
+    @endforeach
+@else
+    <div class="alert alert-warning" role="alert">
+        No products found.
     </div>
-</div>
+@endif
+
+
 
 <div class="card-body text-center">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-primary">
-            <li class="page-item mx-1 "><a class="page-link" href="#">Prev</a></li>
-            <li class="page-item mx-1"><a class="page-link" href="#">1</a></li>
-            <li class="page-item mx-1 active"><a class="page-link" href="#">2</a></li>
-            <li class="page-item mx-1"><a class="page-link" href="#">3</a></li>
-            <li class="page-item mx-1"><a class="page-link" href="#">Next</a></li>
+            @if ($produkHukum->currentPage() > 1)
+                <li class="page-item mx-1">
+                    <button class="page-link"
+                        onclick="changePage('{{ $produkHukum->previousPageUrl() }}')">Prev</button>
+                </li>
+            @endif
+
+            @foreach ($produkHukum->getUrlRange(1, $produkHukum->lastPage()) as $page => $url)
+                <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
+                    <button class="page-link" onclick="changePage('{{ $url }}')">{{ $page }}</button>
+                </li>
+            @endforeach
+
+            @if ($produkHukum->currentPage() < $produkHukum->lastPage())
+                <li class="page-item mx-1">
+                    <button class="page-link" onclick="changePage('{{ $produkHukum->nextPageUrl() }}')">Next</button>
+                </li>
+            @endif
         </ul>
     </nav>
 </div>
+<script>
+    function changePage(url) {
+        window.history.pushState("", "", url);
+        location.reload();
+    }
+</script>

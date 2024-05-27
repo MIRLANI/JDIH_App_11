@@ -25,10 +25,13 @@ Route::controller(HomeController::class)->group(function () {
     Route::get("/jenis",  "jenis")->name("jenis");
     Route::get("/tahun",  "tahun")->name("tahun");
     Route::get("/detail/{id}/{slug}",  "detail")->name("detail");
-    Route::get("/search",  "search")->name("search");
     Route::get("/download_file/{id}/{file}",  "download")->name("download");
     Route::get("/review_file/{id}/{file}",  "review")->name("review");
-    
+
+
+    Route::get("/search",  "search")->name("search");
+    Route::get("/Search",  "search")->name("Search");
+    Route::get("/Subjek",  "subjek")->name("searchSubjek");
 });
 
 

@@ -56,12 +56,16 @@ class ProductHukum extends Model
 
     public static function mostPopularProducts()
     {
-        return self::whereHas('akses', function ($query) {
-            $query->where('review', '>', 0)->orWhere('download', '>', 0);
-        })->with(['akses' => function ($query) {
-            $query->orderByRaw('download DESC, review DESC');
-        }])->get()->sortByDesc(function ($product) {
-            return $product->akses->where('product_hukum_id', $product->id)->sum('download') + $product->akses->where('product_hukum_id', $product->id)->sum('review');
-        });
+        return self::query()
+            ->where(function ($query) {
+                $query->where('review', '>', 0)->orWhere('download', '>', 0);
+            })
+            ->orderByRaw('download DESC, review DESC')
+            ->get()
+            ->sortByDesc(function ($product) {
+                return $product->download + $product->review;
+            });
     }
+
+   
 }

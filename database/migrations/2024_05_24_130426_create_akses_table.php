@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('akses', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_hukum_id');
-            $table->string("file")->default("");
-            $table->integer('review')->default(0);
-            $table->integer('download')->default(0);
-            $table->foreign("product_hukum_id")->on("product_hukums")->references("id");
-            $table->timestamps();
-        });
+        // Schema::create('akses', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('product_hukum_id');
+        //     $table->string("file")->default("");
+        //     $table->integer('review')->default(0);
+        //     $table->integer('download')->default(0);
+        //     $table->foreign("product_hukum_id")->on("product_hukums")->references("id");
+        //     $table->timestamps();
+        // });
     }
 
     /**

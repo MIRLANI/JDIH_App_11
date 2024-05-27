@@ -2,9 +2,9 @@
 
 
 @section('title', 'Database Peraturan | JDHI FMIPA')
-
 @section('content')
 
+  
 
     @if (URL::current() == route('home'))
         @include('pages.users.home.header')
@@ -13,7 +13,7 @@
         @include('pages.users.home.standarLayanan')
     @endif
     
-    @if (URL::current() == route('search'))
+    @if (URL::current() == route('search') || URL::current() == route('Search'))
         @include('pages.users.hasilPencarianProdukHukum')
     @endif
 

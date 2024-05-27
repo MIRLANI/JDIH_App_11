@@ -10,10 +10,10 @@
             <div class="col-11 mx-auto">
                 <div class="d-flex flex-column align-items-start m-5">
                     <div class="text-secondary mb-3" style="font-size: 20px;">
-                        {{ $detailHukum->nama ?? '' }}
+                        {{ $produkHukum->nama ?? '' }} 
                     </div>
                     <div class="text-white" style="font-size: 25px;">
-                        {{ $detailHukum->deskripsi ?? '' }}
+                        {{ $produkHukum->deskripsi ?? '' }}
                     </div>
                 </div>
             </div>

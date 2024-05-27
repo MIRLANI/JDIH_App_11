@@ -45,22 +45,41 @@ class ProductHukumController extends Controller
      */
     public function store(StoreProductHukumRequest $request)
     {
-        if ($request->hasFile("file")) {
-            $originalName = $request->file("file")->getClientOriginalName(); // Mengambil nama file asli
-            $extension = $request->file("file")->getClientOriginalExtension(); // Mengambil ekstensi file
-            $productName = $request->input('nama'); // Mengambil nama produk hukum dari input form
-            $file = $productName . '.' . $extension; // Membuat nama file baru berdasarkan nama produk hukum
-            $request->file("file")->storeAs("public", $file); // Menyimpan file dengan nama baru
+        // dd($request);
+        if ($request->file("file")) {
+            $extension = $request->file("file")->getClientOriginalExtension();
+            if ($extension !== 'pdf') {
+                return back()->withErrors(['file' => 'Only PDF files are allowed.']);
+            }
+            $randomString = \Illuminate\Support\Str::random(10);
+            // Automatically generate slug from product hukum name if not provided
+            $slug = $request->input('slug') ?: \Illuminate\Support\Str::slug($request->input('nama'), '-');
+            $file = $slug . "-" . now()->timestamp . "-" . $randomString . "." . $extension;
+            // memasukan datanya kedalam direktori tanpa prefix public
+            $request->file("file")->storeAs("document", $file);
+
+            // Ensure only the file name is stored in the database, not the path
+            $productHukumData = $request->except('file');
+            $productHukumData['file'] = $file; // Store only the file name in the database
+
+            // Handle nested array data if present
+            if ($request->has('status_hukum')) {
+                $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
+            }
+      
+        } else {
+            $productHukumData = $request->all();
+            // Handle nested array data if present
+            if ($request->has('status_hukum')) {
+                $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
+            }
         }
-    
-        $productHukumData = $request->all();
-        $productHukumData["file"] = $file; // Menambahkan nama file ke dalam data yang akan disimpan
-    
-        $productHukum = ProductHukum::create($productHukumData);
+        // dd($productHukumData);
+        $productHukum = ProductHukum::query()->create($productHukumData); 
         $productHukum->subjekHukums()->sync($request->input("subjek"));
         return redirect()->route("index.product_hukum")->with("message", "Add Product Hukum Successfully");
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -96,36 +115,24 @@ class ProductHukumController extends Controller
     public function update(string $id, string $slug, UpdateProductHukumRequest $request)
     {
         // dd($request);
-       
-        $akses = Akses::query()->where("product_hukum_id", $id)->first();
-        
+        $newSlug = $request->input('slug') ?: \Illuminate\Support\Str::slug($request->input('nama'), '-');
+
         if ($request->file("file")) {
             $extension = $request->file("file")->getClientOriginalExtension();
             if ($extension !== 'pdf') {
                 return back()->withErrors(['file' => 'Only PDF files are allowed.']);
             }
             $randomString = \Illuminate\Support\Str::random(10);
-            $newSlug = $request->input('slug');
-            $file = $newSlug  . $slug . "-" . now()->timestamp . "-" . $randomString . "." . $extension;
+            $file =  $newSlug . "-" . now()->timestamp . "-" . $randomString . "." . $extension;
             // memasukan datanya kedalam direktori tanpa prefix public
-            $path = $request->file("file")->storeAs("document", $file);
-            // Ensure Akses record exists or create a new one
-            if (!$akses) {
-                $akses = Akses::create([
-                    'product_hukum_id' => $id,
-                    'file' => $file  // Store only the file name without the 'public/' prefix
-                ]);
-            } else {
-                $akses->update(['file' => $file]);  // Update with the file name only
-            }
+            $request->file("file")->storeAs("document", $file);
         }
 
         $productHukum = ProductHukum::query()->where("id", $id)->where("slug", $slug)->first();
         if (!$productHukum) {
             return back()->withErrors(['error' => 'Product Hukum not found.']);
         }
-        $productHukum->update($request->except(['slug', 'file']) + ['slug' => $newSlug ?? $slug]);
-
+        $productHukum->update($request->except(['slug', 'file']) + ['slug' => $newSlug, 'file' => $file ?? $productHukum->file]);
         if ($request->input("subjek")) {
             $productHukum->subjekHukums()->sync($request->input("subjek"));
         }

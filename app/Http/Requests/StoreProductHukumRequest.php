@@ -42,7 +42,7 @@ class StoreProductHukumRequest extends FormRequest
             "lokasi" => "required",
             "teu" => "required",
             "nomor" => "required",
-            "file" => ["required", "file"],
+            // "file" => ["required", "file"],
 
             
             "persetujuan" => "required"

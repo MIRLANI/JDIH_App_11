@@ -32,6 +32,9 @@ return new class extends Migration
             $table->string("bidang")->nullable();
             $table->text("status_hukum")->nullable();
             $table->string("slug")->nullable();
+            $table->string("file")->nullable();
+            $table->integer("review")->nullable();
+            $table->integer("download")->nullable();
             $table->softDeletes();
             $table->timestamps();
         

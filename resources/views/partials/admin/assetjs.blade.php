@@ -78,3 +78,19 @@
 </script>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const loader = document.getElementById('loading');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 1000); // Delay the hiding of the loader for 4 seconds
+    });
+</script>
+
+
+<script>
+    window.onload = function() {
+        document.getElementById('app').style.visibility = 'visible';
+    };
+</script>
+

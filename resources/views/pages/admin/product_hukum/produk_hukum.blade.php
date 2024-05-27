@@ -60,31 +60,31 @@
                               
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td> {{ $productHukum->nama }}</td>
+                                    <td> {{ $productHukum->nama ?? '' }}</td>
                                     {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
-                                    <td>{{ $productHukum->judul }}</td>
-                                    <td>{{ $productHukum->categoryHukum->short_title }} </td>
+                                    <td>{{ $productHukum->judul ?? '' }}</td>
+                                    <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
                                     <td>
-                                        {{ implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) }}
+                                        {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
                                     </td>
                                     <td>
                                         <span @class([
                                             'badge bg-danger' => $productHukum->status == 'tidak berlaku',
                                             'badge bg-success' => $productHukum->status == 'berlaku',
-                                        ])>{{ $productHukum->status }}
+                                        ])>{{ $productHukum->status ?? 'Status Unknown' }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="d-flex buttons">
-                                            <a href="/admin/product-hukum-delete/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-delete/{{ $productHukum->slug ?? '#' }}"
                                                 class="btn icon btn-danger" title="Delete" id="warning">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
+                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id ?? '#', "slug" => $productHukum->slug ?? '#']) }}"
                                                 class="btn icon btn-primary" title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
-                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug }}"
+                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug ?? '#' }}"
                                                 class="btn icon btn-info" title="Detail">
                                                 <i class="bi bi-info-circle "></i>
                                             </a>

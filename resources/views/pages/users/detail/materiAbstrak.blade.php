@@ -4,7 +4,9 @@
             <i class="bi mb-4 bi-bookmark-fill me-3 align-self-center" style="font-size: 24px;"></i>
             <h6 class="mb-0 align-self-center">MATERI POKOK PERATURAN</h6>
         </div>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#large" class="btn btn-primary px-4">Abstrak</button>
+   
+        <button type="button" class="btn btn-light-secondary px-4" data-bs-toggle="modal"
+                        data-bs-target="#modal-{{ $produkHukum->id }}">Abstrak</button>
     </div>
     <hr class="mt-0 mx-auto" style="width: 95%;">
     <div class="card-body mx-2">
@@ -16,4 +18,4 @@
 </div>
 
 
-@include('pages.users.modalAbstra')
+@include('pages.users.detail.modalAbstraDetail')

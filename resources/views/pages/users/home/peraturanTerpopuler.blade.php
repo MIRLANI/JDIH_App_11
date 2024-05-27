@@ -21,9 +21,9 @@
                                     <hr style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;">
                                 </div>
                                 <div class="text-end mt-2">
-                                    <span class="text-muted small">Diunduh <strong class="text-danger">{{ $terpopuler->akses->download }} kali</strong></span>
+                                    <span class="text-muted small">Diunduh <strong class="text-danger">{{ $terpopuler->download }} kali</strong></span>
                                     <span class="mx-2">|</span>
-                                    <span class="text-muted small">Dilihat <strong class="text-primary">{{ $terpopuler->akses->review }} kali</strong></span>
+                                    <span class="text-muted small">Dilihat <strong class="text-primary">{{ $terpopuler->review }} kali</strong></span>
                                 </div>
                             </div>
 

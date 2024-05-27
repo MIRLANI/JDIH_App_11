@@ -265,7 +265,7 @@
                                                         <optgroup label="Figures">
                                                             @foreach ($subjek_hukums as $subjek)
                                                                 <option value="{{ $subjek->id }}"
-                                                                    @if (is_array(old('subjek')) && in_array($subjek->id, old('subjek'))) selected @endif>
+                                                                    @if (old('subjek') && in_array($subjek->id, old('subjek'))) selected @endif>
                                                                     {{ $subjek->nama }}</option>
                                                             @endforeach
                                                         </optgroup>
@@ -402,71 +402,84 @@
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Status Hukum</b></h4>
                                         </div>
-                                        @php
-                                            $status = [
-                                                'mengubah' => [
-                                                    'label' => 'Mengubah',
-                                                    'options' => $product_hukums->map(function ($produk) {
-                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
-                                                    })->toArray()
-                                                ],
-                                                'diubah' => [
-                                                    'label' => 'Diubah',
-                                                    'options' => $product_hukums->map(function ($produk) {
-                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
-                                                    })->toArray()
-                                                ],
-                                                'mencabut' => [
-                                                    'label' => 'Mencabut',
-                                                    'options' => $product_hukums->map(function ($produk) {
-                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
-                                                    })->toArray()
-                                                ],
-                                                'dicabut' => [
-                                                    'label' => 'Dicabut',
-                                                    'options' => $product_hukums->map(function ($produk) {
-                                                        return ['id' => $produk->id, 'nama' => $produk->nama];
-                                                    })->toArray()
-                                                ]
-                                            ];
-                                        @endphp
-
-                                        <input type="hidden" name="status_hukum" id="status_hukum" value="">
-                                        <script>
-                                            function updateStatusHukum() {
-                                                var statusHukum = [];
-                                                @foreach ($status as $key => $data)
-                                                    var selected = document.querySelector('select[name="{{ $key }}"]').value;
-                                                    if (selected) {
-                                                        statusHukum.push({ key: "{{ $key }}", id: selected });
-                                                    }
-                                                @endforeach
-                                                                                               document.getElementById('status_hukum').value = JSON.stringify(statusHukum);
-                                            }
-                                        </script>
-
-                                        @foreach ($status as $key => $data)
-                                            <div class="col-md-6 col-12 mt-3">
-                                                <div class="form-group ">
-                                                    <label class="form-label" for="sumber">{{ $data['label'] }}</label>
-                                                    <div class="form-group">
-                                                        <select class="choices form-select" name="{{ $key }}" onchange="updateStatusHukum()">
-                                                            <option value="">Pilih Hukum</option>
-                                                            @foreach ($data['options'] as $option)
-                                                                <option value="{{ $option['id'] }}">{{ $option['nama'] }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group ">
+                                                <label class="form-label" for="sumber">Mengubah </label>
+                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[mengubah][]">
+                                                    <option value="">Pilih Hukum</option>
+                                                    @foreach ($product_hukums as $produk)
+                                                        <option value="{{ $produk->id }}"
+                                                            @selected(in_array($produk->id, old('status_hukum.mengubah', $statusHukum['mengubah'] ?? [])))>
+                                                            {{ $produk->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('status')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                        @endforeach
+                                        </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group ">
+                                                <label class="form-label" for="sumber">Diubah </label>
+                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[diubah][]">
+                                                    <option value="">Pilih Hukum</option>
+                                                    @foreach ($product_hukums as $produk)
+                                                        <option value="{{ $produk->id }}"
+                                                            @selected(in_array($produk->id, old('status_hukum.diubah', $statusHukum['diubah'] ?? [])))>
+                                                            {{ $produk->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('status')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group ">
+                                                <label class="form-label" for="sumber">Mencabut </label>
+                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[mencabut][]">
+                                                    <option value="">Pilih Hukum</option>
+                                                    @foreach ($product_hukums as $produk)
+                                                        <option value="{{ $produk->id }}"
+                                                            @selected(in_array($produk->id, old('status_hukum.mencabut', $statusHukum['mencabut'] ?? [])))>
+                                                            {{ $produk->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('status')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group ">
+                                                <label class="form-label" for="sumber">Dicabut </label>
+                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                        multiple="multiple" name="status_hukum[dicabut][]">
+                                                    <option value="">Pilih Hukum</option>
+                                                    @foreach ($product_hukums as $produk)
+                                                        <option value="{{ $produk->id }}"
+                                                            @selected(in_array($produk->id, old('status_hukum.dicabut', $statusHukum['dicabut'] ?? [])))>
+                                                            {{ $produk->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('status')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
 
-                                        
                                         <div class=" col-12 mt-3 mt-4">
                                             <div class="form-group ">
-                                                <input type="file" class="form-control form-control-sm" image-crop-aspect-ratio="1:1" name="file"
+                                                <input type="file" class="form-control form-control-sm"
+                                                    image-crop-aspect-ratio="1:1" name="file"
                                                     class="@error('file') is-invalid @enderror">
-
                                                 @error('file')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
@@ -474,6 +487,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        
                                         <div class="col-12 mt-3">
                                             <div class='form-group'>
                                                 <div class="form-check mandatory">

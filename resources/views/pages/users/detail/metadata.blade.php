@@ -91,6 +91,5 @@
             </tbody>
         </table>
         <hr>
-        <p style="color: red">Halaman ini telah diakses 2700 kali</p>
     </div>
 </div>
