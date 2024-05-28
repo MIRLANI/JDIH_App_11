@@ -84,10 +84,7 @@
                                                 class="btn icon btn-primary" title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
-                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug ?? '#' }}"
-                                                class="btn icon btn-info" title="Detail">
-                                                <i class="bi bi-info-circle "></i>
-                                            </a>
+                                            
                                         </div>
                                     </td>
                                 </tr>

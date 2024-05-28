@@ -8,6 +8,7 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductHukumController;
 use App\Http\Controllers\SubjekHukumController;
+use App\Http\Controllers\TahunController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -40,15 +41,10 @@ Route::prefix("/admin")->group(function () {
 
     Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
     Route::controller(CategoryHukumController::class)->group(function () {
-        Route::get("/category-hukum",  "index")->name("index.category_hukum");
-        Route::get("/category-hukum-add",  "create")->name("create.category_hukum");
-        Route::post("/category-hukum-add",  "store")->name("store.category_hukum");
-        Route::get("/category-hukum-delete/{slug}", "destroy")->name("destroy.category_hukum");
-        Route::get("/category-hukum-update/{slug}", "edit")->name("edit.category-hukum");
-        Route::post("/category-hukum-update/{slug}", "update")->name("update.category-hukum");
-        Route::get("/category-hukum-view-delete", "viewDelete")->name("viewDelete.category_hukum");
-        Route::get("/category-hukum-restore/{slug}", "restore")->name("restore.category_hukum");
-        Route::get("/category-hukum-detail/{slug}", "show")->name("detail.category-hukum");
+        Route::get("/category-hukum",  "index")->name("index.kategory_hukum");
+        Route::post("/category-hukum-add",  "store")->name("store.kategory_hukum");
+        Route::get("/category-hukum-delete/{id}", "destroy")->name("destroy.kategory_hukum");
+        Route::post("/category-hukum-update/{id}", "update")->name("update.kategory-hukum");
     });
 
     Route::controller(ProductHukumController::class)->group(function () {
@@ -71,12 +67,15 @@ Route::prefix("/admin")->group(function () {
 
     Route::controller(SubjekHukumController::class)->group(function () {
         Route::get("/subjek-hukum", "index")->name("index.subjek_hukum");
-        Route::get("/subjek-hukum-add", "create")->name("create.subjek_hukum");
+        Route::get("/subjek-hukum-delete/{id}", "destroy")->name("delete.subjek_hukum");
         Route::post("/subjek-hukum-add", "store")->name("store.subjek_hukum");
-        Route::get("/subjek-hukum-delete/{slug}", "destroy")->name("destroy.subjek_hukum");
-        Route::get("/subjek-hukum-view-delete", "viewDelete")->name("viewDelete.subjek_hukum");
-        Route::get("/subjek-hukum-restore/{slug}", "restore")->name("restore.subjek_hukum");
-        Route::get("/subjek-hukum-update/{slug}", "edit")->name("edit.subjek-hukum");
-        Route::post("/subjek-hukum-update/{slug}", "update")->name("update.subjek-hukum");
+        Route::post("/subjek-hukum-update/{id}", "update")->name("update.subjek-hukum");
+    });
+
+    Route::controller(TahunController::class)->group(function () {
+        Route::get("/tahun-hukum", "index")->name("index.tahun_hukum");
+        Route::get("/tahun-hukum-delete/{id}", "destroy")->name("destroy.tahun_hukum");
+        Route::post("/tahun-hukum-update/{id}", "update")->name("update.tahun_hukum");
+        Route::post("/tahun-hukum-add", "store")->name("store.tahun_hukum");
     });
 });

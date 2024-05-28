@@ -16,9 +16,9 @@ class CategoryHukumController extends Controller
      */
     public function index(): Response
     {
-        $categoryHukum = CategoryHukum::query()->get();
+        $kategoryHukums = CategoryHukum::query()->orderBy('title', 'desc')->get();
         return response()->view("pages.admin.category_hukum.category_hukum", [
-            "category_hukum" => $categoryHukum
+            "kategory_hukums" => $kategoryHukums
         ]);
     }
 
@@ -45,19 +45,10 @@ class CategoryHukumController extends Controller
             "short_title" => $short_title
         ]);
         $categoryHukum->save();
-        return redirect("/category-hukum");
+        return response()->redirectToRoute("index.kategory_hukum")->with("message", "Add Katagori Successful");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $slug, CategoryHukum $categoryHukum)
-    {
-        $categoryHukums = $categoryHukum->query()->where("slug", $slug)->first();
-        return response()->view("pages.admin.category_hukum.detail_category_hukum",[
-            "categoryHukum" => $categoryHukums
-        ]);
-    }
+ 
 
     /**
      * Show the form for editing the specified resource.
@@ -87,11 +78,14 @@ class CategoryHukumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug, CategoryHukum $categoryHukum): RedirectResponse
+    public function destroy(string $id, CategoryHukum $categoryHukum): RedirectResponse
     {
-        $data = $categoryHukum::query()->where("slug", $slug)->first();
+        $data = $categoryHukum::query()->find($id);
+        if ($data->productHukums()->exists()) {
+            return redirect()->route("index.kategory_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+        }
         $data->delete();
-        return redirect()->route("index.category_hukum")->with("message", "Catagori Hukum Delete Successfull");
+        return redirect()->route("index.kategory_hukum")->with("message", "Catagori Hukum Delete Successfull");
     }
 
     public function viewDelete()

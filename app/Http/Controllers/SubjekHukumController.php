@@ -15,23 +15,14 @@ class SubjekHukumController extends Controller
      */
     public function index(): Response
     {
-        $subjekHukums = SubjekHukum::query()->get();
+        $subjekHukums = SubjekHukum::query()->orderBy("nama", "desc")->get();
         return response()->view("pages.admin.subjek_hukum.subjek_hukum",[
             "subjekHukums" => $subjekHukums
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): Response
-    {
-        return response()->view("pages.admin.subjek_hukum.tambah_subjek_hukum");
-    }
+    
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSubjekHukumRequest $request)
     {
         $subjekHukum = SubjekHukum::query()->create($request->all());
@@ -39,32 +30,11 @@ class SubjekHukumController extends Controller
         return response()->redirectToRoute("index.subjek_hukum")->with("message", "Add Subjek Hukum Successfully" );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SubjekHukum $subjekHukum)
+    
+    
+    public function update(string $id, UpdateSubjekHukumRequest $request): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $slug, SubjekHukum $categoryHukum): Response
-    {
-        return response()->view("pages.admin.subjek_hukum.update_subjek_hukum",
-            [
-                "subjekHukum" => $categoryHukum->query()->where("slug", $slug)->first()
-            ]
-        );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(string $slug, UpdateSubjekHukumRequest $request): RedirectResponse
-    {
-        $categoryHukum = SubjekHukum::query()->where("slug", $slug)->first();
+        $categoryHukum = SubjekHukum::query()->find($id);
         $categoryHukum->nama = $request->input("nama");
         $categoryHukum->update();
         return redirect()->route("index.subjek_hukum")->with("message", "Subjek Hukum Update Successfull");
@@ -73,25 +43,16 @@ class SubjekHukumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug, SubjekHukum $subjekHukum)
+    public function destroy(string $id, SubjekHukum $subjekHukum)
     {
-        $data = $subjekHukum::query()->where("slug", $slug)->first();
+        $data = $subjekHukum::query()->find($id);
+        if ($data->product_hukums()->exists()) {
+            return redirect()->route("index.subjek_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+        }
         $data->delete();
         return redirect()->route("index.subjek_hukum")->with("message", "Subjek Hukum Delete Successfull");
     }
 
-    public function viewDelete()
-    {
-         $subjekHukums = SubjekHukum::onlyTrashed()->get();
-        return response()->view("pages.admin.subjek_hukum.view_delete_subjek_hukum", [
-            "subjekHukums" =>  $subjekHukums
-        ]);
-    }
+    
 
-    public function restore(string $slug): RedirectResponse
-    {
-        $subjekHukum = SubjekHukum::withTrashed()->where("slug", $slug)->first();
-        $subjekHukum->restore();
-        return response()->redirectToRoute("index.subjek_hukum")->with("message", "Restore Subjek Hukum Successfully");  
-    }
 }

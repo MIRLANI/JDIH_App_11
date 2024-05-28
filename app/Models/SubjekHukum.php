@@ -27,7 +27,7 @@ class SubjekHukum extends Model
         ];
     }
 
-    public function products(): BelongsToMany
+    public function product_hukums(): BelongsToMany
     {
         return $this->belongsToMany(ProductHukum::class, "subjek_product_hukums", "subjek_hukum_id", "product_hukum_id");
     }

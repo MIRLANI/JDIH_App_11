@@ -38,11 +38,11 @@
                 </tr>
                 <tr>
                     <th scope="row">Tahun</th>
-                    <td>{{ $produkHukum->tahun ? $produkHukum->tahun : '' }}</td>
+                    <td>{{ $produkHukum->tahuns->tahun ?? '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tempat Penetapan</th>
-                    <td>{{ $produkHukum->lokasi }}</td>
+                    <td>{{ $produkHukum->lokasi ?? '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Penetapan</th>

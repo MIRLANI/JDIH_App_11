@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('product_hukums', function (Blueprint $table) {
-            // $table->foreign("product_hukum_id")->references("id")->on("product_hukums");
-        });
+        
         Schema::table('product_hukums', function (Blueprint $table) {
             $table->foreign("category_hukum_id")->references("id")->on("category_hukums");
+            
         });
     }
 

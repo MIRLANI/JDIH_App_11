@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductHukumRequest;
 use App\Models\Akses;
 use App\Models\CategoryHukum;
 use App\Models\SubjekHukum;
+use App\Models\Tahun;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -33,10 +34,12 @@ class ProductHukumController extends Controller
         $productHukums = ProductHukum::query()->get();
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
+        $tahuns = Tahun::query()->get();
         return response()->view("pages.admin.product_hukum.tambah_product_hukum", [
             "product_hukums" => $productHukums,
             "category_hukums" => $categoryHukums,
-            "subjek_hukums" => $subjekHukums
+            "subjek_hukums" => $subjekHukums,
+            "tahuns" => $tahuns
         ]);
     }
 
@@ -97,15 +100,18 @@ class ProductHukumController extends Controller
      */
     public function edit(string $id, string $slug, ProductHukum $productHukum)
     {
+        $product = $productHukum->where("id", $id)->where("slug", $slug)->first();
+        
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $productHukums = ProductHukum::query()->get();
-        $product = $productHukum->where("id", $id)->where("slug", $slug)->first();
+        $tahuns = Tahun::query()->get();
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
             "product_hukums" => $productHukums,
             "subjek_hukums" => $subjekHukums,
             "category_hukums" => $categoryHukums,
-            "product_hukum" => $product
+            "product_hukum" => $product,
+            "tahuns" => $tahuns
         ]);
     }
 

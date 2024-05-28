@@ -48,11 +48,10 @@ class ProductHukum extends Model
         return $this->hasOne(AbstrakHukum::class, "produk_hukum_id", "id");
     }
 
-
-    public function akses(): HasOne
+    public function tahuns()
     {
-        return $this->hasOne(Akses::class, "product_hukum_id", "id");
-    }
+        return $this->belongsTo(Tahun::class, "tahun_id", "id");
+    }  
 
     public static function mostPopularProducts()
     {

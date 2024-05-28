@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'categori hukum')
+@section('title', 'JDIH | Subjek Hukum')
 
 @section('content')
 
@@ -24,54 +24,64 @@
         @if (session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/admin/subjek-hukum-add" class="btn  btn-primary mx-2" title="Delete">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addSubjekModal">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
-                    </a>
+                    </button>
 
-                    <a href="/admin/subjek-hukum-view-delete" class="btn  btn-secondary">
-                        <i class="bi bi-eye"></i>
-                        View Delete Data
-                    </a>
-
+                    <!-- Modal -->
+                    @include('pages.admin.subjek_hukum.create_subjek_hukum')
                 </div>
-
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Hukum</th>
+                                <th>Subjek</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach ($subjekHukums as $subjek)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td> {{ $subjek->nama }}</td>
-                                    <td>
-
-                                        <div class="d-flex buttons">
-                                            <a href="/admin/subjek-hukum-delete/{{ $subjek->slug }}" class="btn icon btn-danger"
+                                @foreach ($subjekHukums as $subjek)
+                               
+                               
+                                @if ($subjek->nama !== null)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <form action="{{ route('update.subjek-hukum', ['id' => $subjek->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <div class="input-group">
+                                                    <input type="text" name="nama" value="{{ $subjek->nama }}"
+                                                        class="form-control @error('nama') is-invalid @enderror">
+                                                    @error('nama')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                        </div>
+                                                    @enderror
+                                                    <button hidden type="submit" class="btn btn-primary" title="Update">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route("delete.subjek_hukum", ["id" => $subjek->id]) }}" class="btn icon btn-danger"
                                                 title="Delete">
-                                                <i class="bi bi-trash "></i>
+                                                <i class="bi bi-trash"></i>
                                             </a>
-                                            <a href="/admin/subjek-hukum-update/{{ $subjek->slug }}" class="btn icon btn-primary"
-                                                title="Update">
-                                                <i class="bi bi-pencil "></i>
-                                            </a>
-
-                                        </div>
-
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
-
 
 
                         </tbody>

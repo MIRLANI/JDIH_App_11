@@ -19,11 +19,6 @@
                         </a>
                     </li>
                     <li class="menu-item mx-2">
-                        <a href="{{ route("jenis") }}" class='menu-link'>
-                            <span style="font-weight: bold;">Jenis</span>
-                        </a>
-                    </li>
-                    <li class="menu-item mx-2">
                         <a href="{{ route("tahun") }}" class='menu-link'>
                             <span style="font-weight: bold;">Tahun</span>
                         </a>

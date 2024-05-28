@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div>
                     <p>{{ optional($produkHukum->abstrakHukum)->title ?? '' }}</p>
-                    <p>{{ $produkHukum->tahun ?? '' }}</p>
+                    <p>{{ $produkHukum->tahun->tahun ?? '' }}</p>
                     <p>{{ strtoupper(optional($produkHukum->categoryHukum)->title ?? '' . ' NO ' . $produkHukum->nomor ?? '' . optional($produkHukum)->sumber ?? '') }}
                     </p>
                     <p>

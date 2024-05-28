@@ -52,10 +52,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $productHukum->nama }}</td>
-                                    {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
                                     <td>{{ $productHukum->judul }}</td>
-                                    {{-- <td>{{ $productHukum->categoryHukum->short_title }} </td> --}}
-                                    {{-- <td>{{ $productHukum->subjek }}</td> --}}
+                                    
                                     <td>
                                         <span @class([
                                             'badge bg-danger' => $productHukum->status == 'tidak berlaku',
@@ -69,10 +67,6 @@
                                             <a href="/admin/product-hukum-restore/{{ $productHukum->slug }}"
                                                 class="btn icon btn-warning" title="return">
                                                 <i class="bi bi-arrow-repeat"></i>
-                                            </a>
-                                            <a href="/admin/product-hukum-detail/{{ $productHukum->slug }}"
-                                                class="btn icon btn-info" title="Detail">
-                                                <i class="bi bi-info-circle "></i>
                                             </a>
                                         </div>
                                     </td>

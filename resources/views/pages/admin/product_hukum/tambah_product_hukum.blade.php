@@ -37,7 +37,7 @@
                         <div class="card-content">
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
-                                <form class="form"  action="{{ route('store.product_hukum') }}" method="POST"
+                                <form class="form" action="{{ route('store.product_hukum') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -123,13 +123,15 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun </label>
-                                                <select id="tahun" class="form-control @error('tahun') is-invalid @enderror" name="tahun">
+                                                <select id="tahun"
+                                                    class="form-control @error('tahun') is-invalid @enderror"
+                                                    name="tahun">
                                                     <option value="">Pilih Tahun</option>
-                                                    @for ($year = date('Y'); $year >= 1900; $year--)
-                                                        <option value="{{ $year }}">{{ $year }}</option>
-                                                    @endfor
+                                                    @foreach ($tahuns as $tahun)
+                                                        <option value="{{ $tahun->tahun }}" {{ old('tahun') == $tahun->tahun ? 'selected' : '' }}>{{ $tahun->tahun }}</option>
+                                                    @endforeach
                                                 </select>
-                                                
+
                                                 @error('tahun')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
@@ -269,7 +271,7 @@
                                                                     {{ $subjek->nama }}</option>
                                                             @endforeach
                                                         </optgroup>
-                                                       
+
                                                     </select>
 
                                                     @error('subjek')
@@ -405,12 +407,12 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Mengubah </label>
-                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
-                                                        multiple="multiple" name="status_hukum[mengubah][]">
+                                                <select
+                                                    class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                    multiple="multiple" name="status_hukum[mengubah][]">
                                                     <option value="">Pilih Hukum</option>
                                                     @foreach ($product_hukums as $produk)
-                                                        <option value="{{ $produk->id }}"
-                                                            @selected(in_array($produk->id, old('status_hukum.mengubah', $statusHukum['mengubah'] ?? [])))>
+                                                        <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.mengubah', $statusHukum['mengubah'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
                                                     @endforeach
@@ -423,12 +425,12 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Diubah </label>
-                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
-                                                        multiple="multiple" name="status_hukum[diubah][]">
+                                                <select
+                                                    class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                    multiple="multiple" name="status_hukum[diubah][]">
                                                     <option value="">Pilih Hukum</option>
                                                     @foreach ($product_hukums as $produk)
-                                                        <option value="{{ $produk->id }}"
-                                                            @selected(in_array($produk->id, old('status_hukum.diubah', $statusHukum['diubah'] ?? [])))>
+                                                        <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.diubah', $statusHukum['diubah'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
                                                     @endforeach
@@ -441,12 +443,12 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Mencabut </label>
-                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
-                                                        multiple="multiple" name="status_hukum[mencabut][]">
+                                                <select
+                                                    class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                    multiple="multiple" name="status_hukum[mencabut][]">
                                                     <option value="">Pilih Hukum</option>
                                                     @foreach ($product_hukums as $produk)
-                                                        <option value="{{ $produk->id }}"
-                                                            @selected(in_array($produk->id, old('status_hukum.mencabut', $statusHukum['mencabut'] ?? [])))>
+                                                        <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.mencabut', $statusHukum['mencabut'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
                                                     @endforeach
@@ -459,12 +461,12 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">Dicabut </label>
-                                                <select class="choices form-select multiple-remove @error('status') is-invalid @enderror"
-                                                        multiple="multiple" name="status_hukum[dicabut][]">
+                                                <select
+                                                    class="choices form-select multiple-remove @error('status') is-invalid @enderror"
+                                                    multiple="multiple" name="status_hukum[dicabut][]">
                                                     <option value="">Pilih Hukum</option>
                                                     @foreach ($product_hukums as $produk)
-                                                        <option value="{{ $produk->id }}"
-                                                            @selected(in_array($produk->id, old('status_hukum.dicabut', $statusHukum['dicabut'] ?? [])))>
+                                                        <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.dicabut', $statusHukum['dicabut'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
                                                     @endforeach
@@ -487,7 +489,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-12 mt-3">
                                             <div class='form-group'>
                                                 <div class="form-check mandatory">

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jumlah_akses', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("produk_hukum_id");
-            $table->integer("total");
-            $table->foreign("produk_hukum_id")->on("product_hukums")->references("id");
-            $table->timestamps();
+        Schema::table('product_hukums', function (Blueprint $table) {
+            $table->foreign("tahun_id")->references("id")->on("tahuns");
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jumlah_akses');
+        Schema::table('product_hukums', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Akses;
 use App\Models\ProductHukum;
 use App\Models\SubjekHukum;
+use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,12 +15,14 @@ class HomeController extends Controller
         $produkHukumHukumsTerbaru = ProductHukum::query()->latest()->take(4)->get();
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
+        $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
         $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
             "subjekHukums" => $subjekHukums,
             "produkHukumsTerbaru" => $produkHukumHukumsTerbaru,
-            "produkHukumsTerpopuler" => $produkHukumHukumsTerpopuler
+            "produkHukumsTerpopuler" => $produkHukumHukumsTerpopuler,
+            "tahuns" => $tahuns 
         ]);
     }
 
@@ -44,7 +46,10 @@ class HomeController extends Controller
     }
     public function tahun(): Response
     {
-        return response()->view("pages.users.tahun.index");
+        $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
+        return response()->view("pages.users.tahun.index", [
+            "tahuns" => $tahuns
+        ]);
     }
 
     public function detail(string $id, string $slug): Response
@@ -73,7 +78,6 @@ class HomeController extends Controller
                         $q->where('deskripsi', 'like', '%' . $keyword . '%')
                             ->orWhere('nama', 'like', '%' . $keyword . '%')
                             ->orWhere('nomor', 'like', '%' . $keyword . '%')
-                            ->orWhere('tahun', 'like', '%' . $keyword . '%')
                             ->orWhere('tipe_dokumen', 'like', '%' . $keyword . '%')
                             ->orWhere('judul', 'like', '%' . $keyword . '%')
                             ->orWhere('tempat_penetapan', 'like', '%' . $keyword . '%')
@@ -112,7 +116,6 @@ class HomeController extends Controller
                 $q->where('deskripsi', 'like', '%' . $keyword . '%')
                     ->orWhere('nama', 'like', '%' . $keyword . '%')
                     ->orWhere('nomor', 'like', '%' . $keyword . '%')
-                    ->orWhere('tahun', 'like', '%' . $keyword . '%')
                     ->orWhere('tipe_dokumen', 'like', '%' . $keyword . '%')
                     ->orWhere('judul', 'like', '%' . $keyword . '%')
                     ->orWhere('tempat_penetapan', 'like', '%' . $keyword . '%')
@@ -130,10 +133,19 @@ class HomeController extends Controller
             $anyCriteriaMatch = true;
         }
 
-        // Search by 'tahun'
-        if ($request->filled('tahun') && is_array($request->input('tahun'))) {
+        
+        // Search by 'tahun' in 'tahuns' table
+        if ($request->filled('tahun')) {
             $tahun = $request->input('tahun');
-            $query->whereIn('tahun', $tahun);
+            if (is_array($tahun)) {
+                $query->whereHas('tahuns', function ($q) use ($tahun) {
+                    $q->whereIn('tahun', $tahun);
+                });
+            } else {
+                $query->whereHas('tahuns', function ($q) use ($tahun) {
+                    $q->where('tahun', $tahun);
+                });
+            }
             $anyCriteriaMatch = true;
         }
 
@@ -171,11 +183,13 @@ class HomeController extends Controller
     //   dd($produkHukum);
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
+        $tahuns = Tahun::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
             "subjekHukums" => $subjekHukums,
             "produkHukums" => $produkHukums,
-            "produkHukum" => $produkHukum
+            "produkHukum" => $produkHukum,
+            "tahuns" => $tahuns
         ]);
     }
 

@@ -14,7 +14,7 @@
                     <div>
 
                         <p>{{ optional($hukum->abstrakHukum)->title ?? '' }}</p>
-                        <p>{{ $hukum->tahun ?? '' }}</p>
+                        <p>{{ $hukum->tahun->tahun ?? '' }}</p>
                         <p>{{ strtoupper(optional($hukum->categoryHukum)->title ?? ('' . ' NO ' . $hukum->nomor ?? ('' . optional($hukum)->sumber ?? ''))) }}
                         </p>
                         <p>

@@ -60,9 +60,15 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/admin/subjek-hukum" class='sidebar-link'>
+                    <a href="{{ route("index.subjek_hukum") }}" class='sidebar-link'>
                         <i class="bi bi-blockquote-right"></i>
                         <span>Subjek</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  ">
+                    <a href="{{ route("index.tahun_hukum") }}" class='sidebar-link'>
+                        <i class="bi bi-blockquote-right"></i>
+                        <span>Tahun</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
