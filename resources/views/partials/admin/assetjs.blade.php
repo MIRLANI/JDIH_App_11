@@ -99,7 +99,7 @@
     };
 </script>
 
-
+{{-- scirp untuk status peraturan dan jumlah peratruan lima tahun terakhir --}}
 <script>
     var chartVisitorsProfile = new ApexCharts(document.querySelector("#status"), optionsVisitorsProfile);
     var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-peraturan"), optionsProfileVisit);

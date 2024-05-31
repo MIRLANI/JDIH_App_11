@@ -10,7 +10,7 @@
                         <button class="btn btn-light-secondary col-12 col-md-auto" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseExample"
                             aria-expanded="false"
-                            aria-controls="collapseExample" onclick="toggleAdvancedSearch();">
+                            aria-controls="collapseExample" onclick="toggleAdvancedSearch(); toggleZoomBackground();">
                             Adv.Search</button>
                     </div>
                     <div class="collapse {{ request()->has('tentang') || request()->has('nomor') || request()->has('tahun') || request()->has('tag') || request()->has('jenis') ? 'show' : '' }}"
@@ -72,15 +72,3 @@
         </div>
     </div>
 </form>
-
-<script>
-    function toggleAdvancedSearch() {
-        const collapseElement = document.getElementById('collapseExample');
-        const isExpanded = collapseElement.classList.contains('show');
-        if (!isExpanded) {
-            collapseElement.classList.add('show');
-        } else {
-            collapseElement.classList.remove('show');
-        }
-    }
-</script>

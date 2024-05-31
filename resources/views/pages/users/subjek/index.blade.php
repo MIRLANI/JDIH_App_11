@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'JDIH | Subjek')
+@section('title', 'JDIH FMIPA | Subjek Peraturan')
 
 @section('content')
 
