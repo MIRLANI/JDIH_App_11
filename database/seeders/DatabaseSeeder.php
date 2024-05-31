@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::delete("delete from users");
+        DB::delete("delete from tipe_hukums");
         DB::delete("delete from tahuns");
         DB::delete("delete from product_hukums");
         DB::delete("delete from category_hukums");
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         
         $this->call([
+            TipeHukumSeeder::class,
             CategoryHukumSeeder::class,
             TahunSeeder::class,
             SubjekHukumSeeder::class,

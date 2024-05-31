@@ -67,4 +67,9 @@ class ProductHukum extends Model
     }
 
    
+
+    public function tipeHukum(): BelongsTo
+    {
+        return $this->belongsTo(TipeHukum::class, "tipe_id", "id");
+    }
 }

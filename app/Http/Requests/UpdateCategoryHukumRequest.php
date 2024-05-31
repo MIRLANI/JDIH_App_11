@@ -6,24 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoryHukumRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    // public function authorize(): bool
-    // {
-    //     return false;
-    // }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+   
     public function rules(): array
     {
         return [
-            "title" => ["required", "unique:category_hukums,title"],
-            "short_title" => ["required", "unique:category_hukums,short_title"]
+            "title" => ["required"],
+            "short_title" => ["required"]
         ];
     }
 }

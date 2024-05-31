@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'product hukum')
+@section('title', 'JDIH | Tinjau dan Eliminasi Produk Peraturan')
 
 @section('content')
 
@@ -10,14 +10,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>View Delete Produk Hukum</h3>
-                    <p class="text-subtitle text-muted">____________________________________________</p>
+                    <h3>Manajemen Penghapusan Produk Peraturan</h3>
+                    <p class="text-subtitle text-muted">Kelola produk peraturan yang telah dihapus.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">View Detele Produk Hukum</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tinjau dan Eliminasi Produk Hukum</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/admin/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="{{ route("index.product_hukum") }}" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
@@ -64,7 +64,7 @@
                                     <td>
                                         <div class="d-flex buttons">
                                             
-                                            <a href="/admin/product-hukum-restore/{{ $productHukum->slug }}"
+                                            <a href="{{ route("restore.product_hukum", ["id" => $productHukum->id]) }}"
                                                 class="btn icon btn-warning" title="return">
                                                 <i class="bi bi-arrow-repeat"></i>
                                             </a>

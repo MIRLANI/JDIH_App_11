@@ -8,19 +8,26 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Subjek Hukum</h3>
-                    <p class="text-subtitle text-muted">________________________</p>
+                    <h3>Kategori Peraturan</h3>
+                    <p class="text-subtitle text-muted">Daftar kategori yang terlibat dalam peraturan hukum.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Subjek Hukum</li>
+                            <li class="breadcrumb-item"><a href="/dashboard" class="text-decoration-none">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Kategori Peraturan</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+            </div>
+        @endif
         @if (session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
@@ -56,36 +63,43 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <form action="{{ route('update.kategory-hukum', ['id' => $katagori->id]) }}"
+                                            <form action="{{ route('update.category-hukum', ['id' => $katagori->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="input-group">
                                                     <input type="text" name="title" value="{{ $katagori->title }}"
-                                                        class="form-control @error('title') is-invalid @enderror">
-                                                    @error('title')
-                                                        <div class="invalid-feedback">
-                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                        </div>
-                                                    @enderror
+                                                        class="form-control ">
 
-                                                   
                                                 </div>
+                                                <input hidden type="text" name="short_title"
+                                                value="{{ $katagori->short_title }}"
+                                                class="form-control ">
+
+                                                <button hidden type="submit" class="btn btn-primary" title="Update">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
                                             </form>
                                         </td>
                                         <td>
-                                            <input type="text" name="short_title" value="{{ $katagori->short_title }}"
-                                                class="form-control @error('short_title') is-invalid @enderror">
-                                            @error('short_title')
-                                                <div class="invalid-feedback">
-                                                    <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                            <form action="{{ route('update.category-hukum', ['id' => $katagori->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <div class="input-group">
+                                                    <input hidden type="text" name="title" value="{{ $katagori->title }}"
+                                                        class="form-control ">
+
                                                 </div>
-                                            @enderror
-                                            <button hidden type="submit" class="btn btn-primary" title="Update">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
+                                                <input type="text" name="short_title"
+                                                    value="{{ $katagori->short_title }}"
+                                                    class="form-control ">
+
+                                                <button hidden type="submit" class="btn btn-primary" title="Update">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('destroy.kategory_hukum', ['id' => $katagori->id]) }}"
+                                            <a href="{{ route('destroy.category_hukum', ['id' => $katagori->id]) }}"
                                                 class="btn icon btn-danger" title="Delete">
                                                 <i class="bi bi-trash"></i>
                                             </a>
@@ -93,8 +107,6 @@
                                     </tr>
                                 @endif
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>

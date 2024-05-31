@@ -2,8 +2,6 @@
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
 <!-- Need: Apexcharts -->
-<script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 
 
 <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
@@ -26,9 +24,15 @@
 
 <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/sweetalert2.js') }}"></script>
+<script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> --}}
 
+
+
+{{-- code untuk zoom background --}}
 <script>
     let isZoomed = false;
+
     function toggleZoomBackground() {
         const section = document.getElementById('multiple-column-form');
         section.style.transition = 'background-size 0.6s ease-in-out'; // Improved smooth transition for zoom effect
@@ -42,7 +46,7 @@
     }
 </script>
 
-
+{{-- code untuk create abstrak --}}
 <script>
     document.getElementById('abstrak').addEventListener('input', function() {
         var text = this.value;
@@ -60,7 +64,7 @@
 </script>
 
 
-
+{{-- code untuk create catatan --}}
 <script>
     document.getElementById('catatan').addEventListener('input', function() {
         var text = this.value;
@@ -78,6 +82,7 @@
 </script>
 
 
+{{-- code untuk animasi loading --}}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const loader = document.getElementById('loading');
@@ -94,3 +99,10 @@
     };
 </script>
 
+
+<script>
+    var chartVisitorsProfile = new ApexCharts(document.querySelector("#status"), optionsVisitorsProfile);
+    var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-peraturan"), optionsProfileVisit);
+    chartVisitorsProfile.render();
+    chartProfileVisit.render();
+</script>

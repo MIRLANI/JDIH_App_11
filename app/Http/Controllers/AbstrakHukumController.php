@@ -10,20 +10,18 @@ use Illuminate\Http\Response;
 
 class AbstrakHukumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index(): Response
     {
         $abstrakHukums = AbstrakHukum::query()->get();
+        $produkHukum = ProductHukum::doesntHave('abstrakHukum')->get();
         return response()->view("pages.admin.abstract_hukum.abstract_hukum", [
-            "AbstractHukums" => $abstrakHukums
+            "AbstractHukums" => $abstrakHukums,
+            "produkHukum" => $produkHukum
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create(): Response
     {
         $produkHukum = ProductHukum::doesntHave('abstrakHukum')->get();
@@ -32,45 +30,33 @@ class AbstrakHukumController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(StoreAbstrakHukumRequest $request)
     {
-        $abstrakHukum = AbstrakHukum::create($request->validated());
-        dd($abstrakHukum);
-        return redirect()->route("admin.abstract_hukum.index");
+        try {
+            $validated = $request->validated();
+            AbstrakHukum::create($request->all());
+            return redirect()->route("index.abstrack_hukum")->with("message", "Create abstrak peraturan successful");
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AbstrakHukum $abstrakHukum)
+    public function update(string $id, UpdateAbstrakHukumRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AbstrakHukum $abstrakHukum)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAbstrakHukumRequest $request, AbstrakHukum $abstrakHukum)
-    {
-        //
+        $request->validated();
+        $abstrakHukum = AbstrakHukum::query()->find($id);
+        $abstrakHukum->update($request->all());
+        return redirect()->route("index.abstrack_hukum")->with("message", "Update successful");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AbstrakHukum $abstrakHukum)
+    public function destroy(string $id)
     {
-        //
+        $abstrakHukum =  AbstrakHukum::query()->find($id);
+        $abstrakHukum->delete();
+         return redirect()->route("index.abstrack_hukum")->with("message", "Delete successful");;
     }
 }

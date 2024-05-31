@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubjekHukum extends Model
 {
-    use Sluggable, SoftDeletes;
+    use Sluggable;
     protected $table = 'subjek_hukums';
     protected $primaryKey = 'id';
     protected $keyType = 'int';

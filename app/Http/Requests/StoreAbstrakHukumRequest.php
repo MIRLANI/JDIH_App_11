@@ -22,7 +22,11 @@ class StoreAbstrakHukumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "produk_hukum_id" => ["required"],
+            "title" => ["required"],
+            "materi_pokok" => "required",
+            "abstrak" => "required",
+            "catatan" => "required",
         ];
     }
 }

@@ -83,7 +83,7 @@ class TahunController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, Tahun $tahun)
+    public function destroy(string $id)
     {
         $tahun = Tahun::query()->find($id);
 

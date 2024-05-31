@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'product hukum')
+@section('title', 'JDIH | Peraturan')
 
 @section('content')
 
@@ -10,8 +10,8 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Produ Hukum</h3>
-                    <p class="text-subtitle text-muted">______________________</p>
+                    <h3>Peraturan</h3>
+                    <p class="text-subtitle text-muted">Daftar lengkap produk peraturan yang tersedia.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -29,12 +29,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="/admin/product-hukum-add" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="{{ route("create.product_hukum") }}" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
                     </a>
 
-                    <a href="/admin/product-hukum-view-delete" class="btn  btn-secondary">
+                    <a href="{{ route("viewDelete.product_hukum") }}" class="btn  btn-secondary">
                         <i class="bi bi-eye"></i>
                         View Delete Data
                     </a>
@@ -76,11 +76,11 @@
                                     </td>
                                     <td>
                                         <div class="d-flex buttons">
-                                            <a href="/admin/product-hukum-delete/{{ $productHukum->slug ?? '#' }}"
+                                            <a href="{{ route("destroy.product_hukum", ["id" => $productHukum->id]) }}"
                                                 class="btn icon btn-danger" title="Delete" id="warning">
                                                 <i class="bi bi-trash "></i>
                                             </a>
-                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id ?? '#', "slug" => $productHukum->slug ?? '#']) }}"
+                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
                                                 class="btn icon btn-primary" title="Update">
                                                 <i class="bi bi-pencil "></i>
                                             </a>
@@ -91,7 +91,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>4
+                </div>
             </div>
 
         </section>

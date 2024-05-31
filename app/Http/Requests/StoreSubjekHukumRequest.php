@@ -22,7 +22,7 @@ class StoreSubjekHukumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "nama" => ["required", "unique:subjek_hukums,nama," . $this->route("subjek_hukum.store"),]
         ];
     }
 }

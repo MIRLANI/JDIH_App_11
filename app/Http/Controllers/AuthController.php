@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -34,5 +35,13 @@ class AuthController extends Controller
        
          return redirect()->route("getLogin")->with("message", "username atau password anda salah");
       }
+   }
+
+   public function logout(Request $request): RedirectResponse
+   {
+       Auth::logout();
+       $request->session()->invalidate();
+       $request->session()->regenerateToken();
+       return response()->redirectToRoute("getLogin");
    }
 }

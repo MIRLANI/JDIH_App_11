@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'tambah produk hukum')
+@section('title', 'JDIH | Update Produk Peraturan')
 
 @section('content')
 
@@ -9,12 +9,12 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 mt-3 col-md-6 order-md-1 order-last">
-                    <h3>Update Peraturan</h3>
-                    <p class="text-subtitle text-muted">__________________________________________</p>
+                    <h3 class="fw-bold">Update Peraturan</h3>
+                    <hr class="text-muted">
                 </div>
                 <div class="col-12 mt-3 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
+                        <ol class="breadcrumb bg-transparent">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Update Peraturan</li>
                         </ol>
@@ -29,7 +29,7 @@
                 <div class="col-12 mt-3">
                     <div class="card ">
                         <div class="card-header">
-                            <a href="/admin/product-hukum" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="{{ route("index.product_hukum") }}" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
@@ -47,9 +47,9 @@
                                         </div>
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label" for="nama">Nama Hukum: </label>
+                                                <label class="form-label" for="nama">Nama Peraturan: </label>
                                                 <input class="form-control @error('nama') is-invalid @enderror"
-                                                    type="text" placeholder="nama hukum" data-parsley-required="true"
+                                                    type="text" placeholder="nama peraturan" data-parsley-required="true"
                                                     name="nama" id="nama"
                                                     value="{{ @old('nama') ?: $product_hukum->nama }}">
                                                 @error('nama')
@@ -86,24 +86,6 @@
                                         </div>
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label for="tipe_dokumen" class="form-label">Tipe Dokument </label>
-                                                <input type="text" id="tipe_dokumen"
-                                                    class="form-control @error('tipe_dokumen') is-invalid @enderror"
-                                                    name="tipe_dokumen" placeholder="tipe dokument"
-                                                    data-parsley-required="true"
-                                                    value="{{ old('tipe_dokumen') ?: $product_hukum->tipe_dokumen }}">
-                                                @error('tipe_dokumen')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-undangan)</i>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" id="judul"
                                                     class="form-control @error('judul') is-invalid @enderror" name="judul"
@@ -121,6 +103,30 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label for="tipe_dokumen" class="form-label">Tipe Dokument </label>
+                                                <select id="tahun"
+                                                    class="form-control @error('tipe_id') is-invalid @enderror"
+                                                    name="tipe_id">
+                                                    <option value="">Pilih Tipe Peraturan</option>
+                                                    @foreach ($tipeHukums as $tipe)
+                                                        <option value="{{ $tipe->id }}"
+                                                            {{ (old('tipe_id', $product_hukum->tipe_id) == $tipe->id) ? 'selected' : '' }}>
+                                                            {{ $tipe->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('tipe_id')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-undangan)</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                  
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun
@@ -237,7 +243,7 @@
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Bentuk Peraturan</label>
-                                                    <a href="{{ route('index.kategory_hukum') }}"
+                                                    <a href="{{ route('index.category_hukum') }}"
                                                         class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -274,7 +280,7 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Subjek </label>
-                                                    <a href="/admin/subjek-hukum-add" class="icon btn-primary mb-2"
+                                                    <a href="{{ route("index.subjek_hukum") }}" class="icon btn-primary mb-2"
                                                         title="Update Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -444,7 +450,7 @@
 
                                         <div class="mt-5"></div>
                                         <div class="mt-2">
-                                            <h4 class="card-title"><b>Status Hukum</b></h4>
+                                            <h4 class="card-title"><b>Status Peraturan</b></h4>
                                         </div>
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">

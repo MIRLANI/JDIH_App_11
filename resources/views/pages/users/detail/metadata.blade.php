@@ -13,7 +13,7 @@
             <tbody>
                 <tr>
                     <th scope="row">Tipe Dokumen</th>
-                    <td>{{ $produkHukum->tipe_dokumen ? $produkHukum->tipe_dokumen : '' }}</td>
+                    <td>{{ $produkHukum->tipeHukum->nama ?? '' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Judul</th>

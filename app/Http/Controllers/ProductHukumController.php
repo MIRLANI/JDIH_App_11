@@ -9,6 +9,7 @@ use App\Models\Akses;
 use App\Models\CategoryHukum;
 use App\Models\SubjekHukum;
 use App\Models\Tahun;
+use App\Models\TipeHukum;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -35,11 +36,13 @@ class ProductHukumController extends Controller
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $tahuns = Tahun::query()->get();
+        $tipeHukums = TipeHukum::query()->get();
         return response()->view("pages.admin.product_hukum.tambah_product_hukum", [
             "product_hukums" => $productHukums,
             "category_hukums" => $categoryHukums,
             "subjek_hukums" => $subjekHukums,
-            "tahuns" => $tahuns
+            "tahuns" => $tahuns,
+            "tipeHukums" => $tipeHukums
         ]);
     }
 
@@ -84,34 +87,29 @@ class ProductHukumController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $slug, ProductHukum $productHukum)
-    {
-        $productHukums = $productHukum->query()->where("slug", $slug)->first();
-        return response()->view("pages.admin.product_hukum.detail_product_hukum", [
-            "produkHukum" => $productHukums
-        ]);
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id, string $slug, ProductHukum $productHukum)
+    public function edit(string $id,  ProductHukum $productHukum)
     {
-        $product = $productHukum->where("id", $id)->where("slug", $slug)->first();
-        
+        $product = $productHukum->query()->find($id);
+        if (!$product) {
+            return back()->withErrors(['error' => 'Product Hukum not found.']);
+        }
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $productHukums = ProductHukum::query()->get();
         $tahuns = Tahun::query()->get();
+        $tipeHukums = TipeHukum::query()->get();
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
             "product_hukums" => $productHukums,
             "subjek_hukums" => $subjekHukums,
             "category_hukums" => $categoryHukums,
             "product_hukum" => $product,
-            "tahuns" => $tahuns
+            "tahuns" => $tahuns,
+            "tipeHukums" => $tipeHukums
         ]);
     }
 
@@ -148,9 +146,9 @@ class ProductHukumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug)
+    public function destroy(string $id)
     {
-        $productHukum = ProductHukum::query()->where("slug", $slug)->first();
+        $productHukum = ProductHukum::query()->find($id);
         $productHukum->delete();
         $productHukum->save();
         return response()->redirectToRoute("index.product_hukum")->with("message", "Destroy Product Hukum Successfully");
@@ -164,9 +162,9 @@ class ProductHukumController extends Controller
         ]);
     }
 
-    public function restore(string $slug): RedirectResponse
+    public function restore(string $id): RedirectResponse
     {
-        $productHukum = ProductHukum::withTrashed()->where("slug", $slug)->first();
+        $productHukum = ProductHukum::withTrashed()->find($id);
         $productHukum->restore();
         return response()->redirectToRoute("index.product_hukum")->with("message", "Restore Product Hukum Successfully");
     }

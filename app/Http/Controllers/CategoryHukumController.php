@@ -35,44 +35,28 @@ class CategoryHukumController extends Controller
      */
     public function store(StoreCategoryHukumRequest $request)
     {
-        $title = $request->input("title");
-        $short_title = $request->input("short_title");
-        $request->validate([
-            $title, $short_title
-        ]);
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" =>  $title,
-            "short_title" => $short_title
-        ]);
-        $categoryHukum->save();
-        return response()->redirectToRoute("index.kategory_hukum")->with("message", "Add Katagori Successful");
+        try {
+             CategoryHukum::create($request->validated());
+            return redirect()->route("index.category_hukum")->with("message", "Add Katagori Peraturan Successful");
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->route("index.category_hukum")->with("error", "Validation failed: " . $e->getMessage());
+        }
     }
 
  
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $slug, CategoryHukum $categoryHukum): Response
-    {
-        return response()->view(
-            "pages.admin.category_hukum.update_category_hukum",
-            [
-                "categoryHukum" => $categoryHukum->query()->where("slug", $slug)->first()
-            ]
-        );
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(string $slug, UpdateCategoryHukumRequest $request): RedirectResponse
+    public function update(string $id, UpdateCategoryHukumRequest $request): RedirectResponse
     {
-        $categoryHukum = CategoryHukum::query()->where("slug", $slug)->first();
-        $categoryHukum->title = $request->input("title");
-        $categoryHukum->short_title = $request->input("short_title");
-        $categoryHukum->update();
-        return redirect()->route("index.category_hukum")->with("message", "Catagori Hukum Update Successfull");
+        try {
+            $categoryHukum = CategoryHukum::findOrFail($id);
+            $categoryHukum->update($request->validated());
+            return redirect()->route("index.category_hukum")->with("message", "Catagori Peraturan Update Successful");
+        } catch (\Exception $e) {
+            return redirect()->route("index.category_hukum")->with("error", "Update failed: " . $e->getMessage());
+        }
     }
 
     /**
@@ -82,25 +66,19 @@ class CategoryHukumController extends Controller
     {
         $data = $categoryHukum::query()->find($id);
         if ($data->productHukums()->exists()) {
-            return redirect()->route("index.kategory_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+            return redirect()->route("index.category_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
         }
         $data->delete();
-        return redirect()->route("index.kategory_hukum")->with("message", "Catagori Hukum Delete Successfull");
+        return redirect()->route("index.category_hukum")->with("message", "Catagori Peraturan Delete Successfull");
     }
 
-    public function viewDelete()
-    {
-         $categoryHukum = CategoryHukum::onlyTrashed()->get();
-        return response()->view("pages.admin.category_hukum.view_delete_category_hukum", [
-            "category_hukum" =>  $categoryHukum
-        ]);
-    }
+   
 
     public function restore(string $slug): RedirectResponse
     {
         $categoryHukum = CategoryHukum::withTrashed()->where("slug", $slug)->first();
         $categoryHukum->restore();
-        return response()->redirectToRoute("index.category_hukum")->with("message", "Restore Category Hukum Successfully");  
+        return response()->redirectToRoute("index.category_hukum")->with("message", "Restore Category Peraturan Successfully");  
     }
 
 

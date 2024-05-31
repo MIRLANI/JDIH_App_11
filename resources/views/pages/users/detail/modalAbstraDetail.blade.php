@@ -35,7 +35,7 @@
                             <p>
                             <ul>
                                 @if($produkHukum->abstrakHukum)
-                                    @foreach (explode("\n", $produkHukum->abstrakHukum->catatam ?? '') as $point)
+                                    @foreach (explode("\n", $produkHukum->abstrakHukum->catatan ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif

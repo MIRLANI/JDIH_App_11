@@ -9,7 +9,7 @@
                 <form action="{{ route('store.subjek_hukum') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Subjek</label>
+                        <label for="nama" class="form-label">Tag</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
                     </div>
                     <div class="modal-footer">

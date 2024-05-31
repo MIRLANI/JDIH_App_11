@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipe_peraturans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('product_hukums', function (Blueprint $table) {
+            $table->foreign("tipe_id")->on("tipe_hukums")->references("id");
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipe_peraturans');
+        Schema::table('product_hukums', function (Blueprint $table) {
+            //
+        });
     }
 };

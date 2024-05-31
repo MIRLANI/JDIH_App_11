@@ -23,11 +23,11 @@ class StoreProductHukumRequest extends FormRequest
     {
         return [
             
-            "nama" => "required",
+            "nama" => ["required", 'unique:product_hukums,nama'],
             "deskripsi" => "required",
 
           
-            "tipe_dokumen" => "required",
+            "tipe_id" => "required",
             "judul" => "required",
             "tahun" => ["required", "numeric"],
             "tempat_penetapan" => "required",

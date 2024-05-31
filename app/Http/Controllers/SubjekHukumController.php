@@ -25,9 +25,13 @@ class SubjekHukumController extends Controller
 
     public function store(StoreSubjekHukumRequest $request)
     {
-        $subjekHukum = SubjekHukum::query()->create($request->all());
-        $subjekHukum->save();
-        return response()->redirectToRoute("index.subjek_hukum")->with("message", "Add Subjek Hukum Successfully" );
+        try {
+            $subjekHukum = SubjekHukum::query()->create($request->validated());
+            $subjekHukum->save();
+            return response()->redirectToRoute("index.subjek_hukum")->with("message", "Add Subjek Peraturan Successfully");
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
     }
 
     
@@ -37,7 +41,7 @@ class SubjekHukumController extends Controller
         $categoryHukum = SubjekHukum::query()->find($id);
         $categoryHukum->nama = $request->input("nama");
         $categoryHukum->update();
-        return redirect()->route("index.subjek_hukum")->with("message", "Subjek Hukum Update Successfull");
+        return redirect()->route("index.subjek_hukum")->with("message", "Subjek Peraturan Update Successfull");
     }
 
     /**
@@ -47,10 +51,10 @@ class SubjekHukumController extends Controller
     {
         $data = $subjekHukum::query()->find($id);
         if ($data->product_hukums()->exists()) {
-            return redirect()->route("index.subjek_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+            return redirect()->route("index.subjek_hukum")->with("error", "Peraturan is still in use and cannot be deleted.");
         }
         $data->delete();
-        return redirect()->route("index.subjek_hukum")->with("message", "Subjek Hukum Delete Successfull");
+        return redirect()->route("index.subjek_hukum")->with("message", "Subjek Peraturan Delete Successfull");
     }
 
     

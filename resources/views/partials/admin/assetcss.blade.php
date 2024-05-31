@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="{{ asset("assets/extensions/toastify-js/src/toastify.css") }}">
 <link rel="stylesheet" href="{{ asset("assets/css/pages/filepond.css") }}">
 
-<link rel="stylesheet" href="{{ asset("assets/css/shared/iconly.css") }}">
 
 <link rel="stylesheet" href="{{ asset("assets/extensions/sweetalert2/sweetalert2.min.css") }}">
 
@@ -21,6 +20,8 @@
 <link rel="stylesheet" href="{{ asset("assets/css/main/app.css") }}">
 <link rel="stylesheet" href="{{ asset("assets/css/main/app-dark.css") }}">
 
+<link rel="stylesheet" href="{{ asset("assets/css/shared/iconly.css") }}">
 <link rel="shortcut icon" href="{{ asset("assets/images/logo/favicon.svg") }}" type="image/x-icon">
 <link rel="shortcut icon" href="{{ asset("assets/images/logo/favicon.png") }}" type="image/png">
+
 

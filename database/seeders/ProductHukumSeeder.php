@@ -66,6 +66,7 @@ class ProductHukumSeeder extends Seeder
             
             "category_hukum_id" => 1,
             "tahun_id" => 1,
+            "tipe_id" => 1,
             "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
             "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
             "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
@@ -93,6 +94,8 @@ class ProductHukumSeeder extends Seeder
             
             "category_hukum_id" => 1,
             "tahun_id" => 1,
+            "tipe_id" => 2,
+
             "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
             "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
             "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
@@ -121,6 +124,7 @@ class ProductHukumSeeder extends Seeder
             
             "category_hukum_id" => 1,
             "tahun_id" => 1,
+            "tipe_id" => 3,
             "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
             "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
             "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
