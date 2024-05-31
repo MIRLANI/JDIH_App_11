@@ -8,10 +8,10 @@
                             class="form-control px-5 col" placeholder="Search" name="keyword">
                         <button type="submit" name="search" class="btn btn-primary col-12 col-md-auto">Search</button>
                         <button class="btn btn-light-secondary col-12 col-md-auto" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                            aria-expanded="false"
-                            aria-controls="collapseExample" onclick="toggleAdvancedSearch(); toggleZoomBackground();">
-                            Adv.Search</button>
+                        data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                        aria-expanded="{{ request()->has('tentang') || request()->has('nomor') || request()->has('tahun') || request()->has('tag') || request()->has('jenis') ? 'true' : 'false' }}"
+                        aria-controls="collapseExample" onclick="toggleZoomBackground();">
+                        Adv.Search</button>
                     </div>
                     <div class="collapse {{ request()->has('tentang') || request()->has('nomor') || request()->has('tahun') || request()->has('tag') || request()->has('jenis') ? 'show' : '' }}"
                         id="collapseExample">
