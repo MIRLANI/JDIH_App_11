@@ -3,36 +3,34 @@
 |Admistrator|
 start
 :mengakses halaman 
-abstrak produk hukum;
+abstrak peraturan;
 |Sistem|
 :menampilkan halaman 
-abstrak produk hukum;
+abstrak peraturan;
 |Admistrator|
-repeat:halaman abstrak produk hukum;
+repeat:halaman abstrak peraturan;
 :mengelolah abstrak
- produk hukum FMIPA;
+ peraturan FMIPA;
 fork
     :menambah abstrak
-     produk hukum;
+     peraturan;
 fork again
     :menghapus abstrak 
-    produk hukum;
+    peraturan;
 fork again
     :update abstrak 
-    produk hukum;
-fork again
-    :melihat detail 
-    abstrak produk hukum;
+    peraturan;
+
     |Sistem|
 end fork
 :validasi data abstrak produk;
  backward :mengirimkan pesan error
-  ke halaman abstrak produk hukum;
+  ke halaman abstrak peraturan;
 repeat  while (valid?) is (no) not (yes)
 :menyimpan data 
-abstrak produk hukum;
+abstrak peraturan;
 :memperbaharui data
- abstrak produk hukum;
+ abstrak peraturan;
 stop
 @enduml
 

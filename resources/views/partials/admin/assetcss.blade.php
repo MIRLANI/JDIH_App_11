@@ -22,4 +22,6 @@
 
 <link rel="stylesheet" href="{{ asset("assets/css/shared/iconly.css") }}">
 <link rel="icon" href="{{ asset('images/logo-uho.png') }}" type="image/x-icon">
+<link rel="stylesheet" href="{{ asset("assets/css/pages/error.css") }}">
+
 

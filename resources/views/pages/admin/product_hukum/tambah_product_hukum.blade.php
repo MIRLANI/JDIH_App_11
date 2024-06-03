@@ -16,7 +16,7 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tambah Produk Hukum</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tambah Peraturan</li>
                         </ol>
                     </nav>
                 </div>
@@ -42,7 +42,7 @@
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="nama">Nama Peraturan: </label>
                                                 <input class="form-control @error('nama') is-invalid @enderror"
-                                                    type="text" placeholder="nama hukum" data-parsley-required="true"
+                                                    type="text" placeholder="Nama Peraturan" data-parsley-required="true"
                                                     name="nama" id="nama"
                                                     value="{{ old('nama') ?: session('nama') }}">
                                                 @error('nama')
@@ -50,7 +50,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan BPK Nomor 1 Tahun 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -59,7 +59,7 @@
                                                 <label class="form-label" for="deskripsi">Deskripsi </label>
                                                 <input type="text" id="deskripsi"
                                                     class="form-control @error('deskripsi') is-invalid @enderror"
-                                                    placeholder="deskripsi" name="deskripsi" id="deskripsi"
+                                                    placeholder="Deskripsi" name="deskripsi" id="deskripsi"
                                                     value="{{ old('deskripsi') ?: session('deskripsi') }}"
                                                     data-parsley-required="true">
                                                 @error('deskripsi')
@@ -67,9 +67,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Perubahan Atas Peraturan Badan Pemeriksa
-                                                        Keuangan Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik
-                                                        Badan Pemeriksa Keuangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -89,10 +87,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Badan Pemeriksa Keuangan Nomor 1
-                                                        Tahun 2013 tentang Perubahan Atas Peraturan Badan Pemeriksa Keuangan
-                                                        Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik Badan
-                                                        Pemeriksa Keuangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022 tentang Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -115,7 +110,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-undangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -140,7 +135,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -159,7 +154,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Jakarta)</i>
+                                                <p class="small mt-2"><i>(Contoh: FMIPA UHO)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -179,7 +174,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -199,7 +194,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -217,7 +212,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -297,7 +292,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: LN 2013 (189) : 3 hlm. )</i>
+                                                <p class="small mt-2"><i>(Contoh: Gazette FMIPA 2022 No. 1: 5 hlm. )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -349,7 +344,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: BPK RI )</i>
+                                                <p class="small mt-2"><i>(Contoh: FMIPA UHO )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -365,7 +360,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Indonesia, BPK RI )</i>
+                                                <p class="small mt-2"><i>(Contoh: Indonesia, FMIPA UHO )</i>
                                                 </p>
                                             </div>
                                         </div>

@@ -2,38 +2,25 @@
 
 |Admistrator|
 start
-:mengakses halaman
- produk hukum;
+:Mengases Halaman JDIH FMIPA;
 |Sistem|
-:menampilkan halaman 
-produk hukum;
+:menampilkan halaman JDIH FMIPA;
 |Admistrator|
-repeat:halaman produk hukum;
-:mengelolah produk 
-hukum FMIPA;
-fork
-    :menambah 
-    produk hukum;
-fork again
-    :menghapus 
-    produk hukum;
-fork again
-    :update 
-    produk hukum;
-fork again
-    :melihat 
-    detail produk hukum;
-    |Sistem|
-end fork
-:validasi 
-data produk;
- backward :mengirimkan pesan error
-  ke halaman produk hukum;
-repeat  while (valid?) is (no) not (yes)
-:menyimpan data 
-produk hukum;
-:memperbaharui 
-data produk hukum;
+:Login;
+:memasukan username dan password;
+|Sistem|
+:masuk kehalaman admin;
+|Admistrator|
+:Mengelolah peraturan FMIPA
+* create
+* update
+* delete;
+|Sistem|
+:data di perbarui;
+|Admistrator|
+:Logout;
+|Sistem|
+:keluar dari halaman admin;
 stop
 @enduml
 

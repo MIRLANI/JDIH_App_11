@@ -18,12 +18,12 @@
                                             onmouseover="this.style.color='#4A90E2'"
                                             onmouseout="this.style.color='#333'">{{ $terpopuler->nama }} </a> </h6>
                                     <p style="margin-top: 3px; color: #666;">{{ $terpopuler->deskripsi }}</p>
-                                    <hr style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;">
                                 </div>
-                                <div class="text-end mt-2">
-                                    <span class="text-muted small">Diunduh <strong class="text-danger">{{ $terpopuler->download }} kali</strong></span>
-                                    <span class="mx-2">|</span>
-                                    <span class="text-muted small">Dilihat <strong class="text-primary">{{ $terpopuler->review }} kali</strong></span>
+                                <hr style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;">
+                                <div class="d-flex justify-content-around mt-2">
+                                    <span class="text-muted small">Dibuat pada <strong>{{ $terpopuler->created_at->format('d M Y') }}</strong></span>
+                                    <span class="text-muted small">Diunduh <strong class="text-danger">{{ $terpopuler->download ?? 0 }} kali</strong></span>
+                                    <span class="text-muted small">Dilihat <strong class="text-primary">{{ $terpopuler->review  ?? 0}} kali</strong></span>
                                 </div>
                             </div>
 

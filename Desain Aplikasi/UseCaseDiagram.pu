@@ -1,83 +1,62 @@
 @startuml
 
+
 left to right direction
 
-actor "Administrator" as admin
-actor "User" as user
+:Administrator: as  admin
+:User : as user
 
-
-
-    usecase "Download Dokument" as Dokument
-    usecase "Mencari Produk Hukum" as SearchProduk
-
-
+package "Sistem JDIH FMIPA" {
 
     usecase "Login" as login
-    usecase "Dashboard" as dashboard
+    usecase "Logout" as logout
+    usecase "Peraturan" as peraturan
+    usecase "Tahun Peraturan" as tahunPeraturan
+    usecase "Subjek Peraturan" as subjekPeraturan
+    usecase "Tipe Peraturan" as tipePeraturan
+    usecase "Katagori Peraturan" as katagoriPeraturan
+    usecase "Abstrak Peraturan" as abstrakPeraturan
+    usecase "Mengelolah" as mengelolah
 
-    usecase "Katagori Hukum" as Katagori
-    usecase "Tambah Katagori Hukum" as tambahKatagori
-    usecase "delete Katagori Hukum" as deleteKatagori
-
-    usecase "Subjek Hukum" as Subjek
-    usecase "Tambah Subjek Hukum" as tambahSubjek
-    usecase "Delete Subjek Hukum" as deleteSubjek
-
-    usecase "Tipe Dokumen" as Tipe
-    usecase "Update Tipe Dokumen" as deleteTipe
-    usecase "Delete Tipe Dokumen" as updateTipe
-
-    usecase "Produk Hukum" as Produk
-    usecase "Tambah Produk Hukum" as tambahProduk
-    usecase "Delete Produk Hukum" as deleteProduk
-    usecase "Update Produk Hukum" as updateProduk
-    usecase "Detail Produk Hukum" as detailProduk
-
-    usecase "Abstrak Hukum" as Abstrak
-    usecase "Delete Abstrak Hukum" as deleteAbstrak
-    usecase "Update Abstrak Hukum" as updateAbstrak
+    usecase "Download Dokumen" as downloadDokumen
+    usecase "Melihat Dokumen" as melihatDokumen
+    usecase "Produk Hukum" as produkHukum
+    usecase "Mencari peraturan" as mencariPeraturan
+}
 
 
 
-admin ---> login
-admin ---> dashboard
-admin ---> Katagori
-Katagori ..> tambahKatagori : include
-Katagori ..> deleteKatagori : include
 
-admin ---> Subjek
-Subjek ..> tambahSubjek : include
-Subjek ..> deleteSubjek : include
-
-admin ---> Tipe
-Tipe ..> deleteTipe : include
-Tipe ..> updateTipe : include
-
-
-admin ---> Abstrak
-Abstrak ..> updateAbstrak : include
-Abstrak ..> deleteAbstrak : include
-
-
-admin ---> Produk
-admin ---> Dokument
-admin ---> SearchProduk
-admin ---> updateProduk
-admin ---> deleteProduk
-admin ---> tambahProduk
-user --> Dokument
-
-Produk ...> tambahProduk : include
-Produk ...> deleteProduk : include
-Produk ...> updateProduk : include
-Produk ...> SearchProduk : include
-Produk ...> detailProduk : include
-Produk ..> Dokument : include 
+admin --> mengelolah
+admin --> login
+admin --> logout
+login  ..> logout : <<include>>
+mengelolah <.. abstrakPeraturan: <<extend>>
+mengelolah <.. subjekPeraturan: <<extend>>
+mengelolah <.. tipePeraturan: <<extend>>
+mengelolah <.. katagoriPeraturan: <<extend>>
+mengelolah <.. peraturan: <<extend>>
+mengelolah <.. tahunPeraturan: <<extend>>
+mengelolah ..> login: <<include>>
+mengelolah ..> peraturan : <<include>>
 
 
 
-user ---> Produk
-user ---> SearchProduk
+peraturan <.. tahunPeraturan : <<extend>>
+peraturan <.. abstrakPeraturan : <<extend>>
+peraturan <.. subjekPeraturan : <<extend>>
+peraturan <.. tipePeraturan : <<extend>>
+peraturan <.. katagoriPeraturan : <<extend>>
+peraturan  ..> produkHukum : <<include>>
 
+
+produkHukum .. mencariPeraturan : <<extend>>
+produkHukum .. downloadDokumen : <<extend>>
+produkHukum .. melihatDokumen : <<extend>>
+
+user --> downloadDokumen
+user --> melihatDokumen
+user --> produkHukum
+user --> mencariPeraturan
 
 @enduml

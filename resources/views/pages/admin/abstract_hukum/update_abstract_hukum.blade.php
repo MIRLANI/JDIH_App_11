@@ -12,11 +12,12 @@
                     <form class="form" method="POST"
                         action="{{ route('update.abstrack_hukum', ['id' => $abstrak->id]) }}">
                         @csrf
+                        {{-- @dd($abstrak->produkHukum) --}}
                         <div class="mb-3">
                             <label for="produk_hukum_id" class="form-label">Peraturan</label>
                             <select disabled class="form-select" name="produk_hukum_id">
                                 <option value="{{ $abstrak->produk_hukum_id }}">
-                                    {{ $abstrak->productHukum->nama }}
+                                    {{ $abstrak->productHukum->nama ?? "" }}
                                 </option>
                             </select>
                         </div>
@@ -39,8 +40,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="catatan" class="form-label">Catatan</label>
-                            <textarea class="form-control" id="catatanHello" name="catatan" rows="4" oninput="updateCatatanList()">{{ $abstrak->catatan }}</textarea>
-                            <ul id="catatanListUpdate" class="mt-2">
+                            <textarea class="form-control" id="catatanInput" name="catatan" rows="4" oninput="updateCatatanList()">{{ $abstrak->catatan }}</textarea>
+                            <ul id="catatanOutputList" class="mt-2">
                                 @foreach (explode("\n", $abstrak->catatan) as $item)
                                     <li>{{ $item }}</li>
                                 @endforeach
@@ -62,8 +63,8 @@
 {{-- code untuk update catatan abstrak --}}
 <script>
     function updateCatatanList() {
-        const catatanInput = document.getElementById('catatanHello');
-        const catatanOutputList = document.getElementById('catatanListUpdate');
+        const catatanInput = document.getElementById('catatanInput');
+        const catatanOutputList = document.getElementById('catatanOutputList');
         const lines = catatanInput.value.split('\n');
         if (lines.length > 3) {
             alert('Hanya boleh memasukkan maksimal 3 poin.');

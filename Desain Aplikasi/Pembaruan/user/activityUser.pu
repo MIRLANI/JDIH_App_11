@@ -8,24 +8,27 @@ JDIH FMIPA;
 :menampilkan halaman
 JDIH FMIPA;
 |User|
-:melihat halaman
-JDIH FMIPA;
-
-repeat :Mencari produk hukum;
+:Mencari peraturan;
 
 :Memasukan kata kunci;
 |User|
 |Sistem|
 
-:Mencari Produk hukum
+:Mencari peraturan
 berdasarkan kata kunci;
-repeat  while () is (no) not (yes)
-:Menampilkan hasil pencarian;
+if (data ditemukan?) then (no) 
+  :menampilan pesan 
+  peraturan tidak ditemukan;
+  stop
+endif
+
 |User|
-:Melihat produk hukum;
-
-:Mendownload dokumen;
-
+:Memilih peraturan;
+|Sistem|
+:menampilan detail peraturan;
+|User|
+:melihat dokumen;
+:mendownload dokumen;
 stop
 @enduml
 

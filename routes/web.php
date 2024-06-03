@@ -93,3 +93,8 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         Route::post("/tipe-peraturan-add", "store")->name("store.tipe_hukum");
     });
 });
+
+Route::fallback(function () {
+    return response()->view("error.erro404");
+});
+

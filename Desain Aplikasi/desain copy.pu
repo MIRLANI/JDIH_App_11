@@ -1,0 +1,16 @@
+@startuml
+
+start
+:Rumusan Masalah ;
+
+:Analisis Sistem;
+ person :Membangun Sistem;
+
+if (kondisi) then (sistem sesuai);
+ : Memangun sistem
+else 
+:kdfjkdjfkd;
+
+stop
+@enduml
+

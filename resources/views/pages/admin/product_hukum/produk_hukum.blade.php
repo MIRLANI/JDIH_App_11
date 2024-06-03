@@ -17,7 +17,7 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Produk Hukum</li>
+                            <li class="breadcrumb-item active" aria-current="page">Peraturan</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,10 +45,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Product Hukum</th>
+                                <th>Peraturan</th>
                                 {{-- <th>Deskripsi</th> --}}
                                 <th>Judul</th>
-                                <th>Category Hukum</th>
+                                <th>Kategori</th>
                                 <th>Subjek</th>
                                 <th>Status</th>
                                 <th>Aksi</th>

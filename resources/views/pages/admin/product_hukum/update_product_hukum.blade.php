@@ -43,7 +43,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mt-2">
-                                            <h4 class="card-title"><b>Hukum</b></h4>
+                                            <h4 class="card-title"><b>Peraturan</b></h4>
                                         </div>
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -57,7 +57,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan BPK Nomor 1 Tahun 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -74,9 +74,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Perubahan Atas Peraturan Badan Pemeriksa
-                                                        Keuangan Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik
-                                                        Badan Pemeriksa Keuangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -96,10 +94,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Badan Pemeriksa Keuangan Nomor 1
-                                                        Tahun 2013 tentang Perubahan Atas Peraturan Badan Pemeriksa Keuangan
-                                                        Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik Badan
-                                                        Pemeriksa Keuangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022 tentang Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -121,7 +116,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-undangan)</i>
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -155,7 +150,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -174,7 +169,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Jakarta)</i>
+                                                <p class="small mt-2"><i>(Contoh: Kendari)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -194,7 +189,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2014)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -214,7 +209,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -232,7 +227,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 November 2013)</i>
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -321,7 +316,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: LN 2013 (189) : 3 hlm. )</i>
+                                                <p class="small mt-2"><i>(Contoh: Gazette FMIPA 2022 No. 1: 5 hlm. . )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -390,7 +385,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: BPK RI )</i>
+                                                <p class="small mt-2"><i>(Contoh: Indonesia, FMIPA UHO )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -406,7 +401,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Indonesia, BPK RI )</i>
+                                                <p class="small mt-2"><i>(Contoh: FMIPA UHO )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -570,10 +565,12 @@
                                             </div>
                                         </div>
 
+                                    
                                         <div class=" col-12 mt-3 mt-4">
                                             <div class="form-group ">
                                                 <input type="file" class="form-control form-control-sm"
                                                     image-crop-aspect-ratio="1:1" name="file"
+                                                    value="{{ $product_hukum->file }}"
                                                     class="@error('file') is-invalid @enderror">
                                                 @error('file')
                                                     <div class="invalid-feedback">

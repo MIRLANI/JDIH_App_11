@@ -23,7 +23,7 @@ class UpdateProductHukumRequest extends FormRequest
     {
         return [
             "tipe_id" => "required",
-            "category_hukum_id" => "required",
+            // "category_hukum_id" => "required",
             "tahun_id" => ["required", "numeric"],
             
             "nama" => ["required"],
@@ -40,7 +40,7 @@ class UpdateProductHukumRequest extends FormRequest
             "lokasi" => "required",
             "teu" => "required",
             "nomor" => "required",
-            "file" => ["required", "file", "mimes:pdf"],
+            // "file" => ["required", "file", "mimes:pdf"],
         ];
     }
 }

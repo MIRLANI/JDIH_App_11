@@ -13,140 +13,119 @@ class ProductHukumSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        $data1 = [
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "nama" => "Peraturan BPK Nomor 1 Tahun 2013",
-            "deskripsi" => "Perubahan Atas Peraturan Badan Pemeriksa Keuangan Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik Badan Pemeriksa Keuangan",
-            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 1 Tahun 2013 tentang Perubahan Atas Peraturan Badan Pemeriksa Keuangan Nomor 1 Tahun 2011 Tentang Majelis Kehormatan Kode Etik Badan Pemeriksa Keuangan",
-            "tipe_dokumen" => "Peraturan Perundang-undangan",
-            "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "2013-11-29",
-            "tanggal_pengundangan" => "2013-11-29",
-            "tanggal_berlaku" => "2013-11-29",
-            "sumber" => "LN 2013 No. 189 : 3 hlm.",
-            "status" => "Tidak Berlaku",
+            "nama" => "Peraturan Dekan FMIPA Nomor 1 Tahun 2022",
+            "deskripsi" => "Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa",
+            "judul" => "Peraturan Dekan FMIPA Nomor 1 Tahun 2022 tentang Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa",
+            "tipe_dokumen" => "Peraturan Internal",
+            "tempat_penetapan" => "Kendari",
+            "tanggal_penetapan" => "2022-01-15",
+            "tanggal_pengundangan" => "2022-01-15",
+            "tanggal_berlaku" => "2022-01-15",
+            "sumber" => "Gazette FMIPA 2022 No. 1: 5 hlm.",
+            "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
-            "lokasi" => "BPK RI",
+            "lokasi" => "FMIPA UHO",
             "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan contoh",
-                "mengubah" => "diubah oleh peraturan contoh"
+                "dicabut" => "dicabut oleh peraturan dek 2023",
+                "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
         ];
-        $productHukum = ProductHukum::create($data);
+        $productHukum = ProductHukum::create($data1);
         $productHukum->save();
 
         $data2 = [
-            
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "nama" => "Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
-            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "tipe_dokumen" => "Peraturan Perundang-undangan",
-            "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "07 Oktober 2011",
-            "tanggal_pengundangan" => "07 Oktober 2011",
-            "tanggal_berlaku" => "07 Oktober 2011",
-            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
-            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
-            "status" => "Tidak Berlaku",
+            "nama" => "Peraturan Dekan FMIPA Nomor 2 Tahun 2021 tentang Kode Etik Mahasiswa",
+            "deskripsi" => "Peraturan ini berisi tentang kode etik yang harus diikuti oleh mahasiswa FMIPA.",
+            "judul" => "Peraturan Dekan FMIPA Nomor 2 Tahun 2021 tentang Kode Etik Mahasiswa",
+            "tipe_dokumen" => "Peraturan Internal",
+            "tempat_penetapan" => "Kendari",
+            "tanggal_penetapan" => "2021-08-10",
+            "tanggal_pengundangan" => "2021-08-10",
+            "tanggal_berlaku" => "2021-08-10",
+            "sumber" => "Gazette FMIPA 2021 No. 8: 10 hlm.",
+            "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
-            "lokasi" => "BPK RI",
+            "lokasi" => "FMIPA UHO",
             "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan contoh",
-                "mengubah" => "diubah oleh peraturan contoh"
+                "dicabut" => "dicabut oleh peraturan dek 2023",
+                "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
         ];
-
         $productHukums = ProductHukum::query()->create($data2);
         $productHukums->save();
-        
+
         $data3 = [
-            
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "tipe_id" => 1,
-            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
-            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "tipe_dokumen" => "Peraturan Perundang-undangan",
-            "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "07 Oktober 2011",
-            "tanggal_pengundangan" => "07 Oktober 2011",
-            "tanggal_berlaku" => "07 Oktober 2011",
-            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
-            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
-            "status" => "Tidak Berlaku",
+            "nama" => "Peraturan Dekan FMIPA Nomor 3 Tahun 2020 tentang Pelaksanaan Praktikum",
+            "deskripsi" => "Peraturan ini mengatur tentang pelaksanaan praktikum di lingkungan FMIPA.",
+            "judul" => "Peraturan Dekan FMIPA Nomor 3 Tahun 2020 tentang Pelaksanaan Praktikum",
+            "tipe_dokumen" => "Peraturan Internal",
+            "tempat_penetapan" => "Kendari",
+            "tanggal_penetapan" => "2020-03-20",
+            "tanggal_pengundangan" => "2020-03-20",
+            "tanggal_berlaku" => "2020-03-20",
+            "sumber" => "Gazette FMIPA 2020 No. 3: 15 hlm.",
+            "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
-            "lokasi" => "BPK RI",
+            "lokasi" => "FMIPA UHO",
             "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan contoh",
-                "mengubah" => "diubah oleh peraturan contoh"
+                "dicabut" => "dicabut oleh peraturan dek 2023",
+                "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
         ];
-        
         $productHukums = ProductHukum::query()->create($data3);
         $productHukums->save();
 
-
         $data4 = [
-            
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "tipe_id" => 2,
-
-            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
-            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "tipe_dokumen" => "Peraturan Perundang-undangan",
-            "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "07 Oktober 2011",
-            "tanggal_pengundangan" => "07 Oktober 2011",
-            "tanggal_berlaku" => "07 Oktober 2011",
-            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
-            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
-            "status" => "Tidak Berlaku",
+            "nama" => "Peraturan Dekan FMIPA Nomor 4 Tahun 2019 tentang Tata Cara Ujian Akhir",
+            "deskripsi" => "Peraturan ini menjelaskan tata cara pelaksanaan ujian akhir di FMIPA.",
+            "judul" => "Peraturan Dekan FMIPA Nomor 4 Tahun 2019 tentang Tata Cara Ujian Akhir",
+            "tipe_dokumen" => "Peraturan Internal",
+            "tempat_penetapan" => "Kendari",
+            "tanggal_penetapan" => "2019-12-10",
+            "tanggal_pengundangan" => "2019-12-10",
+            "tanggal_berlaku" => "2019-12-10",
+            "sumber" => "Gazette FMIPA 2019 No. 10: 8 hlm.",
+            "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
-            "lokasi" => "BPK RI",
+            "lokasi" => "FMIPA UHO",
             "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan contoh",
-                "mengubah" => "diubah oleh peraturan contoh"
+                "dicabut" => "dicabut oleh peraturan dek 2023",
+                "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
         ];
-
         $productHukums = ProductHukum::query()->create($data4);
         $productHukums->save();
 
-
-       
-        $data4 = [
-            
+        $data5 = [
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "tipe_id" => 3,
-            "nama" => "tiga Peraturan BPK Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "deskripsi" => "Peraturan Badan Pemeriksa Keuangan ini berisi tentang Kode Etik yang harus diikuti oleh anggota Badan Pemeriksa Keuangan.",
-            "judul" => "Peraturan Badan Pemeriksa Keuangan Nomor 2 Tahun 2011 tentang Kode Etik Badan Pemeriksa Keuangan",
-            "tipe_dokumen" => "Peraturan Perundang-undangan",
-            "tempat_penetapan" => "Jakarta",
-            "tanggal_penetapan" => "07 Oktober 2011",
-            "tanggal_pengundangan" => "07 Oktober 2011",
-            "tanggal_berlaku" => "07 Oktober 2011",
-            "sumber" => "LN 2011 (98), TLN 5245 : 10 hlm.",
-            // "subjek" => "KEPEGAWAIAN, APARATUR NEGARA - KODE ETIK",
-            "status" => "Tidak Berlaku",
+            "nama" => "Peraturan Dekan FMIPA Nomor 5 Tahun 2018 tentang Penulisan Skripsi",
+            "deskripsi" => "Peraturan ini mengatur tentang tata cara penulisan skripsi di FMIPA.",
+            "judul" => "Peraturan Dekan FMIPA Nomor 5 Tahun 2018 tentang Penulisan Skripsi",
+            "tipe_dokumen" => "Peraturan Internal",
+            "tempat_penetapan" => "Kendari",
+            "tanggal_penetapan" => "2018-07-15",
+            "tanggal_pengundangan" => "2018-07-15",
+            "tanggal_berlaku" => "2018-07-15",
+            "sumber" => "Gazette FMIPA 2018 No. 7: 12 hlm.",
+            "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
-            "lokasi" => "BPK RI",
+            "lokasi" => "FMIPA UHO",
             "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan contoh",
-                "mengubah" => "diubah oleh peraturan contoh"
+                "dicabut" => "dicabut oleh peraturan dek 2023",
+                "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
         ];
-
-        $productHukums = ProductHukum::query()->create($data4);
+        $productHukums = ProductHukum::query()->create($data5);
         $productHukums->save();
-
-
     }
 }
