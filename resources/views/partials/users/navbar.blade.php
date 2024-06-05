@@ -13,7 +13,12 @@
                     </li>
                     <li class="menu-item mx-2">
                         <a href="{{ route('subjek') }}" class='menu-link'>
-                            <span style="font-weight: bold;">Subjek</span>
+                            <span style="font-weight: bold;">Jenis</span>
+                        </a>
+                    </li>
+                    <li class="menu-item mx-2">
+                        <a href="{{ route('sumber') }}" class='menu-link'>
+                            <span style="font-weight: bold;">Sumber</span>
                         </a>
                     </li>
                     <li class="menu-item mx-2">

@@ -14,7 +14,7 @@
                             Adv.Search</button>
                     </div>
 
-                    <div class="collapse {{ request()->get('tentang') == true || request()->get('nomor') == true || request()->get('tahun') == true || request()->get('tag') == true ? 'show' : '' }}"
+                    <div class="collapse {{ request()->get('tentang') == true || request()->get('nomor') == true || request()->get('tahun') == true || request()->get('tag') == true || request()->get('sumber') == true ? 'show' : '' }}"
                         id="collapseExample">
                         <hr>
                         <div class="card card-body shadow-sm m-2 p-2">
@@ -29,9 +29,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="city-column">Nomor</label>
-                                        <input type="text" id="city-column" value="{{ request('nomor') }}"
-                                            class="form-control" placeholder="Nomor Peraturan" name="nomor">
+                                        <label for="city-column m-1">Sumber</label>
+                                        <select name="sumber" id="sumber" class="form-control">
+                                            <option value="">Pilih Sumber Peraturan</option>
+                                            @foreach ($sumbers as $sumber)
+                                                <option value="{{ $sumber->nama }}"
+                                                    {{ request()->filled('sumber') && request('sumber') == $sumber->nama ? 'selected' : '' }}>
+                                                    {{ $sumber->nama }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -55,7 +61,7 @@
                                         <label for="company-column">Tag</label>
                                         <select class="choices form-select multiple-remove" multiple="multiple"
                                             name="tag[]">
-                                            <optgroup label="Tag Peraturan">
+                                            <optgroup label="Jenis Peraturan">
                                                 @foreach ($subjekHukums as $subjek)
                                                     <option value="{{ $subjek->nama }}"
                                                         {{ is_array(request('tag')) ? (in_array($subjek->nama, request('tag')) ? 'selected' : '') : (request('tag') == $subjek->nama ? 'selected' : '') }}>

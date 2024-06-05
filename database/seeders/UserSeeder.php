@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
     {
         User::query()->create([
             "username" => "lani",
-            "password" => Hash::make("lani")
+            "password" => Hash::make("lani"),
+            "role" => "admin"
         ]);
     }
 }

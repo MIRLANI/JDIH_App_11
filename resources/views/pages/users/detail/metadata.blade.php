@@ -13,57 +13,59 @@
             <tbody>
                 <tr>
                     <th scope="row">Tipe Dokumen</th>
-                    <td>{{ $produkHukum->tipeHukum->nama ?? '' }}</td>
+                    <td>{{ $produkHukum->tipeHukum->nama ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Judul</th>
-                    <td>{{ $produkHukum->judul ? $produkHukum->judul : '' }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">T.E.U.</th>
-                    <td>{{ $produkHukum->teu ? $produkHukum->teu : '' }}</td>
+                    <td>{{ $produkHukum->judul ? $produkHukum->judul : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Nomor</th>
-                    <td>{{ $produkHukum->nomor ? $produkHukum->nomor : '' }}</td>
+                    <td>{{ $produkHukum->nomor ? $produkHukum->nomor : '-' }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Bentuk</th>
-                    <td>{{ optional($produkHukum->categoryHukum)->title ?? '' }}</td>
+                <tr>
+                    <th scope="row">T.E.U.</th>
+                    <td>{{ $produkHukum->teu ? $produkHukum->teu : '-' }}</td>
+                </tr>
+                
+                    <th scope="row">Jenis Dokumen</th>
+                    <td>{{ optional($produkHukum->categoryHukum)->title ?? '-' }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Bentuk Singkat</th>
-                    <td>{{ $produkHukum->categoryHukum->short_title ? $produkHukum->categoryHukum->short_title : '' }}
+                    <th scope="row">Singkatan Jenis</th>
+                    <td>{{ $produkHukum->categoryHukum->short_title ? $produkHukum->categoryHukum->short_title : '-' }}
                     </td>
                 </tr>
+               
                 <tr>
                     <th scope="row">Tahun</th>
-                    <td>{{ $produkHukum->tahuns->tahun ?? '' }}</td>
+                    <td>{{ $produkHukum->tahuns->tahun ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tempat Penetapan</th>
-                    <td>{{ $produkHukum->lokasi ?? '' }}</td>
+                    <td>{{ $produkHukum->tempat_penetapan ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Penetapan</th>
-                    <td>{{ $produkHukum->tempat_penetapan ? $produkHukum->tempat_penetapan : '' }}</td>
+                    <td>{{ $produkHukum->tanggal_penetapan ? $produkHukum->tanggal_penetapan : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Pengundangan</th>
-                    <td>{{ $produkHukum->tanggal_pengundangan ? $produkHukum->tanggal_pengundangan : '' }}
+                    <td>{{ $produkHukum->tanggal_pengundangan ? $produkHukum->tanggal_pengundangan : '-' }}
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">Tanggal Berlaku</th>
-                    <td>{{ $produkHukum->tanggal_berlaku ? $produkHukum->tanggal_berlaku : '' }}</td>
+                    <td>{{ $produkHukum->tanggal_berlaku ? $produkHukum->tanggal_berlaku : '-' }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Sumber</th>
-                    <td>{{ $produkHukum->sumber ? $produkHukum->sumber : '' }}</td>
+                    <th scope="row">Sumber Dokumen</th>
+                    <td>{{ optional($produkHukum->categoryHukum)->short_title ?? '-' }}  {{ $produkHukum->sumber ? $produkHukum->sumber : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Subjek</th>
-                    <td>{{ $produkHukum->subjekHukums->pluck('nama')->isNotEmpty() ? implode(', ', $produkHukum->subjekHukums->pluck('nama')->toArray()) : '' }}
+                    <td>{{ $produkHukum->subjekHukums->pluck('nama')->isNotEmpty() ? implode(', ', $produkHukum->subjekHukums->pluck('nama')->toArray()) : '-' }}
                     </td>
                 </tr>
                 <tr>
@@ -76,17 +78,18 @@
                         </span>
                     </td>
                 </tr>
+               
                 <tr>
                     <th scope="row">Bahasa</th>
-                    <td>{{ $produkHukum->bahasa ? $produkHukum->bahasa : '' }}</td>
+                    <td>{{ $produkHukum->bahasa ? $produkHukum->bahasa : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Lokasi</th>
-                    <td>{{ $produkHukum->lokasi ? $produkHukum->lokasi : '' }}</td>
+                    <td>{{ $produkHukum->lokasi ? $produkHukum->lokasi : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Bidang</th>
-                    <td>{{ $produkHukum->bidang ? $produkHukum->bidang : '' }}</td>
+                    <td>{{ $produkHukum->bidang ? $produkHukum->bidang : '-' }}</td>
                 </tr>
             </tbody>
         </table>

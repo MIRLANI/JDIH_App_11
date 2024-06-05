@@ -57,7 +57,8 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022)</i>
+                                                <p class="small mt-2"><i>(Contoh: Paduan Penyusunan Skripsi)</i>
+                                               
                                                 </p>
                                             </div>
                                         </div>
@@ -74,11 +75,11 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
+                                                <p class="small mt-2"><i>(Contoh: Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo)</i>
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="mt-5"></div>
+                                       {{-- META DATA  --}}
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Meta Data</b></h4>
                                         </div>
@@ -94,17 +95,17 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan FMIPA Nomor 1 Tahun 2022 tentang Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa)</i>
+                                                <p class="small mt-2"><i>(Contoh: Penetapan Buku Paduan Penyusunana Skripsi Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam)</i>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label for="tipe_dokumen" class="form-label">Tipe Dokument </label>
+                                                <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
                                                 <select id="tahun"
-                                                    class="form-control @error('tipe_id') is-invalid @enderror"
+                                                    class="form-control form-select @error('tipe_id') is-invalid @enderror"
                                                     name="tipe_id">
-                                                    <option value="">Pilih Tipe Peraturan</option>
+                                                    <option value="">Pilih Sumber Peraturan</option>
                                                     @foreach ($tipeHukums as $tipe)
                                                         <option value="{{ $tipe->id }}"
                                                             {{ (old('tipe_id', $product_hukum->tipe_id) == $tipe->id) ? 'selected' : '' }}>
@@ -120,7 +121,82 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <div class="form-group">
+                                                    <label
+                                                        class="form-label @error('category_hukum_id') is-invalid @enderror"
+                                                        for="sumber">Kategori Peraturan</label>
+                                                    <a href="{{ route('index.category_hukum') }}"
+                                                        class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
+                                                        <i class="bi bi-file-earmark-plus"></i>
+                                                    </a>
+                                                    <select
+                                                        class="form-select form-control @error('category_hukum_id') is-invalid @enderror"
+                                                        name="category_hukum_id" data-parsley-required="true">
+                                                        <option value="">Pilih Kategori Peraturan</option>
+                                                        @foreach ($category_hukums as $category)
+                                                            <option value="{{ $category->id }}"
+                                                                @if (old('category_hukum_id') == $category->id) selected
+                                                                @elseif (
+                                                                    $product_hukum->categoryHukum &&
+                                                                        old('category_hukum_id') == null &&
+                                                                        old('category_hukum_id', $product_hukum->categoryHukum->id) == $category->id)
+                                                                     selected @endif>
+                                                                {{ $category->title }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
 
+
+                                                    @error('category_hukum_id')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                        </div>
+                                                    @enderror
+
+                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-Undangan)</i>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <div class="form-group">
+                                                    <label class="form-label " for="subjek">Jenis Dokumen </label>
+                                                    <a href="{{ route("index.subjek_hukum") }}" class="icon btn-primary mb-2"
+                                                        title="Update Subjek Hukum">
+                                                        <i class="bi bi-file-earmark-plus"></i>
+                                                    </a>
+                                                    <select
+                                                        class="choices form-select multiple-remove m-0 @error('subjek') is-invalid @enderror"
+                                                        multiple="multiple" name="subjek[]">
+                                                        <option value="">Pilih Jenis Dokumen</option>
+                                                        <optgroup label="Figures">
+                                                            @foreach ($subjek_hukums as $subjek)
+                                                                <option value="{{ $subjek->id }}"
+                                                                    @if (old('subjek')) @selected(true)
+                                                            @elseif (isset($product_hukum->subjekHukums) && $product_hukum->subjekHukums->contains('id', $subjek->id))
+                                                                @selected(true) @endif>
+                                                                    {{ $subjek->nama }}
+                                                                </option>
+                                                            @endforeach
+
+                                                        </optgroup>
+                                                    </select>
+                                                    <p class="small "><i>(Contoh: Buku, Paduan, Modul)</i>
+                                                    @error('subjek[]')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                        </div>
+                                                    @enderror
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                   
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -174,139 +250,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label " for="tanggal_penetapan">Tanggal Penetapan
-                                                </label>
-                                                <input
-                                                    class="form-control @error('tanggal_penetapan') is-invalid @enderror"
-                                                    type="date" placeholder="Tanggal Penetapan"
-                                                    data-parsley-required="true" name="tanggal_penetapan"
-                                                    id="tanggal_penetapan"
-                                                    value="{{ old('tanggal_penetapan') ?: $product_hukum->tanggal_penetapan }}">
-                                                @error('tanggal_penetapan')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2014)</i>
-                                                </p>
-                                            </div>
-                                        </div>
+                                       
 
-                                        <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label " for="tanggal_pengundangan">Tanggal Pengundangan
-                                                </label>
-                                                <input
-                                                    class="form-control @error('tanggal_pengundangan') is-invalid @enderror"
-                                                    type="date" placeholder="Tanggal Pengundangan"
-                                                    data-parsley-required="true" name="tanggal_pengundangan"
-                                                    id="tanggal_pengundangan"
-                                                    value="{{ old('tanggal_pengundangan') ?: $product_hukum->tanggal_pengundangan }}">
-                                                @error('tanggal_pengundangan')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label " for="tanggal_berlaku">Tanggal Berlaku </label>
-                                                <input class="form-control @error('tanggal_berlaku') is-invalid @enderror"
-                                                    type="date" placeholder="Tanggal Berlaku"
-                                                    data-parsley-required="true" name="tanggal_berlaku"
-                                                    id="tanggal_berlaku"
-                                                    value="{{ old('tanggal_berlaku') ?: $product_hukum->tanggal_berlaku }}">
-                                                @error('tanggal_berlaku')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
-                                                </p>
-                                            </div>
-                                        </div>
+                                      
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="form-label @error('category_hukum_id') is-invalid @enderror"
-                                                        for="sumber">Bentuk Peraturan</label>
-                                                    <a href="{{ route('index.category_hukum') }}"
-                                                        class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
-                                                        <i class="bi bi-file-earmark-plus"></i>
-                                                    </a>
-                                                    <select
-                                                        class="choices form-select @error('category_hukum_id') is-invalid @enderror"
-                                                        name="category_hukum_id" data-parsley-required="true">
-                                                        <option value="">Pilih Peraturan</option>
-                                                        @foreach ($category_hukums as $category)
-                                                            <option value="{{ $category->id }}"
-                                                                @if (old('category_hukum_id') == $category->id) selected
-                                                                @elseif (
-                                                                    $product_hukum->categoryHukum &&
-                                                                        old('category_hukum_id') == null &&
-                                                                        old('category_hukum_id', $product_hukum->categoryHukum->id) == $category->id)
-                                                                     selected @endif>
-                                                                {{ $category->title }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-
-
-                                                    @error('category_hukum_id')
-                                                        <div class="invalid-feedback">
-                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                        </div>
-                                                    @enderror
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <div class="form-group">
-                                                    <label class="form-label " for="subjek">Subjek </label>
-                                                    <a href="{{ route("index.subjek_hukum") }}" class="icon btn-primary mb-2"
-                                                        title="Update Subjek Hukum">
-                                                        <i class="bi bi-file-earmark-plus"></i>
-                                                    </a>
-                                                    <select
-                                                        class="choices form-select multiple-remove @error('subjek') is-invalid @enderror"
-                                                        multiple="multiple" name="subjek[]">
-                                                        <option value="">Pilih subjek hukum</option>
-                                                        <optgroup label="Figures">
-                                                            @foreach ($subjek_hukums as $subjek)
-                                                                <option value="{{ $subjek->id }}"
-                                                                    @if (old('subjek')) @selected(true)
-                                                            @elseif (isset($product_hukum->subjekHukums) && $product_hukum->subjekHukums->contains('id', $subjek->id))
-                                                                @selected(true) @endif>
-                                                                    {{ $subjek->nama }}
-                                                                </option>
-                                                            @endforeach
-
-                                                        </optgroup>
-                                                    </select>
-                                                    @error('subjek[]')
-                                                        <div class="invalid-feedback">
-                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label" for="sumber">Sumber </label>
+                                                <label class="form-label" for="sumber">Jumlah Halaman </label>
                                                 <input class="form-control @error('sumber') is-invalid @enderror"
                                                     type="text" placeholder="Sumber" data-parsley-required="true"
                                                     name="sumber" id="sumber"
@@ -316,7 +266,7 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Gazette FMIPA 2022 No. 1: 5 hlm. . )</i>
+                                                <p class="small mt-2"><i>(Contoh: 5 Halaman )</i>
                                                 </p>
                                             </div>
                                         </div>
@@ -418,22 +368,66 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-
+                                                <p class="small mt-2"><i>(Contoh: 1018/SK/UN29.9/PP/2020 )</i>
+                                                </p>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group ">
-                                                <label class="form-label" for="bidang">Bidang </label>
-                                                <input class="form-control @error('bidang') is-invalid @enderror"
-                                                    type="text" placeholder="Bidang" name="bidang" id="bidang"
-                                                    value="{{ old('bidang') ?: $product_hukum->bidang }}">
-                                                @error('bidang')
+                                        <div class="col-md-4 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label " for="tanggal_penetapan">Tanggal Penetapan
+                                                </label>
+                                                <input
+                                                    class="form-control @error('tanggal_penetapan') is-invalid @enderror"
+                                                    type="date" placeholder="Tanggal Penetapan"
+                                                    data-parsley-required="true" name="tanggal_penetapan"
+                                                    id="tanggal_penetapan"
+                                                    value="{{ old('tanggal_penetapan') ?: $product_hukum->tanggal_penetapan }}">
+                                                @error('tanggal_penetapan')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2014)</i>
+                                                </p>
+                                            </div>
+                                        </div>
 
+                                        <div class="col-md-4 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label " for="tanggal_pengundangan">Tanggal Pengundangan
+                                                </label>
+                                                <input
+                                                    class="form-control @error('tanggal_pengundangan') is-invalid @enderror"
+                                                    type="date" placeholder="Tanggal Pengundangan"
+                                                    data-parsley-required="true" name="tanggal_pengundangan"
+                                                    id="tanggal_pengundangan"
+                                                    value="{{ old('tanggal_pengundangan') ?: $product_hukum->tanggal_pengundangan }}">
+                                                @error('tanggal_pengundangan')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label " for="tanggal_berlaku">Tanggal Berlaku </label>
+                                                <input class="form-control @error('tanggal_berlaku') is-invalid @enderror"
+                                                    type="date" placeholder="Tanggal Berlaku"
+                                                    data-parsley-required="true" name="tanggal_berlaku"
+                                                    id="tanggal_berlaku"
+                                                    value="{{ old('tanggal_berlaku') ?: $product_hukum->tanggal_berlaku }}">
+                                                @error('tanggal_berlaku')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 29 Mei 2024)</i>
+                                                </p>
                                             </div>
                                         </div>
 

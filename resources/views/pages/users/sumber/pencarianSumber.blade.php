@@ -3,13 +3,13 @@
     <div class="row match-height">
         <div class="col-11 mx-auto">
             <div class="d-flex justify-content-between align-items-center my-5">
-                <h2 class="mb-0 mx-5" style="color: white;">Jenis Peraturan</h2>
-                <form class="form my-0" method="GET" action="{{ route("searchSubjek") }}">
+                <h2 class="mb-0 mx-5" style="color: white;">Sumber Peraturan</h2>
+                <form class="form my-0" method="GET" action="{{ route("searchSumber") }}">
                     <div class="d-flex align-items-center">
                         <input type="text" id="first-name-column" class="form-control p-2 me-2" placeholder="Keyword"
                             name="keyword"  value="{{ request()->input("keyword") }}">
                         <button type="submit" class="btn btn-primary px-4 py-2">Search</button>
-                        <a id="resetButton" href="{{ route("subjek") }}" class=" px-4 py-2" style="display: none; color: red">Reset</a>
+                        <a id="resetButton" href="{{ route("sumber") }}" class=" px-4 py-2" style="display: none; color: red">Reset</a>
                        
                     </div>
                 </form>

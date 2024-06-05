@@ -93,12 +93,18 @@
                         <li class="submenu-item {{ request()->routeIs('index.tipe_hukum') ? 'active' : '' }}">
                             <a href="{{ route('index.tipe_hukum') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-fill"></i>
-                                <span>Tipe</span>
+                                <span>Sumber</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                <hr>
+                <li class="submenu-item">
+                    <a href="{{ route("manejementUser") }}" class='sidebar-link'>
+                        <i class="bi bi-people-fill"></i>
+                        <span>Manajemen User</span>
+                    </a>
+                </li>
 
 
                 <hr>

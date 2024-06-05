@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryHukumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManajemenUserController;
 use App\Http\Controllers\ProductHukumController;
 use App\Http\Controllers\SubjekHukumController;
 use App\Http\Controllers\TahunController;
@@ -28,8 +29,8 @@ Route::middleware(OnlyQuestMiddleware::class)->group(function () {
 // Route untuk user
 Route::controller(HomeController::class)->group(function () {
     Route::get("/",  "index")->name("home");
-    Route::get("/subjek",  "subjek")->name("subjek");
-    Route::get("/jenis",  "jenis")->name("jenis");
+    Route::get("/jenis",  "subjek")->name("subjek");
+    Route::get("/sumber",  "sumber")->name("sumber");
     Route::get("/tahun",  "tahun")->name("tahun");
     Route::get("/detail/{id}/{slug}",  "detail")->name("detail");
     Route::get("/download_file/{id}/{file}",  "download")->name("download");
@@ -39,6 +40,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get("/search",  "search")->name("search");
     Route::get("/Search",  "search")->name("Search");
     Route::get("/Subjek",  "subjek")->name("searchSubjek");
+    Route::get("/Sumber",  "sumber")->name("searchSumber");
 });
 
 
@@ -92,7 +94,17 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         Route::get("/tipe-peraturan-delete/{id}", "destroy")->name("delete.tipe_hukum");
         Route::post("/tipe-peraturan-add", "store")->name("store.tipe_hukum");
     });
+
+    Route::controller(ManajemenUserController::class)->group(function(){
+        Route::get("/manajement-user", "manejementUser")->name("manejementUser");
+        Route::post("/manajement-user", "store")->name("tambaUser");
+    });
 });
+
+
+
+
+
 
 Route::fallback(function () {
     return response()->view("error.erro404");

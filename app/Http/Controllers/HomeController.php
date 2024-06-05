@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryHukum;
 use App\Models\ProductHukum;
 use App\Models\SubjekHukum;
 use App\Models\Tahun;
+use App\Models\TipeHukum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,33 +19,48 @@ class HomeController extends Controller
         $subjekHukums = SubjekHukum::query()->get();
         $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
         $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts();
+        $sumbers = TipeHukum::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
             "subjekHukums" => $subjekHukums,
             "produkHukumsTerbaru" => $produkHukumHukumsTerbaru,
             "produkHukumsTerpopuler" => $produkHukumHukumsTerpopuler,
-            "tahuns" => $tahuns 
+            "tahuns" => $tahuns,
+            "sumbers" => $sumbers
         ]);
     }
 
-    public function jenis(): Response
-    {
-        return response()->view("pages.users.jenis.index");
-    }
+
 
     public function subjek(Request $request): Response
     {
-        if($request->input("keyword")){
+        if ($request->input("keyword")) {
             $keyword = $request->input("keyword");
-            $subjekHukums = SubjekHukum::query()->where("nama", "like", "%".$keyword."%")->get();
-        }else{
+            $subjekHukums = SubjekHukum::query()->where("nama", "like", "%" . $keyword . "%")->get();
+        } else {
             $subjekHukums = SubjekHukum::query()->get();
         }
-        
+
         return response()->view("pages.users.subjek.index", [
             "subjekHukums" => $subjekHukums
         ]);
     }
+
+    public function sumber(Request $request): Response
+    {
+        if ($request->input("keyword")) {
+            $keyword = $request->input("keyword");
+            $sumberDokumen = TipeHukum::query()->where("nama", "like", "%" . $keyword . "%")->get();
+        } else {
+            $sumberDokumen = TipeHukum::query()->get();
+        }
+
+        return response()->view("pages.users.sumber.index", [
+            "sumberDokumens" => $sumberDokumen
+        ]);
+    }
+
+
     public function tahun(): Response
     {
         $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
@@ -61,7 +78,7 @@ class HomeController extends Controller
     }
 
 
-    public function search( Request $request): Response
+    public function search(Request $request): Response
     {
 
         $query = ProductHukum::query();
@@ -69,7 +86,7 @@ class HomeController extends Controller
         $anyCriteriaMatch = false;
 
         // Check if any search parameters are provided and set the flag if any criteria are filled
-        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag', 'jenis'])) {
+        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag', 'sumber'])) {
             $query->where(function ($q) use ($request, &$anyCriteriaMatch) {
                 // Search by keyword in all fields if keyword is provided
                 if ($request->filled('keyword')) {
@@ -133,7 +150,7 @@ class HomeController extends Controller
             $anyCriteriaMatch = true;
         }
 
-        
+
         // Search by 'tahun' in 'tahuns' table
         if ($request->filled('tahun')) {
             $tahun = $request->input('tahun');
@@ -165,13 +182,16 @@ class HomeController extends Controller
             $anyCriteriaMatch = true;
         }
 
-        // Filter by 'jenis' using 'tipe_dokumen'
-        if ($request->filled('jenis') && is_array($request->input('jenis'))) {
-            $jenis = $request->input('jenis');
-            $query->whereIn('tipe_dokumen', $jenis);
+        // Filter by 'sumber' using 'tipe_dokumen'
+        if (($request->input('sumber'))) {
+            // dd($request->input("sumber"));
+            $sumber = $request->input('sumber');
+            $query->whereHas('categoryHukum', function ($q) use ($sumber) {
+                $q->where('title', $sumber);
+            });
+
             $anyCriteriaMatch = true;
         }
-
         // If no criteria match, ensure no results are returned
         if (!$anyCriteriaMatch) {
             $query->whereRaw('1 = 0');
@@ -179,17 +199,19 @@ class HomeController extends Controller
 
         // Apply sorting and pagination for better performance and usability
         $produkHukum = $query->orderBy('updated_at', 'desc')->paginate(6);
-        
-    //   dd($produkHukum);
+
+        //   dd($produkHukum);
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $tahuns = Tahun::query()->get();
+        $sumbers = TipeHukum::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
             "subjekHukums" => $subjekHukums,
             "produkHukums" => $produkHukums,
             "produkHukum" => $produkHukum,
-            "tahuns" => $tahuns
+            "tahuns" => $tahuns,
+            "sumbers" => $sumbers
         ]);
     }
 

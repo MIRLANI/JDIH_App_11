@@ -16,22 +16,23 @@ class ProductHukumSeeder extends Seeder
         $data1 = [
             "category_hukum_id" => 1,
             "tahun_id" => 1,
-            "nama" => "Peraturan Dekan FMIPA Nomor 1 Tahun 2022",
-            "deskripsi" => "Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa",
-            "judul" => "Peraturan Dekan FMIPA Nomor 1 Tahun 2022 tentang Perubahan Atas Peraturan Dekan FMIPA Nomor 1 Tahun 2020 Tentang Tata Tertib Akademik Mahasiswa",
-            "tipe_dokumen" => "Peraturan Internal",
+            "nama" => "Paduan Penyusunan Skripsi",
+            "deskripsi" => "Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo",
+            "judul" => " Penetapan Buku Paduan Penyusunana Skripsi Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam",
+            "tipe_dokumen" => 1,
             "tempat_penetapan" => "Kendari",
-            "tanggal_penetapan" => "2022-01-15",
-            "tanggal_pengundangan" => "2022-01-15",
-            "tanggal_berlaku" => "2022-01-15",
-            "sumber" => "Gazette FMIPA 2022 No. 1: 5 hlm.",
+            "tanggal_penetapan" => "2020 juni 15",
+            "tanggal_pengundangan" => "2020 juni 08",
+            "tanggal_berlaku" => "2020 juni 15",
+            "sumber" => "2022 No. : 57 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
-            "status_hukum" => json_encode([
-                "dicabut" => "dicabut oleh peraturan dek 2023",
-                "mengubah" => "diubah oleh peraturan dek 2024"
-            ]),
+            "nomor" => "1018/SK/UN29.9/PP/2020",
+            // "status_hukum" => json_encode([
+            //     "dicabut" => "dicabut oleh peraturan dek 2023",
+            //     "mengubah" => "diubah oleh peraturan dek 2024"
+            // ]),
         ];
         $productHukum = ProductHukum::create($data1);
         $productHukum->save();
