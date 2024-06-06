@@ -8,11 +8,11 @@
             <div class="modal-body">
                 <form action="{{ route('updateManajemen', ["id" => $user->id]) }}" method="POST">
                     @csrf
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                         <small class="text-muted">Contoh: ilkom@gmail.com</small>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="username" class="form-label">Nama Pengguna <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>

@@ -48,8 +48,8 @@ class ManajemenUserController extends Controller
    public function update(Request $request, string $id)
    {
       $request->validate([
-         'email' => 'required|string|unique:users',
-         'username' => 'required|string|unique:users',
+         'email' => '|string|unique:users',
+         'username' => 'required',
          'role' => 'required',
      ]);
 
@@ -61,9 +61,10 @@ class ManajemenUserController extends Controller
            }
            $user->save();
            return response()->redirectToRoute("manejementUser")->with("message", "Update $request->role $request->username   Successfull");
+       } else {
+           $user = User::query()->updateOrCreate(['id' => $id], $request->all());
+           return response()->redirectToRoute("manejementUser")->with("message", "Update or Insert Successfull");
        }
-       return response()->redirectToRoute("manejementUser")->with("message", "Gagal Update $request->role $request->username   Successfull");
-
    }
 
    public function delete(string $id)

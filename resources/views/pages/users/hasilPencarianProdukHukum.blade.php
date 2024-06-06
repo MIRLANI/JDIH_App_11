@@ -97,47 +97,43 @@
                             </button>
                         @endif
                     </div>
-                    <button type="button" class="btn btn-light-secondary px-4" data-bs-toggle="modal"
-                    data-bs-target="#modal-{{ $hukum->id }}">Abstrak</button>
+                    <button type="button" class="btn btn-light-secondary px-2 mx-1 " data-bs-toggle="modal"
+                    data-bs-target="#modal-{{ $hukum->id }}">
+                        Abstrak <i class="bi bi-info-circle"></i>
+                    </button>
                 </div>
             </div>
         </div>
     @endforeach
 @else
     <div class="alert alert-warning" role="alert">
-        No products found.
+        Data tidak ditemukan
     </div>
 @endif
-
-
 
 <div class="card-body text-center">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-primary">
-            @if ($produkHukum->currentPage() > 1)
+            @if ($produkHukum->previousPageUrl())
                 <li class="page-item mx-1">
-                    <button class="page-link"
-                        onclick="changePage('{{ $produkHukum->previousPageUrl() }}')">Prev</button>
+                    <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}">Prev</a>
                 </li>
             @endif
 
             @foreach ($produkHukum->getUrlRange(1, $produkHukum->lastPage()) as $page => $url)
-                <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
-                    <button class="page-link" onclick="changePage('{{ $url }}')">{{ $page }}</button>
-                </li>
+                @if ($page >= $produkHukum->currentPage() - 2 && $page <= $produkHukum->currentPage() + 2)
+                    <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $url }}" data-url="{{ $url }}">{{ $page }}</a>
+                    </li>
+                @endif
             @endforeach
 
-            @if ($produkHukum->currentPage() < $produkHukum->lastPage())
+            @if ($produkHukum->nextPageUrl())
                 <li class="page-item mx-1">
-                    <button class="page-link" onclick="changePage('{{ $produkHukum->nextPageUrl() }}')">Next</button>
+                    <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}">Next</a>
                 </li>
             @endif
         </ul>
     </nav>
 </div>
-<script>
-    function changePage(url) {
-        window.history.pushState("", "", url);
-        location.reload();
-    }
-</script>
+

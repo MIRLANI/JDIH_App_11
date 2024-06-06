@@ -198,7 +198,7 @@ class HomeController extends Controller
         }
 
         // Apply sorting and pagination for better performance and usability
-        $produkHukum = $query->orderBy('updated_at', 'desc')->paginate(6);
+        $produkHukum = $query->orderBy('updated_at', 'desc')->paginate(6)->withQueryString();
 
         //   dd($produkHukum);
         $produkHukums = ProductHukum::query()->get();
