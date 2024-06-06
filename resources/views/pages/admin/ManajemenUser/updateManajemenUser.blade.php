@@ -10,12 +10,12 @@
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                         <small class="text-muted">Contoh: ilkom@gmail.com</small>
                     </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Nama Pengguna <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="username" name="username" value="{{$user->username}}" required>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
                         <small class="text-muted">Contoh: Ilmu Komputer</small>
                     </div>
                     <div class="mb-3">
@@ -26,8 +26,8 @@
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-control select " id="role" name="role" required>
-                            <option value="user" {{$user->role == 'user' ? 'selected' : ''}}>User</option>
-                            <option value="admin" {{$user->role == 'admin' ? 'selected' : ''}}>Admin</option>
+                            <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : ''}}>User</option>
+                            <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : ''}}>Admin</option>
                         </select>
                     </div>
                     <div class="modal-footer">

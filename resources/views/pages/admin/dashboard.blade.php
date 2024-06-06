@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Dashboard')
+@section('title', 'JDIH FMIPA | Dashboard')
 
 @section('content')
 

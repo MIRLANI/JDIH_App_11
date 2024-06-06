@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Tahun Peraturan')
+@section('title', 'JDIH FMIPA | Tahun Peraturan')
 
 @section('content')
 
@@ -26,6 +26,16 @@
         @endif
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+               
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                
+            </div>
         @endif
         <section class="section">
             <div class="card">
@@ -59,12 +69,8 @@
                                                 @csrf
                                                 <div class="input-group">
                                                     <input type="text" name="tahun" value="{{ $tahun->tahun }}"
-                                                        class="form-control @error('tahun') is-invalid @enderror">
-                                                    @error('tahun')
-                                                        <div class="invalid-feedback">
-                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                        </div>
-                                                    @enderror
+                                                        class="form-control">
+                                                   
                                                     <button hidden type="submit" class="btn btn-primary" title="Update">
                                                         <i class="bi bi-pencil"></i>
                                                     </button>
@@ -72,7 +78,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="/admin/tahun-hukum-delete/{{ $tahun->id }}" class="btn icon btn-danger"
+                                            <a href="{{ route("destroy.tahun_hukum", ["id" => $tahun->id])  }}" class="btn icon btn-danger"
                                                 title="Delete">
                                                 <i class="bi bi-trash"></i>
                                             </a>

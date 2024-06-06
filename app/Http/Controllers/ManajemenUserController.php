@@ -50,7 +50,6 @@ class ManajemenUserController extends Controller
       $request->validate([
          'email' => 'required|string|unique:users',
          'username' => 'required|string|unique:users',
-         'password' => 'required',
          'role' => 'required',
      ]);
 

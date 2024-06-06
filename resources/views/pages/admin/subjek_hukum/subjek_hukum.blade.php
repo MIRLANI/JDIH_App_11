@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Tag Peraturan')
+@section('title', 'JDIH FMIPA | Tag Peraturan')
 
 @section('content')
     <div class="page-heading">
