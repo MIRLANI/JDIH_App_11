@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TipeHukum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,12 +33,15 @@ class ManajemenUserController extends Controller
        $username = $request->input("username");
        $password = bcrypt($request->input("password"));
        $role = $request->input("role");
-       User::query()->create([
+       $user = User::query()->create([
         "email" => $email,
         "username" => $username,
         "password" => $password,
         "role" => $role
     ]);
+
+    TipeHukum::updateOrCreate(['user_id' => $user->id, "nama" => $user->username]);
+    
     return response()->redirectToRoute("manejementUser")->with("message", "Add  $role $username Successfull");
       
    }
@@ -66,8 +70,10 @@ class ManajemenUserController extends Controller
    public function delete(string $id)
    {
       $akun = User::query()->find($id);
+      if ($akun->sumberPeraturan()->exists() || $akun->productHukums()->exists()) {
+         return response()->redirectToRoute("manejementUser")->with("error", "User is still in use and cannot be deleted.");
+      }
       $akun->delete();
       return response()->redirectToRoute("manejementUser")->with("message", "Delete  Successfull");
-
    }
 }

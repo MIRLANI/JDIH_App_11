@@ -18,7 +18,7 @@ class HomeController extends Controller
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
-        $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts();
+        $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts()->take(4);
         $sumbers = TipeHukum::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,

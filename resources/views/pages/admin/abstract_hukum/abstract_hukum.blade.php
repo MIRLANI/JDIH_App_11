@@ -52,8 +52,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Hukum</th>
-                                <th>Nama</th>
+                                <th>Peraturan</th>
+                                <th>Abstrak</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

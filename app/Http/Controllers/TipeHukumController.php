@@ -12,7 +12,7 @@ class TipeHukumController extends Controller
      */
     public function index()
      {
-        $tipeHukums = TipeHukum::query()->get();
+        $tipeHukums = TipeHukum::query()->orderBy('created_at', 'desc')->get();
         return response()->view("pages.admin.tipe_hukum.tipe_hukum", [
             "tipeHukums" => $tipeHukums
         ]);
@@ -25,8 +25,8 @@ class TipeHukumController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255|unique:tipe_hukums,nama', 
                 'user_id' => 'required', 
-
             ]);
+             
             TipeHukum::query()->create($validatedData);
             return response()->redirectToRoute("index.tipe_hukum")->with("message", "Add Successful");
         } catch (\Illuminate\Validation\ValidationException $e) {

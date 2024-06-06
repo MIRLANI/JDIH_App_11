@@ -108,11 +108,11 @@ class ProductHukumController extends Controller
         $subjekHukums = SubjekHukum::query()->get();
         $productHukums = ProductHukum::query()->get();
         $tahuns = Tahun::query()->get();
-        $tipeHukums = TipeHukum::query()->get();
         if (auth()->user()->role == 'admin') {
             $tipeHukums = TipeHukum::query()->get();
         } else {
             $tipeHukums = TipeHukum::query()->where('user_id', auth()->id())->first();
+           
         }
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
             "product_hukums" => $productHukums,

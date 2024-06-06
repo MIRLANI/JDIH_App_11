@@ -53,6 +53,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Sumber Peraturan</th>
+                                <th>Email Pengguna</th>
+                                <th>Username Pengguna</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -74,6 +76,12 @@
                                                     </button>
                                                 </div>
                                             </form>
+                                        </td>
+                                        <td>
+                                            {{ $tipe->user->email }}
+                                        </td>
+                                        <td>
+                                             {{ $tipe->user->username }}
                                         </td>
                                         <td>
                                             <a href="{{ route('delete.tipe_hukum', ['id' => $tipe->id]) }}"

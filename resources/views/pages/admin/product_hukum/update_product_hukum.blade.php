@@ -125,6 +125,7 @@
                                                 </div>
                                             </div>
                                         @else
+                                     
                                             @if ($tipeHukums)
                                                 <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
                                             @endif

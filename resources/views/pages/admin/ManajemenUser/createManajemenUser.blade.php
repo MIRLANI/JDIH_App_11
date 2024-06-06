@@ -9,17 +9,19 @@
                 <form action="{{ route('tambahManajemen') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
+                        <label for="email" class="form-label">Alamat Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <small class="text-muted">Contoh: ilkom@gmail.com</small>
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Nama Pengguna <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="username" name="username" required>
+                        <small class="text-muted">Contoh: Ilmu Komputer</small>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Kata Sandi <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="password" name="password" required>
-
+                        <small class="text-muted">Minimal 8 karakter</small>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
