@@ -42,6 +42,9 @@
                             placeholder="Masukkan setiap poin catatan sebagai item list..." required></textarea>
                         <ul id="catatanList" class="mt-2"></ul>
                     </div>
+                    
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}" >
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>

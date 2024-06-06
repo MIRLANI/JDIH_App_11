@@ -12,6 +12,7 @@
                         <label for="nama" class="form-label">Tipe Paraturan</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
                     </div>
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>

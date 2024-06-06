@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
 
         
         $this->call([
-            TipeHukumSeeder::class,
             CategoryHukumSeeder::class,
             TahunSeeder::class,
             SubjekHukumSeeder::class,
             UserSeeder::class,
+            TipeHukumSeeder::class,
             ProductHukumSeeder::class,
             AbstrakHukumSeeder::class,
         ]);

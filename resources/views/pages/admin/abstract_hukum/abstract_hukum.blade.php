@@ -58,25 +58,47 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($AbstractHukums as $abstrak)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ optional($abstrak->productHukum)->nama }}</td>
-                                    <td> {{ $abstrak->title }}</td>
-                                    <td>
-                                        <div class="d-flex buttons">
-                                            <a href="{{ route('destroy.abstrack_hukum', ['id' => $abstrak->id]) }}"
-                                                class="btn icon btn-danger" title="Delete">
-                                                <i class="bi bi-trash "></i>
-                                            </a>
-                                            <a href="#" class="btn icon btn-primary" title="Update"
-                                                data-bs-toggle="modal" data-bs-target="#updateAbstractModal-{{ $abstrak->id }}">
-                                                <i class="bi bi-pencil "></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @if (Auth::user()->role== "admin")
+                                @foreach ($AbstractHukums as $abstrak)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ optional($abstrak->productHukum)->nama }}</td>
+                                        <td> {{ $abstrak->title }}</td>
+                                        <td>
+                                            <div class="d-flex buttons">
+                                                <a href="{{ route('destroy.abstrack_hukum', ['id' => $abstrak->id]) }}"
+                                                    class="btn icon btn-danger" title="Delete">
+                                                    <i class="bi bi-trash "></i>
+                                                </a>
+                                                <a href="#" class="btn icon btn-primary" title="Update"
+                                                    data-bs-toggle="modal" data-bs-target="#updateAbstractModal-{{ $abstrak->id }}">
+                                                    <i class="bi bi-pencil "></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach ($AbstractHukums->where('user_id', Auth::id()) as $abstrak)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ optional($abstrak->productHukum)->nama }}</td>
+                                        <td> {{ $abstrak->title }}</td>
+                                        <td>
+                                            <div class="d-flex buttons">
+                                                <a href="{{ route('destroy.abstrack_hukum', ['id' => $abstrak->id]) }}"
+                                                    class="btn icon btn-danger" title="Delete">
+                                                    <i class="bi bi-trash "></i>
+                                                </a>
+                                                <a href="#" class="btn icon btn-primary" title="Update"
+                                                    data-bs-toggle="modal" data-bs-target="#updateAbstractModal-{{ $abstrak->id }}">
+                                                    <i class="bi bi-pencil "></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

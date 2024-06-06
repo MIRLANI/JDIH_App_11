@@ -23,10 +23,10 @@ class TipeHukumController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'nama' => 'required|string|max:255|unique:tipe_hukums,nama', // Assuming 'name' is a field in TipeHukum. Adjust the field name and validation rules as necessary.
-                // Add other fields and validation rules as needed
+                'nama' => 'required|string|max:255|unique:tipe_hukums,nama', 
+                'user_id' => 'required', 
+
             ]);
-           
             TipeHukum::query()->create($validatedData);
             return response()->redirectToRoute("index.tipe_hukum")->with("message", "Add Successful");
         } catch (\Illuminate\Validation\ValidationException $e) {

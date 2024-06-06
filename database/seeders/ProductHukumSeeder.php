@@ -33,6 +33,7 @@ class ProductHukumSeeder extends Seeder
             //     "dicabut" => "dicabut oleh peraturan dek 2023",
             //     "mengubah" => "diubah oleh peraturan dek 2024"
             // ]),
+            "user_id" => 1
         ];
         $productHukum = ProductHukum::create($data1);
         $productHukum->save();
@@ -56,6 +57,7 @@ class ProductHukumSeeder extends Seeder
                 "dicabut" => "dicabut oleh peraturan dek 2023",
                 "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
+            "user_id" => 1
         ];
         $productHukums = ProductHukum::query()->create($data2);
         $productHukums->save();
@@ -79,6 +81,7 @@ class ProductHukumSeeder extends Seeder
                 "dicabut" => "dicabut oleh peraturan dek 2023",
                 "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
+            "user_id" => 1
         ];
         $productHukums = ProductHukum::query()->create($data3);
         $productHukums->save();
@@ -102,6 +105,7 @@ class ProductHukumSeeder extends Seeder
                 "dicabut" => "dicabut oleh peraturan dek 2023",
                 "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
+            "user_id" => 1
         ];
         $productHukums = ProductHukum::query()->create($data4);
         $productHukums->save();
@@ -125,6 +129,7 @@ class ProductHukumSeeder extends Seeder
                 "dicabut" => "dicabut oleh peraturan dek 2023",
                 "mengubah" => "diubah oleh peraturan dek 2024"
             ]),
+            "user_id" => 1
         ];
         $productHukums = ProductHukum::query()->create($data5);
         $productHukums->save();

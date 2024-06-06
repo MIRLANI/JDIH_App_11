@@ -21,19 +21,19 @@ class AuthController extends Controller
    {
 
       // digunakan untuk menyimpan mudahkan user supaya tidak memasukan lagi  datanya berulang kali
-      Session::flash("username", $request->input("username"));
+      Session::flash("email", $request->input("email"));
       Session::flash("password", $request->input("password"));
 
       // ketika Auth:attempt itu berhasil maka secara otomatis laravel akan dibuatkan session
       if (Auth::attempt([
-         "username" => $request->input("username"),
+         "email" => $request->input("email"),
          "password" => $request->input("password")
       ])) {
 
          return redirect()->route("dashboard")->with('success', 'Task Created Successfully!');
       } else {
        
-         return redirect()->route("getLogin")->with("message", "username atau password anda salah");
+         return redirect()->route("getLogin")->with("message", "email atau password anda salah");
       }
    }
 

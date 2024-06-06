@@ -49,46 +49,84 @@
                                 {{-- <th>Deskripsi</th> --}}
                                 <th>Judul</th>
                                 <th>Kategori</th>
-                                <th>Subjek</th>
+                                <th>Tag</th>
+                                <th>Sumber</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                           
+                            @if(Auth::user()->role == 'admin')
+                                @foreach ($productHukums as $productHukum)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td> {{ $productHukum->nama ?? '' }}</td>
+                                        {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
+                                        <td>{{ $productHukum->judul ?? '' }}</td>
+                                        <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
+                                        <td>
+                                            {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
+                                        </td>
+                                        <td>{{ $productHukum->tipeHukum->nama ?? '' }}</td>
+                                        <td>
+                                            <span @class([
+                                                'badge bg-danger' => $productHukum->status == 'tidak berlaku',
+                                                'badge bg-success' => $productHukum->status == 'berlaku',
+                                            ])>{{ $productHukum->status ?? 'Status Unknown' }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex buttons">
+                                                <a href="{{ route("destroy.product_hukum", ["id" => $productHukum->id]) }}"
+                                                    class="btn icon btn-danger" title="Delete" id="warning">
+                                                    <i class="bi bi-trash "></i>
+                                                </a>
+                                                <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
+                                                    class="btn icon btn-primary" title="Update">
+                                                    <i class="bi bi-pencil "></i>
+                                                </a>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach ($productHukums->where('user_id', Auth::user()->id) as $productHukum)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td> {{ $productHukum->nama ?? '' }}</td>
+                                        {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
+                                        <td>{{ $productHukum->judul ?? '' }}</td>
+                                        <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
+                                        <td>
+                                            {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
+                                        </td>
+                                        <td>{{ $productHukum->tipeHukum->nama ?? '' }}</td>
 
-                            @foreach ($productHukums as $productHukum)
-                              
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td> {{ $productHukum->nama ?? '' }}</td>
-                                    {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
-                                    <td>{{ $productHukum->judul ?? '' }}</td>
-                                    <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
-                                    <td>
-                                        {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
-                                    </td>
-                                    <td>
-                                        <span @class([
-                                            'badge bg-danger' => $productHukum->status == 'tidak berlaku',
-                                            'badge bg-success' => $productHukum->status == 'berlaku',
-                                        ])>{{ $productHukum->status ?? 'Status Unknown' }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex buttons">
-                                            <a href="{{ route("destroy.product_hukum", ["id" => $productHukum->id]) }}"
-                                                class="btn icon btn-danger" title="Delete" id="warning">
-                                                <i class="bi bi-trash "></i>
-                                            </a>
-                                            <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
-                                                class="btn icon btn-primary" title="Update">
-                                                <i class="bi bi-pencil "></i>
-                                            </a>
-                                            
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        <td>
+                                            <span @class([
+                                                'badge bg-danger' => $productHukum->status == 'tidak berlaku',
+                                                'badge bg-success' => $productHukum->status == 'berlaku',
+                                            ])>{{ $productHukum->status ?? 'Status Unknown' }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex buttons">
+                                                <a href="{{ route("destroy.product_hukum", ["id" => $productHukum->id]) }}"
+                                                    class="btn icon btn-danger" title="Delete" id="warning">
+                                                    <i class="bi bi-trash "></i>
+                                                </a>
+                                                <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
+                                                    class="btn icon btn-primary" title="Update">
+                                                    <i class="bi bi-pencil "></i>
+                                                </a>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

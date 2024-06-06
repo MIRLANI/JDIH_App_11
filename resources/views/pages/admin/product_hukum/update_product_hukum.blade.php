@@ -29,7 +29,7 @@
                 <div class="col-12 mt-3">
                     <div class="card ">
                         <div class="card-header">
-                            <a href="{{ route("index.product_hukum") }}" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="{{ route('index.product_hukum') }}" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
@@ -58,7 +58,7 @@
                                                     </div>
                                                 @enderror
                                                 <p class="small mt-2"><i>(Contoh: Paduan Penyusunan Skripsi)</i>
-                                               
+
                                                 </p>
                                             </div>
                                         </div>
@@ -75,15 +75,16 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo)</i>
+                                                <p class="small mt-2"><i>(Contoh: Keputusan Dekan Fakultas Matematika dan
+                                                        Ilmu Pengetahun Alam Universitas Halu Oleo)</i>
                                                 </p>
                                             </div>
                                         </div>
-                                       {{-- META DATA  --}}
+                                        {{-- META DATA  --}}
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Meta Data</b></h4>
                                         </div>
-                                        <div class="col-md-6 col-12 mt-3">
+                                        <div class="col-md-6 col-12 {{ Auth::user()->role == "user" ? "col-md-12" : "col-md-6"  }} mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" id="judul"
@@ -95,32 +96,39 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Penetapan Buku Paduan Penyusunana Skripsi Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam)</i>
+                                                <p class="small mt-2"><i>(Contoh: Penetapan Buku Paduan Penyusunana Skripsi
+                                                        Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam)</i>
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
-                                                <select id="tahun"
-                                                    class="form-control form-select @error('tipe_id') is-invalid @enderror"
-                                                    name="tipe_id">
-                                                    <option value="">Pilih Sumber Peraturan</option>
-                                                    @foreach ($tipeHukums as $tipe)
-                                                        <option value="{{ $tipe->id }}"
-                                                            {{ (old('tipe_id', $product_hukum->tipe_id) == $tipe->id) ? 'selected' : '' }}>
-                                                            {{ $tipe->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('tipe_id')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
-                                                </p>
+                                        @if (Auth::user()->role == 'admin')
+                                            <div class="col-md-6 col-12 mt-3">
+                                                <div class="form-group mandatory">
+                                                    <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
+                                                    <select id="tahun"
+                                                        class="form-control form-select @error('tipe_id') is-invalid @enderror"
+                                                        name="tipe_id">
+                                                        <option value="">Pilih Sumber Peraturan</option>
+                                                        @foreach ($tipeHukums as $tipe)
+                                                            <option value="{{ $tipe->id }}"
+                                                                {{ old('tipe_id', $product_hukum->tipe_id) == $tipe->id ? 'selected' : '' }}>
+                                                                {{ $tipe->nama }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('tipe_id')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                        </div>
+                                                    @enderror
+                                                    <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            @if ($tipeHukums)
+                                                <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
+                                            @endif
+                                        @endif
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
@@ -155,7 +163,7 @@
                                                         </div>
                                                     @enderror
 
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Perundang-Undangan)</i>
+                                                    <p class="small mt-2"><i>(Contoh: Peraturan Perundang-Undangan)</i>
 
 
                                                 </div>
@@ -166,15 +174,15 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
-                                                    <label class="form-label " for="subjek">Jenis Dokumen </label>
-                                                    <a href="{{ route("index.subjek_hukum") }}" class="icon btn-primary mb-2"
-                                                        title="Update Subjek Hukum">
+                                                    <label class="form-label " for="subjek">Tag  </label>
+                                                    <a href="{{ route('index.subjek_hukum') }}"
+                                                        class="icon btn-primary mb-2" title="Update Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                     <select
                                                         class="choices form-select multiple-remove m-0 @error('subjek') is-invalid @enderror"
                                                         multiple="multiple" name="subjek[]">
-                                                        <option value="">Pilih Jenis Dokumen</option>
+                                                        <option value="">Pilih Tag Dokumen</option>
                                                         <optgroup label="Figures">
                                                             @foreach ($subjek_hukums as $subjek)
                                                                 <option value="{{ $subjek->id }}"
@@ -188,7 +196,7 @@
                                                         </optgroup>
                                                     </select>
                                                     <p class="small "><i>(Contoh: Buku, Paduan, Modul)</i>
-                                                    @error('subjek[]')
+                                                        @error('subjek[]')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
@@ -197,7 +205,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                  
+
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun
@@ -206,7 +214,7 @@
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                 </label>
-                                
+
                                                 <select id="tahun"
                                                     class="form-control @error('tahun') is-invalid @enderror"
                                                     name="tahun_id">
@@ -235,7 +243,8 @@
                                             <div class="form-group mandatory">
                                                 <label class="form-label " for="tempat_penetapan">Tempat Penetapan
                                                 </label>
-                                                <input class="form-control @error('tempat_penetapan') is-invalid @enderror"
+                                                <input
+                                                    class="form-control @error('tempat_penetapan') is-invalid @enderror"
                                                     type="text" placeholder="Tempat Penetapan..."
                                                     data-parsley-required="true" name="tempat_penetapan"
                                                     id="tempat_penetapan"
@@ -250,9 +259,9 @@
                                             </div>
                                         </div>
 
-                                       
 
-                                      
+
+
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -559,7 +568,7 @@
                                             </div>
                                         </div>
 
-                                    
+
                                         <div class=" col-12 mt-3 mt-4">
                                             <div class="form-group ">
                                                 <input type="file" class="form-control form-control-sm"

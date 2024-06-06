@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::table('product_hukums', function (Blueprint $table) {
             $table->foreign("tipe_id")->on("tipe_hukums")->references("id");
         });
+
+        Schema::table('product_hukums', function (Blueprint $table) {
+            $table->foreign("user_id")->on("users")->references("id");
+        });
+
+        Schema::table('abstrak_hukums', function (Blueprint $table) {
+            $table->foreign("user_id")->on("users")->references("id");
+        });
     }
 
     /**

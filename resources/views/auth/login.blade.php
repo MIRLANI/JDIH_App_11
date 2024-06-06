@@ -43,13 +43,13 @@
                             @csrf
                             
                             <div class="form-group position-relative has-icon-left mb-4">
-                                <input type="text" name="username"
-                                    class="form-control form-control-xl @error('username') is-invalid @enderror"
-                                    placeholder="Username" value="{{ old('username') ?: session('username') }}">
+                                <input type="text" name="email"
+                                    class="form-control form-control-xl @error('email') is-invalid @enderror"
+                                    placeholder="Email" value="{{ old('email') ?: session('email') }}">
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
-                                @error('username')
+                                @error('email')
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                     </div>

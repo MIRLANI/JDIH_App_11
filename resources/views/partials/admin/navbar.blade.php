@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <b><a href="{{ route("dashboard") }}">JDIH FMIPA</a></b>
+                    <b><a href="{{ route('dashboard') }}">JDIH FMIPA</a></b>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -51,65 +51,71 @@
                     </a>
                 </li>
                 <hr>
-                <li class="sidebar-item {{ request()->routeIs('index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
+                <li
+                    class="sidebar-item {{ request()->routeIs('index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
                     <a href="{{ route('index.product_hukum') }}" class='sidebar-link'>
                         <i class="bi bi-journal-bookmark"></i>
                         <span>Peraturan</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('index.abstrack_hukum', 'store.abstrack_hukum','destroy.abstrack_hukum', 'update.abstrack_hukum' ) ? 'active' : '' }}">
+                <li
+                    class="sidebar-item {{ request()->routeIs('index.abstrack_hukum', 'store.abstrack_hukum', 'destroy.abstrack_hukum', 'update.abstrack_hukum') ? 'active' : '' }}">
                     <a href="{{ route('index.abstrack_hukum') }}" class='sidebar-link'>
                         <i class="bi bi-journal-text"></i>
                         <span>Abstrak Peraturan</span>
                     </a>
                 </li>
+                @if (Auth::user()->role == 'admin')
+                    <li
+                        class="sidebar-item  has-sub {{ request()->routeIs('index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'index.tipe_hukum') ? 'active' : '' }}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-hexagon-fill"></i>
+                            <span>Master Data </span>
+                        </a>
+                        <ul
+                            class="submenu {{ request()->routeIs('index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'index.tipe_hukum') ? 'active' : '' }}">
+                            <li class="submenu-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
+                                <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
+                                    <i class="bi bi-tags-fill"></i>
+                                    <span>Kategori</span>
+                                </a>
+                            </li>
+                            <li class="submenu-item {{ request()->routeIs('index.subjek_hukum') ? 'active' : '' }}">
+                                <a href="{{ route('index.subjek_hukum') }}" class='sidebar-link'>
+                                    <i>#</i>
+                                    <span>Tag</span>
+                                </a>
+                            </li>
+                            <li class="submenu-item {{ request()->routeIs('index.tahun_hukum') ? 'active' : '' }}">
+                                <a href="{{ route('index.tahun_hukum') }}" class='sidebar-link'>
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>Tahun</span>
+                                </a>
+                            </li>
 
-                <li
-                    class="sidebar-item  has-sub {{ request()->routeIs('index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'index.tipe_hukum') ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Master Data </span>
-                    </a>
-                    <ul
-                        class="submenu {{ request()->routeIs('index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'index.tipe_hukum') ? 'active' : '' }}">
-                        <li class="submenu-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-tags-fill"></i>
-                                <span>Kategori</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.subjek_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.subjek_hukum') }}" class='sidebar-link'>
-                                <i >#</i>
-                                <span>Tag</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.tahun_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.tahun_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-calendar3"></i>
-                                <span>Tahun</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.tipe_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.tipe_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-fill"></i>
-                                <span>Sumber</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                            <li class="submenu-item {{ request()->routeIs('index.tipe_hukum') ? 'active' : '' }}">
+                                <a href="{{ route('index.tipe_hukum') }}" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-fill"></i>
+                                    <span>Sumber</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <hr>
+
+                    <div class="submenu-item">
+                        <a href="{{ route('manejementUser') }}" class='sidebar-link'>
+                            <i class="bi bi-people-fill"></i>
+                            <span>Manajemen User</span>
+                        </a>
+                    </div>
+                @endif
                 <hr>
-                <li class="submenu-item">
-                    <a href="{{ route("manejementUser") }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Manajemen User</span>
-                    </a>
-                </li>
 
-
-                <hr>
+               {{ Auth::user()->username }}
                 <li class="sidebar-item mt-3">
-                    <a href="{{ route("logout") }}" class='sidebar-link'>
+                    <a href="{{ route('logout') }}" class='sidebar-link'>
                         <i class="bi bi-arrow-bar-right"></i>
                         <span>Logout</span>
                     </a>

@@ -13,6 +13,7 @@ use App\Http\Controllers\TahunController;
 use App\Http\Controllers\TipeHukumController;
 use App\Http\Controllers\TipePeraturanController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ManajemenUserMiddleware;
 use App\Http\Middleware\OnlyQuestMiddleware;
 use App\Models\TipePeraturan;
 use Illuminate\Support\Facades\File;
@@ -49,12 +50,7 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
 
     Route::get("/logout", [AuthController::class, "logout"])->name("logout");
     Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
-    Route::controller(CategoryHukumController::class)->group(function () {
-        Route::get("/category-peraturan",  "index")->name("index.category_hukum");
-        Route::post("/category-peraturan-add",  "store")->name("store.category_hukum");
-        Route::get("/category-peraturan-delete/{id}", "destroy")->name("destroy.category_hukum");
-        Route::post("/category-peraturan-update/{id}", "update")->name("update.category-hukum");
-    });
+   
 
     Route::controller(ProductHukumController::class)->group(function () {
         Route::get("/product-peraturan", "index")->name("index.product_hukum");
@@ -74,30 +70,39 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         Route::post("/abstract-peraturan-update/{id}", "update")->name("update.abstrack_hukum");
     });
 
-    Route::controller(SubjekHukumController::class)->group(function () {
-        Route::get("/subjek-peraturan", "index")->name("index.subjek_hukum");
-        Route::get("/subjek-peraturan-delete/{id}", "destroy")->name("delete.subjek_hukum");
-        Route::post("/subjek-peraturan-add", "store")->name("store.subjek_hukum");
-        Route::post("/subjek-peraturan-update/{id}", "update")->name("update.subjek-hukum");
-    });
+    Route::middleware(ManajemenUserMiddleware::class)->group(function () {
+        Route::controller(CategoryHukumController::class)->group(function () {
+            Route::get("/category-peraturan",  "index")->name("index.category_hukum");
+            Route::post("/category-peraturan-add",  "store")->name("store.category_hukum");
+            Route::get("/category-peraturan-delete/{id}", "destroy")->name("destroy.category_hukum");
+            Route::post("/category-peraturan-update/{id}", "update")->name("update.category-hukum");
+        });
+        Route::controller(SubjekHukumController::class)->group(function () {
+            Route::get("/subjek-peraturan", "index")->name("index.subjek_hukum");
+            Route::get("/subjek-peraturan-delete/{id}", "destroy")->name("delete.subjek_hukum");
+            Route::post("/subjek-peraturan-add", "store")->name("store.subjek_hukum");
+            Route::post("/subjek-peraturan-update/{id}", "update")->name("update.subjek-hukum");
+        });
 
-    Route::controller(TahunController::class)->group(function () {
-        Route::get("/tahun-peraturan", "index")->name("index.tahun_hukum");
-        Route::get("/tahun-peraturan-delete/{id}", "destroy")->name("destroy.tahun_hukum");
-        Route::post("/tahun-peraturan-update/{id}", "update")->name("update.tahun_hukum");
-        Route::post("/tahun-peraturan-add", "store")->name("store.tahun_hukum");
-    });
+        Route::controller(TahunController::class)->group(function () {
+            Route::get("/tahun-peraturan", "index")->name("index.tahun_hukum");
+            Route::get("/tahun-peraturan-delete/{id}", "destroy")->name("destroy.tahun_hukum");
+            Route::post("/tahun-peraturan-update/{id}", "update")->name("update.tahun_hukum");
+            Route::post("/tahun-peraturan-add", "store")->name("store.tahun_hukum");
+        });
 
-    Route::controller(TipeHukumController::class)->group(function () {
-        Route::get("/tipe-peraturan", "index")->name("index.tipe_hukum");
-        Route::post("/tipe-peraturan-update/{id}", "update")->name("update.tipe_hukum");
-        Route::get("/tipe-peraturan-delete/{id}", "destroy")->name("delete.tipe_hukum");
-        Route::post("/tipe-peraturan-add", "store")->name("store.tipe_hukum");
-    });
-
-    Route::controller(ManajemenUserController::class)->group(function(){
-        Route::get("/manajement-user", "manejementUser")->name("manejementUser");
-        Route::post("/manajement-user", "store")->name("tambaUser");
+        Route::controller(TipeHukumController::class)->group(function () {
+            Route::get("/sumber-peraturan", "index")->name("index.tipe_hukum");
+            Route::post("/sumber-peraturan-update/{id}", "update")->name("update.tipe_hukum");
+            Route::get("/sumber-peraturan-delete/{id}", "destroy")->name("delete.tipe_hukum");
+            Route::post("/sumber-peraturan-add", "store")->name("store.tipe_hukum");
+        });
+        Route::controller(ManajemenUserController::class)->group(function () {
+            Route::get("/manajement-user", "manejementUser")->name("manejementUser");
+            Route::post("/add-manajement-user", "store")->name("tambahManajemen");
+            Route::post("/update-manajement-user/{id}", "update")->name("updateManajemen");
+            Route::get("/delete-manajement-user/{id}", "delete")->name("deleteManajemen");
+        });
     });
 });
 
@@ -109,4 +114,3 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
 Route::fallback(function () {
     return response()->view("error.erro404");
 });
-

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('abstrak_hukums', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("produk_hukum_id")->nullable(false);
+            $table->unsignedBigInteger("user_id");
             $table->string("title")->nullable();
             $table->text("materi_pokok")->nullable();
             $table->text("abstrak")->nullable();

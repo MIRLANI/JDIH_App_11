@@ -186,8 +186,8 @@ class HomeController extends Controller
         if (($request->input('sumber'))) {
             // dd($request->input("sumber"));
             $sumber = $request->input('sumber');
-            $query->whereHas('categoryHukum', function ($q) use ($sumber) {
-                $q->where('title', $sumber);
+            $query->whereHas('tipeHukum', function ($q) use ($sumber) {
+                $q->where('nama', $sumber);
             });
 
             $anyCriteriaMatch = true;

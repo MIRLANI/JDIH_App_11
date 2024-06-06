@@ -67,14 +67,16 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo)</i>
+                                                <p class="small mt-2"><i>(Contoh: Keputusan Dekan Fakultas Matematika dan
+                                                        Ilmu Pengetahun Alam Universitas Halu Oleo)</i>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Meta Data</b></h4>
                                         </div>
-                                        <div class="col-md-6 col-12 mt-3">
+                                        <div
+                                            class="col-md-6 col-12 {{ Auth::user()->role == 'user' ? 'col-md-12' : 'col-md-6' }}  mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" id="judul"
@@ -86,32 +88,41 @@
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: Penetapan Buku Paduan Penyusunana Skripsi Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam)</i>
+                                                <p class="small mt-2"><i>(Contoh: Penetapan Buku Paduan Penyusunana Skripsi
+                                                        Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam)</i>
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
-                                                <select id="sumber"
-                                                    class="form-control @error('tipe_id') is-invalid @enderror"
-                                                    name="tipe_id">
-                                                    <option value="">Pilih Sumber Peraturan</option>
-                                                    @foreach ($tipeHukums as $tipe)
-                                                        <option value="{{ $tipe->id }}"
-                                                            {{ old('tipe_id') == $tipe->id ? 'selected' : '' }}>
-                                                            {{ $tipe->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('tipe_id')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
-                                                </p>
+
+                                        @if (Auth::user()->role == 'admin')
+                                            <div class="col-md-6 col-12 mt-3">
+                                                <div class="form-group mandatory">
+                                                    <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
+                                                    <select id="sumber"
+                                                        class="form-control @error('tipe_id') is-invalid @enderror"
+                                                        name="tipe_id">
+                                                        <option value="">Pilih Sumber Peraturan</option>
+                                                        @foreach ($tipeHukums as $tipe)
+                                                            <option value="{{ $tipe->id }}"
+                                                                {{ old('tipe_id') == $tipe->id ? 'selected' : '' }}>
+                                                                {{ $tipe->nama }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('tipe_id')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                        </div>
+                                                    @enderror
+                                                    <p class="small mt-2"><i>(Contoh: Peraturan Dekan)</i>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            @if ($tipeHukums)
+                                                <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
+                                            @endif
+                                        @endif
+
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -119,10 +130,12 @@
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Kategori Peraturan</label>
+                                                        @if (Auth::user()->role == 'admin')
                                                     <a href="{{ route('index.category_hukum') }}"
                                                         class="icon btn-primary mb-2" title="Tambah Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
+                                                    @endif
                                                     <select
                                                         class="form-control @error('category_hukum_id') is-invalid @enderror"
                                                         name="category_hukum_id" data-parsley-required="true">
@@ -139,7 +152,7 @@
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
                                                     @enderror
-                                                    <p class="small mt-2"><i>(Contoh:  Peraturan Perundang-Undangan)</i>
+                                                    <p class="small mt-2"><i>(Contoh: Peraturan Perundang-Undangan)</i>
 
 
                                                 </div>
@@ -150,16 +163,18 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
-                                                    <label class="form-label " for="subjek">Jenis Dokumen  </label>
-                                                    <a href="{{ route('index.subjek_hukum') }}"
-                                                        class="icon btn-primary mb-2" title="Tambah Subjek Hukum">
-                                                        <i class="bi bi-file-earmark-plus"></i>
-                                                    </a>
+                                                    <label class="form-label " for="subjek">Tag </label>
+                                                    @if (Auth::user()->role == 'admin')
+                                                        <a href="{{ route('index.subjek_hukum') }}"
+                                                            class="icon btn-primary mb-2" title="Tambah Subjek Hukum">
+                                                            <i class="bi bi-file-earmark-plus"></i>
+                                                        </a>
+                                                    @endif
                                                     <select
                                                         class="choices form-select multiple-remove @error('subjek') is-invalid @enderror"
                                                         multiple="multiple" name="subjek[]">
                                                         <optgroup label="Figures">
-                                                            <option value="">Pilih Jenis Dokumen </option>
+                                                            <option value="">Pilih Tag Dokumen </option>
                                                             @foreach ($subjek_hukums as $subjek)
                                                                 <option value="{{ $subjek->id }}"
                                                                     @if (old('subjek') && in_array($subjek->id, old('subjek'))) selected @endif>
@@ -174,7 +189,8 @@
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
                                                     @enderror
-                                                    <p class="small mt-2"><i>(Contoh:  Buku, Modul)</i>
+
+                                                    <p class="small mt-2"><i>(Contoh: Buku, Modul)</i>
                                                     </p>
                                                 </div>
                                             </div>
@@ -209,7 +225,8 @@
                                             <div class="form-group mandatory">
                                                 <label class="form-label " for="tempat_penetapan">Tempat Penetapan
                                                 </label>
-                                                <input class="form-control @error('tempat_penetapan') is-invalid @enderror"
+                                                <input
+                                                    class="form-control @error('tempat_penetapan') is-invalid @enderror"
                                                     type="text" placeholder="Tempat Penetapan..."
                                                     data-parsley-required="true" name="tempat_penetapan"
                                                     id="tempat_penetapan"
@@ -224,9 +241,9 @@
                                             </div>
                                         </div>
 
-                                       
 
-                                        
+
+
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="sumber">Jumlah Halaman </label>
@@ -386,7 +403,7 @@
                                             </div>
                                         </div>
 
-                                     
+
                                         {{-- status Hukum --}}
                                         <div class="mt-5"></div>
                                         <div class="mt-2">
@@ -486,6 +503,7 @@
                                                 class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                 </form>
                             </div>
                         </div>

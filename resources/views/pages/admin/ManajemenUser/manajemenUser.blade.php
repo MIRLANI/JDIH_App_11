@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Dashboard')
+@section('title', 'JDIH | Manajemen User')
 
 @section('content')
 
@@ -9,19 +9,27 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Peraturan</h3>
-                    <p class="text-subtitle text-muted">Daftar lengkap produk peraturan yang tersedia.</p>
+                    <h3>Manajemen User</h3>
+                    <p class="text-subtitle text-muted">Daftar Akun</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Peraturan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Manajemen Akun</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                       {{ $error }}
+                    @endforeach
+            
+            </div>
+        @endif
         @if (session('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
         @endif
@@ -42,6 +50,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Email</th>
                                 <th>Username</th>
                                 <th>Role</th>
                                 <th>Aksi</th>
@@ -51,11 +60,17 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary">Edit</a>
-                                        <a href="#" class="btn btn-danger">Delete</a>
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#editModal{{ $user->id }}" class="btn btn-primary"><i
+                                                class="bi bi-pencil"></i> </a>
+                                        <!-- Modal -->
+                                        @include('pages.admin.ManajemenUser.updateManajemenUser')
+
+                                        <a href="{{ route("deleteManajemen", ["id" => $user->id]) }}" class="btn btn-danger"><i class="bi bi-trash"></i> </a>
                                     </td>
                                 </tr>
                             @endforeach

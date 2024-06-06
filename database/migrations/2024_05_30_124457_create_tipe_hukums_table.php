@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('tipe_hukums', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
             $table->string("nama");
             $table->timestamps();
-         
+            $table->foreign("user_id")->references("id")->on("users");
         });
     }
 

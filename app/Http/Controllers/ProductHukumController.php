@@ -10,6 +10,7 @@ use App\Models\CategoryHukum;
 use App\Models\SubjekHukum;
 use App\Models\Tahun;
 use App\Models\TipeHukum;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -23,7 +24,8 @@ class ProductHukumController extends Controller
         $productHukums = ProductHukum::orderBy('created_at', 'desc')->get();
 
         return response()->view("pages.admin.product_hukum.produk_hukum", [
-            "productHukums" => $productHukums
+            "productHukums" => $productHukums,
+            "users" => User::query()->get()
         ]);
     }
 
@@ -36,7 +38,11 @@ class ProductHukumController extends Controller
         $categoryHukums = CategoryHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
         $tahuns = Tahun::query()->get();
-        $tipeHukums = TipeHukum::query()->get();
+        if (auth()->user()->role == 'admin') {
+            $tipeHukums = TipeHukum::query()->get();
+        } else {
+            $tipeHukums = TipeHukum::query()->where('user_id', auth()->id())->first();
+        }
         return response()->view("pages.admin.product_hukum.tambah_product_hukum", [
             "product_hukums" => $productHukums,
             "category_hukums" => $categoryHukums,
@@ -103,6 +109,11 @@ class ProductHukumController extends Controller
         $productHukums = ProductHukum::query()->get();
         $tahuns = Tahun::query()->get();
         $tipeHukums = TipeHukum::query()->get();
+        if (auth()->user()->role == 'admin') {
+            $tipeHukums = TipeHukum::query()->get();
+        } else {
+            $tipeHukums = TipeHukum::query()->where('user_id', auth()->id())->first();
+        }
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
             "product_hukums" => $productHukums,
             "subjek_hukums" => $subjekHukums,

@@ -26,26 +26,26 @@ class StoreProductHukumRequest extends FormRequest
             "nama" => ["required", 'unique:product_hukums,nama'],
             "deskripsi" => "required",
 
-          
             "tipe_id" => "required",
             "judul" => "required",
-            "tahun" => ["required", "numeric"],
+            "tahun_id" => ["required", "numeric"],
+            "category_hukum_id" => "required",
             "tempat_penetapan" => "required",
             "tanggal_penetapan" => "required",
             "tanggal_pengundangan" => "required",
             "tanggal_berlaku" => "required",
-            "category_hukum_id" => "required",
             "subjek" => ["required", "array", "min:1"],
             "sumber" => "required",
             "status" => "required",
             "bahasa" => "required",
             "lokasi" => "required",
             "teu" => "required",
-            "nomor" => "required",
-            // "file" => ["required", "file"],
+
+
+            // "nomor" => "required",
+            "file" => ["required",  "mimes:pdf"],
 
             
-            "persetujuan" => "required"
             
         ];
     }

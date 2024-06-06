@@ -52,7 +52,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tipe Peraturan</th>
+                                <th>Sumber Peraturan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

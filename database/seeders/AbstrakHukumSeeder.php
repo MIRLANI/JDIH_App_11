@@ -15,6 +15,7 @@ class AbstrakHukumSeeder extends Seeder
     {
         $data1 = [
             "produk_hukum_id" => "1",
+            "user_id" => 1,
             "title" => "PERATURAN DEKAN TENTANG KURIKULUM FAKULTAS MIPA",
             "materi_pokok" => "Peraturan ini mengatur kurikulum baru yang akan diterapkan di Fakultas MIPA mulai tahun ajaran 2024/2025.",
             "abstrak" => "Peraturan ini bertujuan untuk memperbarui dan menyelaraskan kurikulum Fakultas MIPA dengan perkembangan ilmu pengetahuan dan teknologi terkini. Kurikulum baru mencakup penambahan mata kuliah pilihan, peningkatan jumlah SKS untuk mata kuliah inti, dan penyempurnaan metode pembelajaran.
@@ -27,6 +28,7 @@ class AbstrakHukumSeeder extends Seeder
 
         $data2 = [
             "produk_hukum_id" => "2",
+            "user_id" => 1,
             "title" => "PERATURAN REKTOR TENTANG PENELITIAN DAN PENGABDIAN MASYARAKAT DI FAKULTAS MIPA",
             "materi_pokok" => "Peraturan ini mengatur prosedur dan standar untuk kegiatan penelitian dan pengabdian masyarakat yang dilakukan oleh dosen dan mahasiswa di Fakultas MIPA.",
             "abstrak" => "Peraturan ini bertujuan untuk memastikan bahwa kegiatan penelitian dan pengabdian masyarakat di Fakultas MIPA dilakukan dengan standar yang tinggi dan memberikan dampak positif bagi masyarakat. 
@@ -39,6 +41,7 @@ class AbstrakHukumSeeder extends Seeder
 
         $data3 = [
             "produk_hukum_id" => "3",
+            "user_id" => 1,
             "title" => "PERATURAN DEKAN TENTANG PENGGUNAAN LABORATORIUM FAKULTAS MIPA",
             "materi_pokok" => "Peraturan ini mengatur penggunaan dan pemeliharaan fasilitas laboratorium di Fakultas MIPA.",
             "abstrak" => "Peraturan ini bertujuan untuk memastikan bahwa fasilitas laboratorium di Fakultas MIPA digunakan secara optimal dan aman. 
@@ -51,6 +54,7 @@ class AbstrakHukumSeeder extends Seeder
 
         $data4 = [
             "produk_hukum_id" => "4",
+            "user_id" => 1,
             "title" => "PERATURAN DEKAN TENTANG BEASISWA FAKULTAS MIPA",
             "materi_pokok" => "Peraturan ini mengatur tata cara pemberian beasiswa bagi mahasiswa Fakultas MIPA yang berprestasi dan kurang mampu secara ekonomi.",
             "abstrak" => "Peraturan ini bertujuan untuk memberikan kesempatan kepada mahasiswa berprestasi dan kurang mampu secara ekonomi untuk mendapatkan beasiswa di Fakultas MIPA. 
@@ -63,6 +67,7 @@ class AbstrakHukumSeeder extends Seeder
 
         $data5 = [
             "produk_hukum_id" => "5",
+            "user_id" => 1,
             "title" => "PERATURAN REKTOR TENTANG KODE ETIK DOSEN DAN MAHASISWA FAKULTAS MIPA",
             "materi_pokok" => "Peraturan ini mengatur kode etik yang harus diikuti oleh dosen dan mahasiswa di Fakultas MIPA.",
             "abstrak" => "Peraturan ini bertujuan untuk menjaga integritas dan profesionalisme dosen dan mahasiswa di Fakultas MIPA. 

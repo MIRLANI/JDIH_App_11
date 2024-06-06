@@ -7,12 +7,12 @@
         </div>
     </div>
     <hr class="mt-0 mx-auto" style="width: 95%;">
-    <div class="card-body mx-2">
+    <div class="card-body ">
         <table class="table table-hover table-striped">
 
             <tbody>
                 <tr>
-                    <th scope="row">Tipe Dokumen</th>
+                    <th scope="row">Sumber Peraturan</th>
                     <td>{{ $produkHukum->tipeHukum->nama ?? '-' }}</td>
                 </tr>
                 <tr>
@@ -60,8 +60,8 @@
                     <td>{{ $produkHukum->tanggal_berlaku ? $produkHukum->tanggal_berlaku : '-' }}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Sumber Dokumen</th>
-                    <td>{{ optional($produkHukum->categoryHukum)->short_title ?? '-' }}  {{ $produkHukum->sumber ? $produkHukum->sumber : '-' }}</td>
+                    <th scope="row">Jumlah Halaman</th>
+                    <td>{{ $produkHukum->sumber ? $produkHukum->sumber : '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Subjek</th>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Subjek Hukum')
+@section('title', 'JDIH | Tag Peraturan')
 
 @section('content')
     <div class="page-heading">

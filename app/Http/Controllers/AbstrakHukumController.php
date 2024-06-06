@@ -14,7 +14,7 @@ class AbstrakHukumController extends Controller
     public function index(): Response
     {
         $abstrakHukums = AbstrakHukum::query()->get();
-        $produkHukum = ProductHukum::doesntHave('abstrakHukum')->get();
+        $produkHukum = auth()->user()->role == 'admin' ? ProductHukum::doesntHave('abstrakHukum')->get() : ProductHukum::where('user_id', auth()->id())->doesntHave('abstrakHukum')->get();
         return response()->view("pages.admin.abstract_hukum.abstract_hukum", [
             "AbstractHukums" => $abstrakHukums,
             "produkHukum" => $produkHukum
@@ -22,13 +22,6 @@ class AbstrakHukumController extends Controller
     }
 
   
-    public function create(): Response
-    {
-        $produkHukum = ProductHukum::doesntHave('abstrakHukum')->get();
-        return response()->view("pages.admin.abstract_hukum.tambah_abstract_hukum", [
-            "produkHukum" => $produkHukum
-        ]);
-    }
 
    
     public function store(StoreAbstrakHukumRequest $request)
