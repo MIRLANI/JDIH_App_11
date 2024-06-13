@@ -5,12 +5,13 @@
 @section('content')
 
     <section id="multiple-column-form" class="full-background"
-        style="background-image: url('{{ asset('images/fmipa_uho.jpg') }}'); background-size: cover; background-color: rgba(0,0,0,0.7); background-blend-mode: darken; background-position: center;">
-        <div class="row match-height">
-            <div class="col-11 mx-auto">
-                <div class="d-flex justify-content-between align-items-center my-5">
-                    <h2 class="mb-0 mx-5" style="color: white;">Tahun Peraturan</h2>
-
+        style="background-image: url('{{ asset('images/fmipa_uho.jpg') }}'); background-size: cover; background-color: rgba(0,0,0,0.7); background-blend-mode: darken; background-position: center; background-attachment: fixed; width: 100%;">
+        <div class="container">
+            <div class="row match-height">
+                <div class="col-11 mx-auto">
+                    <div class="d-flex justify-content-between align-items-center my-5">
+                        <h2 class="mb-0 mx-5" style="color: white;">Tahun Peraturan</h2>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,7 +24,7 @@
     @endphp
 
     @foreach ($groupedYears as $group => $years)
-        <div class="card w-75 mx-auto my-5 text-center">
+        <div class="card w-75 mx-auto my-5 text-center container">
             <div class="card-body" style="border-radius: 20px; color: black;">
                 <h1 class="card-title" style="color: black;"><b>{{ $group }} - {{ $group + 3 }}</b></h1>
                 @foreach ($years as $year)

@@ -38,14 +38,14 @@
             <div class="card">
                 <div class="card-header my-3">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
+                    {{-- <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
                         data-bs-target="#addTipeModal">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
-                    </button>
+                    </button> --}}
 
                     <!-- Modal -->
-                    @include('pages.admin.tipe_hukum.create_tipe_hukum')
+                    {{-- @include('pages.admin.tipe_hukum.create_tipe_hukum') --}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">

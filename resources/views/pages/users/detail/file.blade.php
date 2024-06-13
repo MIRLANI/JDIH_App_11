@@ -22,12 +22,30 @@
         </div>
 
        
+        <!-- Modal -->
+        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header p-4">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Tampilkan file PDF disini -->
+                        @if($produkHukum->id && $produkHukum->file)
+                            <iframe style="width: 100%; height: 800px;" src="{{ route('review', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}#toolbar=0"></iframe>
+                        @endif                                              
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
         <div class="d-flex justify-content-center  gap-5">
             @if($produkHukum->file && $produkHukum->id)
-                <a href="{{ route("review", ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}" target="_blank" class="btn btn-primary px-4">
+                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#pdfModal">
                     <i class="bi bi-eye-fill me-2"></i>Preview
-                </a>
+                </button>
                 <a href="{{ route('download', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}" class="btn btn-primary px-4">
                     <i class="bi bi-download me-2"></i>Download
                 </a>

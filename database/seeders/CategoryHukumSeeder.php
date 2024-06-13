@@ -14,6 +14,11 @@ class CategoryHukumSeeder extends Seeder
     public function run(): void
     {
         $categoryHukum = CategoryHukum::query()->create([
+            "title" => "Peraturan Perundang-Undangan",
+            "short_title" => "UU",
+        ]);
+        $categoryHukum->save();
+        $categoryHukum = CategoryHukum::query()->create([
             "title" => "Peraturan Dekan FMIPA",
             "short_title" => "Peraturan Dekan",
         ]);
@@ -55,35 +60,15 @@ class CategoryHukumSeeder extends Seeder
         ]);
         $categoryHukum->save();
         
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" => "Instruksi Dekan",
-            "short_title" => "Instruksi Dekan",
-        ]);
-        $categoryHukum->save();
-        
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" => "Instruksi Rektor",
-            "short_title" => "Instruksi Rektor",
-        ]);
-        $categoryHukum->save();
-        
+ 
+ 
         $categoryHukum = CategoryHukum::query()->create([
             "title" => "Prosedur Operasional Standar",
             "short_title" => "POS",
         ]);
         $categoryHukum->save();
         
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" => "Petunjuk Teknis",
-            "short_title" => "Juknis",
-        ]);
-        $categoryHukum->save();
-        
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" => "Petunjuk Pelaksanaan",
-            "short_title" => "Juklak",
-        ]);
-        $categoryHukum->save();
+
         
         $categoryHukum = CategoryHukum::query()->create([
             "title" => "Pedoman Akademik",
@@ -103,11 +88,6 @@ class CategoryHukumSeeder extends Seeder
         ]);
         $categoryHukum->save();
         
-        $categoryHukum = CategoryHukum::query()->create([
-            "title" => "Nota Dinas",
-            "short_title" => "Nota Dinas",
-        ]);
-        $categoryHukum->save();
         
         $categoryHukum = CategoryHukum::query()->create([
             "title" => "Peraturan Akademik",

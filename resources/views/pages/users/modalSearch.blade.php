@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal abstrak-->
 <div class="modal fade text-left" id="modal-{{ $hukum->id }}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel17" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
@@ -47,6 +47,26 @@
                     </div>
                    
                 </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Modal review dokumen -->
+
+  <div class="modal fade" id="modalpdf-{{ $hukum->id }}" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header p-4">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Tampilkan file PDF disini -->
+                @if($hukum->id && $hukum->file)
+                    <iframe style="width: 100%; height: 800px;" src="{{ route('review', ['id' => $hukum->id, 'file' => $hukum->file]) }}#toolbar=0"></iframe>
+                @endif                                              
+            </div>
         </div>
     </div>
 </div>

@@ -14,34 +14,34 @@ class SubjekHukumSeeder extends Seeder
     public function run(): void
     {
       SubjekHukum::query()->create([
-         "nama" => "TATA TERTIB AKADEMIK"
+         "nama" => "Tata Tertib Akademik"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "KODE ETIK MAHASISWA"
+         "nama" => "Kode Etik Mahasiswa"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PELAKSANAAN PRAKTIKUM"
+         "nama" => "Pelaksanaan Praktikum"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "TATA CARA UJIAN AKHIR"
+         "nama" => "Tata Cara Ujian Akhir"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PENULISAN SKRIPSI"
+         "nama" => "Penulisan Skripsi"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PENGELOLAAN LABORATORIUM"
+         "nama" => "Pengelolaan Laboratorium"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "KEGIATAN KEMAHASISWAAN"
+         "nama" => "Kegiatan Kemahasiswaan"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PENILAIAN AKADEMIK"
+         "nama" => "Penilaian Akademik"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PEMBIMBINGAN AKADEMIK"
+         "nama" => "Pembimbingan Akademik"
      ]);
      SubjekHukum::query()->create([
-         "nama" => "PENANGANAN KASUS PELANGGARAN"
+         "nama" => "Penanganan Kasus Pelanggaran"
      ]);
      
     }

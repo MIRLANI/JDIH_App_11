@@ -18,8 +18,11 @@
     </div>
     
     <div id="app">
-        @include('partials.admin.navbar')
-
+        @if (Auth::user()->role == 'admin')
+            @include('partials.admin.navbar')
+        @else
+            @include('partials.admin.navbarProdik')
+        @endif
         <div id="main" class='layout-navbar'>
             @include('partials.admin.header')
             {{-- <header class="mb-3">

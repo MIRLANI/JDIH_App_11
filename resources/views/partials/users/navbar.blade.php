@@ -1,5 +1,5 @@
 <header class="mt-0">
-    <nav class="main-navbar" style=" width: 100%; top: 0; z-index: 1000; background-color: rgb(135, 25, 25)">
+    <nav class="main-navbar" style="position: fixed; width: 100%; top: 0; z-index: 1000; background-color: rgb(135, 25, 25)">
         <div class="container">
             <div class="navbar-header" style="display: flex; align-items: center;">
                 <a href="{{ route('home') }}" class="navbar-brand" style="flex-grow: 1;">
@@ -40,45 +40,49 @@
 </header>
 
 
-<button class="btn p-2 m-1 mb-5 d-md-none float-end" data-bs-toggle="modal" data-bs-target="#navbarModal">
-    <i class="bi bi-list" style="font-size: 24px;"></i>
-</button>
-<div class="modal fade" id="navbarModal" tabindex="-1" aria-labelledby="navbarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:rgb(135, 25, 25); color: #fff; padding: 10px; border-bottom: 1px solid #333;">
-                <h5 class="modal-title" id="navbarModalLabel" style="font-weight: bold; color: #fff;">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #fff; border: none; padding: 5px; font-size: 18px;"></button>
-            </div>
-            <div class="modal-body" style="padding: 20px;">
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px;" class="m-3">
-                        <a href="{{ route('home') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
-                            Beranda
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;"  class="m-3">
-                        <a href="{{ route('subjek') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
-                            Jenis
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;"  class="m-3">
-                        <a href="{{ route('sumber') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
-                            Sumber
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;"  class="m-3">
-                        <a href="{{ route('tahun') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
-                            Tahun
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;"  class="m-3">
-                        <a href="{{ route('getLogin') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
-                            <i class="bi bi-box-arrow-in-right" style="font-size: 20px; margin-right: 5px;"></i> Login
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+<div class="offcanvas offcanvas-end d-md-none" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
+    <div class="offcanvas-header" style="padding: 10px;">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="padding: 5px; font-size: 18px;"></button>
+    </div>
+    <div class="offcanvas-body" style="padding: 20px; background-color: transparent;">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 10px;" class="m-3">
+                <a href="{{ route('home') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
+                    <span style="font-weight: bold;">Beranda</span>
+                </a>
+            </li>
+            <li style="margin-bottom: 10px;" class="m-3">
+                <a href="{{ route('subjek') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
+                    <span style="font-weight: bold;">Jenis</span>
+                </a>
+            </li>
+            <li style="margin-bottom: 10px;" class="m-3">
+                <a href="{{ route('sumber') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
+                    <span style="font-weight: bold;">Sumber</span>
+                </a>
+            </li>
+            <li style="margin-bottom: 10px;" class="m-3">
+                <a href="{{ route('tahun') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
+                    <span style="font-weight: bold;">Tahun</span>
+                </a>
+            </li>
+            <li style="margin-bottom: 10px;" class="m-3">
+                <a href="{{ route('getLogin') }}" class='menu-link' style="text-decoration: none; color: #333; font-weight: bold;">
+                    <i class="bi bi-box-arrow-in-right" style="font-size: 20px; margin-right: 5px;"></i> <span style="font-weight: bold;">Login</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
+
+
+
+<div class="modal-footer" style="background-color:rgb(135, 25, 25); padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+    <img src="{{ asset('images/logo-mipa.png') }}" alt="MIPA Logo" style="height: 30px;">
+    <a href="#" class="btn p-1 m-1 d-md-none" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas">
+        <i class="bi bi-list" style="font-size: 24px;"></i> 
+    </a>
+</div>
+
+

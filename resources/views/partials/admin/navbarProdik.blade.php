@@ -51,63 +51,38 @@
                     </a>
                 </li>
                 <hr>
-               
-                <li class="sidebar-item">
-                    <a href="{{ route('manejementUser') }}" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Manajemen User</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ request()->routeIs('index.tipe_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.tipe_hukum') }}" class='sidebar-link'>
-                        <i class="bi bi-folder-fill"></i>
-                        <span>Sumber</span>
-                    </a>
-                </li>
-                <hr>
                 <li
-                    class="sidebar-item  has-sub {{ request()->routeIs('index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Master Data </span>
+                    class="sidebar-item {{ request()->routeIs('index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
+                    <a href="{{ route('index.product_hukum') }}" class='sidebar-link'>
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Peraturan</span>
                     </a>
-                    <ul
-                        class="submenu {{ request()->routeIs('index.abstrack_hukum', 'index.product_hukum', 'index.category_hukum', 'index.subjek_hukum', 'index.tahun_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
-                        <li
-                            class="submenu-item {{ request()->routeIs('index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.product_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-journal-bookmark"></i>
-                                <span>Peraturan</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.abstrack_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.abstrack_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-journal-text"></i>
-                                <span>Abstrak</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-tags-fill"></i>
-                                <span>Kategori</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.subjek_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.subjek_hukum') }}" class='sidebar-link'>
-                                <i>#</i>
-                                <span>Tag</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item {{ request()->routeIs('index.tahun_hukum') ? 'active' : '' }}">
-                            <a href="{{ route('index.tahun_hukum') }}" class='sidebar-link'>
-                                <i class="bi bi-calendar3"></i>
-                                <span>Tahun</span>
-                            </a>
-                        </li>
+                </li>
+                <li
+                    class="sidebar-item {{ request()->routeIs('index.abstrack_hukum', 'store.abstrack_hukum', 'destroy.abstrack_hukum', 'update.abstrack_hukum') ? 'active' : '' }}">
+                    <a href="{{ route('index.abstrack_hukum') }}" class='sidebar-link'>
+                        <i class="bi bi-journal-text"></i>
+                        <span>Abstrak Peraturan</span>
+                    </a>
+                </li>
 
-
-
-                    </ul>
+                <li class="sidebar-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
+                    <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
+                        <i class="bi bi-tags-fill"></i>
+                        <span>Kategori</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('index.subjek_hukum') ? 'active' : '' }}">
+                    <a href="{{ route('index.subjek_hukum') }}" class='sidebar-link'>
+                        <i>#</i>
+                        <span>Tag</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->routeIs('index.tahun_hukum') ? 'active' : '' }}">
+                    <a href="{{ route('index.tahun_hukum') }}" class='sidebar-link'>
+                        <i class="bi bi-calendar3"></i>
+                        <span>Tahun</span>
+                    </a>
                 </li>
                 <hr>
 

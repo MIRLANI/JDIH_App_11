@@ -84,7 +84,8 @@
                                         <div class="mt-2">
                                             <h4 class="card-title"><b>Meta Data</b></h4>
                                         </div>
-                                        <div class="col-md-6 col-12 {{ Auth::user()->role == "user" ? "col-md-12" : "col-md-6"  }} mt-3">
+                                        <div
+                                            class="col-md-6 col-12 {{ Auth::user()->role == 'user' ? 'col-md-12' : 'col-md-6' }} mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" id="judul"
@@ -125,7 +126,6 @@
                                                 </div>
                                             </div>
                                         @else
-                                     
                                             @if ($tipeHukums)
                                                 <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
                                             @endif
@@ -175,7 +175,7 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
-                                                    <label class="form-label " for="subjek">Tag  </label>
+                                                    <label class="form-label " for="subjek">Tag </label>
                                                     <a href="{{ route('index.subjek_hukum') }}"
                                                         class="icon btn-primary mb-2" title="Update Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
@@ -551,23 +551,41 @@
                                         <div class="col-md-12 col-12 mt-3">
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">File Old </label>
-                                                <div class="form-group">
-                                                    @if ($product_hukum->file)
-                                                        <div
-                                                            style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
-                                                            <iframe
-                                                                src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}"
-                                                                style="width:100%; height:500px;" frameborder="0">
-                                                                This browser does not support PDFs. Please download the PDF
-                                                                to view it: <a
-                                                                    href="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}">Download
-                                                                    PDF</a>.
-                                                            </iframe>
-                                                        </div>
-                                                    @endif
+                                                <!-- Button to Open Modal -->
+                                                <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"
+                                                    data-bs-target="#pdfModal">
+                                                    Open File Pdf
+                                                </button>
+                                            </div>
+                                        </div>
+
+                 
+                                        <!-- Modal -->
+                                        <div class="modal fade modal-xl" id="pdfModal" tabindex="-1"
+                                            aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                <div class="modal-content ">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="pdfModalLabel">PDF Preview</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Tampilkan file PDF disini -->
+                                                        <iframe style="width: 100%; height: 600px;"
+                                                            src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}"
+                                                            style="width:100%; height:500px;" frameborder="0">
+                                                        </iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
 
 
                                         <div class=" col-12 mt-3 mt-4">
@@ -601,5 +619,9 @@
 
 
     </div>
+
+
+
+
 
 @endsection

@@ -106,3 +106,22 @@
     chartVisitorsProfile.render();
     chartProfileVisit.render();
 </script>
+
+
+{{-- kode untuk pengaturan navbar user --}}
+
+
+<script>
+    function handleResize() {
+        const offcanvas = document.getElementById('navbarOffcanvas');
+        if (window.innerWidth >= 768) {
+            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
+            if (bsOffcanvas) {
+                bsOffcanvas.hide();
+            }
+        }
+    }
+
+    window.addEventListener('resize', handleResize);
+    document.addEventListener('DOMContentLoaded', handleResize);
+</script>

@@ -16,16 +16,22 @@
     </div>
 </section>
 
-
-
-
-
-
-
-<div class="col-11 my-5">
-    <h4 class="fw-bold text-center">PENCARIAN PERATURAN</h4>
-    <p class="mb-0 text-center">Kriteria: Tentang: <strong>{{ request()->get('keyword') }}</strong></p>
+<div class="d-flex justify-content-center my-5">
+    <div class="col-11 text-center">
+        <h4 class="fw-bold mb-3">PENCARIAN PERATURAN</h4>
+        <p class="mb-1">Kriteria Pencarian:</p>
+        <div class="d-inline-block text-start">
+            @foreach (['keyword' => 'Keyword', 'tentang' => 'Tentang', 'sumber' => 'Sumber', 'tahun' => 'Tahun', 'tag' => 'Tag'] as $key => $label)
+                @if (request()->get($key))
+                    <p class="mb-1">{{ $label }}:
+                        <strong>{{ is_array(request()->get($key)) ? implode(', ', request()->get($key)) : request()->get($key) }}</strong>
+                    </p>
+                @endif
+            @endforeach
+        </div>
+    </div>
 </div>
+
 
 @if ($produkHukum->isNotEmpty())
     @foreach ($produkHukum as $hukum)
@@ -74,66 +80,85 @@
                     @endif
                 @endforeach
                 <hr class="my-2">
-                <div class="d-flex justify-content-between align-items-center mx-1">
-                    <div class="d-flex align-items-center">
+                <div class="d-flex justify-content-between align-items-center mx-1 flex-wrap">
+                    <div class="d-flex align-items-center mb-2 mb-md-0">
                         @if ($hukum->file)
-                            <a class="btn btn-light-secondary px-2 mx-1"
+                            <a class="btn btn-primary d-flex align-items-center me-2 flex-grow-1 flex-md-grow-0"
                                 href="{{ route('download', ['id' => $hukum->id, 'file' => $hukum->file]) }}"
-                                title="Download">Download
-                                <i class="bi bi-download"></i>
+                                title="Download">
+                                <i class="bi bi-download pb-4 me-2"></i>
+                                <span>Download</span>
                             </a>
-                            <a class="btn btn-light-secondary px-2 mx-1"
-                                href="{{ route('review', ['id' => $hukum->id, 'file' => $hukum->file]) }}"
-                                target="_blank">Review
-                                <i class="bi bi-eye"></i>
-                            </a>
-                        @else
-                            <button class="btn btn-light-secondary px-2 mx-1 disabled" title="Download"
-                                disabled>Download
-                                <i class="bi bi-download"></i>
+
+                            <button type="button"
+                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0"
+                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}">
+                                <i class="bi bi-eye-fill pb-4 me-2"></i>
+                                <span>Preview</span>
                             </button>
-                            <button class="btn btn-light-secondary px-2 mx-1 disabled" disabled>Review
-                                <i class="bi bi-eye"></i>
+                        @else
+                            <a class="btn btn-primary d-flex align-items-center me-2 flex-grow-1 flex-md-grow-0 disabled"
+                                href="#"
+                                title="Download">
+                                <i class="bi bi-download pb-4 me-2"></i>
+                                <span>Download</span>
+                            </a>
+
+                            <button type="button"
+                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0 disabled"
+                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}" disabled>
+                                <i class="bi bi-eye-fill pb-4 me-2"></i>
+                                <span>Preview</span>
                             </button>
                         @endif
                     </div>
-                    <button type="button" class="btn btn-light-secondary px-2 mx-1 " data-bs-toggle="modal"
-                    data-bs-target="#modal-{{ $hukum->id }}">
-                        Abstrak <i class="bi bi-info-circle"></i>
-                    </button>
+                    <div class="d-flex align-items-center mb-2 mb-md-0">
+                        <button type="button"
+                            class="btn btn-light-secondary px-2 mx-1 d-flex align-items-center justify-content-center"
+                            data-bs-toggle="modal" data-bs-target="#modal-{{ $hukum->id }}"
+                            style="width: 100%; max-width: 200px;">
+                            <i class="bi bi-info-circle pb-4 me-2"></i> <span>Abstrak</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     @endforeach
 @else
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning text-center mx-auto my-3" role="alert" style="max-width: 600px; font-size: 1rem;">
+        <i class="bi bi-exclamation-triangle-fill me-2" style="font-size: 1.2rem;"></i>
         Data tidak ditemukan
     </div>
 @endif
 
-<div class="card-body text-center">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center pagination-primary">
-            @if ($produkHukum->previousPageUrl())
-                <li class="page-item mx-1">
-                    <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}">Prev</a>
-                </li>
-            @endif
 
-            @foreach ($produkHukum->getUrlRange(1, $produkHukum->lastPage()) as $page => $url)
-                @if ($page >= $produkHukum->currentPage() - 2 && $page <= $produkHukum->currentPage() + 2)
-                    <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
-                        <a class="page-link" href="{{ $url }}" data-url="{{ $url }}">{{ $page }}</a>
+
+{{-- kodisi pagination --}}
+@if ($produkHukum->total() > 5)
+    <div class="card-body text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center pagination-primary">
+                @if ($produkHukum->previousPageUrl())
+                    <li class="page-item mx-1">
+                        <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}">Prev</a>
                     </li>
                 @endif
-            @endforeach
 
-            @if ($produkHukum->nextPageUrl())
-                <li class="page-item mx-1">
-                    <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}">Next</a>
-                </li>
-            @endif
-        </ul>
-    </nav>
-</div>
+                @foreach ($produkHukum->getUrlRange(1, $produkHukum->lastPage()) as $page => $url)
+                    @if ($page >= $produkHukum->currentPage() - 2 && $page <= $produkHukum->currentPage() + 2)
+                        <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}"
+                                data-url="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endif
+                @endforeach
 
+                @if ($produkHukum->nextPageUrl())
+                    <li class="page-item mx-1">
+                        <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}">Next</a>
+                    </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
+@endif

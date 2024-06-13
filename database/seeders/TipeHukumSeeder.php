@@ -14,38 +14,50 @@ class TipeHukumSeeder extends Seeder
     public function run(): void
     {
 
-        $tipe = [
-            "nama" => "Admin",
-            "user_id" => 1
-        ];
+        // $tipe = [
+        //     "nama" => "Admin",
+        //     "user_id" => 1
+        // ];
 
-        $tipe = [
-            "nama" => "Matematika",
-            "user_id" => 2
-        ];
-
-        $tipe5 = TipeHukum::query()->create([
-            "nama" => "Ilmu Komputer",
-            "user_id" => 3
-        ]);
-        $tipe5->save();
-
-        $create = TipeHukum::query()->create($tipe);
-        $create->save();
+        // $create = TipeHukum::query()->create($tipe);
+        // $create->save();
         
+      
+
+        $tipe1 = TipeHukum::query()->create([
+            "nama" => "Ilmu Komputer",
+            "user_id" => 2
+        ]);
+        $tipe1->save();
+
         $tipe2 = TipeHukum::query()->create([
-            "nama" => "Fisika",
-            "user_id" => 4
+            "nama" => "metematika",
+            "user_id" => 3
         ]);
         $tipe2->save();
 
         $tipe3 = TipeHukum::query()->create([
-            "nama" => "Kimia",
-            "user_id" => 5
+            "nama" => "biologi",
+            "user_id" => 4
         ]);
         $tipe3->save();
 
+
+        $tipe4 = TipeHukum::query()->create([
+            "nama" => "fisika",
+            "user_id" => 5
+        ]);
+        $tipe4->save();
         
+        $tipe5 = TipeHukum::query()->create([
+            "nama" => "kimia",
+            "user_id" => 6
+        ]);
+        $tipe5->save();
+      
+
+        
+ 
 
      
 
