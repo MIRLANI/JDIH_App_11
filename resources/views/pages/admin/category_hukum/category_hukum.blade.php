@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'JDIH | Katagori Hukum')
+@section('title', 'JDIH | Kategori Hukum')
 
 @section('content')
 
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Kategori Peraturan</h3>
-                    <p class="text-subtitle text-muted">Daftar sumber yang terlibat dalam peraturan hukum.</p>
+                    <p class="text-subtitle text-muted">Daftar kategori yang terlibat dalam peraturan hukum.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -80,6 +80,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        
                                         <td>
                                             <form action="{{ route('update.category-hukum', ['id' => $katagori->id]) }}"
                                                 method="POST">
@@ -103,6 +104,13 @@
                                                 class="btn icon btn-danger" title="Delete">
                                                 <i class="bi bi-trash"></i>
                                             </a>
+                                        </td>
+                                        {{-- memudahkan pencarian data  --}}
+                                        <td style="display: none;">
+                                            {{ $katagori->title }}
+                                        </td>
+                                        <td style="display: none;">
+                                            {{ $katagori->short_title }}
                                         </td>
                                     </tr>
                                 @endif

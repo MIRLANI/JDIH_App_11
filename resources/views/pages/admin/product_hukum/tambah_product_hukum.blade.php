@@ -130,12 +130,12 @@
                                                     <label
                                                         class="form-label @error('category_hukum_id') is-invalid @enderror"
                                                         for="sumber">Kategori Peraturan</label>
-                                                        @if (Auth::user()->role == 'admin')
+                                                       
                                                     <a href="{{ route('index.category_hukum') }}"
                                                         class="icon btn-primary mb-2" title="Tambah Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
-                                                    @endif
+                                                    
                                                     <select
                                                         class="form-control @error('category_hukum_id') is-invalid @enderror"
                                                         name="category_hukum_id" data-parsley-required="true">
@@ -164,12 +164,12 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Tag </label>
-                                                    @if (Auth::user()->role == 'admin')
+                                                    
                                                         <a href="{{ route('index.subjek_hukum') }}"
                                                             class="icon btn-primary mb-2" title="Tambah Subjek Hukum">
                                                             <i class="bi bi-file-earmark-plus"></i>
                                                         </a>
-                                                    @endif
+
                                                     <select
                                                         class="choices form-select multiple-remove @error('subjek') is-invalid @enderror"
                                                         multiple="multiple" name="subjek[]">

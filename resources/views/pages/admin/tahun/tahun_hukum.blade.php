@@ -77,6 +77,9 @@
                                                 </div>
                                             </form>
                                         </td>
+                                        <td style="display: none;">
+                                            {{ $tahun->tahun }}
+                                        </td>
                                         <td>
                                             <a href="{{ route("destroy.tahun_hukum", ["id" => $tahun->id])  }}" class="btn icon btn-danger"
                                                 title="Delete">

@@ -89,15 +89,14 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         Route::post("/tahun-peraturan-add", "store")->name("store.tahun_hukum");
     });
 
-    Route::controller(TipeHukumController::class)->group(function () {
-        Route::get("/sumber-peraturan", "index")->name("index.tipe_hukum");
-        Route::post("/sumber-peraturan-update/{id}", "update")->name("update.tipe_hukum");
-        Route::get("/sumber-peraturan-delete/{id}", "destroy")->name("delete.tipe_hukum");
-        Route::post("/sumber-peraturan-add", "store")->name("store.tipe_hukum");
-    });
-
     Route::middleware(ManajemenUserMiddleware::class)->group(function () {
-        
+        Route::controller(TipeHukumController::class)->group(function () {
+            Route::get("/sumber-peraturan", "index")->name("index.tipe_hukum");
+            Route::post("/sumber-peraturan-update/{id}", "update")->name("update.tipe_hukum");
+            Route::get("/sumber-peraturan-delete/{id}", "destroy")->name("delete.tipe_hukum");
+            Route::post("/sumber-peraturan-add", "store")->name("store.tipe_hukum");
+        });
+
         Route::controller(ManajemenUserController::class)->group(function () {
             Route::get("/manajement-user", "manejementUser")->name("manejementUser");
             Route::post("/add-manajement-user", "store")->name("tambahManajemen");

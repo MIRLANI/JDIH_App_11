@@ -66,7 +66,7 @@ class CategoryHukumController extends Controller
     {
         $data = $categoryHukum::query()->find($id);
         if ($data->productHukums()->exists()) {
-            return redirect()->route("index.category_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+            return redirect()->route("index.category_hukum")->with("error", "Category is still in use and cannot be deleted.");
         }
         $data->delete();
         return redirect()->route("index.category_hukum")->with("message", "Catagori Peraturan Delete Successfull");

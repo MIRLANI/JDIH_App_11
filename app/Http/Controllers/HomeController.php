@@ -17,7 +17,7 @@ class HomeController extends Controller
         $produkHukumHukumsTerbaru = ProductHukum::query()->latest()->take(4)->get();
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
-        $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
+        $tahuns = Tahun::query()->orderBy('tahun', 'desc')->get();
         $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts()->take(4);
         $sumbers = TipeHukum::query()->get();
         return response()->view("pages.users.index", [
@@ -203,7 +203,7 @@ class HomeController extends Controller
         //   dd($produkHukum);
         $produkHukums = ProductHukum::query()->get();
         $subjekHukums = SubjekHukum::query()->get();
-        $tahuns = Tahun::query()->get();
+        $tahuns = Tahun::query()->orderBy('tahun', 'desc')->get();
         $sumbers = TipeHukum::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,

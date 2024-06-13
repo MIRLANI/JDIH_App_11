@@ -15,7 +15,7 @@ class SubjekHukumController extends Controller
      */
     public function index(): Response
     {
-        $subjekHukums = SubjekHukum::query()->orderBy("nama", "desc")->get();
+        $subjekHukums = SubjekHukum::query()->orderBy("id", "desc")->get();
         return response()->view("pages.admin.subjek_hukum.subjek_hukum",[
             "subjekHukums" => $subjekHukums
         ]);

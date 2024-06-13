@@ -76,6 +76,9 @@
                                                 </div>
                                             </form>
                                         </td>
+                                        <td style="display: none;">
+                                            {{ $subjek->nama }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('delete.subjek_hukum', ['id' => $subjek->id]) }}"
                                                 class="btn icon btn-danger" title="Delete">

@@ -572,10 +572,13 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Tampilkan file PDF disini -->
+                                                        @if ( $product_hukum->id && $product_hukum->file)
                                                         <iframe style="width: 100%; height: 600px;"
-                                                            src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}"
-                                                            style="width:100%; height:500px;" frameborder="0">
-                                                        </iframe>
+                                                              
+                                                          src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}"
+                                                          style="width:100%; height:500px;" frameborder="0">
+                                                      </iframe>
+                                                          @endif
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

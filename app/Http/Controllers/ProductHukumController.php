@@ -89,7 +89,7 @@ class ProductHukumController extends Controller
         // dd($productHukumData);
         $productHukum = ProductHukum::query()->create($productHukumData); 
         $productHukum->subjekHukums()->sync($request->input("subjek"));
-        return redirect()->route("index.product_hukum")->with("message", "Add Product Hukum Successfully");
+        return redirect()->route("index.product_hukum")->with("message", "Add Peraturan Successfully");
     }
 
 
@@ -162,7 +162,7 @@ class ProductHukumController extends Controller
         $productHukum = ProductHukum::query()->find($id);
         $productHukum->delete();
         $productHukum->save();
-        return response()->redirectToRoute("index.product_hukum")->with("message", "Destroy Product Hukum Successfully");
+        return response()->redirectToRoute("index.product_hukum")->with("message", "Destroy Peraturan Successfully");
     }
 
     public function viewDelete()
@@ -177,6 +177,6 @@ class ProductHukumController extends Controller
     {
         $productHukum = ProductHukum::withTrashed()->find($id);
         $productHukum->restore();
-        return response()->redirectToRoute("index.product_hukum")->with("message", "Restore Product Hukum Successfully");
+        return response()->redirectToRoute("index.product_hukum")->with("message", "Restore Peraturan Successfully");
     }
 }

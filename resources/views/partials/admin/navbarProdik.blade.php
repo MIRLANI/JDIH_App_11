@@ -65,7 +65,6 @@
                         <span>Abstrak Peraturan</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
                     <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
                         <i class="bi bi-tags-fill"></i>
