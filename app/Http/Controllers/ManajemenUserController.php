@@ -42,7 +42,7 @@ class ManajemenUserController extends Controller
 
     TipeHukum::updateOrCreate(['user_id' => $user->id, "nama" => $user->username]);
     
-    return response()->redirectToRoute("manejementUser")->with("message", "Add  $role $username Successfull");
+    return response()->redirectToRoute("manejementUser")->with("message", "Add  $role $username successfull");
       
    }
    public function update(Request $request, string $id)
@@ -60,10 +60,10 @@ class ManajemenUserController extends Controller
                $user->password = $request->input("password");
            }
            $user->save();
-           return response()->redirectToRoute("manejementUser")->with("message", "Update $request->role $request->username   Successfull");
+           return response()->redirectToRoute("manejementUser")->with("message", "Update $request->role $request->username   successfull");
        } else {
            $user = User::query()->updateOrCreate(['id' => $id], $request->all());
-           return response()->redirectToRoute("manejementUser")->with("message", "Update or Insert Successfull");
+           return response()->redirectToRoute("manejementUser")->with("message", "Update or Insert successfull");
        }
    }
 
@@ -74,6 +74,6 @@ class ManajemenUserController extends Controller
          return response()->redirectToRoute("manejementUser")->with("error", "User is still in use and cannot be deleted.");
       }
       $akun->delete();
-      return response()->redirectToRoute("manejementUser")->with("message", "Delete  Successfull");
+      return response()->redirectToRoute("manejementUser")->with("message", "Delete akun  successfull");
    }
 }

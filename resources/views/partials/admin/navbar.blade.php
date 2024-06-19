@@ -52,16 +52,16 @@
                 </li>
                 <hr>
                
-                <li class="sidebar-item">
+                <li class="sidebar-item {{ request()->routeIs('manejementUser') ? 'active' : '' }}">
                     <a href="{{ route('manejementUser') }}" class='sidebar-link'>
                         <i class="bi bi-people-fill"></i>
-                        <span>Manajemen User</span>
+                        <span>Manajemen Akun</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ request()->routeIs('index.tipe_hukum') ? 'active' : '' }}">
                     <a href="{{ route('index.tipe_hukum') }}" class='sidebar-link'>
                         <i class="bi bi-folder-fill"></i>
-                        <span>Sumber</span>
+                        <span>Sumber Peraturan</span>
                     </a>
                 </li>
                 <hr>

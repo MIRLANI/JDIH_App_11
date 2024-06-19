@@ -25,35 +25,35 @@ class UserSeeder extends Seeder
             "username" => "Ilmu Komputer",
             "email" => "ilkom@gmail.com",
             "password" => Hash::make("ilkom123"),
-            "role" => "user"
+            "role" => "admin prodik"
         ]);
 
         User::query()->create([
             "username" => "metematika",
             "email" => "matematika@gmail.com",
             "password" => Hash::make("mtk123"),
-            "role" => "user"
+            "role" => "admin prodik"
         ]);
         
         User::query()->create([
             "username" => "biologi",
             "email" => "biologi@gmail.com",
             "password" => Hash::make("biologi123"),
-            "role" => "user"
+            "role" => "admin prodik"
         ]);
 
         User::query()->create([
             "username" => "fisika",
             "email" => "fisika@gmail.com",
             "password" => Hash::make("fisika123"),
-            "role" => "user"
+            "role" => "admin prodik"
         ]);
 
         User::query()->create([
             "username" => "kimia",
             "email" => "kimia@gmail.com",
             "password" => Hash::make("kimia123"),
-            "role" => "user"
+            "role" => "admin prodik"
         ]);
     }
 }

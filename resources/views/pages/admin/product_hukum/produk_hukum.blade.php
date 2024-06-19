@@ -64,7 +64,7 @@
                                         <td> {{ $productHukum->nama ?? '' }}</td>
                                         {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
                                         <td>{{ $productHukum->judul ?? '' }}</td>
-                                        <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
+                                        <td>{{ $productHukum->categoryHukum->title ?? '' }} </td>
                                         <td>
                                             {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
                                         </td>
@@ -98,7 +98,7 @@
                                         <td> {{ $productHukum->nama ?? '' }}</td>
                                         {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
                                         <td>{{ $productHukum->judul ?? '' }}</td>
-                                        <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
+                                        <td>{{ $productHukum->categoryHukum->title ?? '' }} </td>
                                         <td>
                                             {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
                                         </td>

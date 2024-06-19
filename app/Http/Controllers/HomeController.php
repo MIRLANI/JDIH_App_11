@@ -63,7 +63,7 @@ class HomeController extends Controller
 
     public function tahun(): Response
     {
-        $tahuns = Tahun::query()->orderBy('id', 'asc')->get();
+        $tahuns = Tahun::query()->orderBy('id', 'desc')->get();
         return response()->view("pages.users.tahun.index", [
             "tahuns" => $tahuns
         ]);

@@ -98,10 +98,10 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         });
 
         Route::controller(ManajemenUserController::class)->group(function () {
-            Route::get("/manajement-user", "manejementUser")->name("manejementUser");
-            Route::post("/add-manajement-user", "store")->name("tambahManajemen");
-            Route::post("/update-manajement-user/{id}", "update")->name("updateManajemen");
-            Route::get("/delete-manajement-user/{id}", "delete")->name("deleteManajemen");
+            Route::get("/manajement-akun", "manejementUser")->name("manejementUser");
+            Route::post("/add-manajement-akun", "store")->name("tambahManajemen");
+            Route::post("/update-manajement-akun/{id}", "update")->name("updateManajemen");
+            Route::get("/delete-manajement-akun/{id}", "delete")->name("deleteManajemen");
         });
     });
 });

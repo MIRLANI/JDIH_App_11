@@ -40,7 +40,7 @@ class AbstrakHukumController extends Controller
         $request->validated();
         $abstrakHukum = AbstrakHukum::query()->find($id);
         $abstrakHukum->update($request->all());
-        return redirect()->route("index.abstrack_hukum")->with("message", "Update successful");
+        return redirect()->route("index.abstrack_hukum")->with("message", "Update abstrak successful");
     }
 
     /**
@@ -50,6 +50,6 @@ class AbstrakHukumController extends Controller
     {
         $abstrakHukum =  AbstrakHukum::query()->find($id);
         $abstrakHukum->delete();
-         return redirect()->route("index.abstrack_hukum")->with("message", "Delete successful");;
+         return redirect()->route("index.abstrack_hukum")->with("message", "Delete abstrak successful");;
     }
 }

@@ -9,10 +9,18 @@
                 <form action="{{ route('store.tipe_hukum') }}" method="POST">
                     @csrf
                     <div class="mb-3">
+                        <label for="nama" class="form-label">Daftar akun</label>
+                        <select name="user_id" id="user_id" class="form-select">
+                            <option value="">Pilih Akun</option>
+                            @foreach ($users as $item)
+                                <option value="{{ $item->id }}">{{ $item->email }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="nama" class="form-label">Sumber Paraturan</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
                     </div>
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>

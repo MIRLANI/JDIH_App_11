@@ -16,13 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::delete("delete from users");
-        DB::delete("delete from tipe_hukums");
-        DB::delete("delete from tahuns");
-        DB::delete("delete from product_hukums");
-        DB::delete("delete from category_hukums");
-        DB::delete("delete from abstrak_hukums");
-        DB::delete("delete from subjek_hukums");
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('users')->truncate();
+        DB::table('tipe_hukums')->truncate();
+        DB::table('tahuns')->truncate();
+        DB::table('product_hukums')->truncate();
+        DB::table('category_hukums')->truncate();
+        DB::table('abstrak_hukums')->truncate();
+        DB::table('subjek_hukums')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         
         $this->call([
@@ -34,6 +36,5 @@ class DatabaseSeeder extends Seeder
             ProductHukumSeeder::class,
             AbstrakHukumSeeder::class,
         ]);
-        ProductHukum::factory(10)->create();
     }
 }

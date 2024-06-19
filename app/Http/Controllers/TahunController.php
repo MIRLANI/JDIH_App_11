@@ -58,9 +58,9 @@ class TahunController extends Controller
          $tahun->tahun = $request->input("tahun");
          $result = $tahun->update();
         if ($result) {
-            return redirect()->route("index.tahun_hukum")->with('message', 'Update successful');
+            return redirect()->route("index.tahun_hukum")->with('message', 'Update tahun successful');
         } else {
-            return redirect()->route("index.tahun_hukum")->with('error', 'Update failed');
+            return redirect()->route("index.tahun_hukum")->with('error', 'Update tahun failed');
         }
     }
 
@@ -75,6 +75,6 @@ class TahunController extends Controller
             return redirect()->route("index.tahun_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
         }
         $tahun->delete();
-        return redirect()->route("index.tahun_hukum")->with("message", "Delete successful");
+        return redirect()->route("index.tahun_hukum")->with("message", "Delete tahun successful");
     }
 }
