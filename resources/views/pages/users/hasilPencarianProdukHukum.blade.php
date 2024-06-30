@@ -92,7 +92,7 @@
 
                             <button type="button"
                                 class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0"
-                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}">
+                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}" onclick="document.getElementById('pdfIframe').src = document.getElementById('pdfIframe').getAttribute('data-src')">
                                 <i class="bi bi-eye-fill pb-4 me-2"></i>
                                 <span>Preview</span>
                             </button>
@@ -105,8 +105,7 @@
                             </a>
 
                             <button type="button"
-                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0 disabled"
-                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}" disabled>
+                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0 disabled" disabled>
                                 <i class="bi bi-eye-fill pb-4 me-2"></i>
                                 <span>Preview</span>
                             </button>

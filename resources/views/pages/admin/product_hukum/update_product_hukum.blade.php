@@ -102,6 +102,23 @@
                                                 </p>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label" for="teu">Nomor </label>
+                                                <input class="form-control @error('nomor') is-invalid @enderror"
+                                                    type="text" placeholder="nomor" name="nomor" id="nomor"
+                                                    value="{{ old('nomor') ?: $product_hukum->nomor }}"
+                                                    data-parsley-required="true">
+                                                @error('nomor')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 1018/SK/UN29.9/PP/2020 )</i>
+                                                </p>
+                                            </div>
+                                        </div>
                                         @if (Auth::user()->role == 'admin')
                                             <div class="col-md-6 col-12 mt-3">
                                                 <div class="form-group mandatory">
@@ -130,6 +147,41 @@
                                                 <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
                                             @endif
                                         @endif
+
+
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label" for="tahun">Tahun
+                                                    <a href="{{ route('index.tahun_hukum') }}"
+                                                        class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
+                                                        <i class="bi bi-file-earmark-plus"></i>
+                                                    </a>
+                                                </label>
+
+                                                <select id="tahun"
+                                                    class="form-control @error('tahun') is-invalid @enderror"
+                                                    name="tahun_id">
+                                                    <option value="">Pilih Tahun</option>
+                                                    @foreach ($tahuns as $tahun)
+                                                        <option value="{{ $tahun->id }}"
+                                                            @if (old('tahun_id') == $tahun->id) selected
+                                                            @elseif ($product_hukum->tahuns && old('tahun_id', $product_hukum->tahuns->id) == $tahun->id)
+                                                                selected @endif>
+                                                            {{ $tahun->tahun }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('tahun')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
@@ -207,38 +259,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label" for="tahun">Tahun
-                                                    <a href="{{ route('index.tahun_hukum') }}"
-                                                        class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
-                                                        <i class="bi bi-file-earmark-plus"></i>
-                                                    </a>
-                                                </label>
-
-                                                <select id="tahun"
-                                                    class="form-control @error('tahun') is-invalid @enderror"
-                                                    name="tahun_id">
-                                                    <option value="">Pilih Tahun</option>
-                                                    @foreach ($tahuns as $tahun)
-                                                        <option value="{{ $tahun->id }}"
-                                                            @if (old('tahun_id') == $tahun->id) selected
-                                                            @elseif ($product_hukum->tahuns && old('tahun_id', $product_hukum->tahuns->id) == $tahun->id)
-                                                                selected @endif>
-                                                            {{ $tahun->tahun }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-
-                                                @error('tahun')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
-                                                </p>
-                                            </div>
-                                        </div>
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -268,8 +288,8 @@
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="sumber">Jumlah Halaman </label>
                                                 <input class="form-control @error('sumber') is-invalid @enderror"
-                                                    type="text" placeholder="Sumber" data-parsley-required="true"
-                                                    name="sumber" id="sumber"
+                                                    type="text" placeholder="Jumlah Halaman"
+                                                    data-parsley-required="true" name="sumber" id="sumber"
                                                     value="{{ old('sumber') ?: $product_hukum->sumber }}">
                                                 @error('sumber')
                                                     <div class="invalid-feedback">
@@ -281,32 +301,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label " for="sumber">Status </label>
-                                                <fieldset class="form-group">
-
-                                                    <select class="form-select @error('status') is-invalid @enderror"
-                                                        id="basicSelect" name="status">
-                                                        <option value="berlaku"
-                                                            @if (old('status')) @selected(true)
-                                                            @elseif (old('status') == null && $product_hukum->status == 'berlaku')
-                                                                @selected(true) @endif>
-                                                            Berlaku</option>
-                                                        <option value="tidak berlaku"
-                                                            @if (old('status')) @selected(true)
-                                                            @elseif (old('status') == null && $product_hukum->status == 'tidak berlaku')
-                                                                @selected(true) @endif>
-                                                            Tidak Berlaku</option>
-                                                    </select>
-                                                </fieldset>
-                                                @error('status')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -368,23 +362,35 @@
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label" for="teu">Nomor </label>
-                                                <input class="form-control @error('nomor') is-invalid @enderror"
-                                                    type="text" placeholder="nomor" name="nomor" id="nomor"
-                                                    value="{{ old('nomor') ?: $product_hukum->nomor }}"
-                                                    data-parsley-required="true">
-                                                @error('nomor')
+                                                <label class="form-label " for="sumber">Status </label>
+                                                <fieldset class="form-group">
+
+                                                    <select class="form-select @error('status') is-invalid @enderror"
+                                                        id="basicSelect" name="status">
+                                                        <option value="berlaku"
+                                                            @if (old('status')) @selected(true)
+                                                            @elseif (old('status') == null && $product_hukum->status == 'berlaku')
+                                                                @selected(true) @endif>
+                                                            Berlaku</option>
+                                                        <option value="tidak berlaku"
+                                                            @if (old('status')) @selected(true)
+                                                            @elseif (old('status') == null && $product_hukum->status == 'tidak berlaku')
+                                                                @selected(true) @endif>
+                                                            Tidak Berlaku</option>
+                                                    </select>
+                                                </fieldset>
+                                                @error('status')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 1018/SK/UN29.9/PP/2020 )</i>
-                                                </p>
                                             </div>
                                         </div>
 
+
+
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_penetapan">Tanggal Penetapan
                                                 </label>
                                                 <input
@@ -404,7 +410,7 @@
                                         </div>
 
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_pengundangan">Tanggal Pengundangan
                                                 </label>
                                                 <input
@@ -424,7 +430,7 @@
                                         </div>
 
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_berlaku">Tanggal Berlaku </label>
                                                 <input class="form-control @error('tanggal_berlaku') is-invalid @enderror"
                                                     type="date" placeholder="Tanggal Berlaku"
@@ -552,37 +558,31 @@
                                             <div class="form-group ">
                                                 <label class="form-label" for="sumber">File Old </label>
                                                 <!-- Button to Open Modal -->
-                                                <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"
-                                                    data-bs-target="#pdfModal">
-                                                    Open File Pdf
+                                                <button type="button" class="btn btn-primary px-3 my-5"
+                                                    data-bs-toggle="modal" data-bs-target="#pdfModal"
+                                                    onclick="document.getElementById('pdfIframe').src = document.getElementById('pdfIframe').getAttribute('data-src')">
+                                                    <i class="bi bi-eye-fill me-2"></i>Preview
                                                 </button>
                                             </div>
                                         </div>
 
-                 
+
                                         <!-- Modal -->
-                                        <div class="modal fade modal-xl" id="pdfModal" tabindex="-1"
+                                        <div class="modal fade" id="pdfModal" tabindex="-1"
                                             aria-labelledby="pdfModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content ">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="pdfModalLabel">PDF Preview</h5>
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header p-4">
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Tampilkan file PDF disini -->
-                                                        @if ( $product_hukum->id && $product_hukum->file)
-                                                        <iframe style="width: 100%; height: 600px;"
-                                                              
-                                                          src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}"
-                                                          style="width:100%; height:500px;" frameborder="0">
-                                                      </iframe>
-                                                          @endif
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
+                                                        @if ($product_hukum->id && $product_hukum->file)
+                                                            <iframe id="pdfIframe" style="width: 100%; height: 800px;"
+                                                                src=""
+                                                                data-src="{{ route('review', ['id' => $product_hukum->id, 'file' => $product_hukum->file]) }}#toolbar=0"></iframe>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

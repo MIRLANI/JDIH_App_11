@@ -78,11 +78,13 @@
 
 
 
-<div class="modal-footer" style="background-color:rgb(135, 25, 25); padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+<div class="modal-footer d-md-none" style="background-color:rgb(135, 25, 25); padding: 5px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000;">
     <img src="{{ asset('images/logo-mipa.png') }}" alt="MIPA Logo" style="height: 30px;">
-    <a href="#" class="btn p-1 m-1 d-md-none" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas">
+    <a href="#" class="btn p-1 m-1" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas">
         <i class="bi bi-list" style="font-size: 24px;"></i> 
     </a>
 </div>
+
+<div class="mb-5"></div>
 
 

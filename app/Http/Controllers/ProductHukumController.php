@@ -65,7 +65,7 @@ class ProductHukumController extends Controller
             }
             $randomString = \Illuminate\Support\Str::random(10);
             // Automatically generate slug from product hukum name if not provided
-            $slug = $request->input('slug') ?: \Illuminate\Support\Str::slug($request->input('nama'), '-');
+            $slug = $request->input('slug') ?: \Illuminate\Support\Str::slug(\Illuminate\Support\Str::title($request->input('nama')), '-');
             $file = $slug . "-" . now()->timestamp . "-" . $randomString . "." . $extension;
             // memasukan datanya kedalam direktori tanpa prefix public
             $request->file("file")->storeAs("document", $file);
@@ -86,6 +86,15 @@ class ProductHukumController extends Controller
                 $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
             }
         }
+
+        // Capitalize the first letter of 'nama', 'deskripsi', and 'judul'
+        if (isset($productHukumData['deskripsi'])) {
+            $productHukumData['deskripsi'] = \Illuminate\Support\Str::title($productHukumData['deskripsi']);
+        }
+        if (isset($productHukumData['judul'])) {
+            $productHukumData['judul'] = \Illuminate\Support\Str::title($productHukumData['judul']);
+        }
+
         // dd($productHukumData);
         $productHukum = ProductHukum::query()->create($productHukumData); 
         $productHukum->subjekHukums()->sync($request->input("subjek"));
@@ -147,7 +156,16 @@ class ProductHukumController extends Controller
         if (!$productHukum) {
             return back()->withErrors(['error' => 'Product Hukum not found.']);
         }
-        $productHukum->update($request->except(['slug', 'file']) + ['slug' => $newSlug, 'file' => $file ?? $productHukum->file]);
+
+        $requestData = $request->except(['slug', 'file']);
+        if (isset($requestData['deskripsi'])) {
+            $requestData['deskripsi'] = \Illuminate\Support\Str::title($requestData['deskripsi']);
+        }
+        if (isset($requestData['judul'])) {
+            $requestData['judul'] = \Illuminate\Support\Str::title($requestData['judul']);
+        }
+
+        $productHukum->update($requestData + ['slug' => $newSlug, 'file' => $file ?? $productHukum->file]);
         if ($request->input("subjek")) {
             $productHukum->subjekHukums()->sync($request->input("subjek"));
         }

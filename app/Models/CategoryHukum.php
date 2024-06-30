@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryHukum extends Model 
 {
-    use Sluggable;
+    use Sluggable,  SoftDeletes;
     protected $table = 'category_hukums';
     protected $primaryKey = 'id';
     protected $keyType = 'int';

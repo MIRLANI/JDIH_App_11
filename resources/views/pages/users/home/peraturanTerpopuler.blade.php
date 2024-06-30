@@ -17,7 +17,8 @@
                                             style="font-size: larger; color: #333; transition: color 0.3s;"
                                             onmouseover="this.style.color='#4A90E2'"
                                             onmouseout="this.style.color='#333'">{{ $terpopuler->nama }} </a> </h6>
-                                    <p style="margin-top: 3px; color: #666;">{{ $terpopuler->deskripsi }}</p>
+                                            <p style="margin-top: 3px; color: #666;">{{ \Illuminate\Support\Str::words($terpopuler->deskripsi, 12) }}</p>
+
                                 </div>
                                 <hr style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;">
                                 <div class="d-flex justify-content-around mt-2">

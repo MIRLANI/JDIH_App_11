@@ -94,6 +94,24 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label" for="teu">Nomor </label>
+                                                <input class="form-control @error('nomor') is-invalid @enderror"
+                                                    type="text" placeholder="nomor" name="nomor" id="nomor"
+                                                    value="{{ old('nomor') ?: session('nomor') }}"
+                                                    data-parsley-required="true">
+                                                @error('nomor')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 1018/SK/UN29.9/PP/2020 )</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
                                         @if (Auth::user()->role == 'admin')
                                             <div class="col-md-6 col-12 mt-3">
                                                 <div class="form-group mandatory">
@@ -122,6 +140,32 @@
                                                 <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
                                             @endif
                                         @endif
+
+                                        
+                                        <div class="col-md-6 col-12 mt-3">
+                                            <div class="form-group mandatory">
+                                                <label class="form-label" for="tahun">Tahun </label>
+                                                <select id="tahun"
+                                                    class="form-control @error('tahun') is-invalid @enderror"
+                                                    name="tahun_id">
+                                                    <option value="">Pilih Tahun</option>
+                                                    @foreach ($tahuns as $tahun)
+                                                        <option value="{{ $tahun->id }}"
+                                                            {{ old('tahun') == $tahun->tahun ? 'selected' : '' }}>
+                                                            {{ $tahun->tahun }}</option>
+                                                    @endforeach
+                                                </select>
+
+                                                @error('tahun_id')
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
+                                                    </div>
+                                                @enderror
+                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
+                                                </p>
+                                            </div>
+                                        </div>
+
 
 
                                         <div class="col-md-6 col-12 mt-3">
@@ -199,30 +243,6 @@
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label" for="tahun">Tahun </label>
-                                                <select id="tahun"
-                                                    class="form-control @error('tahun') is-invalid @enderror"
-                                                    name="tahun_id">
-                                                    <option value="">Pilih Tahun</option>
-                                                    @foreach ($tahuns as $tahun)
-                                                        <option value="{{ $tahun->id }}"
-                                                            {{ old('tahun') == $tahun->tahun ? 'selected' : '' }}>
-                                                            {{ $tahun->tahun }}</option>
-                                                    @endforeach
-                                                </select>
-
-                                                @error('tahun_id')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                                <p class="small mt-2"><i>(Contoh: 2024)</i>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
                                                 <label class="form-label " for="tempat_penetapan">Tempat Penetapan
                                                 </label>
                                                 <input
@@ -245,10 +265,10 @@
 
 
                                         <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label" for="sumber">Jumlah Halaman </label>
                                                 <input class="form-control @error('sumber') is-invalid @enderror"
-                                                    type="text" placeholder="Sumber" data-parsley-required="true"
+                                                    type="text" placeholder="Jumlah Halaman" data-parsley-required="true"
                                                     name="sumber" id="sumber"
                                                     value="{{ old('sumber') ?: session('sumber') }}">
                                                 @error('sumber')
@@ -261,23 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-12 mt-3">
-                                            <div class="form-group mandatory">
-                                                <label class="form-label " for="sumber">Status </label>
-                                                <fieldset class="form-group">
-                                                    <select class="form-select @error('status') is-invalid @enderror"
-                                                        id="basicSelect" name="status">
-                                                        <option value="berlaku">Berlaku</option>
-                                                        <option value="tidak berlaku">Tidak Berlaku</option>
-                                                    </select>
-                                                </fieldset>
-                                                @error('status')
-                                                    <div class="invalid-feedback">
-                                                        <i class="bx bx-radio-circle"> {{ $message }}</i>
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                       
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
@@ -328,25 +332,27 @@
                                                 </p>
                                             </div>
                                         </div>
-
+                                        
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label" for="teu">Nomor </label>
-                                                <input class="form-control @error('nomor') is-invalid @enderror"
-                                                    type="text" placeholder="nomor" name="nomor" id="nomor"
-                                                    value="{{ old('nomor') ?: session('nomor') }}"
-                                                    data-parsley-required="true">
-                                                @error('nomor')
+                                                <label class="form-label " for="sumber">Status </label>
+                                                <fieldset class="form-group">
+                                                    <select class="form-select @error('status') is-invalid @enderror"
+                                                        id="basicSelect" name="status">
+                                                        <option value="berlaku">Berlaku</option>
+                                                        <option value="tidak berlaku">Tidak Berlaku</option>
+                                                    </select>
+                                                </fieldset>
+                                                @error('status')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
                                                 @enderror
-                                                <p class="small mt-2"><i>(Contoh: 1018/SK/UN29.9/PP/2020 )</i>
-                                                </p>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_penetapan">Tanggal Penetapan
                                                 </label>
                                                 <input
@@ -366,7 +372,7 @@
                                         </div>
 
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_pengundangan">Tanggal Pengundangan
                                                 </label>
                                                 <input
@@ -386,7 +392,7 @@
                                         </div>
 
                                         <div class="col-md-4 col-12 mt-3">
-                                            <div class="form-group mandatory">
+                                            <div class="form-group ">
                                                 <label class="form-label " for="tanggal_berlaku">Tanggal Berlaku </label>
                                                 <input class="form-control @error('tanggal_berlaku') is-invalid @enderror"
                                                     type="date" placeholder="Tanggal Berlaku"

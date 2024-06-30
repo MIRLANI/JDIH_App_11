@@ -16,7 +16,7 @@
 
 <body class="small">
 
-    <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100vh; position: fixed; width: 100%; background-color: white; z-index: 9999;">
+    <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100vh; position: fixed; top: 0; left: 0; width: 100%; background-color: white; z-index: 9999;">
         <img src="{{ asset("assets/images/svg-loaders/puff.svg") }}" class="me-4" style="width: 3rem" alt="audio" alt="Loading...">
     </div>
 

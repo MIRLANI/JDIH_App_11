@@ -16,12 +16,13 @@
             </div>
             <div class="card" style="background-color: #fce4ec; width: 48%; margin-left: 1%;">
                 <div class="card-body" style="color: #343a40;">
-                    <span style="font-size: 15px;"><strong>Downloads: </strong> {{ $produkHukum->download ?? '0' }}</span>
+                    <span style="font-size: 15px;"><strong>Downloads: </strong>
+                        {{ $produkHukum->download ?? '0' }}</span>
                 </div>
             </div>
         </div>
 
-       
+
         <!-- Modal -->
         <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -31,22 +32,25 @@
                     </div>
                     <div class="modal-body">
                         <!-- Tampilkan file PDF disini -->
-                        @if($produkHukum->id && $produkHukum->file)
-                            <iframe style="width: 100%; height: 800px;" src="{{ route('review', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}#toolbar=0"></iframe>
-                        @endif                                              
+                        @if ($produkHukum->id && $produkHukum->file)
+                            <iframe id="pdfIframe" style="width: 100%; height: 800px;" src=""
+                                data-src="{{ route('review', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}#toolbar=0"></iframe>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
-        
+
 
         <div class="d-flex justify-content-center  gap-5">
-            @if($produkHukum->file && $produkHukum->id)
-                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#pdfModal">
+            @if ($produkHukum->file && $produkHukum->id)
+                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#pdfModal"
+                    onclick="document.getElementById('pdfIframe').src = document.getElementById('pdfIframe').getAttribute('data-src')">
                     <i class="bi bi-eye-fill me-2"></i>Preview
                 </button>
-                <a href="{{ route('download', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}" class="btn btn-primary px-4">
+                <a href="{{ route('download', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}"
+                    class="btn btn-primary px-4">
                     <i class="bi bi-download me-2"></i>Download
                 </a>
             @else

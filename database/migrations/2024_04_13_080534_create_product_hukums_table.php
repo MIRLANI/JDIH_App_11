@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("tipe_id")->nullable();
             $table->unsignedBigInteger("user_id");
             $table->string("nama")->nullable();
-            $table->string("deskripsi")->nullable();
+            $table->text("deskripsi")->nullable();
             $table->string("tipe_dokumen")->nullable();
             $table->string("judul")->nullable();
             $table->string("tempat_penetapan")->nullable();
