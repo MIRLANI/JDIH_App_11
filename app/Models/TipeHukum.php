@@ -11,7 +11,7 @@ use PHPUnit\Event\Runtime\Runtime;
 class TipeHukum extends Model
 {
   
-    use  SoftDeletes;
+    // use  SoftDeletes;
     protected $fillable = ["nama", "user_id"];
 
     public function product_hukums(): HasMany

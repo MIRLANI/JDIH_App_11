@@ -114,8 +114,8 @@
                                         <td>
                                             <div class="d-flex buttons">
                                                 <a href="{{ route("destroy.product_hukum", ["id" => $productHukum->id]) }}"
-                                                    class="btn icon btn-danger" title="Delete" id="warning">
-                                                    <i class="bi bi-trash "></i>
+                                                    class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
+                                                    <i class="bi bi-trash"></i>
                                                 </a>
                                                 <a href="{{ route("edit.product_hukum", ["id" => $productHukum->id, "slug" => $productHukum->slug]) }}"
                                                     class="btn icon btn-primary" title="Update">

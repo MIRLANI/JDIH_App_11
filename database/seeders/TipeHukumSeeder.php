@@ -54,12 +54,18 @@ class TipeHukumSeeder extends Seeder
             "user_id" => 6
         ]);
         $tipe5->save();
+
+        $tipe6 = TipeHukum::query()->create([
+            "nama" => "bioteknologi",
+            "user_id" => 7
+        ]);
+        $tipe6->save();
+        $tipe7 = TipeHukum::query()->create([
+            "nama" => "statistika",
+            "user_id" => 8
+        ]);
+        $tipe7->save();
       
-
-        
- 
-
-     
 
        
 

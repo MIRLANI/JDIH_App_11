@@ -22,7 +22,7 @@
                         <label for="role" class="form-label">Role</label>
                         <select class="form-control select " id="role" name="role" required>
                             <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : ''}}>Admin</option>
-                            <option value="admin prodik" {{ old('role', $user->role) == 'admin prodik' ? 'selected' : ''}}>Admin Prodik</option>
+                            <option value="sub admin" {{ old('role', $user->role) == 'sub admin' ? 'selected' : ''}}>Sub Admin</option>
                         </select>
                     </div>
                     <div class="modal-footer">

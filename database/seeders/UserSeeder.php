@@ -16,44 +16,58 @@ class UserSeeder extends Seeder
     {
         User::query()->create([
             "username" => "Administrator",
-            "email" => "fmipa@uho.ac.id",
+            "email" => "admin@uho.ac.id",
             "password" => Hash::make("admin123"),
             "role" => "admin"
         ]);
 
         User::query()->create([
             "username" => "Ilmu Komputer",
-            "email" => "ilkom@gmail.com",
+            "email" => "ilkom@uho.ac.id",
             "password" => Hash::make("ilkom123"),
-            "role" => "admin prodik"
+            "role" => "sub admin"
         ]);
 
         User::query()->create([
             "username" => "metematika",
-            "email" => "matematika@gmail.com",
+            "email" => "matematika@uho.ac.id",
             "password" => Hash::make("mtk123"),
-            "role" => "admin prodik"
+            "role" => "sub admin"
         ]);
         
         User::query()->create([
             "username" => "biologi",
-            "email" => "biologi@gmail.com",
+            "email" => "biologi@uho.ac.id",
             "password" => Hash::make("biologi123"),
-            "role" => "admin prodik"
+            "role" => "sub admin"
         ]);
 
         User::query()->create([
             "username" => "fisika",
-            "email" => "fisika@gmail.com",
+            "email" => "fisika@uho.ac.id",
             "password" => Hash::make("fisika123"),
-            "role" => "admin prodik"
+            "role" => "sub admin"
         ]);
 
         User::query()->create([
             "username" => "kimia",
-            "email" => "kimia@gmail.com",
+            "email" => "kimia@uho.ac.id",
             "password" => Hash::make("kimia123"),
-            "role" => "admin prodik"
+            "role" => "sub admin"
+        ]);
+        
+        User::query()->create([
+            "username" => "bioteknologi",
+            "email" => "bioteknologi@uho.ac.id",
+            "password" => Hash::make("bioteknologi123"),
+            "role" => "sub admin"
+        ]);
+
+        User::query()->create([
+            "username" => "statistika",
+            "email" => "statistika@uho.ac.id",
+            "password" => Hash::make("statistika123"),
+            "role" => "sub admin"
         ]);
     }
 }

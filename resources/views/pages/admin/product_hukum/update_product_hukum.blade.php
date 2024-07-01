@@ -85,7 +85,7 @@
                                             <h4 class="card-title"><b>Meta Data</b></h4>
                                         </div>
                                         <div
-                                            class="col-md-6 col-12 {{ Auth::user()->role == 'admin prodik' ? 'col-md-12' : 'col-md-6' }} mt-3">
+                                            class="col-md-6 col-12 {{ Auth::user()->role == 'sub admin' ? 'col-md-12' : 'col-md-6' }} mt-3">
                                             <div class="form-group mandatory">
                                                 <label for="judul" class="form-label">Judul </label>
                                                 <input type="text" id="judul"

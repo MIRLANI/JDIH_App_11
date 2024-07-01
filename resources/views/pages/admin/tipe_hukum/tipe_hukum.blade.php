@@ -37,7 +37,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <!-- Button trigger modal -->
+                    {{-- <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
                         data-bs-target="#addTipeModal">
                         <i class="bi bi-file-earmark-plus"></i>
@@ -45,7 +45,7 @@
                     </button>
 
                     <!-- Modal -->
-                    @include('pages.admin.tipe_hukum.create_tipe_hukum')
+                    @include('pages.admin.tipe_hukum.create_tipe_hukum') --}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
@@ -84,8 +84,8 @@
                                              {{ $tipe->user->username }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('delete.tipe_hukum', ['id' => $tipe->id]) }}"
-                                                class="btn icon btn-danger" title="Delete">
+                                            <a href="{{ route('delete.tipe_hukum', ['id' => $tipe->user_id]) }}"
+                                               class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>

@@ -53,13 +53,16 @@ class TipeHukumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, TipeHukum $tipeHukum)
+    public function destroy(string $id, TipeHukum $tipeHukum, User $user)
     {
-       $data =  $tipeHukum->query()->find($id);
-       if ($data->product_hukums()->exists()) {
+   
+        $user = $user->query()->find($id);
+       $tipe =  $tipeHukum->query()->where("user_id", $id)->first();
+       if ($tipe->product_hukums()->exists()) {
            return redirect()->route("index.tipe_hukum")->with("error", "Tipe Hukum is still in use and cannot be deleted.");
        }
-       $data->delete();
+       $tipe->delete();
+       $user->delete(); 
     
        return response()->redirectToRoute("index.tipe_hukum")->with("message", "Sumber Peraturan Deleted Successfully");
     }

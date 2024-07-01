@@ -81,8 +81,8 @@
                                             {{ $tahun->tahun }}
                                         </td>
                                         <td>
-                                            <a href="{{ route("destroy.tahun_hukum", ["id" => $tahun->id])  }}" class="btn icon btn-danger"
-                                                title="Delete">
+                                            <a href="{{ route("destroy.tahun_hukum", ["id" => $tahun->id])  }}"
+                                                class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>

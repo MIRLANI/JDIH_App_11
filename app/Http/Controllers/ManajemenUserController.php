@@ -70,9 +70,11 @@ class ManajemenUserController extends Controller
    public function delete(string $id)
    {
       $akun = User::query()->find($id);
-      if ($akun->sumberPeraturan()->exists() || $akun->productHukums()->exists()) {
-         return response()->redirectToRoute("manejementUser")->with("error", "User is still in use and cannot be deleted.");
-      }
+      $sumber = TipeHukum::query()->where("user_id", $id)->first();
+    //   if ($akun->sumberPeraturan()->exists() || $akun->productHukums()->exists()) {
+    //      return response()->redirectToRoute("manejementUser")->with("error", "User is still in use and cannot be deleted.");
+    //   }
+      $sumber->delete();
       $akun->delete();
       return response()->redirectToRoute("manejementUser")->with("message", "Delete akun  successfull");
    }
