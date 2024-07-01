@@ -15,6 +15,7 @@
         </div>
     </div>
 </section>
+
 <div class="d-flex justify-content-center my-5">
     <div class="col-11 text-center">
         <h4 class="fw-bold mb-3">PENCARIAN PERATURAN</h4>
@@ -104,8 +105,7 @@
                             </a>
 
                             <button type="button"
-                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0 disabled"
-                                data-bs-toggle="modal" data-bs-target="#modalpdf-{{ $hukum->id }}" disabled>
+                                class="btn btn-primary d-flex align-items-center flex-grow-1 flex-md-grow-0 disabled" disabled>
                                 <i class="bi bi-eye-fill pb-4 me-2"></i>
                                 <span>Preview</span>
                             </button>
