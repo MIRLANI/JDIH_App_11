@@ -22,31 +22,78 @@
             </div>
         </div>
 
-
         <!-- Modal -->
         <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Larger modal for better document display -->
                 <div class="modal-content">
-                    <div class="modal-header p-4">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Dokumen Peraturan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Tampilkan file PDF disini -->
+                        <!-- Display PDF file here -->
                         @if ($produkHukum->id && $produkHukum->file)
-                            <iframe id="pdfIframe" style="width: 100%; height: 800px;" src=""
-                                data-src="{{ route('review', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}#toolbar=0"></iframe>
+                            <div id="pdfViewer" style="width: 100%; height: 80vh; overflow: auto;"></div> <!-- Viewer height adjusted for better readability -->
+                            <script>
+                                // Ensure PDF.js library is loaded
+                                if (typeof pdfjsLib === "undefined") {
+                                    var script = document.createElement('script');
+                                    script.onload = function () {
+                                        pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
+                                        loadPDF();
+                                    };
+                                    script.src = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js';
+                                    document.head.appendChild(script);
+                                } else {
+                                    loadPDF();
+                                }
+
+                                function loadPDF() {
+                                    // Load PDF after modal is shown
+                                    document.getElementById('pdfModal').addEventListener('shown.bs.modal', function () {
+                                        var url = "{{ route('review', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}";
+                                        var loadingTask = pdfjsLib.getDocument(url);
+                                        loadingTask.promise.then(function(pdf) {
+                                            var numPages = pdf.numPages;
+                                            var viewer = document.getElementById('pdfViewer');
+                                            viewer.innerHTML = ''; // Clear previous PDF pages
+                                            for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                                                pdf.getPage(pageNum).then(function(page) {
+                                                    var scale = 1.5; // Scale adjusted for better visibility
+                                                    var viewport = page.getViewport({scale: scale});
+                                                    var canvas = document.createElement('canvas');
+                                                    var ctx = canvas.getContext('2d');
+                                                    var renderContext = {
+                                                        canvasContext: ctx,
+                                                        viewport: viewport
+                                                    };
+
+                                                    canvas.height = viewport.height;
+                                                    canvas.width = viewport.width;
+                                                    viewer.appendChild(canvas);
+
+                                                    page.render(renderContext).promise.then(function() {
+                                                        // Add page number below each page
+                                                        var pageNumberDiv = document.createElement('div');
+                                                        pageNumberDiv.style.textAlign = 'center';
+                                                        pageNumberDiv.textContent = 'Halaman ' + pageNum + ' dari ' + numPages; // Text changed to Indonesian
+                                                        viewer.appendChild(pageNumberDiv);
+                                                    });
+                                                });
+                                            }
+                                        });
+                                    });
+                                }
+                            </script>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-        <div class="d-flex justify-content-center  gap-5">
+        <div class="d-flex justify-content-center gap-3">
             @if ($produkHukum->file && $produkHukum->id)
-                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#pdfModal"
-                    onclick="document.getElementById('pdfIframe').src = document.getElementById('pdfIframe').getAttribute('data-src')">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal">
                     <i class="bi bi-eye-fill me-2"></i>Preview
                 </button>
                 <a href="{{ route('download', ['id' => $produkHukum->id, 'file' => $produkHukum->file]) }}"

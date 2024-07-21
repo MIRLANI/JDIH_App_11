@@ -28,9 +28,8 @@ class TahunController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "tahun" => "required|numeric|unique:tahuns,tahun"
+            "tahun" => "required|numeric|unique:tahuns,tahun,NULL,id,deleted_at,NULL"
         ]);
-
         Tahun::query()->create([
             "tahun" => $request->input("tahun")
         ]);
