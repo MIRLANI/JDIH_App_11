@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryHukum;
-use App\Models\ProductHukum;
-use App\Models\SubjekHukum;
+use App\Models\Kategori;
+use App\Models\Peraturan;
+use App\Models\Tag;
 use App\Models\Tahun;
-use App\Models\TipeHukum;
+use App\Models\Sumber;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -14,15 +14,15 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
-        $produkHukumHukumsTerbaru = ProductHukum::query()->latest()->take(4)->get();
-        $produkHukums = ProductHukum::query()->get();
-        $subjekHukums = SubjekHukum::query()->get();
+        $produkHukumHukumsTerbaru = Peraturan::query()->latest()->take(4)->get();
+        $produkHukums = Peraturan::query()->get();
+        $tagPeraturans = Tag::query()->get();
         $tahuns = Tahun::query()->orderBy('tahun', 'desc')->get();
-        $produkHukumHukumsTerpopuler = ProductHukum::mostPopularProducts()->take(4);
-        $sumbers = TipeHukum::query()->get();
+        $produkHukumHukumsTerpopuler = Peraturan::mostPopularProducts()->take(4);
+        $sumbers = Sumber::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
-            "subjekHukums" => $subjekHukums,
+            "tagPeraturans" => $tagPeraturans,
             "produkHukumsTerbaru" => $produkHukumHukumsTerbaru,
             "produkHukumsTerpopuler" => $produkHukumHukumsTerpopuler,
             "tahuns" => $tahuns,
@@ -36,13 +36,13 @@ class HomeController extends Controller
     {
         if ($request->input("keyword")) {
             $keyword = $request->input("keyword");
-            $subjekHukums = SubjekHukum::query()->where("nama", "like", "%" . $keyword . "%")->get();
+            $tagPeraturans = Tag::query()->where("nama", "like", "%" . $keyword . "%")->get();
         } else {
-            $subjekHukums = SubjekHukum::query()->get();
+            $tagPeraturans = Tag::query()->get();
         }
 
         return response()->view("pages.users.subjek.index", [
-            "subjekHukums" => $subjekHukums
+            "tagPeraturans" => $tagPeraturans
         ]);
     }
 
@@ -50,9 +50,9 @@ class HomeController extends Controller
     {
         if ($request->input("keyword")) {
             $keyword = $request->input("keyword");
-            $sumberDokumen = TipeHukum::query()->where("nama", "like", "%" . $keyword . "%")->get();
+            $sumberDokumen = Sumber::query()->where("nama", "like", "%" . $keyword . "%")->get();
         } else {
-            $sumberDokumen = TipeHukum::query()->get();
+            $sumberDokumen = Sumber::query()->get();
         }
 
         return response()->view("pages.users.sumber.index", [
@@ -71,7 +71,7 @@ class HomeController extends Controller
 
     public function detail(string $id, string $slug): Response
     {
-        $produkHukum = ProductHukum::query()->where('id', $id)->orWhere('slug', $slug)->first();
+        $produkHukum = Peraturan::query()->where('id', $id)->orWhere('slug', $slug)->first();
         return response()->view("pages.users.detail.index", [
             "produkHukum" => $produkHukum
         ]);
@@ -81,12 +81,12 @@ class HomeController extends Controller
     public function search(Request $request): Response
     {
 
-        $query = ProductHukum::query();
+        $query = Peraturan::query();
         // Initialize a flag to check if any search criteria match
         $anyCriteriaMatch = false;
 
         // Check if any search parameters are provided and set the flag if any criteria are filled
-        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag', 'sumber'])) {
+        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag', 'jumlah_halaman'])) {
             $query->where(function ($q) use ($request, &$anyCriteriaMatch) {
                 // Search by keyword in all fields if keyword is provided
                 if ($request->filled('keyword')) {
@@ -101,7 +101,7 @@ class HomeController extends Controller
                             ->orWhere('tanggal_penetapan', 'like', '%' . $keyword . '%')
                             ->orWhere('tanggal_pengundangan', 'like', '%' . $keyword . '%')
                             ->orWhere('tanggal_berlaku', 'like', '%' . $keyword . '%')
-                            ->orWhere('sumber', 'like', '%' . $keyword . '%')
+                            ->orWhere('jumlah_halaman', 'like', '%' . $keyword . '%')
                             ->orWhere('status', 'like', '%' . $keyword . '%')
                             ->orWhere('bahasa', 'like', '%' . $keyword . '%')
                             ->orWhere('lokasi', 'like', '%' . $keyword . '%')
@@ -139,7 +139,7 @@ class HomeController extends Controller
                     ->orWhere('tanggal_penetapan', 'like', '%' . $keyword . '%')
                     ->orWhere('tanggal_pengundangan', 'like', '%' . $keyword . '%')
                     ->orWhere('tanggal_berlaku', 'like', '%' . $keyword . '%')
-                    ->orWhere('sumber', 'like', '%' . $keyword . '%')
+                    ->orWhere('jumlah_halaman', 'like', '%' . $keyword . '%')
                     ->orWhere('status', 'like', '%' . $keyword . '%')
                     ->orWhere('bahasa', 'like', '%' . $keyword . '%')
                     ->orWhere('lokasi', 'like', '%' . $keyword . '%')
@@ -173,10 +173,10 @@ class HomeController extends Controller
             $anyCriteriaMatch = true;
         }
 
-        // Filter by 'tag' using relation with 'subjekHukums'
+        // Filter by 'tag' using relation with 'tagPeraturans'
         if ($request->filled('tag')) {
             $tags = is_array($request->input('tag')) ? $request->input('tag') : [$request->input('tag')];
-            $query->whereHas('subjekHukums', function ($q) use ($tags) {
+            $query->whereHas('tagPeraturans', function ($q) use ($tags) {
                 $q->whereIn('nama', $tags);
             });
             $anyCriteriaMatch = true;
@@ -186,7 +186,7 @@ class HomeController extends Controller
         if (($request->input('sumber'))) {
             // dd($request->input("sumber"));
             $sumber = $request->input('sumber');
-            $query->whereHas('tipeHukum', function ($q) use ($sumber) {
+            $query->whereHas('sumber', function ($q) use ($sumber) {
                 $q->where('nama', $sumber);
             });
 
@@ -201,13 +201,13 @@ class HomeController extends Controller
         $produkHukum = $query->orderBy('updated_at', 'desc')->paginate(6)->withQueryString();
 
         //   dd($produkHukum);
-        $produkHukums = ProductHukum::query()->get();
-        $subjekHukums = SubjekHukum::query()->get();
+        $produkHukums = Peraturan::query()->get();
+        $tagPeraturans = Tag::query()->get();
         $tahuns = Tahun::query()->orderBy('tahun', 'desc')->get();
-        $sumbers = TipeHukum::query()->get();
+        $sumbers = Sumber::query()->get();
         return response()->view("pages.users.index", [
             "produkHukums" => $produkHukums,
-            "subjekHukums" => $subjekHukums,
+            "tagPeraturans" => $tagPeraturans,
             "produkHukums" => $produkHukums,
             "produkHukum" => $produkHukum,
             "tahuns" => $tahuns,
@@ -221,7 +221,7 @@ class HomeController extends Controller
     public function download(string $id, string $file)
     {
 
-        $produk = ProductHukum::query()->where('id', $id)->first();
+        $produk = Peraturan::query()->where('id', $id)->first();
         if ($produk) {
             if ($produk->download === null) {
                 $produk->download = 1;
@@ -244,7 +244,7 @@ class HomeController extends Controller
     public function review(string $id, string $file)
     {
 
-        $produk = ProductHukum::query()->where('id', $id)->first();
+        $produk = Peraturan::query()->where('id', $id)->first();
         if ($produk) {
             if ($produk->review === null) {
                 $produk->review = 1;

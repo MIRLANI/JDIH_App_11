@@ -29,7 +29,7 @@
                 <div class="col-12 mt-3">
                     <div class="card ">
                         <div class="card-header">
-                            <a href="{{ route('index.product_hukum') }}" class="btn  btn-primary mx-2" title="Delete">
+                            <a href="{{ route('index.peraturan') }}" class="btn  btn-primary mx-2" title="Delete">
                                 <i class="bi bi-arrow-left"></i>
                                 Back
                             </a>
@@ -38,7 +38,7 @@
                             <div class="card-body m-2">
                                 {{-- data-parsley-validate --}}
                                 <form class="form"
-                                    action="{{ route('update.product_hukum', ['id' => $product_hukum->id, 'slug' => $product_hukum->slug]) }}"
+                                    action="{{ route('update.peraturan', ['id' => $product_hukum->id, 'slug' => $product_hukum->slug]) }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -124,16 +124,16 @@
                                                 <div class="form-group mandatory">
                                                     <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
                                                     <select id="tahun"
-                                                        class="form-control form-select @error('tipe_id') is-invalid @enderror"
-                                                        name="tipe_id">
+                                                        class="form-control form-select @error('sumber_id') is-invalid @enderror"
+                                                        name="sumber_id">
                                                         <option value="">Pilih Sumber Peraturan</option>
                                                         @foreach ($tipeHukums as $tipe)
                                                             <option value="{{ $tipe->id }}"
-                                                                {{ old('tipe_id', $product_hukum->tipe_id) == $tipe->id ? 'selected' : '' }}>
+                                                                {{ old('sumber_id', $product_hukum->sumber_id) == $tipe->id ? 'selected' : '' }}>
                                                                 {{ $tipe->nama }}</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('tipe_id')
+                                                    @error('sumber_id')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
@@ -144,7 +144,7 @@
                                             </div>
                                         @else
                                             @if ($tipeHukums)
-                                                <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
+                                                <input type="hidden" name="sumber_id" value="{{ $tipeHukums->id }}">
                                             @endif
                                         @endif
 
@@ -152,7 +152,7 @@
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
                                                 <label class="form-label" for="tahun">Tahun
-                                                    <a href="{{ route('index.tahun_hukum') }}"
+                                                    <a href="{{ route('index.tahun') }}"
                                                         class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -186,23 +186,23 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label
-                                                        class="form-label @error('category_hukum_id') is-invalid @enderror"
+                                                        class="form-label @error('kategori_id') is-invalid @enderror"
                                                         for="sumber">Kategori Peraturan</label>
-                                                    <a href="{{ route('index.category_hukum') }}"
+                                                    <a href="{{ route('index.kategori') }}"
                                                         class="icon btn-primary mb-2" title="Update Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                     <select
-                                                        class="form-select form-control @error('category_hukum_id') is-invalid @enderror"
-                                                        name="category_hukum_id" data-parsley-required="true">
+                                                        class="form-select form-control @error('kategori_id') is-invalid @enderror"
+                                                        name="kategori_id" data-parsley-required="true">
                                                         <option value="">Pilih Kategori Peraturan</option>
-                                                        @foreach ($category_hukums as $category)
+                                                        @foreach ($kategoris as $category)
                                                             <option value="{{ $category->id }}"
-                                                                @if (old('category_hukum_id') == $category->id) selected
+                                                                @if (old('kategori_id') == $category->id) selected
                                                                 @elseif (
-                                                                    $product_hukum->categoryHukum &&
-                                                                        old('category_hukum_id') == null &&
-                                                                        old('category_hukum_id', $product_hukum->categoryHukum->id) == $category->id)
+                                                                    $product_hukum->ketegori &&
+                                                                        old('kategori_id') == null &&
+                                                                        old('kategori_id', $product_hukum->ketegori->id) == $category->id)
                                                                      selected @endif>
                                                                 {{ $category->title }}
                                                             </option>
@@ -210,7 +210,7 @@
                                                     </select>
 
 
-                                                    @error('category_hukum_id')
+                                                    @error('kategori_id')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
@@ -228,7 +228,7 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Tag </label>
-                                                    <a href="{{ route('index.subjek_hukum') }}"
+                                                    <a href="{{ route('index.tag') }}"
                                                         class="icon btn-primary mb-2" title="Update Subjek Hukum">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
@@ -237,10 +237,10 @@
                                                         multiple="multiple" name="subjek[]">
                                                         <option value="">Pilih Tag Dokumen</option>
                                                         <optgroup label="Figures">
-                                                            @foreach ($subjek_hukums as $subjek)
+                                                            @foreach ($tags as $subjek)
                                                                 <option value="{{ $subjek->id }}"
                                                                     @if (old('subjek')) @selected(true)
-                                                            @elseif (isset($product_hukum->subjekHukums) && $product_hukum->subjekHukums->contains('id', $subjek->id))
+                                                            @elseif (isset($product_hukum->tagPeraturans) && $product_hukum->tagPeraturans->contains('id', $subjek->id))
                                                                 @selected(true) @endif>
                                                                     {{ $subjek->nama }}
                                                                 </option>
@@ -286,12 +286,12 @@
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group mandatory">
-                                                <label class="form-label" for="sumber">Jumlah Halaman </label>
-                                                <input class="form-control @error('sumber') is-invalid @enderror"
+                                                <label class="form-label" for="jumlah_halaman">Jumlah Halaman </label>
+                                                <input class="form-control @error('jumlah_halaman') is-invalid @enderror"
                                                     type="text" placeholder="Jumlah Halaman"
-                                                    data-parsley-required="true" name="sumber" id="sumber"
-                                                    value="{{ old('sumber') ?: $product_hukum->sumber }}">
-                                                @error('sumber')
+                                                    data-parsley-required="true" name="jumlah_halaman" id="jumlah_halaman"
+                                                    value="{{ old('jumlah_halaman') ?: $product_hukum->jumlah_halaman }}">
+                                                @error('jumlah_halaman')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
@@ -465,7 +465,7 @@
                                                         class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                         multiple="multiple" name="status_hukum[mengubah][]">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
+                                                        @foreach ($peraturans as $produk)
                                                             <option value="{{ $produk->id }}"
                                                                 @if (old('status_hukum.mengubah') &&
                                                                         is_array(old('status_hukum.mengubah')) &&
@@ -489,7 +489,7 @@
                                                         class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                         multiple="multiple" name="status_hukum[diubah][]">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
+                                                        @foreach ($peraturans as $produk)
                                                             <option value="{{ $produk->id }}"
                                                                 @if (old('status_hukum.diubah') &&
                                                                         is_array(old('status_hukum.diubah')) &&
@@ -511,7 +511,7 @@
                                                         class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                         multiple="multiple" name="status_hukum[mencabut][]">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
+                                                        @foreach ($peraturans as $produk)
                                                             <option value="{{ $produk->id }}"
                                                                 @if (old('status_hukum.mencabut') &&
                                                                         is_array(old('status_hukum.mencabut')) &&
@@ -536,7 +536,7 @@
                                                         class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                         multiple="multiple" name="status_hukum[dicabut][]">
                                                         <option value="">Pilih Hukum</option>
-                                                        @foreach ($product_hukums as $produk)
+                                                        @foreach ($peraturans as $produk)
                                                             <option value="{{ $produk->id }}"
                                                                 @if (old('status_hukum.dicabut') &&
                                                                         is_array(old('status_hukum.dicabut')) &&

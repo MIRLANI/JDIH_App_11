@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\CategoryHukum;
+use App\Models\Kategori;
 use App\Services\CategoryHukumService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -22,8 +22,8 @@ class CategoryHukumServiceTest extends TestCase
     {
         $result = $this->categoriHukumService->addCategoryHukum("Hukum Perdata", "HP", "hukum-perdata");
         assertTrue($result);
-        $categoryHukum = $this->categoriHukumService->getCategoriHukum();
-        foreach ($categoryHukum as $data) {
+        $ketegori = $this->categoriHukumService->getCategoriHukum();
+        foreach ($ketegori as $data) {
             assertEquals("Hukum Perdata", $data->title);
             assertEquals("HP", $data->short_title);
             assertEquals("hukum-perdata", $data->slug);
@@ -45,9 +45,9 @@ class CategoryHukumServiceTest extends TestCase
     public function test_update_category_hukum_sukses()
     {
         $this->test_add_sukses();
-        $categoryHukum = $this->categoriHukumService->getCategoriHukum()->first();
+        $ketegori = $this->categoriHukumService->getCategoriHukum()->first();
         $result = $this->categoriHukumService->update(
-            $categoryHukum->id,
+            $ketegori->id,
             "Laporan Keuangan",
             "LK",
             "laporan-keuangan"

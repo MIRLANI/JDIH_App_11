@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TipeHukum;
+use App\Models\Sumber;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
-class ManajemenUserController extends Controller
+class ManajemenController extends Controller
 {
     
    public function manejementUser()
@@ -40,7 +40,7 @@ class ManajemenUserController extends Controller
         "role" => $role
     ]);
 
-    TipeHukum::updateOrCreate(['user_id' => $user->id, "nama" => $user->username]);
+    Sumber::updateOrCreate(['user_id' => $user->id, "nama" => $user->username]);
     
     return response()->redirectToRoute("manejementUser")->with("message", "Add  $role $username successfull");
       
@@ -70,8 +70,8 @@ class ManajemenUserController extends Controller
    public function delete(string $id)
    {
       $akun = User::query()->find($id);
-      $sumber = TipeHukum::query()->where("user_id", $id)->first();
-    //   if ($akun->sumberPeraturan()->exists() || $akun->productHukums()->exists()) {
+      $sumber = Sumber::query()->where("user_id", $id)->first();
+    //   if ($akun->sumberPeraturan()->exists() || $akun->peraturans()->exists()) {
     //      return response()->redirectToRoute("manejementUser")->with("error", "User is still in use and cannot be deleted.");
     //   }
       $sumber->delete();

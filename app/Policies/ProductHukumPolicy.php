@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\ProductHukum;
+use App\Models\Peraturan;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class ProductHukumPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ProductHukum $productHukum): bool
+    public function view(User $user, Peraturan $peraturans): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ProductHukumPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ProductHukum $productHukum): bool
+    public function update(User $user, Peraturan $peraturans): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class ProductHukumPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ProductHukum $productHukum): bool
+    public function delete(User $user, Peraturan $peraturans): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class ProductHukumPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ProductHukum $productHukum): bool
+    public function restore(User $user, Peraturan $peraturans): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ProductHukumPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ProductHukum $productHukum): bool
+    public function forceDelete(User $user, Peraturan $peraturans): bool
     {
         //
     }

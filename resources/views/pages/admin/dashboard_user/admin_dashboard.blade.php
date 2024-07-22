@@ -2,7 +2,7 @@
     <div class="col-12 col-lg-12">
         <div class="row">
             <div class="col-12 col-lg-3 col-md-6">
-                <a href="{{ route('index.product_hukum') }}">
+                <a href="{{ route('index.peraturan') }}">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -22,7 +22,7 @@
             </div>
              @if (Auth::user()->role == "admin")
              <div class="col-6 col-lg-3 col-md-6">
-                <a href="{{ route('index.category_hukum') }}">
+                <a href="{{ route('index.kategori') }}">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div class="col-6 col-lg-3 col-md-6">
-                <a href="{{ route('index.tipe_hukum') }}">
+                <a href="{{ route('index.sumber') }}">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
@@ -60,7 +60,7 @@
                 </a>
             </div>
             <div class="col-6 col-lg-3 col-md-6">
-                <a href="{{ route('index.subjek_hukum') }}">
+                <a href="{{ route('index.tag') }}">
                     <div class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">

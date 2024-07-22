@@ -62,7 +62,7 @@
                                         <select class="choices form-select multiple-remove" multiple="multiple"
                                             name="tag[]">
                                             <optgroup label="Jenis Peraturan">
-                                                @foreach ($subjekHukums as $subjek)
+                                                @foreach ($tagPeraturans as $subjek)
                                                     <option value="{{ $subjek->nama }}"
                                                         {{ is_array(request('tag')) ? (in_array($subjek->nama, request('tag')) ? 'selected' : '') : (request('tag') == $subjek->nama ? 'selected' : '') }}>
                                                         {{ $subjek->nama }}

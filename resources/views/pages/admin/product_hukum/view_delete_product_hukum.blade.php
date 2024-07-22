@@ -26,7 +26,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="{{ route('index.product_hukum') }}" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="{{ route('index.peraturan') }}" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
@@ -48,27 +48,27 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($productHukums as $productHukum)
+                            @foreach ($peraturans as $peraturans)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td> {{ $productHukum->nama ?? '' }}</td>
-                                    {{-- <td>{{ $productHukum->deskripsi }}</td> --}}
-                                    <td>{{ $productHukum->judul ?? '' }}</td>
-                                    <td>{{ $productHukum->categoryHukum->short_title ?? '' }} </td>
+                                    <td> {{ $peraturans->nama ?? '' }}</td>
+                                    {{-- <td>{{ $peraturans->deskripsi }}</td> --}}
+                                    <td>{{ $peraturans->judul ?? '' }}</td>
+                                    <td>{{ $peraturans->ketegori->short_title ?? '' }} </td>
                                     <td>
-                                        {{ $productHukum->subjekHukums->isNotEmpty() ? implode(', ', $productHukum->subjekHukums->pluck('nama')->toArray()) : 'N/A' }}
+                                        {{ $peraturans->tagPeraturans->isNotEmpty() ? implode(', ', $peraturans->tagPeraturans->pluck('nama')->toArray()) : 'N/A' }}
                                     </td>
                                     <td>
                                         <span @class([
-                                            'badge bg-danger' => $productHukum->status == 'tidak berlaku',
-                                            'badge bg-success' => $productHukum->status == 'berlaku',
-                                        ])>{{ $productHukum->status ?? 'Status Unknown' }}
+                                            'badge bg-danger' => $peraturans->status == 'tidak berlaku',
+                                            'badge bg-success' => $peraturans->status == 'berlaku',
+                                        ])>{{ $peraturans->status ?? 'Status Unknown' }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="d-flex buttons">
 
-                                            <a href="{{ route('restore.product_hukum', ['id' => $productHukum->id]) }}"
+                                            <a href="{{ route('restore.peraturan', ['id' => $peraturans->id]) }}"
                                                 class="btn icon btn-warning" title="return">
                                                 <i class="bi bi-arrow-repeat"></i>
                                             </a>

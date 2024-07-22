@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProductHukumRequest extends FormRequest
+class UpdatePeraturanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class UpdateProductHukumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "tipe_id" => "required",
-            // "category_hukum_id" => "required",
+            "sumber_id" => "required",
+            // "kategori_id" => "required",
             "tahun_id" => ["required", "numeric"],
             
             "nama" => ["required"],
@@ -33,8 +33,8 @@ class UpdateProductHukumRequest extends FormRequest
             // "tanggal_penetapan" => "required",
             // "tanggal_pengundangan" => "required",
             // "tanggal_berlaku" => "required",
-            "category_hukum_id" => "required",
-            "sumber" => "required",
+            "kategori_id" => "required",
+            "jumlah_halaman" => "required",
             "status" => "required",
             "bahasa" => "required",
             "lokasi" => "required",

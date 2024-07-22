@@ -62,11 +62,11 @@
                                 @foreach ($AbstractHukums as $abstrak)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ optional($abstrak->productHukum)->nama }}</td>
+                                        <td>{{ optional($abstrak->peraturans)->nama }}</td>
                                         <td> {{ $abstrak->title }}</td>
                                         <td>
                                             <div class="d-flex buttons">
-                                                <a href="{{ route('destroy.abstrack_hukum', ['id' => $abstrak->id]) }}"
+                                                <a href="{{ route('destroy.abstrak', ['id' => $abstrak->id]) }}"
                                                     class="btn icon btn-danger" title="Delete" id="warning"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                     <i class="bi bi-trash "></i>
@@ -84,11 +84,11 @@
                                 @foreach ($AbstractHukums->where('user_id', Auth::id()) as $abstrak)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ optional($abstrak->productHukum)->nama }}</td>
+                                        <td>{{ optional($abstrak->peraturans)->nama }}</td>
                                         <td> {{ $abstrak->title }}</td>
                                         <td>
                                             <div class="d-flex buttons">
-                                                <a href="{{ route('destroy.abstrack_hukum', ['id' => $abstrak->id]) }}"
+                                                <a href="{{ route('destroy.abstrak', ['id' => $abstrak->id]) }}"
                                                     class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                     <i class="bi bi-trash "></i>
                                                 </a>

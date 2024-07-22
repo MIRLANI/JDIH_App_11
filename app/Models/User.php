@@ -49,14 +49,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function productHukums(): HasMany
+    public function peraturans(): HasMany
     {
-        return $this->hasMany(ProductHukum::class, "user_id", "id");
+        return $this->hasMany(Peraturan::class, "user_id", "id");
     }
 
     public function sumberPeraturan(): HasOne
     {
-        return $this->hasOne(TipeHukum::class, "user_id", "id");
+        return $this->hasOne(Sumber::class, "user_id", "id");
     }
 
 }

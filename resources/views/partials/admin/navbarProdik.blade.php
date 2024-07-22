@@ -52,33 +52,33 @@
                 </li>
                 <hr>
                 <li
-                    class="sidebar-item {{ request()->routeIs('index.product_hukum', 'create.product_hukum', 'destroy.product_hukum', 'viewDelete.product_hukum', 'restore.product_hukum', 'edit.product_hukum', 'update.product_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.product_hukum') }}" class='sidebar-link'>
+                    class="sidebar-item {{ request()->routeIs('index.peraturan', 'create.peraturan', 'destroy.peraturan', 'viewDelete.peraturan', 'restore.peraturan', 'edit.peraturan', 'update.peraturan') ? 'active' : '' }}">
+                    <a href="{{ route('index.peraturan') }}" class='sidebar-link'>
                         <i class="bi bi-journal-bookmark"></i>
                         <span>Peraturan</span>
                     </a>
                 </li>
                 <li
-                    class="sidebar-item {{ request()->routeIs('index.abstrack_hukum', 'store.abstrack_hukum', 'destroy.abstrack_hukum', 'update.abstrack_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.abstrack_hukum') }}" class='sidebar-link'>
+                    class="sidebar-item {{ request()->routeIs('index.abstrak', 'store.abstrak', 'destroy.abstrak', 'update.abstrak') ? 'active' : '' }}">
+                    <a href="{{ route('index.abstrak') }}" class='sidebar-link'>
                         <i class="bi bi-journal-text"></i>
                         <span>Abstrak Peraturan</span>
                     </a>
                 </li>
-                <li class="sidebar-item  {{ request()->routeIs('index.category_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.category_hukum') }}" class='sidebar-link'>
+                <li class="sidebar-item  {{ request()->routeIs('index.kategori') ? 'active' : '' }}">
+                    <a href="{{ route('index.kategori') }}" class='sidebar-link'>
                         <i class="bi bi-tags-fill"></i>
                         <span>Kategori</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('index.subjek_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.subjek_hukum') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->routeIs('index.tag') ? 'active' : '' }}">
+                    <a href="{{ route('index.tag') }}" class='sidebar-link'>
                         <i>#</i>
                         <span>Tag</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('index.tahun_hukum') ? 'active' : '' }}">
-                    <a href="{{ route('index.tahun_hukum') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->routeIs('index.tahun') ? 'active' : '' }}">
+                    <a href="{{ route('index.tahun') }}" class='sidebar-link'>
                         <i class="bi bi-calendar3"></i>
                         <span>Tahun</span>
                     </a>

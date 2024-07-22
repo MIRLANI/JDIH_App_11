@@ -12,9 +12,9 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <p>{{ optional($produkHukum->abstrakHukum)->title ?? '' }}</p>
+                    <p>{{ optional($produkHukum->abstrak)->title ?? '' }}</p>
                     <p>{{ $produkHukum->tahun->tahun ?? '' }}</p>
-                    <p>{{ strtoupper(optional($produkHukum->categoryHukum)->title ?? '' . ' NO ' . $produkHukum->nomor ?? '' . optional($produkHukum)->sumber ?? '') }}
+                    <p>{{ strtoupper(optional($produkHukum->ketegori)->title ?? '' . ' NO ' . $produkHukum->nomor ?? '' . optional($produkHukum)->sumber ?? '') }}
                     </p>
                     <p>
                         {{ strtoupper(optional($produkHukum)->deskripsi ?? '') }}
@@ -23,8 +23,8 @@
                         <h5>ABSTRAK:</h5>
                         <div>
                             <ul>
-                                @if($produkHukum->abstrakHukum)
-                                    @foreach (explode("\n", $produkHukum->abstrakHukum->abstrak ?? '') as $point)
+                                @if($produkHukum->abstrak)
+                                    @foreach (explode("\n", $produkHukum->abstrak->abstrak ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -34,8 +34,8 @@
                             <h5>CATATAN:</h5>
                             <p>
                             <ul>
-                                @if($produkHukum->abstrakHukum)
-                                    @foreach (explode("\n", $produkHukum->abstrakHukum->catatan ?? '') as $point)
+                                @if($produkHukum->abstrak)
+                                    @foreach (explode("\n", $produkHukum->abstrak->catatan ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif

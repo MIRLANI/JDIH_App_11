@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductHukum;
-use App\Http\Requests\StoreProductHukumRequest;
-use App\Http\Requests\UpdateProductHukumRequest;
+use App\Models\Peraturan;
+use App\Http\Requests\StorePeraturanRequest;
+use App\Http\Requests\UpdatePeraturanRequest;
 use App\Models\Akses;
-use App\Models\CategoryHukum;
-use App\Models\SubjekHukum;
+use App\Models\Kategori;
+use App\Models\Tag;
 use App\Models\Tahun;
-use App\Models\TipeHukum;
+use App\Models\Sumber;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
-class ProductHukumController extends Controller
+class PeraturanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        $productHukums = ProductHukum::orderBy('created_at', 'desc')->get();
+        $peraturans = Peraturan::orderBy('created_at', 'desc')->get();
 
         return response()->view("pages.admin.product_hukum.produk_hukum", [
-            "productHukums" => $productHukums,
+            "peraturans" => $peraturans,
             "users" => User::query()->get()
         ]);
     }
@@ -34,19 +34,19 @@ class ProductHukumController extends Controller
      */
     public function create(): Response
     {
-        $productHukums = ProductHukum::query()->get();
-        $categoryHukums = CategoryHukum::query()->get();
-        $subjekHukums = SubjekHukum::query()->get();
+        $peraturans = Peraturan::query()->get();
+        $categoryHukums = Kategori::query()->get();
+        $tagPeraturans = Tag::query()->get();
         $tahuns = Tahun::query()->get();
         if (auth()->user()->role == 'admin') {
-            $tipeHukums = TipeHukum::query()->get();
+            $tipeHukums = Sumber::query()->get();
         } else {
-            $tipeHukums = TipeHukum::query()->where('user_id', auth()->id())->first();
+            $tipeHukums = Sumber::query()->where('user_id', auth()->id())->first();
         }
         return response()->view("pages.admin.product_hukum.tambah_product_hukum", [
-            "product_hukums" => $productHukums,
-            "category_hukums" => $categoryHukums,
-            "subjek_hukums" => $subjekHukums,
+            "peraturans" => $peraturans,
+            "kategoris" => $categoryHukums,
+            "tags" => $tagPeraturans,
             "tahuns" => $tahuns,
             "tipeHukums" => $tipeHukums
         ]);
@@ -55,7 +55,7 @@ class ProductHukumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductHukumRequest $request)
+    public function store(StorePeraturanRequest $request)
     {
         // dd($request);
         if ($request->file("file")) {
@@ -96,9 +96,9 @@ class ProductHukumController extends Controller
         }
 
         // dd($productHukumData);
-        $productHukum = ProductHukum::query()->create($productHukumData); 
-        $productHukum->subjekHukums()->sync($request->input("subjek"));
-        return redirect()->route("index.product_hukum")->with("message", "Add Peraturan Successfully");
+        $peraturans = Peraturan::query()->create($productHukumData); 
+        $peraturans->tagPeraturans()->sync($request->input("subjek"));
+        return redirect()->route("index.peraturan")->with("message", "Add Peraturan Successfully");
     }
 
 
@@ -107,26 +107,26 @@ class ProductHukumController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id,  ProductHukum $productHukum)
+    public function edit(string $id,  Peraturan $peraturans)
     {
-        $product = $productHukum->query()->find($id);
+        $product = $peraturans->query()->find($id);
         if (!$product) {
             return back()->withErrors(['error' => 'Product Hukum not found.']);
         }
-        $categoryHukums = CategoryHukum::query()->get();
-        $subjekHukums = SubjekHukum::query()->get();
-        $productHukums = ProductHukum::query()->get();
+        $categoryHukums = Kategori::query()->get();
+        $tagPeraturans = Tag::query()->get();
+        $peraturans = Peraturan::query()->get();
         $tahuns = Tahun::query()->get();
         if (auth()->user()->role == 'admin') {
-            $tipeHukums = TipeHukum::query()->get();
+            $tipeHukums = Sumber::query()->get();
         } else {
-            $tipeHukums = TipeHukum::query()->where('user_id', auth()->id())->first();
+            $tipeHukums = Sumber::query()->where('user_id', auth()->id())->first();
            
         }
         return response()->view("pages.admin.product_hukum.update_product_hukum", [
-            "product_hukums" => $productHukums,
-            "subjek_hukums" => $subjekHukums,
-            "category_hukums" => $categoryHukums,
+            "peraturans" => $peraturans,
+            "tags" => $tagPeraturans,
+            "kategoris" => $categoryHukums,
             "product_hukum" => $product,
             "tahuns" => $tahuns,
             "tipeHukums" => $tipeHukums
@@ -136,7 +136,7 @@ class ProductHukumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id, string $slug, UpdateProductHukumRequest $request)
+    public function update(string $id, string $slug, UpdatePeraturanRequest $request)
     {
         // dd($request);
         $newSlug = $request->input('slug') ?: \Illuminate\Support\Str::slug($request->input('nama'), '-');
@@ -152,8 +152,8 @@ class ProductHukumController extends Controller
             $request->file("file")->storeAs("document", $file);
         }
 
-        $productHukum = ProductHukum::query()->where("id", $id)->where("slug", $slug)->first();
-        if (!$productHukum) {
+        $peraturans = Peraturan::query()->where("id", $id)->where("slug", $slug)->first();
+        if (!$peraturans) {
             return back()->withErrors(['error' => 'Product Hukum not found.']);
         }
 
@@ -165,11 +165,11 @@ class ProductHukumController extends Controller
             $requestData['judul'] = \Illuminate\Support\Str::title($requestData['judul']);
         }
 
-        $productHukum->update($requestData + ['slug' => $newSlug, 'file' => $file ?? $productHukum->file]);
+        $peraturans->update($requestData + ['slug' => $newSlug, 'file' => $file ?? $peraturans->file]);
         if ($request->input("subjek")) {
-            $productHukum->subjekHukums()->sync($request->input("subjek"));
+            $peraturans->tagPeraturans()->sync($request->input("subjek"));
         }
-        return redirect()->route("index.product_hukum")->with("message", "Update Product Successfully");
+        return redirect()->route("index.peraturan")->with("message", "Update Product Successfully");
     }
 
     /**
@@ -177,24 +177,24 @@ class ProductHukumController extends Controller
      */
     public function destroy(string $id)
     {
-        $productHukum = ProductHukum::query()->find($id);
-        $productHukum->delete();
-        $productHukum->save();
-        return response()->redirectToRoute("index.product_hukum")->with("message", "Destroy Peraturan Successfully");
+        $peraturans = Peraturan::query()->find($id);
+        $peraturans->delete();
+        $peraturans->save();
+        return response()->redirectToRoute("index.peraturan")->with("message", "Destroy Peraturan Successfully");
     }
 
     public function viewDelete()
     {
-        $productHukums = ProductHukum::onlyTrashed()->get();
+        $peraturans = Peraturan::onlyTrashed()->get();
         return response()->view("pages.admin.product_hukum.view_delete_product_hukum", [
-            "productHukums" => $productHukums
+            "peraturans" => $peraturans
         ]);
     }
 
     public function restore(string $id): RedirectResponse
     {
-        $productHukum = ProductHukum::withTrashed()->find($id);
-        $productHukum->restore();
-        return response()->redirectToRoute("index.product_hukum")->with("message", "Restore Peraturan Successfully");
+        $peraturans = Peraturan::withTrashed()->find($id);
+        $peraturans->restore();
+        return response()->redirectToRoute("index.peraturan")->with("message", "Restore Peraturan Successfully");
     }
 }

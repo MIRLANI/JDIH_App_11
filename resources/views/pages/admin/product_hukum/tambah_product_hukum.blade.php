@@ -31,7 +31,7 @@
 
                         <div class="card-content">
                             <div class="card-body m-2">
-                                <form class="form" action="{{ route('store.product_hukum') }}" method="POST"
+                                <form class="form" action="{{ route('store.peraturan') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -117,16 +117,16 @@
                                                 <div class="form-group mandatory">
                                                     <label for="tipe_dokumen" class="form-label">Sumber Peraturan </label>
                                                     <select id="sumber"
-                                                        class="form-control @error('tipe_id') is-invalid @enderror"
-                                                        name="tipe_id">
+                                                        class="form-control @error('sumber_id') is-invalid @enderror"
+                                                        name="sumber_id">
                                                         <option value="">Pilih Sumber Peraturan</option>
                                                         @foreach ($tipeHukums as $tipe)
                                                             <option value="{{ $tipe->id }}"
-                                                                {{ old('tipe_id') == $tipe->id ? 'selected' : '' }}>
+                                                                {{ old('sumber_id') == $tipe->id ? 'selected' : '' }}>
                                                                 {{ $tipe->nama }}</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('tipe_id')
+                                                    @error('sumber_id')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
@@ -137,7 +137,7 @@
                                             </div>
                                         @else
                                             @if ($tipeHukums)
-                                                <input type="hidden" name="tipe_id" value="{{ $tipeHukums->id }}">
+                                                <input type="hidden" name="sumber_id" value="{{ $tipeHukums->id }}">
                                             @endif
                                         @endif
 
@@ -172,26 +172,26 @@
                                             <div class="form-group mandatory">
                                                 <div class="form-group">
                                                     <label
-                                                        class="form-label @error('category_hukum_id') is-invalid @enderror"
+                                                        class="form-label @error('kategori_id') is-invalid @enderror"
                                                         for="sumber">Kategori Peraturan</label>
                                                        
-                                                    <a href="{{ route('index.category_hukum') }}"
+                                                    <a href="{{ route('index.kategori') }}"
                                                         class="icon btn-primary mb-2" title="Tambah Bentuk Peraturan">
                                                         <i class="bi bi-file-earmark-plus"></i>
                                                     </a>
                                                     
                                                     <select
-                                                        class="form-control @error('category_hukum_id') is-invalid @enderror"
-                                                        name="category_hukum_id" data-parsley-required="true">
+                                                        class="form-control @error('kategori_id') is-invalid @enderror"
+                                                        name="kategori_id" data-parsley-required="true">
                                                         <option value="">Pilih Kategori Peraturan</option>
-                                                        @foreach ($category_hukums as $category)
+                                                        @foreach ($kategoris as $category)
                                                             <option value="{{ $category->id }}"
-                                                                @if (old('category_hukum_id') == $category->id) selected @endif>
+                                                                @if (old('kategori_id') == $category->id) selected @endif>
                                                                 {{ $category->title }}</option>
                                                         @endforeach
                                                     </select>
 
-                                                    @error('category_hukum_id')
+                                                    @error('kategori_id')
                                                         <div class="invalid-feedback">
                                                             <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                         </div>
@@ -209,7 +209,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label " for="subjek">Tag </label>
                                                     
-                                                        <a href="{{ route('index.subjek_hukum') }}"
+                                                        <a href="{{ route('index.tag') }}"
                                                             class="icon btn-primary mb-2" title="Tambah Subjek Hukum">
                                                             <i class="bi bi-file-earmark-plus"></i>
                                                         </a>
@@ -219,7 +219,7 @@
                                                         multiple="multiple" name="subjek[]">
                                                         <optgroup label="Figures">
                                                             <option value="">Pilih Tag Dokumen </option>
-                                                            @foreach ($subjek_hukums as $subjek)
+                                                            @foreach ($tags as $subjek)
                                                                 <option value="{{ $subjek->id }}"
                                                                     @if (old('subjek') && in_array($subjek->id, old('subjek'))) selected @endif>
                                                                     {{ $subjek->nama }}</option>
@@ -266,12 +266,12 @@
 
                                         <div class="col-md-6 col-12 mt-3">
                                             <div class="form-group ">
-                                                <label class="form-label" for="sumber">Jumlah Halaman </label>
-                                                <input class="form-control @error('sumber') is-invalid @enderror"
+                                                <label class="form-label" for="jumlah_halaman">Jumlah Halaman </label>
+                                                <input class="form-control @error('jumlah_halaman') is-invalid @enderror"
                                                     type="text" placeholder="Jumlah Halaman" data-parsley-required="true"
-                                                    name="sumber" id="sumber"
-                                                    value="{{ old('sumber') ?: session('sumber') }}">
-                                                @error('sumber')
+                                                    name="jumlah_halaman" id="jumlah_halaman"
+                                                    value="{{ old('jumlah_halaman') ?: session('jumlah_halaman') }}">
+                                                @error('jumlah_halaman')
                                                     <div class="invalid-feedback">
                                                         <i class="bx bx-radio-circle"> {{ $message }}</i>
                                                     </div>
@@ -422,7 +422,7 @@
                                                     class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                     multiple="multiple" name="status_hukum[mengubah][]">
                                                     <option value="">Pilih Hukum</option>
-                                                    @foreach ($product_hukums as $produk)
+                                                    @foreach ($peraturans as $produk)
                                                         <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.mengubah', $statusHukum['mengubah'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
@@ -440,7 +440,7 @@
                                                     class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                     multiple="multiple" name="status_hukum[diubah][]">
                                                     <option value="">Pilih Hukum</option>
-                                                    @foreach ($product_hukums as $produk)
+                                                    @foreach ($peraturans as $produk)
                                                         <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.diubah', $statusHukum['diubah'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
@@ -458,7 +458,7 @@
                                                     class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                     multiple="multiple" name="status_hukum[mencabut][]">
                                                     <option value="">Pilih Hukum</option>
-                                                    @foreach ($product_hukums as $produk)
+                                                    @foreach ($peraturans as $produk)
                                                         <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.mencabut', $statusHukum['mencabut'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>
@@ -476,7 +476,7 @@
                                                     class="choices form-select multiple-remove @error('status') is-invalid @enderror"
                                                     multiple="multiple" name="status_hukum[dicabut][]">
                                                     <option value="">Pilih Hukum</option>
-                                                    @foreach ($product_hukums as $produk)
+                                                    @foreach ($peraturans as $produk)
                                                         <option value="{{ $produk->id }}" @selected(in_array($produk->id, old('status_hukum.dicabut', $statusHukum['dicabut'] ?? [])))>
                                                             {{ $produk->nama }}
                                                         </option>

@@ -48,7 +48,7 @@
                             style="font-size: 25px; color: black;" onmouseover="this.style.color='#4A90E2'"
                             onmouseout="this.style.color='#333'">{{ Str::limit($hukum->deskripsi, 100) }}</a>
                         <span class="d-block mt-2"
-                            style="color: gray;">{{ $hukum->subjekHukums->isNotEmpty() ? implode(', ', $hukum->subjekHukums->pluck('nama')->toArray()) : '' }}</span>
+                            style="color: gray;">{{ $hukum->tagPeraturans->isNotEmpty() ? implode(', ', $hukum->tagPeraturans->pluck('nama')->toArray()) : '' }}</span>
                     </div>
                 </div>
                 <hr class="my-2">
@@ -64,7 +64,7 @@
                         <ol style="list-style-type: lower-alpha;">
                             @foreach ($hukum_status[$statusKey] as $statusId)
                                 @php
-                                    $produkStatus = \App\Models\ProductHukum::query()->find($statusId);
+                                    $produkStatus = \App\Models\Peraturan::query()->find($statusId);
                                 @endphp
                                 @if ($produkStatus)
                                     <li>

@@ -6,15 +6,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5">
-                <form class="form" method="POST" action="{{ route('store.abstrack_hukum') }}">
+                <form class="form" method="POST" action="{{ route('store.abstrak') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="produk_hukum_id">Peraturan</label>
-                        <select class="form-control" name="produk_hukum_id" required>
+                        <label for="peraturan_id">Peraturan</label>
+                        <select class="form-control" name="peraturan_id" required>
                             <option value="">Pilih Peraturan</option>
                             @foreach ($produkHukum as $hukum)
                                 <option value="{{ $hukum->id }}"
-                                    {{ old('produk_hukum_id') == $hukum->id ? 'selected' : '' }}>
+                                    {{ old('peraturan_id') == $hukum->id ? 'selected' : '' }}>
                                     {{ $hukum->nama }}
                                 </option>
                             @endforeach

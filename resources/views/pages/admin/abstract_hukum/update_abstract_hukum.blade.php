@@ -10,14 +10,14 @@
                 </div>
                 <div class="modal-body p-5">
                     <form class="form" method="POST"
-                        action="{{ route('update.abstrack_hukum', ['id' => $abstrak->id]) }}">
+                        action="{{ route('update.abstrak', ['id' => $abstrak->id]) }}">
                         @csrf
                         {{-- @dd($abstrak->produkHukum) --}}
                         <div class="mb-3">
-                            <label for="produk_hukum_id" class="form-label">Peraturan</label>
-                            <select disabled class="form-select" name="produk_hukum_id">
-                                <option value="{{ $abstrak->produk_hukum_id }}">
-                                    {{ $abstrak->productHukum->nama ?? "" }}
+                            <label for="peraturan_id" class="form-label">Peraturan</label>
+                            <select disabled class="form-select" name="peraturan_id">
+                                <option value="{{ $abstrak->peraturan_id }}">
+                                    {{ $abstrak->peraturans->nama ?? "" }}
                                 </option>
                             </select>
                         </div>

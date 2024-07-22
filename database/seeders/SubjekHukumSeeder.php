@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SubjekHukum;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,34 +13,34 @@ class SubjekHukumSeeder extends Seeder
      */
     public function run(): void
     {
-      SubjekHukum::query()->create([
+      Tag::query()->create([
          "nama" => "Tata Tertib Akademik"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Kode Etik Mahasiswa"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Pelaksanaan Praktikum"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Tata Cara Ujian Akhir"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Penulisan Skripsi"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Pengelolaan Laboratorium"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Kegiatan Kemahasiswaan"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Penilaian Akademik"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Pembimbingan Akademik"
      ]);
-     SubjekHukum::query()->create([
+     Tag::query()->create([
          "nama" => "Penanganan Kasus Pelanggaran"
      ]);
      

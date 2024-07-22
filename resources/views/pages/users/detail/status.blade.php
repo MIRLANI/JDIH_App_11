@@ -17,7 +17,7 @@
                 <ol style="list-style-type: lower-alpha;">
                     @foreach ($statusHukum[$statusKey] as $statusId)
                         @php
-                            $produkStatus = \App\Models\ProductHukum::query()->find($statusId);
+                            $produkStatus = \App\Models\Peraturan::query()->find($statusId);
                         @endphp
                         @if ($produkStatus)
                             <li>

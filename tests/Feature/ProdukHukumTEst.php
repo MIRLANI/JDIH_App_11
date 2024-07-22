@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\ProductHukum;
+use App\Models\Peraturan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -14,7 +14,7 @@ class ProdukHukumTEst extends TestCase
 
     public function test_example(): void
     {
-          $produkHukum = ProductHukum::query()->find(1);
+          $produkHukum = Peraturan::query()->find(1);
           $subProdukHukum = $produkHukum->subProducts;
           dd($subProdukHukum);
     }

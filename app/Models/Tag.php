@@ -6,13 +6,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CategoryHukum extends Model 
+class Tag extends Model
 {
-    use Sluggable,  SoftDeletes;
-    protected $table = 'category_hukums';
+    use Sluggable, SoftDeletes;
+    protected $table = 'tags';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
@@ -23,15 +22,15 @@ class CategoryHukum extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'nama'
             ]
         ];
     }
-    // satu category hukum mempunyai banyak produk hukum
-    public function productHukums(): HasMany
+
+    public function peraturans(): BelongsToMany
     {
-        return $this->hasMany(ProductHukum::class,  "category_hukum_id", "id");
+        return $this->belongsToMany(Peraturan::class, "tag_peraturans", "tag_id", "peraturan_id");
     }
 
-  
+
 }

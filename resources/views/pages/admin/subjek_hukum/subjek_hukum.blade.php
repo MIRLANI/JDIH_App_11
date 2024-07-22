@@ -58,12 +58,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($subjekHukums as $subjek)
+                            @foreach ($tagPeraturans as $subjek)
                                 @if ($subjek->nama !== null)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <form action="{{ route('update.subjek-hukum', ['id' => $subjek->id]) }}"
+                                            <form action="{{ route('update.tag', ['id' => $subjek->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="input-group">
@@ -80,7 +80,7 @@
                                             {{ $subjek->nama }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('delete.subjek_hukum', ['id' => $subjek->id]) }}"
+                                            <a href="{{ route('delete.tag', ['id' => $subjek->id]) }}"
                                                 class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>

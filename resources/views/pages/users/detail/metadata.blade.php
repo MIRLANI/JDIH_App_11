@@ -13,7 +13,7 @@
             <tbody>
                 <tr>
                     <th scope="row">Sumber Peraturan</th>
-                    <td>{{ $produkHukum->tipeHukum->nama ?? '-' }}</td>
+                    <td>{{ $produkHukum->sumber->nama ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Judul</th>
@@ -24,17 +24,16 @@
                     <td>{{ $produkHukum->nomor ? $produkHukum->nomor : '-' }}</td>
                 </tr>
                 <tr>
-                <tr>
                     <th scope="row">T.E.U.</th>
                     <td>{{ $produkHukum->teu ? $produkHukum->teu : '-' }}</td>
                 </tr>
                 
                     <th scope="row">Jenis Dokumen</th>
-                    <td>{{ optional($produkHukum->categoryHukum)->title ?? '-' }}</td>
+                    <td>{{ optional($produkHukum->ketegori)->title ?? '-' }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Singkatan Jenis</th>
-                    <td>{{ $produkHukum->categoryHukum->short_title ? $produkHukum->categoryHukum->short_title : '-' }}
+                    <td>{{ $produkHukum->ketegori->short_title ? $produkHukum->ketegori->short_title : '-' }}
                     </td>
                 </tr>
                
@@ -61,11 +60,11 @@
                 </tr>
                 <tr>
                     <th scope="row">Jumlah Halaman</th>
-                    <td>{{ $produkHukum->sumber ? $produkHukum->sumber : '-' }}</td>
+                    <td>{{ $produkHukum->jumlah_halaman ? $produkHukum->jumlah_halaman : '-' }} Halaman</td>
                 </tr>
                 <tr>
                     <th scope="row">Subjek</th>
-                    <td>{{ $produkHukum->subjekHukums->pluck('nama')->isNotEmpty() ? implode(', ', $produkHukum->subjekHukums->pluck('nama')->toArray()) : '-' }}
+                    <td>{{ $produkHukum->tagPeraturans->pluck('nama')->isNotEmpty() ? implode(', ', $produkHukum->tagPeraturans->pluck('nama')->toArray()) : '-' }}
                     </td>
                 </tr>
                 <tr>

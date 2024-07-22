@@ -32,7 +32,7 @@
                         <div class="card-body d-flex justify-content-between align-items-center" style="color: black;">
                             <span class="text-start" style="color: black;">{{ $year->tahun }}</span>
                             <a href="{{ route('search', ['tahun' => $year->tahun]) }}" class="btn btn-primary">
-                                {{ $year->product_hukums->count() }}
+                                {{ $year->peraturans->count() }}
                             </a>
                         </div>
                     </div>

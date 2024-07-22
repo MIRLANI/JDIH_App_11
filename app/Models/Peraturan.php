@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductHukum extends Model
+class Peraturan extends Model
 {
 
     use Sluggable, SoftDeletes;
-    protected $table = 'product_hukums';
+    protected $table = 'peraturans';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
@@ -30,22 +30,22 @@ class ProductHukum extends Model
         ];
     }
 
-    public function categoryHukum(): BelongsTo
+    public function ketegori(): BelongsTo
     {
-        return $this->belongsTo(CategoryHukum::class,  "category_hukum_id", "id");
+        return $this->belongsTo(Kategori::class,  "kategori_id", "id");
     }
 
 
-    public function subjekHukums(): BelongsToMany
+    public function tagPeraturans(): BelongsToMany
     {
-        return $this->belongsToMany(SubjekHukum::class, "subjek_product_hukums",  "product_hukum_id", "subjek_hukum_id");
+        return $this->belongsToMany(Tag::class, "tag_peraturans",  "peraturan_id", "tag_id");
     }
 
 
 
-    public function abstrakHukum(): HasOne
+    public function abstrak(): HasOne
     {
-        return $this->hasOne(AbstrakHukum::class, "produk_hukum_id", "id");
+        return $this->hasOne(Abstrak::class, "peraturan_id", "id");
     }
 
     public function tahuns()
@@ -67,9 +67,9 @@ class ProductHukum extends Model
     }
 
 
-    public function tipeHukum(): BelongsTo
+    public function sumber(): BelongsTo
     {
-        return $this->belongsTo(TipeHukum::class, "tipe_id", "id");
+        return $this->belongsTo(Sumber::class, "sumber_id", "id");
     }
 
     public function user(): BelongsTo

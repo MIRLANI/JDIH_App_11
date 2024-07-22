@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('store.tipe_hukum') }}" method="POST">
+                <form action="{{ route('store.sumber') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="nama" class="form-label">Daftar akun</label>

@@ -12,7 +12,7 @@
     <div class="card-body mx-2">
 
 
-        <p> {{ optional($produkHukum->abstrakHukum ?? null)->materi_pokok }}
+        <p> {{ optional($produkHukum->abstrak ?? null)->materi_pokok }}
         </p>
     </div>
 </div>

@@ -34,7 +34,7 @@ class TahunController extends Controller
             "tahun" => $request->input("tahun")
         ]);
 
-        return response()->redirectToRoute("index.tahun_hukum")->with("message", "Tambah tahun hukum berhasil");
+        return response()->redirectToRoute("index.tahun")->with("message", "Tambah tahun hukum berhasil");
     }
 
     /**
@@ -57,9 +57,9 @@ class TahunController extends Controller
          $tahun->tahun = $request->input("tahun");
          $result = $tahun->update();
         if ($result) {
-            return redirect()->route("index.tahun_hukum")->with('message', 'Update tahun successful');
+            return redirect()->route("index.tahun")->with('message', 'Update tahun successful');
         } else {
-            return redirect()->route("index.tahun_hukum")->with('error', 'Update tahun failed');
+            return redirect()->route("index.tahun")->with('error', 'Update tahun failed');
         }
     }
 
@@ -70,10 +70,10 @@ class TahunController extends Controller
     {
         $tahun = Tahun::query()->find($id);
 
-        if ($tahun->product_hukums()->exists()) {
-            return redirect()->route("index.tahun_hukum")->with("error", "Tahun is still in use and cannot be deleted.");
+        if ($tahun->peraturans()->exists()) {
+            return redirect()->route("index.tahun")->with("error", "Tahun is still in use and cannot be deleted.");
         }
         $tahun->delete();
-        return redirect()->route("index.tahun_hukum")->with("message", "Delete tahun successful");
+        return redirect()->route("index.tahun")->with("message", "Delete tahun successful");
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductHukum;
+use App\Models\Peraturan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class ProductHukumSeeder extends Seeder
     public function run(): void
     {
         $data1 = [
-            "category_hukum_id" => 1,
+            "kategori_id" => 1,
             "tahun_id" => 1,
             "nama" => "Paduan Penyusunan Skripsi",
             "deskripsi" => "Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo",
@@ -24,7 +24,7 @@ class ProductHukumSeeder extends Seeder
             "tanggal_penetapan" => "2020 juni 15",
             "tanggal_pengundangan" => "2020 juni 08",
             "tanggal_berlaku" => "2020 juni 15",
-            "sumber" => "2022 No. : 57 hlm.",
+            "jumlah_halaman" => "2022 No. : 57 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
@@ -35,11 +35,11 @@ class ProductHukumSeeder extends Seeder
             // ]),
             "user_id" => 2
         ];
-        $productHukum = ProductHukum::create($data1);
-        $productHukum->save();
+        $peraturans = Peraturan::create($data1);
+        $peraturans->save();
 
         $data2 = [
-            "category_hukum_id" => 1,
+            "kategori_id" => 1,
             "tahun_id" => 1,
             "nama" => "Peraturan Dekan FMIPA Nomor 2 Tahun 2021 tentang Kode Etik Mahasiswa",
             "deskripsi" => "Peraturan ini berisi tentang kode etik yang harus diikuti oleh mahasiswa FMIPA.",
@@ -49,7 +49,7 @@ class ProductHukumSeeder extends Seeder
             "tanggal_penetapan" => "2021-08-10",
             "tanggal_pengundangan" => "2021-08-10",
             "tanggal_berlaku" => "2021-08-10",
-            "sumber" => "Gazette FMIPA 2021 No. 8: 10 hlm.",
+            "jumlah_halaman" => "Gazette FMIPA 2021 No. 8: 10 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
@@ -59,11 +59,11 @@ class ProductHukumSeeder extends Seeder
             ]),
             "user_id" => 2
         ];
-        $productHukums = ProductHukum::query()->create($data2);
-        $productHukums->save();
+        $peraturans = Peraturan::query()->create($data2);
+        $peraturans->save();
 
         $data3 = [
-            "category_hukum_id" => 1,
+            "kategori_id" => 1,
             "tahun_id" => 1,
             "nama" => "Peraturan Dekan FMIPA Nomor 3 Tahun 2020 tentang Pelaksanaan Praktikum",
             "deskripsi" => "Peraturan ini mengatur tentang pelaksanaan praktikum di lingkungan FMIPA.",
@@ -73,7 +73,7 @@ class ProductHukumSeeder extends Seeder
             "tanggal_penetapan" => "2020-03-20",
             "tanggal_pengundangan" => "2020-03-20",
             "tanggal_berlaku" => "2020-03-20",
-            "sumber" => "Gazette FMIPA 2020 No. 3: 15 hlm.",
+            "jumlah_halaman" => "Gazette FMIPA 2020 No. 3: 15 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
@@ -83,11 +83,11 @@ class ProductHukumSeeder extends Seeder
             ]),
             "user_id" => 2
         ];
-        $productHukums = ProductHukum::query()->create($data3);
-        $productHukums->save();
+        $peraturans = Peraturan::query()->create($data3);
+        $peraturans->save();
 
         $data4 = [
-            "category_hukum_id" => 1,
+            "kategori_id" => 1,
             "tahun_id" => 1,
             "nama" => "Peraturan Dekan FMIPA Nomor 4 Tahun 2019 tentang Tata Cara Ujian Akhir",
             "deskripsi" => "Peraturan ini menjelaskan tata cara pelaksanaan ujian akhir di FMIPA.",
@@ -97,7 +97,7 @@ class ProductHukumSeeder extends Seeder
             "tanggal_penetapan" => "2019-12-10",
             "tanggal_pengundangan" => "2019-12-10",
             "tanggal_berlaku" => "2019-12-10",
-            "sumber" => "Gazette FMIPA 2019 No. 10: 8 hlm.",
+            "jumlah_halaman" => "Gazette FMIPA 2019 No. 10: 8 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
@@ -107,11 +107,11 @@ class ProductHukumSeeder extends Seeder
             ]),
             "user_id" => 2
         ];
-        $productHukums = ProductHukum::query()->create($data4);
-        $productHukums->save();
+        $peraturans = Peraturan::query()->create($data4);
+        $peraturans->save();
 
         $data5 = [
-            "category_hukum_id" => 1,
+            "kategori_id" => 1,
             "tahun_id" => 1,
             "nama" => "Peraturan Dekan FMIPA Nomor 5 Tahun 2018 tentang Penulisan Skripsi",
             "deskripsi" => "Peraturan ini mengatur tentang tata cara penulisan skripsi di FMIPA.",
@@ -121,7 +121,7 @@ class ProductHukumSeeder extends Seeder
             "tanggal_penetapan" => "2018-07-15",
             "tanggal_pengundangan" => "2018-07-15",
             "tanggal_berlaku" => "2018-07-15",
-            "sumber" => "Gazette FMIPA 2018 No. 7: 12 hlm.",
+            "jumlah_halaman" => "Gazette FMIPA 2018 No. 7: 12 hlm.",
             "status" => "Berlaku",
             "bahasa" => "Bahasa Indonesia",
             "lokasi" => "FMIPA UHO",
@@ -131,7 +131,7 @@ class ProductHukumSeeder extends Seeder
             ]),
             "user_id" => 2
         ];
-        $productHukums = ProductHukum::query()->create($data5);
-        $productHukums->save();
+        $peraturans = Peraturan::query()->create($data5);
+        $peraturans->save();
     }
 }

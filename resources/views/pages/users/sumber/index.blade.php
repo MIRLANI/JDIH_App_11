@@ -24,7 +24,7 @@
                     <div class="d-flex justify-content-between align-items-center py-2">
                         <span class="text-start">{{ $sumber->nama ?? ""}}</span>
                         <a href="{{ route('search', ['sumber' => $sumber->nama]) }}" class="btn btn-primary">
-                            {{ $sumber->product_hukums->count() }}
+                            {{ $sumber->peraturans->count() }}
                         </a>
                     </div>
                     <hr class="my-1"> <!-- Horizontal line as a separator -->

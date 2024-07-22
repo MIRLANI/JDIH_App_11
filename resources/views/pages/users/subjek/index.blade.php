@@ -8,7 +8,7 @@
     @include('pages.users.subjek.pencarianSubjek')
 
     @php
-        $groupedSubjeks = $subjekHukums->sortBy('nama')->groupBy(function($item) {
+        $groupedSubjeks = $tagPeraturans->sortBy('nama')->groupBy(function($item) {
             return strtoupper(substr($item->nama, 0, 1));
         });
     @endphp
@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-between align-items-center py-2">
                         <span class="text-start">{{ $subjek->nama }}</span>
                         <a href="{{ route('search', ["tag" => $subjek->nama]) }}" class="btn btn-primary">
-                            {{ $subjek->product_hukums()->count() }}
+                            {{ $subjek->peraturans()->count() }}
                         </a>
                     </div>
                     <hr class="my-1"> <!-- Horizontal line as a separator -->

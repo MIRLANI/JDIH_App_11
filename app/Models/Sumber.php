@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use PHPUnit\Event\Runtime\Runtime;
 
-class TipeHukum extends Model
+class Sumber extends Model
 {
   
     // use  SoftDeletes;
     protected $fillable = ["nama", "user_id"];
+    protected $table = 'sumbers';
 
-    public function product_hukums(): HasMany
+
+    public function peraturans(): HasMany
     {
-        return $this->hasMany(ProductHukum::class, "tipe_id", "id");
+        return $this->hasMany(Peraturan::class, "sumber_id", "id");
     }
 
     public function user()

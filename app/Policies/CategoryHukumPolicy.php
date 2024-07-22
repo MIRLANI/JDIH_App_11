@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\CategoryHukum;
+use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class CategoryHukumPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, CategoryHukum $categoryHukum): bool
+    public function view(User $user, Kategori $ketegori): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class CategoryHukumPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, CategoryHukum $categoryHukum): bool
+    public function update(User $user, Kategori $ketegori): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class CategoryHukumPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, CategoryHukum $categoryHukum): bool
+    public function delete(User $user, Kategori $ketegori): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class CategoryHukumPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, CategoryHukum $categoryHukum): bool
+    public function restore(User $user, Kategori $ketegori): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class CategoryHukumPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, CategoryHukum $categoryHukum): bool
+    public function forceDelete(User $user, Kategori $ketegori): bool
     {
         //
     }

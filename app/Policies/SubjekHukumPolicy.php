@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\SubjekHukum;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class SubjekHukumPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, SubjekHukum $subjekHukum): bool
+    public function view(User $user, Tag $subjekHukum): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class SubjekHukumPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, SubjekHukum $subjekHukum): bool
+    public function update(User $user, Tag $subjekHukum): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class SubjekHukumPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, SubjekHukum $subjekHukum): bool
+    public function delete(User $user, Tag $subjekHukum): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class SubjekHukumPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, SubjekHukum $subjekHukum): bool
+    public function restore(User $user, Tag $subjekHukum): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class SubjekHukumPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, SubjekHukum $subjekHukum): bool
+    public function forceDelete(User $user, Tag $subjekHukum): bool
     {
         //
     }

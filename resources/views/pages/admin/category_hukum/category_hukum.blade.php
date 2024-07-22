@@ -63,7 +63,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <form action="{{ route('update.category-hukum', ['id' => $katagori->id]) }}"
+                                            <form action="{{ route('update.kategori', ['id' => $katagori->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="input-group">
@@ -82,7 +82,7 @@
                                         </td>
                                         
                                         <td>
-                                            <form action="{{ route('update.category-hukum', ['id' => $katagori->id]) }}"
+                                            <form action="{{ route('update.kategori', ['id' => $katagori->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="input-group">
@@ -100,7 +100,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('destroy.category_hukum', ['id' => $katagori->id]) }}"
+                                            <a href="{{ route('destroy.kategori', ['id' => $katagori->id]) }}"
                                                class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>

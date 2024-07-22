@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\AbstrakHukum;
-use App\Models\ProductHukum;
+use App\Models\Abstrak;
+use App\Models\Peraturan;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
-        DB::table('tipe_hukums')->truncate();
+        DB::table('sumbers')->truncate();
         DB::table('tahuns')->truncate();
-        DB::table('product_hukums')->truncate();
-        DB::table('category_hukums')->truncate();
-        DB::table('abstrak_hukums')->truncate();
-        DB::table('subjek_hukums')->truncate();
+        DB::table('peraturans')->truncate();
+        DB::table('kategoris')->truncate();
+        DB::table('abstraks')->truncate();
+        DB::table('tags')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         

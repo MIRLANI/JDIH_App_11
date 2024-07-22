@@ -13,9 +13,9 @@
 
                 <div>
 
-                    <p>{{ optional($hukum->abstrakHukum)->title ?? '' }}</p>
+                    <p>{{ optional($hukum->abstrak)->title ?? '' }}</p>
                     <p>{{ $hukum->tahun->tahun ?? '' }}</p>
-                    <p>{{ strtoupper(optional($hukum->categoryHukum)->title ?? ('' . ' NO ' . $hukum->nomor ?? ('' . optional($hukum)->sumber ?? ''))) }}
+                    <p>{{ strtoupper(optional($hukum->ketegori)->title ?? ('' . ' NO ' . $hukum->nomor ?? ('' . optional($hukum)->sumber ?? ''))) }}
                     </p>
                     <p>
                         {{ strtoupper(optional($hukum)->deskripsi ?? '') }}
@@ -24,8 +24,8 @@
                         <h5>ABSTRAK:</h5>
                         <div>
                             <ul>
-                                @if ($hukum->abstrakHukum)
-                                    @foreach (explode("\n", $hukum->abstrakHukum->abstrak ?? '') as $point)
+                                @if ($hukum->abstrak)
+                                    @foreach (explode("\n", $hukum->abstrak->abstrak ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -35,8 +35,8 @@
                             <h5>CATATAN:</h5>
                             <p>
                             <ul>
-                                @if ($hukum->abstrakHukum)
-                                    @foreach (explode("\n", $hukum->abstrakHukum->catatam ?? '') as $point)
+                                @if ($hukum->abstrak)
+                                    @foreach (explode("\n", $hukum->abstrak->catatam ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif

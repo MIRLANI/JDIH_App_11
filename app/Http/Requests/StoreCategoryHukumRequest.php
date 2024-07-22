@@ -22,8 +22,8 @@ class StoreCategoryHukumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required", "unique:category_hukums,title"],
-            "short_title" => ["required", "unique:category_hukums,short_title"]
+            "title" => ["required", "unique:kategoris,title"],
+            "short_title" => ["required", "unique:kategoris,short_title"]
         ];
     }
 }

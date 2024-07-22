@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\AbstrakHukum;
+use App\Models\Abstrak;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class AbstrakHukumPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, AbstrakHukum $abstrakHukum): bool
+    public function view(User $user, Abstrak $abstrak): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class AbstrakHukumPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, AbstrakHukum $abstrakHukum): bool
+    public function update(User $user, Abstrak $abstrak): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class AbstrakHukumPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, AbstrakHukum $abstrakHukum): bool
+    public function delete(User $user, Abstrak $abstrak): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class AbstrakHukumPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, AbstrakHukum $abstrakHukum): bool
+    public function restore(User $user, Abstrak $abstrak): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class AbstrakHukumPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, AbstrakHukum $abstrakHukum): bool
+    public function forceDelete(User $user, Abstrak $abstrak): bool
     {
         //
     }

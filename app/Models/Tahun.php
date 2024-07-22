@@ -11,8 +11,10 @@ class Tahun extends Model
 {
      use  SoftDeletes;
      protected $fillable = ["tahun"];
-     public function product_hukums(): HasMany
+
+     
+     public function peraturans(): HasMany
      {
-        return $this->hasMany(ProductHukum::class, "tahun_id", "id");
+        return $this->hasMany(Peraturan::class, "tahun_id", "id");
      }
 }
