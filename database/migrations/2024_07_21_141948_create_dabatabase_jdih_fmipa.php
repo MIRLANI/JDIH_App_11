@@ -75,15 +75,15 @@ return new class extends Migration
 
         Schema::create('abstraks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("peraturan_id")->nullable(false);
-            $table->unsignedBigInteger("user_id");
-            $table->string("title")->nullable();
-            $table->text("materi_pokok")->nullable();
-            $table->text("abstrak")->nullable();
-            $table->text("catatan")->nullable();
-            $table->string("slug")->nullable();
+            $table->unsignedBigInteger('peraturan_id');
+            $table->string('nama');
+            $table->text('materi_pokok')->nullable();
+            $table->text('abstrak')->nullable();
+            $table->text('catatan')->nullable();
+            $table->string('slug')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
         });
 
         Schema::create('tahuns', function (Blueprint $table) {

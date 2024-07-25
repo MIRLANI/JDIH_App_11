@@ -4,20 +4,15 @@ use App\Http\Controllers\AbstrakController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\SumberController;
-use App\Http\Controllers\TipePeraturanController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ManajemenUserMiddleware;
 use App\Http\Middleware\OnlyQuestMiddleware;
-use App\Models\TipePeraturan;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 

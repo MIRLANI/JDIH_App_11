@@ -23,7 +23,7 @@ class StoreAbstrakHukumRequest extends FormRequest
     {
         return [
             "peraturan_id" => ["required"],
-            "title" => ["required"],
+            "nama" => ["required"],
             "materi_pokok" => "required",
             "abstrak" => "required",
             "catatan" => "required",

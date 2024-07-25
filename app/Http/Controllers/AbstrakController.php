@@ -10,20 +10,18 @@ use Illuminate\Http\Response;
 
 class AbstrakController extends Controller
 {
-   
+
     public function index(): Response
     {
-        $abstrakHukums = Abstrak::query()->get();
-        $produkHukum = auth()->user()->role == 'admin' ? Peraturan::doesntHave('abstrak')->get() : Peraturan::where('user_id', auth()->id())->doesntHave('abstrak')->get();
-        return response()->view("pages.admin.abstract_hukum.abstract_hukum", [
-            "AbstractHukums" => $abstrakHukums,
-            "produkHukum" => $produkHukum
+        $peraturans = auth()->user()->role == 'admin' ? Peraturan::query()->get() : Peraturan::where('user_id', auth()->id())->get();
+        return response()->view("pages.admin.abstrak.abstrak", [
+            "peraturans" => $peraturans
         ]);
     }
 
-  
 
-   
+
+
     public function store(StoreAbstrakHukumRequest $request)
     {
         try {
@@ -50,6 +48,6 @@ class AbstrakController extends Controller
     {
         $abstrak =  Abstrak::query()->find($id);
         $abstrak->delete();
-         return redirect()->route("index.abstrak")->with("message", "Delete abstrak successful");;
+        return redirect()->route("index.abstrak")->with("message", "Delete abstrak successful");;
     }
 }

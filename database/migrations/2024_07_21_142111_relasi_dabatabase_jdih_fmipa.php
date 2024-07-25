@@ -23,7 +23,7 @@ return new class extends Migration
         });
 
         Schema::table('abstraks', function (Blueprint $table) {
-            $table->foreign("user_id")->on("users")->references("id");
+            // $table->foreign("user_id")->on("users")->references("id");
             $table->foreign("peraturan_id")->on("peraturans")->references("id");
 
         });

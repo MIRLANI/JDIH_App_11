@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addAbstractModalLabel">Tambah Abstrak Hukum</h5>
+                <h5 class="modal-nama" id="addAbstractModalLabel">Tambah Abstrak Hukum</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5">
@@ -12,7 +12,7 @@
                         <label for="peraturan_id">Peraturan</label>
                         <select class="form-control" name="peraturan_id" required>
                             <option value="">Pilih Peraturan</option>
-                            @foreach ($produkHukum as $hukum)
+                            @foreach ($peraturans->whereNull('abstrak') as $hukum)
                                 <option value="{{ $hukum->id }}"
                                     {{ old('peraturan_id') == $hukum->id ? 'selected' : '' }}>
                                     {{ $hukum->nama }}
@@ -21,8 +21,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">Nama Abstrak</label>
-                        <textarea class="form-control" name="title" id="title" placeholder="Masukkan nama abstrak" required>{{ old('title') }}</textarea>
+                        <label for="nama">Nama Abstrak</label>
+                        <textarea class="form-control" name="nama" id="nama" placeholder="Masukkan nama abstrak" required>{{ old('nama') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="materi_pokok">Materi Pokok</label>
@@ -43,8 +43,6 @@
                         <ul id="catatanList" class="mt-2"></ul>
                     </div>
                     
-                    <input type="hidden" name="user_id" value="{{ Auth::id() }}" >
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
