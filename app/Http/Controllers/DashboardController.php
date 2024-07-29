@@ -31,10 +31,12 @@ class DashboardController extends Controller
         
         $jmlPeraturanPerLimaTahun = [];
         $currentYear = now()->year;
-        $startYear = $currentYear - 5; // Adjust to include the current year and the last 5 years
+        $startYear = $currentYear - 5; 
+        // pluck digunakan untuk mengubah data menjadi array
         $years = Tahun::where('tahun', '>=', $startYear)->orderBy('tahun', 'desc')->pluck('tahun')->take(5);
         foreach ($years as $year) {
             $count = Auth::user()->role == "admin" ? Peraturan::whereHas('tahuns', function ($query) use ($year) {
+                dd($year);
                 $query->where('tahun', $year);
             })->count() : Peraturan::where('user_id', Auth::id())->whereHas('tahuns', function ($query) use ($year) {
                 $query->where('tahun', $year);

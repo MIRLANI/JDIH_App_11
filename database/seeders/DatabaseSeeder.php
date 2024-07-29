@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
 
         
         $this->call([
-            // CategoryHukumSeeder::class,
-            // TahunSeeder::class,
-            // SubjekHukumSeeder::class,
+            CategoryHukumSeeder::class,
+            TahunSeeder::class,
+            SubjekHukumSeeder::class,
             UserSeeder::class,
-            // TipeHukumSeeder::class,
-            // ProductHukumSeeder::class,
-            // AbstrakHukumSeeder::class,
+            TipeHukumSeeder::class,
+            ProductHukumSeeder::class,
+            AbstrakHukumSeeder::class,
         ]);
     }
 }

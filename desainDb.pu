@@ -1,0 +1,120 @@
+@startuml JDIH FMIPA
+' skinparam linetype ortho
+
+
+entity Kategoris{
+    **id : integer <<PK>>**
+    --
+    nama :varchar
+    singkatan_nama :varchar
+    slug :varchar
+    deleted_at :timestamp
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+entity Peraturans{
+    **id : integer <<PK>>**
+    kategori_id :  integer <<FK>>
+    ' sumber_id :  integer <<FK>>
+    tahun_id :  integer <<FK>>
+    user_id :  integer <<FK>>
+    --
+    nama :varchar
+    deskripsi :text
+    judul :varchar
+    tempat_penetapan : varchar
+    tanggal_penetapan : varchar
+    tanggal_pengundangan : varchar
+    taggal_berlaku : varchar
+    jumlah_halaman: varchar
+    status :enum('berlaku','tidak berlaku')
+    bahasa : varchar
+    lokasi : varchar
+    teu : varchar
+    bidang : varchar
+    file : varchar
+    review: varchar
+    download: varchar
+    slug : varchar
+    deleted_at :timestamp
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+
+entity TagPeraturans{
+    **id : integer <<PK>>**
+    --
+    tag_id : integer <<FK>>
+    peraturan_id : integer <<FK>>
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+entity Tags{
+    **id : integer <<PK>>**
+    --
+    nama :varchar
+    slug :varchar
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+
+
+entity Abstrak{
+    **id : integer <<PK>>**
+    peraturan_id : integer <<FK>>
+    --
+    nama :varchar
+    materi_pokok :text
+    abstract :text
+    catatan :text
+    slug :varchar
+    deleted_at :timestamp
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+' entity Sumber{
+    '     **id : integer <<PK>>**
+    '     --
+    '     nama :varchar
+    '     slug :varchar
+    '
+' }
+
+entity Users{
+    **id : integer <<PK>>**
+    --
+    email :varchar
+    username :varchar
+    password :varchar
+    role :enum('admin', 'sub admin')
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+entity Tahuns{
+    **id : integer <<PK>>**
+    --
+    tahun:  integer
+    deleted_at :timestamp
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+
+Users||--o{Peraturans
+Tahuns||--o{Peraturans
+
+Kategoris||--o{Peraturans
+            ' Sumber||--o{
+' Peraturans
+Peraturans ||--|{TagPeraturans
+Tags ||--|{TagPeraturans
+Peraturans ||--o|Abstrak
+
+
+@enduml

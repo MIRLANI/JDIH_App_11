@@ -16,7 +16,7 @@ class Kategori extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'int';
     public $incrementing = true;
-    public $timestamps = true;
+    public $timestamps = false;
     protected $guarded = ["id"];
 
     public function sluggable(): array

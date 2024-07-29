@@ -3,9 +3,6 @@
 @section('title', 'JDIH FMIPA | Peraturan')
 
 @section('content')
-
-
-
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -23,18 +20,15 @@
                 </div>
             </div>
         </div>
-        @if (session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
-                    <a href="{{ route("create.peraturan") }}" class="btn  btn-primary mx-2" title="Delete">
+                    <a href="{{ route('create.peraturan') }}" class="btn  btn-primary mx-2" title="Delete">
                         <i class="bi bi-file-earmark-plus"></i>
                         Tambah
                     </a>
 
-                    <a href="{{ route("viewDelete.peraturan") }}" class="btn  btn-secondary">
+                    <a href="{{ route('viewDelete.peraturan') }}" class="btn  btn-secondary">
                         <i class="bi bi-eye"></i>
                         View Delete Data
                     </a>
@@ -56,8 +50,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
-                            @if(Auth::user()->role == 'admin')
+
+                            @if (Auth::user()->role == 'admin')
                                 @foreach ($peraturans as $peraturans)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -78,15 +72,15 @@
                                         </td>
                                         <td>
                                             <div class="d-flex buttons">
-                                                <a href="{{ route("destroy.peraturan", ["id" => $peraturans->id]) }}"
+                                                <a href="{{ route('destroy.peraturan', ['id' => $peraturans->id]) }}"
                                                     class="btn icon btn-danger" title="Delete" id="warning">
                                                     <i class="bi bi-trash "></i>
                                                 </a>
-                                                <a href="{{ route("edit.peraturan", ["id" => $peraturans->id, "slug" => $peraturans->slug]) }}"
+                                                <a href="{{ route('edit.peraturan', ['id' => $peraturans->id, 'slug' => $peraturans->slug]) }}"
                                                     class="btn icon btn-primary" title="Update">
                                                     <i class="bi bi-pencil "></i>
                                                 </a>
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
@@ -106,23 +100,25 @@
                                         <td>{{ $peraturans->sumber->nama ?? '' }}</td>
 
                                         <td>
-                                            <span @class([
-                                                'badge bg-danger' => $peraturans->status == 'tidak berlaku',
-                                                'badge bg-success' => $peraturans->status == 'berlaku',
-                                            ])>{{ $peraturans->status ?? 'Status Unknown' }}
+                                            <span
+                                                @class([
+                                                    'badge bg-danger' => $peraturans->status == 'tidak berlaku',
+                                                    'badge bg-success' => $peraturans->status == 'berlaku',
+                                                ])>{{ $peraturans->status ?? 'Status Unknown' }}
                                             </span>
                                         </td>
                                         <td>
                                             <div class="d-flex buttons">
-                                                <a href="{{ route("destroy.peraturan", ["id" => $peraturans->id]) }}"
-                                                    class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
+                                                <a href="{{ route('destroy.peraturan', ['id' => $peraturans->id]) }}"
+                                                    class="btn icon btn-danger" title="Delete" id="warning"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                     <i class="bi bi-trash"></i>
                                                 </a>
-                                                <a href="{{ route("edit.peraturan", ["id" => $peraturans->id, "slug" => $peraturans->slug]) }}"
+                                                <a href="{{ route('edit.peraturan', ['id' => $peraturans->id, 'slug' => $peraturans->slug]) }}"
                                                     class="btn icon btn-primary" title="Update">
                                                     <i class="bi bi-pencil "></i>
                                                 </a>
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
@@ -135,9 +131,4 @@
 
         </section>
     </div>
-
-
-
-
-
 @endsection

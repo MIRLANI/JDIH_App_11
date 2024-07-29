@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string("file")->nullable();
             $table->integer("review")->nullable();
             $table->integer("download")->nullable();
-            $table->enum("status_public", ["public", "non-public"])->default("public")->nullable();
+            // $table->enum("status_public", ["public", "non-public"])->default("public")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -63,7 +63,7 @@ return new class extends Migration
             $table->string("short_title")->nullable(false)->unique();
             $table->string("slug")->nullable(false);
             $table->softDeletes();
-            $table->timestamps();
+            // $table->timestamps();
         });
 
         Schema::create('tag_peraturans', function (Blueprint $table) {

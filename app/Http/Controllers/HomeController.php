@@ -82,13 +82,10 @@ class HomeController extends Controller
     {
 
         $query = Peraturan::query();
-        // Initialize a flag to check if any search criteria match
         $anyCriteriaMatch = false;
 
-        // Check if any search parameters are provided and set the flag if any criteria are filled
-        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag', 'jumlah_halaman'])) {
+        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag'])) {
             $query->where(function ($q) use ($request, &$anyCriteriaMatch) {
-                // Search by keyword in all fields if keyword is provided
                 if ($request->filled('keyword')) {
                     $keyword = $request->input('keyword');
                     $q->where(function ($q) use ($keyword) {
