@@ -7,6 +7,7 @@ use App\Models\Peraturan;
 use App\Models\Tag;
 use App\Models\Tahun;
 use App\Models\Sumber;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class DashboardController extends Controller
         
 
         $jmlKatagori = Auth::user()->role == "admin" ? Kategori::query()->count() : Peraturan::where('user_id', Auth::id())->count();
-        $jmlTipe  = Auth::user()->role == "admin" ? Sumber::query()->count() : Peraturan::where('user_id', Auth::id())->where('sumber_id', '!=', null)->count();
+        $jmlTipe  = Auth::user()->role == "admin" ? User::query()->where('username', '!=', 'administrator')->count() : Peraturan::where('user_id', Auth::id())  ->count();
         $jmlTag  = Auth::user()->role == "admin" ? Tag::query()->count() : Peraturan::where('user_id', Auth::id())->whereHas('tagPeraturans', function ($query) {
             $query->where('tag_id', '!=', null);
         })->count();
@@ -36,7 +37,6 @@ class DashboardController extends Controller
         $years = Tahun::where('tahun', '>=', $startYear)->orderBy('tahun', 'desc')->pluck('tahun')->take(5);
         foreach ($years as $year) {
             $count = Auth::user()->role == "admin" ? Peraturan::whereHas('tahuns', function ($query) use ($year) {
-                dd($year);
                 $query->where('tahun', $year);
             })->count() : Peraturan::where('user_id', Auth::id())->whereHas('tahuns', function ($query) use ($year) {
                 $query->where('tahun', $year);

@@ -58,13 +58,23 @@
                         <span>Peraturan</span>
                     </a>
                 </li>
+
+
                 <li
                     class="sidebar-item {{ request()->routeIs('index.abstrak', 'store.abstrak', 'destroy.abstrak', 'update.abstrak') ? 'active' : '' }}">
                     <a href="{{ route('index.abstrak') }}" class='sidebar-link'>
                         <i class="bi bi-journal-text"></i>
-                        <span>Abstrak Peraturan</span>
+                        <span>Abstrak </span>
                     </a>
                 </li>
+
+
+
+
+
+
+
+
                 <li class="sidebar-item  {{ request()->routeIs('index.kategori') ? 'active' : '' }}">
                     <a href="{{ route('index.kategori') }}" class='sidebar-link'>
                         <i class="bi bi-tags-fill"></i>
@@ -82,6 +92,29 @@
                         <i class="bi bi-calendar3"></i>
                         <span>Tahun</span>
                     </a>
+                </li>
+                <hr>
+                <li
+                    class="sidebar-item has-sub {{ request()->routeIs('index.akses', 'store.access', 'destroy.access', 'update.access') ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Setting Dokumen</span>
+                    </a>
+                    <ul
+                        class="submenu {{ request()->routeIs('index.akses', 'store.access', 'destroy.access', 'update.access', 'index.password', 'store.password', 'destroy.password', 'update.password') ? 'active' : '' }}">
+                        <li class="submenu-item {{ request()->routeIs('index.akses') ? 'active' : '' }}">
+                            <a href="{{ route('index.akses') }}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-text"></i>
+                                <span>Akses</span>
+                            </a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('index.password', 'store.password', 'destroy.password', 'update.password') ? 'active' : ''  }}">
+                            <a href="{{ route('index.password') }}" class='sidebar-link'>
+                                <i class="bi bi-key-fill"></i>
+                                <span>Password</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <hr>
 

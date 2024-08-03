@@ -33,9 +33,9 @@
                                         <select name="sumber" id="sumber" class="form-control">
                                             <option value="">Pilih Sumber Peraturan</option>
                                             @foreach ($sumbers as $sumber)
-                                                <option value="{{ $sumber->nama }}"
-                                                    {{ request()->filled('sumber') && request('sumber') == $sumber->nama ? 'selected' : '' }}>
-                                                    {{ $sumber->nama }}</option>
+                                                <option value="{{ $sumber->username }}"
+                                                    {{ request()->filled('sumber') && request('sumber') == $sumber->username ? 'selected' : '' }}>
+                                                    {{ $sumber->username }}</option>
                                             @endforeach
                                         </select>
                                     </div>

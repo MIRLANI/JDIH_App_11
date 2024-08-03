@@ -8,8 +8,8 @@
     @include('pages.users.sumber.pencarianSumber')
 
     @php
-        $groupedSubjeks = $sumberDokumens->sortBy('nama')->groupBy(function ($item) {
-            return strtoupper(substr($item->nama, 0, 1));
+        $groupedSubjeks = $sumberDokumens->sortBy('username')->groupBy(function ($item) {
+            return strtoupper(substr($item->username, 0, 1));
         });
     @endphp
 
@@ -22,8 +22,8 @@
             <div class="card-body m-3 bg-white rounded">
                 @foreach ($sumber as $sumber)
                     <div class="d-flex justify-content-between align-items-center py-2">
-                        <span class="text-start">{{ $sumber->nama ?? ""}}</span>
-                        <a href="{{ route('search', ['sumber' => $sumber->nama]) }}" class="btn btn-primary">
+                        <span class="text-start">{{ $sumber->username ?? ""}}</span>
+                        <a href="{{ route('search', ['sumber' => $sumber->username]) }}" class="btn btn-primary">
                             {{ $sumber->peraturans->count() }}
                         </a>
                     </div>

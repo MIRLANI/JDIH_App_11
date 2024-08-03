@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger("kategori_id")->nullable();
             $table->unsignedBigInteger("tahun_id")->nullable();
             $table->unsignedBigInteger("sumber_id")->nullable(); // ambil dari table sumber
+            $table->unsignedBigInteger("password_id")->nullable(); // ambil dari table password
             $table->unsignedBigInteger("user_id");
             $table->string("nama")->nullable();
             $table->text("deskripsi")->nullable();
@@ -47,7 +48,19 @@ return new class extends Migration
 
 
 
-        // 
+        // // 
+        Schema::create('passwords', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->string("password_name")->nullable();
+            $table->string("password")->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+
+
+
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string("nama")->nullable(false);
@@ -93,13 +106,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('sumbers', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->string("nama");
-            $table->timestamps();
-            // $table->softDeletes();
-        });
+        // Schema::create('sumbers', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger("user_id");
+        //     $table->string("nama");
+        //     $table->timestamps();
+        //     // $table->softDeletes();
+        // });
     }
 
     /**

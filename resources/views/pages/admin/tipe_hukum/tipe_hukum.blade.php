@@ -46,7 +46,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tipeHukums as $tipe)
+                            @foreach ($sumbers as $tipe)
                                 @if ($tipe->nama !== null)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>

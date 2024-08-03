@@ -51,7 +51,7 @@ class Peraturan extends Model
     public function tahuns()
     {
         return $this->belongsTo(Tahun::class, "tahun_id", "id");
-    }  
+    }
 
     public static function mostPopularProducts()
     {
@@ -67,13 +67,14 @@ class Peraturan extends Model
     }
 
 
-    public function sumber(): BelongsTo
-    {
-        return $this->belongsTo(Sumber::class, "sumber_id", "id");
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, "user_id", "id");
+    }
+
+    public function password(): BelongsTo
+    {
+        return $this->belongsTo(Password::class, "password_id", "id");
     }
 }

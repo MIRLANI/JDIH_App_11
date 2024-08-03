@@ -1,5 +1,5 @@
 <!-- Modal abstrak-->
-<div class="modal fade text-left" id="modal-{{ $hukum->id }}" tabindex="-1" role="dialog"
+<div class="modal fade text-left" id="modal-{{ $peraturan->id }}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel17" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
@@ -13,19 +13,19 @@
 
                 <div>
 
-                    <p>{{ optional($hukum->abstrak)->title ?? '' }}</p>
-                    <p>{{ $hukum->tahun->tahun ?? '' }}</p>
-                    <p>{{ strtoupper(optional($hukum->ketegori)->title ?? ('' . ' NO ' . $hukum->nomor ?? ('' . optional($hukum)->sumber ?? ''))) }}
+                    <p>{{ optional($peraturan->abstrak)->title ?? '' }}</p>
+                    <p>{{ $peraturan->tahun->tahun ?? '' }}</p>
+                    <p>{{ strtoupper(optional($peraturan->ketegori)->title ?? ('' . ' NO ' . $peraturan->nomor ?? ('' . optional($peraturan)->sumber ?? ''))) }}
                     </p>
                     <p>
-                        {{ strtoupper(optional($hukum)->deskripsi ?? '') }}
+                        {{ strtoupper(optional($peraturan)->deskripsi ?? '') }}
                     </p>
                     <div>
                         <h5>ABSTRAK:</h5>
                         <div>
                             <ul>
-                                @if ($hukum->abstrak)
-                                    @foreach (explode("\n", $hukum->abstrak->abstrak ?? '') as $point)
+                                @if ($peraturan->abstrak)
+                                    @foreach (explode("\n", $peraturan->abstrak->abstrak ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -35,8 +35,8 @@
                             <h5>CATATAN:</h5>
                             <p>
                             <ul>
-                                @if ($hukum->abstrak)
-                                    @foreach (explode("\n", $hukum->abstrak->catatam ?? '') as $point)
+                                @if ($peraturan->abstrak)
+                                    @foreach (explode("\n", $peraturan->abstrak->catatam ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -55,7 +55,7 @@
 
 <!-- Modal review dokumen -->
 
-<div class="modal fade" id="modalpdf-{{ $hukum->id }}" tabindex="-1" aria-labelledby="pdfModalLabel"
+<div class="modal fade" id="modalpdf-{{ $peraturan->id }}" tabindex="-1" aria-labelledby="pdfModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -64,8 +64,8 @@
             </div>
             <div class="modal-body">
                 <!-- Tampilkan file PDF disini -->
-                @if ($hukum->id && $hukum->file)
-                    <iframe id="pdfIframe-{{ $hukum->id }}" style="width: 100%; height: 800px;" src="" data-src="{{ route('review', ['id' => $hukum->id, 'file' => $hukum->file]) }}#toolbar=0"></iframe>
+                @if ($peraturan->id && $peraturan->file)
+                    <iframe id="pdfIframe-{{ $peraturan->id }}" style="width: 100%; height: 800px;" src="" data-src="{{ route('review', ['id' => $peraturan->id, 'file' => $peraturan->file]) }}#toolbar=0"></iframe>
                 @endif
             </div>
         </div>
@@ -74,9 +74,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var modal = document.getElementById('modalpdf-{{ $hukum->id }}');
+        var modal = document.getElementById('modalpdf-{{ $peraturan->id }}');
         modal.addEventListener('show.bs.modal', function () {
-            var iframe = document.getElementById('pdfIframe-{{ $hukum->id }}');
+            var iframe = document.getElementById('pdfIframe-{{ $peraturan->id }}');
             iframe.src = iframe.getAttribute('data-src');
         });
     });

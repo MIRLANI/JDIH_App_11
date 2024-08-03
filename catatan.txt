@@ -1,0 +1,11 @@
+Kode ini adalah bagian dari metode `search` dalam `HomeController`. Berikut penjelasannya:
+
+- **`$query->where(function ($q) use ($request, &$anyCriteriaMatch)`**: Ini adalah awal dari sebuah klausa `where` yang menggunakan fungsi anonim (closure) untuk membangun kondisi pencarian yang lebih kompleks.
+  
+- **`$q`**: Merupakan parameter yang mewakili query builder yang akan digunakan untuk menambahkan kondisi pencarian.
+
+- **`use ($request, &$anyCriteriaMatch)`**: Ini memungkinkan fungsi anonim untuk mengakses variabel `$request` dan `$anyCriteriaMatch` dari lingkup luar. Variabel `$request` digunakan untuk mendapatkan input dari permintaan HTTP, sedangkan `$anyCriteriaMatch` adalah flag yang menunjukkan apakah ada kriteria pencarian yang cocok.
+
+- **`// Memeriksa apakah request mengandung keyword`**: Komentar ini menjelaskan bahwa bagian kode berikutnya akan memeriksa apakah ada input `keyword` dalam permintaan.
+
+Secara keseluruhan, bagian ini bertujuan untuk membangun kondisi pencarian berdasarkan input yang diberikan oleh pengguna, dan menandai jika ada kriteria yang cocok.

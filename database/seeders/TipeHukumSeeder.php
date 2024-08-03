@@ -6,7 +6,7 @@ use App\Models\Sumber;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TipeHukumSeeder extends Seeder
+class sumberseeder extends Seeder
 {
     /**
      * Run the database seeds.

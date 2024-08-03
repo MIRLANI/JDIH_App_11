@@ -33,8 +33,8 @@
 </div>
 
 
-@if ($produkHukum->isNotEmpty())
-    @foreach ($produkHukum as $hukum)
+@if ($peraturans->isNotEmpty())
+    @foreach ($peraturans as $hukum)
         @include('pages.users.modalSearch')
         <div class="card w-75 mx-auto my-5 shadow">
             <div class="card-body">
@@ -133,28 +133,28 @@
 
 
 {{-- kodisi pagination --}}
-@if ($produkHukum->total() > 5)
+@if ($peraturans->total() > 5)
     <div class="card-body text-center">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-primary">
-                @if ($produkHukum->previousPageUrl())
+                @if ($peraturans->previousPageUrl())
                     <li class="page-item mx-1">
-                        <a class="page-link" href="{{ $produkHukum->previousPageUrl() }}">Prev</a>
+                        <a class="page-link" href="{{ $peraturans->previousPageUrl() }}">Prev</a>
                     </li>
                 @endif
 
-                @foreach ($produkHukum->getUrlRange(1, $produkHukum->lastPage()) as $page => $url)
-                    @if ($page >= $produkHukum->currentPage() - 2 && $page <= $produkHukum->currentPage() + 2)
-                        <li class="page-item mx-1 {{ $produkHukum->currentPage() == $page ? 'active' : '' }}">
+                @foreach ($peraturans->getUrlRange(1, $peraturans->lastPage()) as $page => $url)
+                    @if ($page >= $peraturans->currentPage() - 2 && $page <= $peraturans->currentPage() + 2)
+                        <li class="page-item mx-1 {{ $peraturans->currentPage() == $page ? 'active' : '' }}">
                             <a class="page-link" href="{{ $url }}"
                                 data-url="{{ $url }}">{{ $page }}</a>
                         </li>
                     @endif
                 @endforeach
 
-                @if ($produkHukum->nextPageUrl())
+                @if ($peraturans->nextPageUrl())
                     <li class="page-item mx-1">
-                        <a class="page-link" href="{{ $produkHukum->nextPageUrl() }}">Next</a>
+                        <a class="page-link" href="{{ $peraturans->nextPageUrl() }}">Next</a>
                     </li>
                 @endif
             </ul>

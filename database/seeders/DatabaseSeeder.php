@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
-        DB::table('sumbers')->truncate();
         DB::table('tahuns')->truncate();
+        DB::table('passwords')->truncate();
         DB::table('peraturans')->truncate();
         DB::table('kategoris')->truncate();
         DB::table('abstraks')->truncate();
@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             TahunSeeder::class,
             SubjekHukumSeeder::class,
             UserSeeder::class,
-            TipeHukumSeeder::class,
+            // sumberseeder::class,
+            PasswordSeeder::class,
             ProductHukumSeeder::class,
             AbstrakHukumSeeder::class,
         ]);

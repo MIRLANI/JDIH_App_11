@@ -54,9 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Peraturan::class, "user_id", "id");
     }
 
-    public function sumberPeraturan(): HasOne
+   
+
+    public function aksesDokumens(): HasMany
     {
-        return $this->hasOne(Sumber::class, "user_id", "id");
+        return $this->hasMany(Password::class, "user_id", "id");
     }
 
 }

@@ -17,27 +17,33 @@ return new class extends Migration
         Schema::table('peraturans', function (Blueprint $table) {
             $table->foreign("kategori_id")->references("id")->on("kategoris");
             $table->foreign("tahun_id")->references("id")->on("tahuns");
-            $table->foreign("sumber_id")->on("sumbers")->references("id");
             $table->foreign("user_id")->on("users")->references("id");
+            $table->foreign("password_id")->on("passwords")->references("id");
             
         });
 
+        
+        // relasi meny to one
+        Schema::table('passwords', function (Blueprint $table) {
+            $table->foreign("user_id")->on("users")->references("id");
+        });
+
+        
+        // relasi one to one
         Schema::table('abstraks', function (Blueprint $table) {
             // $table->foreign("user_id")->on("users")->references("id");
             $table->foreign("peraturan_id")->on("peraturans")->references("id");
 
         });
 
-
+        // relasi meny to meny
         Schema::table('tag_peraturans', function (Blueprint $table) {
             $table->foreign("tag_id")->references("id")->on("tags");
             $table->foreign("peraturan_id")->references("id")->on("peraturans");
            
         });
 
-        Schema::table('sumbers', function (Blueprint $table) {
-            $table->foreign("user_id")->references("id")->on("users");
-        });
+ 
 
 
     }
@@ -50,8 +56,9 @@ return new class extends Migration
         Schema::table('peraturans', function (Blueprint $table) {
             $table->dropForeign("kategori_id");
             $table->dropForeign("tahun_id");
-            $table->dropForeign("sumber_id");
             $table->dropForeign("user_id");
+            $table->dropForeign("password_id");
+            $table->dropForeign("password_id");
         });
 
         Schema::table('abstraks', function (Blueprint $table) {
@@ -64,8 +71,6 @@ return new class extends Migration
             $table->dropForeign("peraturan_id");
         });
 
-        Schema::table('sumbers', function (Blueprint $table) {
-            $table->dropForeign("user_id");
-        });
+       
     }
 };

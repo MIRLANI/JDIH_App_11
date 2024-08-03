@@ -34,26 +34,27 @@
                     </a>
 
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped" id="table1">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Peraturan</th>
-                                {{-- <th>Deskripsi</th> --}}
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Tag</th>
-                                <th>Sumber</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+              
 
                             @if (Auth::user()->role == 'admin')
-                                @foreach ($peraturans as $peraturans)
-                                    <tr>
+                            <div class="card-body">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Peraturan</th>
+                                            {{-- <th>Deskripsi</th> --}}
+                                            <th>Judul</th>
+                                            <th>Kategori</th>
+                                            <th>Tag</th>
+                                            <th>Sumber</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($peraturans as $peraturans)
+                                <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td> {{ $peraturans->nama ?? '' }}</td>
                                         {{-- <td>{{ $peraturans->deskripsi }}</td> --}}
@@ -62,7 +63,7 @@
                                         <td>
                                             {{ $peraturans->tagPeraturans->isNotEmpty() ? implode(', ', $peraturans->tagPeraturans->pluck('nama')->toArray()) : 'N/A' }}
                                         </td>
-                                        <td>{{ $peraturans->sumber->nama ?? '' }}</td>
+                                        <td>{{ $peraturans->user->username ?? '' }}</td>
                                         <td>
                                             <span @class([
                                                 'badge bg-danger' => $peraturans->status == 'tidak berlaku',
@@ -86,6 +87,21 @@
                                     </tr>
                                 @endforeach
                             @else
+                            <div class="card-body">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Peraturan</th>
+                                            {{-- <th>Deskripsi</th> --}}
+                                            <th>Judul</th>
+                                            <th>Kategori</th>
+                                            <th>Tag</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                 @foreach ($peraturans->where('user_id', Auth::user()->id) as $peraturans)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -97,7 +113,7 @@
                                             {{ $peraturans->tagPeraturans->isNotEmpty() ? implode(', ', $peraturans->tagPeraturans->pluck('nama')->toArray()) : 'N/A' }}
                                         </td>
                                         {{-- @dd($peraturans->sumber->nama) --}}
-                                        <td>{{ $peraturans->sumber->nama ?? '' }}</td>
+                                        {{-- <td>{{ $peraturans->user->username ?? '' }}</td> --}}
 
                                         <td>
                                             <span

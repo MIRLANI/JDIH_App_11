@@ -14,7 +14,7 @@
     @endif
     
     @if (URL::current() == route('search') || URL::current() == route('Search'))
-        @include('pages.users.hasilPencarianProdukHukum')
+        @include('pages.users.hasilPencarianPeraturan')
     @endif
 
 @endsection

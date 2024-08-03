@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<div class="modal fade text-left" id="modal-{{ $produkHukum->id }}" tabindex="-1" role="dialog"
+<div class="modal fade text-left" id="modal-{{ $peraturan->id }}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel17" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
@@ -12,19 +12,19 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <p>{{ optional($produkHukum->abstrak)->title ?? '' }}</p>
-                    <p>{{ $produkHukum->tahun->tahun ?? '' }}</p>
-                    <p>{{ strtoupper(optional($produkHukum->ketegori)->title ?? '' . ' NO ' . $produkHukum->nomor ?? '' . optional($produkHukum)->sumber ?? '') }}
+                    <p>{{ optional($peraturan->abstrak)->title ?? '' }}</p>
+                    <p>{{ $peraturan->tahun->tahun ?? '' }}</p>
+                    <p>{{ strtoupper(optional($peraturan->ketegori)->title ?? '' . ' NO ' . $peraturan->nomor ?? '' . optional($peraturan)->sumber ?? '') }}
                     </p>
                     <p>
-                        {{ strtoupper(optional($produkHukum)->deskripsi ?? '') }}
+                        {{ strtoupper(optional($peraturan)->deskripsi ?? '') }}
                     </p>
                     <div>
                         <h5>ABSTRAK:</h5>
                         <div>
                             <ul>
-                                @if($produkHukum->abstrak)
-                                    @foreach (explode("\n", $produkHukum->abstrak->abstrak ?? '') as $point)
+                                @if($peraturan->abstrak)
+                                    @foreach (explode("\n", $peraturan->abstrak->abstrak ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif
@@ -34,8 +34,8 @@
                             <h5>CATATAN:</h5>
                             <p>
                             <ul>
-                                @if($produkHukum->abstrak)
-                                    @foreach (explode("\n", $produkHukum->abstrak->catatan ?? '') as $point)
+                                @if($peraturan->abstrak)
+                                    @foreach (explode("\n", $peraturan->abstrak->catatan ?? '') as $point)
                                         <li>{{ $point }}</li>
                                     @endforeach
                                 @endif

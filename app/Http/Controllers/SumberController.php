@@ -13,13 +13,13 @@ class SumberController extends Controller
      */
     public function index()
      {
-        $tipeHukums = Sumber::query()->orderBy('created_at', 'desc')->get();
+        $sumbers = User::query()->where('username', '!=', 'administrator')->orderBy('created_at', 'desc')->get();
         $users = User::query()
-            ->whereDoesntHave('sumberPeraturan')
+            ->whereDoesntHave('peraturans')
             ->where('role', '!=', 'admin')
             ->get();
         return response()->view("pages.admin.tipe_hukum.tipe_hukum", [
-            "tipeHukums" => $tipeHukums,
+            "sumbers" => $sumbers,
             "users" => $users
         ]);
      }
@@ -32,7 +32,7 @@ class SumberController extends Controller
                 'nama' => 'required|string|max:255|unique:sumbers,nama', 
                 'user_id' => 'required', 
             ]);
-            Sumber::query()->create($validatedData);
+            User::query()->create($validatedData);
             return response()->redirectToRoute("index.sumber")->with("message", "Add Sumber Peraturan Successful");
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -44,7 +44,7 @@ class SumberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id, Request $request, Sumber $sumber)
+    public function update(string $id, Request $request, User $sumber)
     {
         $sumber->query()->find($id)->update($request->all());
         return response()->redirectToRoute("index.sumber")->with("message", "Sumber Peraturan Updated Successfully");
@@ -53,7 +53,7 @@ class SumberController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, Sumber $sumber, User $user)
+    public function destroy(string $id, User $sumber, User $user)
     {
    
         $user = $user->query()->find($id);

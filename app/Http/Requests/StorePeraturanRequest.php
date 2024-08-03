@@ -26,7 +26,7 @@ class StorePeraturanRequest extends FormRequest
             "nama" => ["required", 'unique:peraturans,nama'],
             "deskripsi" => "required",
 
-            "sumber_id" => "required",
+            "user_id" => "required",
             "judul" => "required",
             "tahun_id" => ["required", "numeric"],
             "kategori_id" => "required",

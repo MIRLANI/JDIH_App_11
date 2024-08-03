@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Peraturan;
 use App\Http\Requests\StorePeraturanRequest;
 use App\Http\Requests\UpdatePeraturanRequest;
-use App\Models\Akses;
+use App\Models\AksesDokumen;
 use App\Models\Kategori;
 use App\Models\Tag;
 use App\Models\Tahun;
@@ -23,7 +23,7 @@ class PeraturanController extends Controller
     {
         $peraturans = Peraturan::orderBy('created_at', 'desc')->get();
 
-        return response()->view("pages.admin.product_hukum.produk_hukum", [
+        return response()->view("pages.admin.peraturan.peraturan", [
             "peraturans" => $peraturans,
             "users" => User::query()->get()
         ]);
@@ -39,16 +39,16 @@ class PeraturanController extends Controller
         $tagPeraturans = Tag::query()->get();
         $tahuns = Tahun::query()->get();
         if (auth()->user()->role == 'admin') {
-            $tipeHukums = Sumber::query()->get();
+            $sumbers = User::query()->where('username', '!=', 'administrator')->get();
         } else {
-            $tipeHukums = Sumber::query()->where('user_id', auth()->id())->first();
+            $sumbers = User::query()->where('id', auth()->id())->first();
         }
-        return response()->view("pages.admin.product_hukum.tambah_product_hukum", [
+        return response()->view("pages.admin.peraturan.tambah_peraturan", [
             "peraturans" => $peraturans,
             "kategoris" => $categoryHukums,
             "tags" => $tagPeraturans,
             "tahuns" => $tahuns,
-            "tipeHukums" => $tipeHukums
+            "sumbers" => $sumbers
         ]);
     }
 
@@ -75,16 +75,16 @@ class PeraturanController extends Controller
             $productHukumData['file'] = $file; // Store only the file name in the database
 
             // Handle nested array data if present
-            if ($request->has('status_hukum')) {
-                $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
-            }
+            // if ($request->has('status_hukum')) {
+            //     $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
+            // }
       
         } else {
             $productHukumData = $request->all();
             // Handle nested array data if present
-            if ($request->has('status_hukum')) {
-                $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
-            }
+            // if ($request->has('status_hukum')) {
+            //     $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
+            // }
         }
 
         // Capitalize the first letter of 'nama', 'deskripsi', and 'judul'
@@ -118,18 +118,18 @@ class PeraturanController extends Controller
         $peraturans = Peraturan::query()->get();
         $tahuns = Tahun::query()->get();
         if (auth()->user()->role == 'admin') {
-            $tipeHukums = Sumber::query()->get();
+            $sumbers = User::query()->get();
         } else {
-            $tipeHukums = Sumber::query()->where('user_id', auth()->id())->first();
+            $sumbers = User::query()->where('id', auth()->id())->first();
            
         }
-        return response()->view("pages.admin.product_hukum.update_product_hukum", [
+        return response()->view("pages.admin.peraturan.update_peraturan", [
             "peraturans" => $peraturans,
             "tags" => $tagPeraturans,
             "kategoris" => $categoryHukums,
             "product_hukum" => $product,
             "tahuns" => $tahuns,
-            "tipeHukums" => $tipeHukums
+            "sumbers" => $sumbers
         ]);
     }
 
@@ -186,7 +186,7 @@ class PeraturanController extends Controller
     public function viewDelete()
     {
         $peraturans = Peraturan::onlyTrashed()->get();
-        return response()->view("pages.admin.product_hukum.view_delete_product_hukum", [
+        return response()->view("pages.admin.peraturan.view_delete_peraturan", [
             "peraturans" => $peraturans
         ]);
     }

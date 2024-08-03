@@ -16,6 +16,7 @@ class ProductHukumSeeder extends Seeder
         $data1 = [
             "kategori_id" => 1,
             "tahun_id" => 1,
+            "password_id" => 1,
             "nama" => "Paduan Penyusunan Skripsi",
             "deskripsi" => "Keputusan Dekan Fakultas Matematika dan Ilmu Pengetahun Alam Universitas Halu Oleo",
             "judul" => " Penetapan Buku Paduan Penyusunana Skripsi Dalam Lingkungan Fakultas Matematika dan Ilmu Pengetahuan Alam",
@@ -41,6 +42,7 @@ class ProductHukumSeeder extends Seeder
         $data2 = [
             "kategori_id" => 1,
             "tahun_id" => 1,
+            "password_id" => 2,
             "nama" => "Peraturan Dekan FMIPA Nomor 2 Tahun 2021 tentang Kode Etik Mahasiswa",
             "deskripsi" => "Peraturan ini berisi tentang kode etik yang harus diikuti oleh mahasiswa FMIPA.",
             "judul" => "Peraturan Dekan FMIPA Nomor 2 Tahun 2021 tentang Kode Etik Mahasiswa",

@@ -4,8 +4,11 @@ use App\Http\Controllers\AbstrakController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AksesController;
+use App\Http\Controllers\AksesDokumenController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManajemenController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TahunController;
@@ -29,6 +32,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get("/sumber",  "sumber")->name("sumber");
     Route::get("/tahun",  "tahun")->name("tahun");
     Route::get("/detail/{id}/{slug}",  "detail")->name("detail");
+    Route::post("/detail/{id}/{slug}",  "detail")->name("password");
     Route::get("/download_file/{id}/{file}",  "download")->name("download");
     Route::get("/review_file/{id}/{file}",  "review")->name("review");
 
@@ -56,6 +60,20 @@ Route::prefix("/admin")->middleware(AdminMiddleware::class)->group(function () {
         Route::get("/product-peraturan-restore/{id}", "restore")->name("restore.peraturan");
         Route::get("/product-peraturan-update/{id}/{slug}", "edit")->name("edit.peraturan");
         Route::post("/product-peraturan-update/{id}/{slug}", "update")->name("update.peraturan");
+    });
+
+    Route::controller(AksesDokumenController::class)->group(function(){
+        Route::get("/dokumen-access", "index")->name("index.akses");
+        Route::post("/dokumen-access-add", "store")->name("store.akses");
+        Route::post("/dokumen-access-update/{id}", "update")->name("update.akses");
+        Route::get("/dokumen-access-delete/{id}", "destroy")->name("destroy.akses");
+    });
+
+    Route::controller(PasswordController::class)->group(function(){
+        Route::get("/password", "index")->name("index.password");
+        Route::post("/password-add", "store")->name("store.password");
+        Route::post("/password-update/{id}", "update")->name("update.password");
+        Route::get("/password-delete/{id}", "destroy")->name("destroy.password");
     });
 
     Route::controller(AbstrakController::class)->group(function () {

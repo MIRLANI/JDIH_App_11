@@ -3,7 +3,7 @@
     <div class="card-body" style="border-radius: 2000px;">
         <h4 class="card-title" style="color: #333;">PERATURAN TERPOPULER</h4>
         <div class="row">
-            @foreach ($produkHukumsTerpopuler as $terpopuler)
+            @foreach ($peraturanTerpopulers as $terpopuler)
                 <div class="col-md-6">
                     <div class="card"
                         style="margin: 10px; background-color: #FFFFFF; border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">

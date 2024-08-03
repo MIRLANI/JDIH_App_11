@@ -1,5 +1,5 @@
 @startuml JDIH FMIPA
-' skinparam linetype ortho
+skinparam linetype ortho
 
 
 entity Kategoris{
@@ -19,6 +19,7 @@ entity Peraturans{
     ' sumber_id :  integer <<FK>>
     tahun_id :  integer <<FK>>
     user_id :  integer <<FK>>
+    password_id :  integer <<FK>>
     --
     nama :varchar
     deskripsi :text
@@ -77,12 +78,14 @@ entity Abstrak{
     updated_at :timestamp
 }
 
-' entity Sumber{
-    '     **id : integer <<PK>>**
-    '     --
-    '     nama :varchar
-    '     slug :varchar
-    '
+' entity Sumbers{
+'         **id : integer <<PK>>**
+'         user_id : integer <<FK>>
+'         --
+'         nama :varchar
+'         slug :varchar
+'         created_at :timestamp
+'         updated_at :timestamp    
 ' }
 
 entity Users{
@@ -105,16 +108,26 @@ entity Tahuns{
     updated_at :timestamp
 }
 
+entity Passwords{
+    **id : integer <<PK>>**
+    user_id : integer <<FK>>
+    --
+    password_name : varchar
+    password : varchar
+    created_at :timestamp
+    updated_at :timestamp
+}
+
+Peraturans}o-o|Passwords
+Users||-o{Passwords
+Peraturans ||-o|Abstrak
+Peraturans ||-|{TagPeraturans
+Tags ||--|{TagPeraturans
 
 Users||--o{Peraturans
 Tahuns||--o{Peraturans
 
 Kategoris||--o{Peraturans
-            ' Sumber||--o{
-' Peraturans
-Peraturans ||--|{TagPeraturans
-Tags ||--|{TagPeraturans
-Peraturans ||--o|Abstrak
 
 
 @enduml
