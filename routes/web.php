@@ -56,9 +56,6 @@ Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(function () {
         Route::post('/product-peraturan-update/{id}/{slug}', 'update')->name('update.peraturan');
     });
 
-
-
-    
     Route::controller(AksesDokumenController::class)->group(function () {
         Route::get('/dokumen-access', 'index')->name('index.akses');
         Route::post('/dokumen-access-add', 'store')->name('store.akses');
