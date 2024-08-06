@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         DB::listen(function ($query) {
-            return Log::alert("query: " . $query->sql);
+            return Log::alert('query: '.$query->sql);
         });
     }
 

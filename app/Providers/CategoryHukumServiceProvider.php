@@ -9,17 +9,15 @@ use Illuminate\Support\ServiceProvider;
 
 class CategoryHukumServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    
-
     public array $singletons = [
-        CategoryHukumService::class => CategoryHukumServiceImpl::class
+        CategoryHukumService::class => CategoryHukumServiceImpl::class,
     ];
 
     public function provides(): array
     {
-      return [
-        CategoryHukumService::class
-    ];
+        return [
+            CategoryHukumService::class,
+        ];
     }
 
     public function register(): void

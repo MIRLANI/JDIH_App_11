@@ -12,77 +12,69 @@ return new class extends Migration
     public function up(): void
     {
 
-
         // table peraturan
         Schema::create('peraturans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("kategori_id")->nullable();
-            $table->unsignedBigInteger("tahun_id")->nullable();
-            $table->unsignedBigInteger("sumber_id")->nullable(); // ambil dari table sumber
-            $table->unsignedBigInteger("password_id")->nullable(); // ambil dari table password
-            $table->unsignedBigInteger("user_id");
-            $table->string("nama")->nullable();
-            $table->text("deskripsi")->nullable();
-            $table->string("tipe_dokumen")->nullable();
-            $table->string("judul")->nullable();
-            $table->string("tempat_penetapan")->nullable();
-            $table->string("tanggal_penetapan")->nullable();
-            $table->string("tanggal_pengundangan")->nullable();
-            $table->string("tanggal_berlaku")->nullable();
-            $table->string("jumlah_halaman")->nullable();
-            $table->enum("status", ["berlaku", "tidak berlaku"])->nullable();
-            $table->string("bahasa")->nullable();
-            $table->string("lokasi")->nullable();
-            $table->string("teu")->nullable();
-            $table->string("nomor")->nullable();
-            $table->string("bidang")->nullable();
-            $table->text("status_hukum")->nullable();
-            $table->string("slug")->nullable();
-            $table->string("file")->nullable();
-            $table->integer("review")->nullable();
-            $table->integer("download")->nullable();
+            $table->unsignedBigInteger('kategori_id')->nullable();
+            $table->unsignedBigInteger('tahun_id')->nullable();
+            $table->unsignedBigInteger('password_id')->nullable(); // ambil dari table password
+            $table->unsignedBigInteger('user_id');
+            $table->string('nama')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->string('judul')->nullable();
+            $table->string('tempat_penetapan')->nullable();
+            $table->string('tanggal_penetapan')->nullable();
+            $table->string('tanggal_pengundangan')->nullable();
+            $table->string('tanggal_berlaku')->nullable();
+            $table->string('jumlah_halaman')->nullable();
+            $table->enum('status', ['berlaku', 'tidak berlaku'])->nullable();
+            $table->string('bahasa')->nullable();
+            $table->string('lokasi')->nullable();
+            $table->string('teu')->nullable();
+            $table->string('nomor')->nullable();
+            $table->string('bidang')->nullable();
+            $table->text('status_hukum')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('file')->nullable();
+            $table->integer('review')->nullable();
+            $table->integer('download')->nullable();
             // $table->enum("status_public", ["public", "non-public"])->default("public")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
-
-
-        // // 
+        // //
         Schema::create('passwords', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->string("password_name")->nullable();
-            $table->string("password")->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('password_name')->nullable();
+            $table->string('password')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
-
-
-
 
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string("nama")->nullable(false);
-            $table->string("slug")->nullable(false);
+            $table->string('nama')->nullable(false);
+            $table->string('slug')->nullable(false);
             $table->softDeletes();
             $table->timestamps();
         });
 
-        // 
+        //
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->nullable(false)->unique();
-            $table->string("short_title")->nullable(false)->unique();
-            $table->string("slug")->nullable(false);
+            $table->string('title')->nullable(false)->unique();
+            $table->string('short_title')->nullable(false)->unique();
+            $table->string('slug')->nullable(false);
             $table->softDeletes();
             // $table->timestamps();
         });
 
         Schema::create('tag_peraturans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("tag_id")->nullable(false);
-            $table->unsignedBigInteger("peraturan_id")->nullable(false);
+            $table->unsignedBigInteger('tag_id')->nullable(false);
+            $table->unsignedBigInteger('peraturan_id')->nullable(false);
             $table->timestamps();
         });
 
@@ -101,7 +93,7 @@ return new class extends Migration
 
         Schema::create('tahuns', function (Blueprint $table) {
             $table->id();
-            $table->integer("tahun")->nullable();
+            $table->integer('tahun')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -126,6 +118,6 @@ return new class extends Migration
         Schema::dropIfExists('kategoris');
         Schema::dropIfExists('tag_peraturans');
         Schema::dropIfExists('abstraks');
-        Schema::dropIfExists('sumbers');
+        // Schema::dropIfExists('sumbers');
     }
 };

@@ -22,24 +22,24 @@ class UpdatePeraturanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "sumber_id" => "required",
+            'sumber_id' => 'required',
             // "kategori_id" => "required",
-            "tahun_id" => ["required", "numeric"],
-            
-            "nama" => ["required"],
-            "deskripsi" => "required",
-            "judul" => "required",
+            'tahun_id' => ['required', 'numeric'],
+
+            'nama' => ['required'],
+            'deskripsi' => 'required',
+            'judul' => 'required',
             // "tempat_penetapan" => "required",
             // "tanggal_penetapan" => "required",
             // "tanggal_pengundangan" => "required",
             // "tanggal_berlaku" => "required",
-            "kategori_id" => "required",
-            "jumlah_halaman" => "required",
-            "status" => "required",
-            "bahasa" => "required",
-            "lokasi" => "required",
-            "teu" => "required",
-            "nomor" => "required",
+            'kategori_id' => 'required',
+            'jumlah_halaman' => 'required',
+            'status' => 'required',
+            'bahasa' => 'required',
+            'lokasi' => 'required',
+            'teu' => 'required',
+            'nomor' => 'required',
             // "file" => ["required", "file", "mimes:pdf"],
         ];
     }

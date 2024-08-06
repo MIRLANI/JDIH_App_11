@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\DB;
 abstract class TestCase extends BaseTestCase
 {
     public CategoryHukumService $categoriHukumService;
+
     protected function setUp(): void
     {
         parent::setUp();
-        DB::delete("delete from kategoris");
+        DB::delete('delete from kategoris');
         $this->categoriHukumService = $this->app->make(CategoryHukumService::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSubjekHukumRequest extends FormRequest
+class StoreTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateSubjekHukumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nama" => ["required", "unique:tags,nama," . $this->route("subjek_hukum.update"),]
+            'nama' => ['required', 'unique:tags,nama,'.$this->route('subjek_hukum.store')],
         ];
     }
 }

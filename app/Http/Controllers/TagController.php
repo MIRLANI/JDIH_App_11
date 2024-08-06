@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
-use App\Http\Requests\StoreSubjekHukumRequest;
-use App\Http\Requests\UpdateSubjekHukumRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -15,48 +15,45 @@ class TagController extends Controller
      */
     public function index(): Response
     {
-        $tagPeraturans = Tag::query()->orderBy("id", "desc")->get();
-        return response()->view("pages.admin.subjek_hukum.subjek_hukum",[
-            "tagPeraturans" => $tagPeraturans
+        $tags = Tag::query()->orderBy('id', 'desc')->get();
+
+        return response()->view('pages.admin.tag.tag', [
+            'tags' => $tags,
         ]);
     }
 
-    
-
-    public function store(StoreSubjekHukumRequest $request)
+    public function store(StoreTagRequest $request)
     {
         try {
-            $subjekHukum = Tag::query()->create($request->validated());
-            $subjekHukum->save();
-            return response()->redirectToRoute("index.tag")->with("message", "Add Subjek Peraturan Successfully");
+            $tag = Tag::query()->create($request->validated());
+            $tag->save();
+
+            return response()->redirectToRoute('index.tag')->with('message', 'Add Tag Peraturan Successfully');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
     }
 
-    
-    
-    public function update(string $id, UpdateSubjekHukumRequest $request): RedirectResponse
+    public function update(string $id, UpdateTagRequest $request): RedirectResponse
     {
-        $ketegori = Tag::query()->find($id);
-        $ketegori->nama = $request->input("nama");
-        $ketegori->update();
-        return redirect()->route("index.tag")->with("message", "Subjek Peraturan Update Successfull");
+        $tag = Tag::query()->find($id);
+        $tag->nama = $request->input('nama');
+        $tag->update();
+
+        return redirect()->route('index.tag')->with('message', 'Tag Peraturan Update Successfull');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, Tag $subjekHukum)
+    public function destroy(string $id, Tag $tag)
     {
-        $data = $subjekHukum::query()->find($id);
+        $data = $tag::query()->find($id);
         if ($data->peraturans()->exists()) {
-            return redirect()->route("index.tag")->with("error", "Peraturan is still in use and cannot be deleted.");
+            return redirect()->route('index.tag')->with('error', 'Peraturan is still in use and cannot be deleted.');
         }
         $data->delete();
-        return redirect()->route("index.tag")->with("message", "Subjek Peraturan Delete Successfull");
+
+        return redirect()->route('index.tag')->with('message', 'Tag Peraturan Delete Successfull');
     }
-
-    
-
 }

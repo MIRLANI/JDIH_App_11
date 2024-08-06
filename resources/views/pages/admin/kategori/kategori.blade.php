@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-       
+
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
@@ -33,7 +33,7 @@
                     </button>
 
                     <!-- Modal -->
-                    @include('pages.admin.category_hukum.create_katagori_hukum')
+                    @include('pages.admin.kategori.create_kategori')
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
@@ -68,7 +68,7 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        
+
                                         <td>
                                             <form action="{{ route('update.kategori', ['id' => $katagori->id]) }}"
                                                 method="POST">

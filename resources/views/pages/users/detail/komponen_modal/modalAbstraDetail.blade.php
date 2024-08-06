@@ -12,7 +12,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <p>{{ optional($peraturan->abstrak)->title ?? '' }}</p>
+                    <p>{{ optional($peraturan->abstrak)->nama ?? '' }}</p>
                     <p>{{ $peraturan->tahun->tahun ?? '' }}</p>
                     <p>{{ strtoupper(optional($peraturan->ketegori)->title ?? '' . ' NO ' . $peraturan->nomor ?? '' . optional($peraturan)->sumber ?? '') }}
                     </p>

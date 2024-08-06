@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Sumber;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class sumberseeder extends Seeder
@@ -21,53 +20,47 @@ class sumberseeder extends Seeder
 
         // $create = Sumber::query()->create($tipe);
         // $create->save();
-        
-      
 
         $tipe1 = Sumber::query()->create([
-            "nama" => "Ilmu Komputer",
-            "user_id" => 2
+            'nama' => 'Ilmu Komputer',
+            'user_id' => 2,
         ]);
         $tipe1->save();
 
         $tipe2 = Sumber::query()->create([
-            "nama" => "metematika",
-            "user_id" => 3
+            'nama' => 'metematika',
+            'user_id' => 3,
         ]);
         $tipe2->save();
 
         $tipe3 = Sumber::query()->create([
-            "nama" => "biologi",
-            "user_id" => 4
+            'nama' => 'biologi',
+            'user_id' => 4,
         ]);
         $tipe3->save();
 
-
         $tipe4 = Sumber::query()->create([
-            "nama" => "fisika",
-            "user_id" => 5
+            'nama' => 'fisika',
+            'user_id' => 5,
         ]);
         $tipe4->save();
-        
+
         $tipe5 = Sumber::query()->create([
-            "nama" => "kimia",
-            "user_id" => 6
+            'nama' => 'kimia',
+            'user_id' => 6,
         ]);
         $tipe5->save();
 
         $tipe6 = Sumber::query()->create([
-            "nama" => "bioteknologi",
-            "user_id" => 7
+            'nama' => 'bioteknologi',
+            'user_id' => 7,
         ]);
         $tipe6->save();
         $tipe7 = Sumber::query()->create([
-            "nama" => "statistika",
-            "user_id" => 8
+            'nama' => 'statistika',
+            'user_id' => 8,
         ]);
         $tipe7->save();
-      
-
-       
 
     }
 }

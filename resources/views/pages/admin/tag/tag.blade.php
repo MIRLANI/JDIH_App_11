@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        
+
         <section class="section">
             <div class="card">
                 <div class="card-header my-3">
@@ -32,7 +32,7 @@
                     </button>
 
                     <!-- Modal -->
-                    @include('pages.admin.subjek_hukum.create_subjek_hukum')
+                    @include('pages.admin.tag.create_tag')
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
@@ -44,18 +44,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tagPeraturans as $subjek)
-                                @if ($subjek->nama !== null)
+                            @foreach ($tags as $tag)
+                                @if ($tag->nama !== null)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <form action="{{ route('update.tag', ['id' => $subjek->id]) }}"
+                                            <form action="{{ route('update.tag', ['id' => $tag->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="input-group">
-                                                    <input type="text" name="nama" value="{{ $subjek->nama }}"
+                                                    <input type="text" name="nama" value="{{ $tag->nama }}"
                                                         class="form-control ">
-                                                
+
                                                     <button hidden type="submit" class="btn btn-primary" title="Update">
                                                         <i class="bi bi-pencil"></i>
                                                     </button>
@@ -63,10 +63,10 @@
                                             </form>
                                         </td>
                                         <td style="display: none;">
-                                            {{ $subjek->nama }}
+                                            {{ $tag->nama }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('delete.tag', ['id' => $subjek->id]) }}"
+                                            <a href="{{ route('delete.tag', ['id' => $tag->id]) }}"
                                                 class="btn icon btn-danger" title="Delete" id="warning" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>

@@ -33,6 +33,8 @@
                     </button>
 
                     <!-- Modal -->
+                    @include('pages.admin.ManajemenUser.createManajemenUser')
+
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
@@ -59,7 +61,8 @@
                                         <!-- Modal -->
                                         @include('pages.admin.ManajemenUser.updateManajemenUser')
 
-                                        <a href="{{ route("deleteManajemen", ["id" => $user->id]) }}" class="btn btn-danger"><i class="bi bi-trash"></i> </a>
+                                        <a href="{{ route('deleteManajemen', ['id' => $user->id]) }}"
+                                            class="btn btn-danger"><i class="bi bi-trash"></i> </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -72,7 +75,6 @@
     </div>
 
 
-    @include('pages.admin.ManajemenUser.createManajemenUser')
 
 
 

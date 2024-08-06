@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Abstrak;
-use App\Models\Peraturan;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +23,6 @@ class DatabaseSeeder extends Seeder
         DB::table('tags')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        
         $this->call([
             CategoryHukumSeeder::class,
             TahunSeeder::class,

@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
-   
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,8 +14,8 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "required",
-            "password" => "required"
+            'email' => 'required',
+            'password' => 'required',
         ];
     }
 }

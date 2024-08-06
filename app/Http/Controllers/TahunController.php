@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Tahun;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class TahunController extends Controller
 {
@@ -15,12 +14,11 @@ class TahunController extends Controller
     public function index(): Response
     {
         $tahuns = Tahun::query()->orderBy('tahun', 'desc')->get();
-        return response()->view("pages.admin.tahun.tahun_hukum", [
-            "tahuns" => $tahuns
+
+        return response()->view('pages.admin.tahun.tahun_hukum', [
+            'tahuns' => $tahuns,
         ]);
     }
-
-   
 
     /**
      * Store a newly created resource in storage.
@@ -28,13 +26,13 @@ class TahunController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "tahun" => "required|numeric|unique:tahuns,tahun,NULL,id,deleted_at,NULL"
+            'tahun' => 'required|numeric|unique:tahuns,tahun,NULL,id,deleted_at,NULL',
         ]);
         Tahun::query()->create([
-            "tahun" => $request->input("tahun")
+            'tahun' => $request->input('tahun'),
         ]);
 
-        return response()->redirectToRoute("index.tahun")->with("message", "Tambah tahun hukum berhasil");
+        return response()->redirectToRoute('index.tahun')->with('message', 'Tambah tahun hukum berhasil');
     }
 
     /**
@@ -45,21 +43,20 @@ class TahunController extends Controller
         //
     }
 
-    
     public function update(string $id, Request $request)
     {
-        
+
         $request->validate([
-            "tahun" => "required|numeric|unique:tahuns,tahun"
+            'tahun' => 'required|numeric|unique:tahuns,tahun',
         ]);
-        
-         $tahun = Tahun::query()->find($id);
-         $tahun->tahun = $request->input("tahun");
-         $result = $tahun->update();
+
+        $tahun = Tahun::query()->find($id);
+        $tahun->tahun = $request->input('tahun');
+        $result = $tahun->update();
         if ($result) {
-            return redirect()->route("index.tahun")->with('message', 'Update tahun successful');
+            return redirect()->route('index.tahun')->with('message', 'Update tahun successful');
         } else {
-            return redirect()->route("index.tahun")->with('error', 'Update tahun failed');
+            return redirect()->route('index.tahun')->with('error', 'Update tahun failed');
         }
     }
 
@@ -71,9 +68,10 @@ class TahunController extends Controller
         $tahun = Tahun::query()->find($id);
 
         if ($tahun->peraturans()->exists()) {
-            return redirect()->route("index.tahun")->with("error", "Tahun is still in use and cannot be deleted.");
+            return redirect()->route('index.tahun')->with('error', 'Tahun is still in use and cannot be deleted.');
         }
         $tahun->delete();
-        return redirect()->route("index.tahun")->with("message", "Delete tahun successful");
+
+        return redirect()->route('index.tahun')->with('message', 'Delete tahun successful');
     }
 }

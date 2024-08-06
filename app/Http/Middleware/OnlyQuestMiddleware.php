@@ -16,9 +16,10 @@ class OnlyQuestMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()){
-            return response()->redirectToRoute("dashboard");
+        if (Auth::user()) {
+            return response()->redirectToRoute('dashboard');
         }
+
         return $next($request);
     }
 }

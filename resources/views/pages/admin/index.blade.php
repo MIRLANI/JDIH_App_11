@@ -5,9 +5,9 @@
 @section('content')
 
     @if (Auth::user()->role == 'admin')
-        @include('pages.admin.dashboard_user.admin_dashboard')
+        @include('pages.admin.dashboard.admin_dashboard')
     @else
-        @include('pages.admin.dashboard_user.user_dashboard')
+        @include('pages.admin.dashboard.user_dashboard')
     @endif
 
 

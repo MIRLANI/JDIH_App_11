@@ -16,9 +16,10 @@ class ManajemenUserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role != "admin") {
-            return response()->redirectToRoute("dashboard");
+        if (Auth::user()->role != 'admin') {
+            return response()->redirectToRoute('dashboard');
         }
+
         return $next($request);
     }
 }

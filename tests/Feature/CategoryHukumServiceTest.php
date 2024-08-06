@@ -2,31 +2,24 @@
 
 namespace Tests\Feature;
 
-use App\Models\Kategori;
-use App\Services\CategoryHukumService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotNull;
-use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertTrue;
 
 class CategoryHukumServiceTest extends TestCase
 {
-
-
     public function test_add_sukses()
     {
-        $result = $this->categoriHukumService->addCategoryHukum("Hukum Perdata", "HP", "hukum-perdata");
+        $result = $this->categoriHukumService->addCategoryHukum('Hukum Perdata', 'HP', 'hukum-perdata');
         assertTrue($result);
         $ketegori = $this->categoriHukumService->getCategoriHukum();
         foreach ($ketegori as $data) {
-            assertEquals("Hukum Perdata", $data->title);
-            assertEquals("HP", $data->short_title);
-            assertEquals("hukum-perdata", $data->slug);
+            assertEquals('Hukum Perdata', $data->title);
+            assertEquals('HP', $data->short_title);
+            assertEquals('hukum-perdata', $data->slug);
         }
     }
 
@@ -36,9 +29,9 @@ class CategoryHukumServiceTest extends TestCase
         $result = $this->categoriHukumService->getCategoriHukum();
         assertNotNull($result);
         $result->each(function ($data) {
-            assertEquals("Hukum Perdata", $data->title);
-            assertEquals("HP", $data->short_title);
-            assertEquals("hukum-perdata", $data->slug);
+            assertEquals('Hukum Perdata', $data->title);
+            assertEquals('HP', $data->short_title);
+            assertEquals('hukum-perdata', $data->slug);
         });
     }
 
@@ -48,16 +41,16 @@ class CategoryHukumServiceTest extends TestCase
         $ketegori = $this->categoriHukumService->getCategoriHukum()->first();
         $result = $this->categoriHukumService->update(
             $ketegori->id,
-            "Laporan Keuangan",
-            "LK",
-            "laporan-keuangan"
+            'Laporan Keuangan',
+            'LK',
+            'laporan-keuangan'
         );
         assertTrue($result);
         $data = $this->categoriHukumService->getCategoriHukum();
-        $data->each(function($data){
-            $this->assertEquals("Laporan Keuangan", $data->title);
-            $this->assertEquals("LK", $data->short_title);
-            $this->assertEquals("laporan-keuangan", $data->slug);
+        $data->each(function ($data) {
+            $this->assertEquals('Laporan Keuangan', $data->title);
+            $this->assertEquals('LK', $data->short_title);
+            $this->assertEquals('laporan-keuangan', $data->slug);
         });
     }
 
@@ -67,7 +60,7 @@ class CategoryHukumServiceTest extends TestCase
         $data = $this->categoriHukumService->getCategoriHukum();
         assertNotNull($data);
         $this->categoriHukumService->delete($data[0]->id);
-        Log::info(json_encode($data) );
-        assertEquals(0, sizeof($this->categoriHukumService->getCategoriHukum()));
+        Log::info(json_encode($data));
+        assertEquals(0, count($this->categoriHukumService->getCategoriHukum()));
     }
 }

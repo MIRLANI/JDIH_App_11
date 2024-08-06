@@ -22,31 +22,28 @@ class StorePeraturanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            "nama" => ["required", 'unique:peraturans,nama'],
-            "deskripsi" => "required",
 
-            "user_id" => "required",
-            "judul" => "required",
-            "tahun_id" => ["required", "numeric"],
-            "kategori_id" => "required",
+            'nama' => ['required', 'unique:peraturans,nama'],
+            'deskripsi' => 'required',
+
+            'user_id' => 'required',
+            'judul' => 'required',
+            'tahun_id' => ['required', 'numeric'],
+            'kategori_id' => 'required',
             // "tempat_penetapan" => "required",
             // "tanggal_penetapan" => "required",
             // "tanggal_pengundangan" => "required",
             // "tanggal_berlaku" => "required",
-            "subjek" => ["required", "array", "min:1"],
-            "jumlah_halaman" => "required",
-            "status" => "required",
-            "bahasa" => "required",
-            "lokasi" => "required",
-            "teu" => "required",
-
+            'subjek' => ['required', 'array', 'min:1'],
+            'jumlah_halaman' => 'required',
+            'status' => 'required',
+            'bahasa' => 'required',
+            'lokasi' => 'required',
+            'teu' => 'required',
 
             // "nomor" => "required",
-            "file" => ["required",  "mimes:pdf"],
+            'file' => ['required',  'mimes:pdf'],
 
-            
-            
         ];
     }
 }
