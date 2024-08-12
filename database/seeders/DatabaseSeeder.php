@@ -13,25 +13,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('users')->truncate();
-        DB::table('tahuns')->truncate();
-        DB::table('passwords')->truncate();
-        DB::table('peraturans')->truncate();
-        DB::table('kategoris')->truncate();
-        DB::table('abstraks')->truncate();
-        DB::table('tags')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (env('DB_DATABASE') == 'jdih_app_11') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            DB::table('users')->truncate();
+            DB::table('tahuns')->truncate();
+            DB::table('passwords')->truncate();
+            DB::table('peraturans')->truncate();
+            DB::table('kategoris')->truncate();
+            DB::table('abstraks')->truncate();
+            DB::table('tags')->truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $this->call([
-            CategoryHukumSeeder::class,
-            TahunSeeder::class,
-            SubjekHukumSeeder::class,
-            UserSeeder::class,
-            // sumberseeder::class,
-            PasswordSeeder::class,
-            ProductHukumSeeder::class,
-            AbstrakHukumSeeder::class,
-        ]);
+            $this->call([
+                CategoryHukumSeeder::class,
+                TahunSeeder::class,
+                SubjekHukumSeeder::class,
+                UserSeeder::class,
+                // sumberseeder::class,
+                PasswordSeeder::class,
+                ProductHukumSeeder::class,
+                AbstrakHukumSeeder::class,
+            ]);
+            echo "berhasil menambahakan seeder" . PHP_EOL;
+        } else {
+            echo 'ganti database' . PHP_EOL;
+        }
     }
 }

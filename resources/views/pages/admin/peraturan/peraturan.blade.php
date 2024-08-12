@@ -34,27 +34,26 @@
                     </a>
 
                 </div>
-              
 
-                            @if (Auth::user()->role == 'admin')
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Peraturan</th>
-                                            {{-- <th>Deskripsi</th> --}}
-                                            <th>Judul</th>
-                                            <th>Kategori</th>
-                                            <th>Tag</th>
-                                            <th>Sumber</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($peraturans as $peraturans)
+                @if (Auth::user()->role == 'admin')
+                    <div class="card-body">
+                        <table class="table table-striped" id="table1">
+                            <thead>
                                 <tr>
+                                    <th>No</th>
+                                    <th>Peraturan</th>
+                                    {{-- <th>Deskripsi</th> --}}
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Tag</th>
+                                    <th>Sumber</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($peraturans as $peraturans)
+                                    <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td> {{ $peraturans->nama ?? '' }}</td>
                                         {{-- <td>{{ $peraturans->deskripsi }}</td> --}}
@@ -86,22 +85,25 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @else
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Peraturan</th>
-                                            {{-- <th>Deskripsi</th> --}}
-                                            <th>Judul</th>
-                                            <th>Kategori</th>
-                                            <th>Tag</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="card-body">
+                        <table class="table table-striped" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Peraturan</th>
+                                    {{-- <th>Deskripsi</th> --}}
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Tag</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach ($peraturans->where('user_id', Auth::user()->id) as $peraturans)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -139,10 +141,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
             </div>
 
         </section>

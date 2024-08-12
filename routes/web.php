@@ -46,14 +46,14 @@ Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::controller(PeraturanController::class)->group(function () {
-        Route::get('/product-peraturan', 'index')->name('index.peraturan');
-        Route::get('/product-peraturan-add', 'create')->name('create.peraturan');
-        Route::post('/product-peraturan-add', 'store')->name('store.peraturan');
-        Route::get('/product-peraturan-delete/{id}', 'destroy')->name('destroy.peraturan');
-        Route::get('/product-peraturan-view-delete', 'viewDelete')->name('viewDelete.peraturan');
-        Route::get('/product-peraturan-restore/{id}', 'restore')->name('restore.peraturan');
-        Route::get('/product-peraturan-update/{id}/{slug}', 'edit')->name('edit.peraturan');
-        Route::post('/product-peraturan-update/{id}/{slug}', 'update')->name('update.peraturan');
+        Route::get('/peraturan', 'index')->name('index.peraturan');
+        Route::get('/peraturan-add', 'create')->name('create.peraturan');
+        Route::post('/peraturan-add', 'store')->name('store.peraturan');
+        Route::get('/peraturan-delete/{id}', 'destroy')->name('destroy.peraturan');
+        Route::get('/peraturan-view-delete', 'viewDelete')->name('viewDelete.peraturan');
+        Route::get('/peraturan-restore/{id}', 'restore')->name('restore.peraturan');
+        Route::get('/peraturan-update/{id}/{slug}', 'edit')->name('edit.peraturan');
+        Route::post('/peraturan-update/{id}/{slug}', 'update')->name('update.peraturan');
     });
 
     Route::controller(AksesDokumenController::class)->group(function () {
