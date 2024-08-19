@@ -9,16 +9,23 @@ use App\Models\Peraturan;
 use App\Models\Tag;
 use App\Models\Tahun;
 use App\Models\User;
+use App\Services\PeraturanService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class PeraturanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // private PeraturanService $peraturanService; 
+
+    // public function __construct(PeraturanService $peraturanService)
+    // {
+    //     $this->peraturanService = $peraturanService;
+    // }
+
     public function index(): Response
     {
+        // $peraturans = $this->peraturanService->get();
+
         $peraturans = Peraturan::orderBy('created_at', 'desc')->get();
 
         return response()->view('pages.admin.peraturan.peraturan', [

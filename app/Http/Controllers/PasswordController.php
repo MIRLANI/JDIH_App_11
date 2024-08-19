@@ -47,7 +47,7 @@ class PasswordController extends Controller
     {
 
         $request->validate([
-            'password_name' => ['required', 'unique:passwords,password_name'],
+            'password_name' => ['required'],
             'password' => 'required',
         ]);
 
