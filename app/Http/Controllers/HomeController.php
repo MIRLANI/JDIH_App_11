@@ -20,6 +20,11 @@ class HomeController extends Controller
         $peraturanPopuler = Peraturan::mostPopularProducts()->take(4);
         $sumbers = User::query()->where('username', '!=', 'administrator')->get();
 
+        $jmlPeraturanAktif =  Peraturan::query()->where('status', 'berlaku')->count();
+
+        $jmlPeraturanTidakAktif = Peraturan::query()->where('status', 'tidak berlaku')->count();
+
+
         return response()->view('pages.users.index', [
             'peraturans' => $peraturans,
             'tagPeraturans' => $tagPeraturans,
@@ -27,6 +32,8 @@ class HomeController extends Controller
             'peraturanTerpopulers' => $peraturanPopuler,
             'tahuns' => $tahuns,
             'sumbers' => $sumbers,
+            'jmlPeraturanAktif' => $jmlPeraturanAktif,
+            'jmlPeraturanTidakAktif' => $jmlPeraturanTidakAktif
         ]);
     }
 
@@ -85,7 +92,7 @@ class HomeController extends Controller
         } else {
             return response()->view('pages.users.detail.index', [
                 'peraturan' => $peraturan,
-                'error' => 'password salah',
+                'error' => 'Mohon maaf password yang dimasukkan salah!',
             ]);
         }
 
@@ -93,111 +100,62 @@ class HomeController extends Controller
 
     public function search(Request $request): Response
     {
-
         $query = Peraturan::query();
 
-        // Jika request mengandung keyword, tentang, nomor, tahun, atau tag
-        if ($request->filled(['keyword', 'tentang', 'nomor', 'tahun', 'tag'])) {
-            // Membuat klausa where untuk query
-            $query->where(function ($q) use ($request) {
-                // Memeriksa apakah request mengandung keyword
-                if ($request->filled('keyword')) {
-                    // Mengambil nilai keyword dari request
-                    $keyword = $request->input('keyword');
-                    // Membuat kondisi where untuk mencari berdasarkan keyword
-                    $q->where(function ($q) use ($keyword) {
-                        $q->where('deskripsi', 'like', '%'.$keyword.'%')
-                            ->orWhere('nama', 'like', '%'.$keyword.'%')
-                            ->orWhere('nomor', 'like', '%'.$keyword.'%')
-                            ->orWhere('tipe_dokumen', 'like', '%'.$keyword.'%')
-                            ->orWhere('judul', 'like', '%'.$keyword.'%')
-                            ->orWhere('tempat_penetapan', 'like', '%'.$keyword.'%')
-                            ->orWhere('tanggal_penetapan', 'like', '%'.$keyword.'%')
-                            ->orWhere('tanggal_pengundangan', 'like', '%'.$keyword.'%')
-                            ->orWhere('tanggal_berlaku', 'like', '%'.$keyword.'%')
-                            ->orWhere('jumlah_halaman', 'like', '%'.$keyword.'%')
-                            ->orWhere('status', 'like', '%'.$keyword.'%')
-                            ->orWhere('bahasa', 'like', '%'.$keyword.'%')
-                            ->orWhere('lokasi', 'like', '%'.$keyword.'%')
-                            ->orWhere('teu', 'like', '%'.$keyword.'%')
-                            ->orWhere('bidang', 'like', '%'.$keyword.'%')
-                            ->orWhere('status_hukum', 'like', '%'.$keyword.'%');
-                    });
-                }
-                // Memeriksa apakah request mengandung tentang
-                if ($request->filled('tentang')) {
-                    $tentang = $request->input('tentang');
-                    // Menggunakan orWhere untuk menambahkan kondisi pencarian "tentang" pada kolom "nama"
-                    $q->orWhere('nama', 'like', '%'.$tentang.'%');
-                }
-
-                // Memeriksa apakah request mengandung nomor
-                if ($request->filled('nomor')) {
-                    $nomor = $request->input('nomor');
-                    $q->orWhere('nomor', 'like', '%'.$nomor.'%');
-                }
-
-                // Memeriksa apakah request mengandung tag
-                if ($request->filled('tag')) {
-                    $tags = is_array($request->input('tag')) ? $request->input('tag') : [$request->input('tag')];
-                    $q->whereHas('tagPeraturans', function ($q) use ($tags) {
-                        // whereIn adalah klausa yang digunakan untuk memeriksa apakah nilai kolom ada dalam array nilai yang diberikan
-                        $q->whereIn('nama', $tags);
-                    });
-                }
-
-                // Memeriksa apakah request mengandung tahun
-                if ($request->filled('tahun')) {
-                    $tahun = is_array($request->input('tahun')) ? $request->input('tahun') : [$request->input('tahun')];
-                    if (is_array($tahun)) {
-                        $q->whereHas('tahuns', function ($q) use ($tahun) {
-                            $q->whereIn('tahun', $tahun);
-                        });
-                    } else {
-                        $q->whereHas('tahuns', function ($q) use ($tahun) {
-                            $q->where('tahun', $tahun);
-                        });
-                    }
-                }
-            });
-        }
-
-        // Search by 'tahun' in 'tahuns' table
-        if ($request->filled('tahun')) {
-            $tahun = $request->input('tahun');
-            if (is_array($tahun)) {
-                $query->whereHas('tahuns', function ($q) use ($tahun) {
-                    $q->whereIn('tahun', $tahun);
-                });
-            } else {
-                $query->whereHas('tahuns', function ($q) use ($tahun) {
-                    $q->where('tahun', $tahun);
+        // Membuat klausa where untuk query
+        $query->where(function ($q) use ($request) {
+            // Memeriksa apakah request mengandung keyword
+            if ($request->filled('keyword')) {
+                $keyword = $request->input('keyword');
+                
+                $q->where(function ($q) use ($keyword) {
+                    $q->where('deskripsi', 'like', '%'.$keyword.'%')
+                        ->orWhere('nama', 'like', '%'.$keyword.'%')
+                        ->orWhere('nomor', 'like', '%'.$keyword.'%')
+                        ->orWhere('judul', 'like', '%'.$keyword.'%')
+                        ->orWhere('tempat_penetapan', 'like', '%'.$keyword.'%')
+                        ->orWhere('tanggal_penetapan', 'like', '%'.$keyword.'%')
+                        ->orWhere('tanggal_pengundangan', 'like', '%'.$keyword.'%')
+                        ->orWhere('tanggal_berlaku', 'like', '%'.$keyword.'%')
+                        ->orWhere('jumlah_halaman', 'like', '%'.$keyword.'%')
+                        ->orWhere('bahasa', 'like', '%'.$keyword.'%')
+                        ->orWhere('lokasi', 'like', '%'.$keyword.'%')
+                        ->orWhere('teu', 'like', '%'.$keyword.'%')
+                        ->orWhere('bidang', 'like', '%'.$keyword.'%');
                 });
             }
-        }
 
-        // Search by 'nomor'
-        if ($request->filled('nomor')) {
-            $nomor = $request->input('nomor');
-            $query->where('nomor', 'like', '%'.$nomor.'%');
-        }
+            if ($request->filled('tentang')) {
+                $tentang = $request->input('tentang');
+                $q->where('nama', 'like', '%'.$tentang.'%');
+            }
 
-        // Filter by 'tag' using relation with 'tagPeraturans'
-        if ($request->filled('tag')) {
-            $tags = is_array($request->input('tag')) ? $request->input('tag') : [$request->input('tag')];
-            $query->whereHas('tagPeraturans', function ($q) use ($tags) {
-                $q->whereIn('nama', $tags);
-            });
-        }
+            if ($request->filled('status')) {
+                $status = $request->input('status');
+                $q->where('status', 'like', '%'.$status.'%');
+            }
 
-        // Filter by 'user' using 'tipe_dokumen'
-        if (($request->input('sumber'))) {
-            // dd($request->input("user"));
-            $user = $request->input('sumber');
-            $query->whereHas('user', function ($q) use ($user) {
-                $q->where('username', $user);
-            });
-        }
+            if ($request->filled('sumber')) {
+                $sumber = $request->input('sumber');
+                $q->whereHas('user', function ($q) use ($sumber) {
+                    $q->where('username', 'like', '%'.$sumber.'%');
+                });
+            }
+
+            if ($request->filled('tahun')) {
+                $tahun = is_array($request->input('tahun')) ? $request->input('tahun') : [$request->input('tahun')];
+                $q->whereHas('tahuns', function ($q) use ($tahun) {
+                    $q->whereIn('tahun', $tahun);
+                });
+            }
+
+            if ($request->filled('tag')) {
+                $tags = is_array($request->input('tag')) ? $request->input('tag') : [$request->input('tag')];
+                $q->whereHas('tagPeraturans', function ($q) use ($tags) {
+                    $q->whereIn('nama', $tags);
+                });
+            }
+        });
 
         // Apply sorting and pagination for better performance and usability
         $peraturanPencarians = $query->orderBy('updated_at', 'desc')->paginate(6)->withQueryString();

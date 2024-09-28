@@ -16,8 +16,9 @@
 
                     <div class="form-group" id="password-group">
                         <label for="password">Password</label>
-                        <input class="form-control" name="password" id="password"
-                            placeholder="Masukkan Password">{{ old('password') }}</input>
+                        <input class="form-control" name="password" id="password" placeholder="Masukkan Password" 
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" required>
+                        <small class="form-text text-muted">Contoh: 123456</small>
                     </div>
 
                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">

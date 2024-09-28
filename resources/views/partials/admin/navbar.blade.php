@@ -58,12 +58,12 @@
                         <span>Manajemen Akun</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('index.sumber') ? 'active' : '' }}">
+                {{-- <li class="sidebar-item {{ request()->routeIs('index.sumber') ? 'active' : '' }}">
                     <a href="{{ route('index.sumber') }}" class='sidebar-link'>
                         <i class="bi bi-folder-fill"></i>
                         <span>Sumber Peraturan</span>
                     </a>
-                </li>
+                </li> --}}
                 <hr>
                 <li
                     class="sidebar-item  has-sub {{ request()->routeIs('index.kategori', 'index.tag', 'index.tahun', 'index.peraturan', 'create.peraturan', 'destroy.peraturan', 'viewDelete.peraturan', 'restore.peraturan', 'edit.peraturan', 'update.peraturan') ? 'active' : '' }}">

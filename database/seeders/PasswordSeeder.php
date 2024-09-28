@@ -16,13 +16,13 @@ class PasswordSeeder extends Seeder
         Password::query()->create([
             'user_id' => 2,
             'password_name' => 'password 1',
-            'password' => Hash::make('123'),
+            'password' => 123333,
         ]);
 
         Password::query()->create([
             'user_id' => 2,
             'password_name' => 'password 2',
-            'password' => Hash::make('123'),
+            'password' => 445554,
         ]);
     }
 }

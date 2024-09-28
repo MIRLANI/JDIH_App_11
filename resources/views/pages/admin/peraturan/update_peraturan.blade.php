@@ -126,11 +126,12 @@
                                                     <select id="tahun"
                                                         class="form-control form-select @error('sumber_id') is-invalid @enderror"
                                                         name="sumber_id">
-                                                        <option value="">Pilih Sumber Peraturan</option>
-                                                        @foreach ($sumbers as $tipe)
-                                                            <option value="{{ $tipe->id }}"
-                                                                {{ old('sumber_id', $product_hukum->sumber_id) == $tipe->id ? 'selected' : '' }}>
-                                                                {{ $tipe->nama }}</option>
+                                                        @foreach ($sumbers as $sumber)
+                                                            @if ($sumber->role != 'admin')
+                                                                <option value="{{ $sumber->id }}"
+                                                                    {{ old('sumber_id', $sumber->sumber_id) == $sumber->id ? 'selected' : '' }}>
+                                                                    {{ $sumber->username }}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                     @error('sumber_id')
