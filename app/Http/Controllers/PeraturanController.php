@@ -76,24 +76,15 @@ class PeraturanController extends Controller
             // memasukan datanya kedalam direktori tanpa prefix public
             $request->file('file')->storeAs('document', $file);
 
-            // Ensure only the file name is stored in the database, not the path
+            //
             $productHukumData = $request->except('file');
-            $productHukumData['file'] = $file; // Store only the file name in the database
-
-            // Handle nested array data if present
-            // if ($request->has('status_hukum')) {
-            //     $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
-            // }
+            $productHukumData['file'] = $file; 
 
         } else {
             $productHukumData = $request->all();
-            // Handle nested array data if present
-            // if ($request->has('status_hukum')) {
-            //     $productHukumData['status_hukum'] = json_encode($request->input('status_hukum'));
-            // }
+            
         }
 
-        // Capitalize the first letter of 'nama', 'deskripsi', and 'judul'
         if (isset($productHukumData['deskripsi'])) {
             $productHukumData['deskripsi'] = \Illuminate\Support\Str::title($productHukumData['deskripsi']);
         }
@@ -101,7 +92,7 @@ class PeraturanController extends Controller
             $productHukumData['judul'] = \Illuminate\Support\Str::title($productHukumData['judul']);
         }
 
-        // dd($productHukumData);
+        
         $peraturans = Peraturan::query()->create($productHukumData);
         $peraturans->tagPeraturans()->sync($request->input('subjek'));
 
