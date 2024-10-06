@@ -32,7 +32,8 @@
 </div>
 
 @if ($peraturanPencarians->isNotEmpty())
-    @foreach ($peraturanPencarians as $peraturan)
+   {{-- menampilkan data pencarian berdasarkan tahun yang ada di table tahun --}}
+    @foreach ($peraturanPencarians->sortByDesc('tahuns.tahun') as $peraturan)
         @include('pages.users.modalSearch')
         <div class="card w-75 mx-auto my-5 shadow">
             <div class="card-body">
@@ -41,7 +42,10 @@
                         <i class="bi bi-file-earmark-text-fill mb-3 me-3" style="font-size:100px;"></i>
                     </div>
                     <div class="col-12 col-md mt-3">
-                        <h6 class="mb-4">{{ $peraturan->nama }}</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-4">{{ $peraturan->nama }}</h6>
+                            <span class="fw-bold align-middle" style="font-size: 1.25rem;">{{ $peraturan->tahuns->tahun }}</span>
+                        </div>
                         <a href="{{ route('detail', ['id' => $peraturan->id, 'slug' => $peraturan->slug]) }}"
                             style="font-size: 25px; color: black;" onmouseover="this.style.color='#4A90E2'"
                             onmouseout="this.style.color='#333'">{{ Str::limit($peraturan->deskripsi, 100) }}</a>
@@ -142,6 +146,6 @@
 {{-- kodisi pagination --}}
 @if ($peraturanPencarians->hasPages())
     <div class="d-flex justify-content-center">
-        {{ $peraturanPencarians->links() }}
+        {{ $peraturanPencarians->onEachSide(1)->links() }}
     </div>
 @endif

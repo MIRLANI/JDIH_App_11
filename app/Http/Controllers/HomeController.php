@@ -177,7 +177,6 @@ class HomeController extends Controller
 
     public function download(string $id, string $file)
     {
-
         $produk = Peraturan::query()->where('id', $id)->first();
         if ($produk) {
             if ($produk->download === null) {
