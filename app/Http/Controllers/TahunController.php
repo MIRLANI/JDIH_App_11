@@ -32,7 +32,7 @@ class TahunController extends Controller
             'tahun' => $request->input('tahun'),
         ]);
 
-        return response()->redirectToRoute('index.tahun')->with('message', 'Tambah tahun hukum berhasil');
+        return response()->redirectToRoute('index.tahun')->with('message', 'Sukses Menambah Tahun');
     }
 
     /**
@@ -54,7 +54,7 @@ class TahunController extends Controller
         $tahun->tahun = $request->input('tahun');
         $result = $tahun->update();
         if ($result) {
-            return redirect()->route('index.tahun')->with('message', 'Update tahun successful');
+            return redirect()->route('index.tahun')->with('message', 'Update Tahun Berhasil');
         } else {
             return redirect()->route('index.tahun')->with('error', 'Update tahun failed');
         }
@@ -72,6 +72,6 @@ class TahunController extends Controller
         }
         $tahun->delete();
 
-        return redirect()->route('index.tahun')->with('message', 'Delete tahun successful');
+        return redirect()->route('index.tahun')->with('message', 'Delete Tahun Berhasil');
     }
 }

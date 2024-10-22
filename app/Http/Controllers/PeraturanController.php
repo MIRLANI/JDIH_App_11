@@ -166,7 +166,7 @@ class PeraturanController extends Controller
             $peraturans->tagPeraturans()->sync($request->input('subjek'));
         }
 
-        return redirect()->route('index.peraturan')->with('message', 'Update Product Successfully');
+        return redirect()->route('index.peraturan')->with('message', 'Update Peraturan Successfully');
     }
 
     /**
